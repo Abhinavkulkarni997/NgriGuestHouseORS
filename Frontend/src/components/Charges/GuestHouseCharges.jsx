@@ -54,7 +54,7 @@ Beyond 7 days the rates will be doubled for that category in which the guest bel
 
 {guestHouseCharges.map((item,index)=>{
     return(
-        <table key={index} className='bg-white max-w-screen-xl' >
+        <table key={index} className='bg-white max-w-screen-xl py-16 px-4 sm:px-2 ' >
            <th className='text-gray-800 font-medium bg-cyan-400/40 backdrop-blur-md bg-gradient-to-r from-cyan-400/40 via-cyan-400/40 to-white gap-4'>
            {item.title}
            </th> 
