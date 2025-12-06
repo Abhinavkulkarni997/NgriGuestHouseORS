@@ -19,7 +19,9 @@ const Guidelines = () => {
             <h1 className=''>Guidelines</h1>
             {guideLines.map(item,index)=>{
             return(
-                
+                <div div key={index}>
+                    
+                    </div>
             )
             }}
 
