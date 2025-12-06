@@ -58,7 +58,7 @@ Beyond 7 days the rates will be doubled for that category in which the guest bel
            <th className='text-gray-800 font-medium bg-cyan-400/40 backdrop-blur-md bg-gradient-to-r from-cyan-400/40 via-cyan-400/40 to-white gap-4'>
            {item.title}
            </th> 
-            <tr key={index} className='hover:bg-indigo-500 '>{item.description}</tr> 
+            <tr key={index} className='hover:bg-cyan-400/40 '>{item.description}</tr> 
 
         </table>
     )
