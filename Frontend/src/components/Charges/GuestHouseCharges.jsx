@@ -62,7 +62,7 @@ Beyond 7 days the rates will be doubled for that category in which the guest bel
             Array.isArray((item,index)=>{
                 return(
                     <div className='max-w-screen-xl '>
-                    <td key={index} className='hover:bg-indigo-500 '>{item.description}</td> 
+                    <tr key={index} className='hover:bg-indigo-500 '>{item.description}</tr> 
                     </div>
                 )
             })
