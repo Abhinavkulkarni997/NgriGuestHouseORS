@@ -60,9 +60,6 @@ Beyond 7 days the rates will be doubled for that category in which the guest bel
            </th> 
             <tr key={index} className='hover:bg-indigo-500 '>{item.description}</tr> 
 
-        
-
-
         </table>
     )
 })}
