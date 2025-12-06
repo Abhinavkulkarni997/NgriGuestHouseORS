@@ -22,7 +22,9 @@ const Guidelines = () => {
                 <div div key={index} className='py-12 px-6 max-w-screen-xl'>
                   <div className='mt-1 p-6'>
                     {Array.isArray((item,index)=>{
-                        <div key={index}>{item.info}</div>
+                        <div key={index}>{item.info}
+                        <div className=''></div>
+                        </div>
                     })}
                     </div>
                     </div>
