@@ -67,7 +67,7 @@ const Faq = () => {
                     <div className='font-medium mt-3 ml-1'>
                         {Array.isArray(item.answer)? (
                             item.answer.map((point,index)=>(
-                                <div key={index}>{point}</div>
+                                <div key={index} className='mb-1'>{point}</div>
                             ))
 
                         ):(

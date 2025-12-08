@@ -12,8 +12,8 @@ const Guidelines = () => {
 'Accommodation and food charges are billed separately and are to be separately settled as per rules]'
         ]
   return (
-    <section id="guidelines" className='min-h-screen w-full py-16 bg-gradient-to-br from-cyan-50 via-cyan-400/10 to-blue-100 rounded-lg '>
-        <div className='max-w-6xl bg-white mx-auto shadow-md rounded-2xl p-10 '>
+    <section id="guidelines" className='w-full py-16 bg-gradient-to-br from-cyan-50 via-cyan-400/10 to-cyan-400/10 rounded-lg '>
+        <div className='max-w-6xl bg-white mx-auto shadow-md rounded-2xl p-10 px-4 '>
             <h1 className='text-3xl md:text-4xl font-extrabold text-gray-800 text-center'>Guidelines</h1>
 
             <div className='mt-12 grid grid-cols-1 md:grid-cols-2 gap-6'>

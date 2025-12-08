@@ -55,7 +55,7 @@ const GuestHouseCharges = () => {
 
     }];
   return (
-    <section className='min-h-screen py-10 bg-white '>
+    <section className='py-10 sm:py-14 lg:py-20 bg-white '>
       <div className='max-w-6xl mx-auto px-4 '>
         <h1 className='text-center text-gray-800 font-extrabold text-3xl md:text-4xl mb-3'>Guesthouse Charges</h1>
         <p className='text-center  text-gray-700   mb-10 leading-relaxed'>The accommodation can be requested/booked for a maximum period of 7 days, subject to availability.<br/>
