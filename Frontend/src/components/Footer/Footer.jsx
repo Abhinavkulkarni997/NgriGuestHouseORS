@@ -21,7 +21,7 @@ const Footer = () => {
     info:'Facebook | Twitter | Instagram | LinkedIn'
 }]
   return (
-    <footer className='bottom-0 left-0 relative bg-indigo-500/10 backdrop-blur-md  rounded-lg w-full pt-10 py-12 '>
+    <footer className='bottom-0 left-0 relative bg-indigo-500/70 backdrop-blur-md bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg w-full pt-10 py-12 '>
     <div className='max-w-[1280px] mx-auto px-4 py-12 grid md:grid-cols-4 gap-8 '>
         {footerItems.map((item,index)=>{
             return(

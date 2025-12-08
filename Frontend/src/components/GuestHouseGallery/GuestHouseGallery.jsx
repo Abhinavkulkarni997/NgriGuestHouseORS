@@ -345,7 +345,7 @@ export default function GuestHouseCenteredCarousel() {
                   />
 
                   {/** gradient overlay to darken lower portion */}
-                  {/* <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none"></div> */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none"></div>
                  
                 </div>
               </SwiperSlide>
