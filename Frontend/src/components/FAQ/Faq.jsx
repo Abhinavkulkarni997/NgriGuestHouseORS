@@ -47,13 +47,13 @@ const Faq = () => {
     }
   return (
     
-    <section className='py-16 max-w-screen-xl mx-auto px-4 bg-cyan-400/10 backdrop-blur-md rounded-lg '>
-        <h1 className='font-semibold text-2xl mb-6 text-gray-800'>Any questions? Check out the FAQ</h1>
+    <section className='py-16 max-w-screen-xl mx-auto px-4 bg-cyan-400/10 backdrop-blur-md rounded-lg mb-4  '>
+        <h1 className='font-extrabold text-3xl md:text-4xl mb-6 text-gray-800 text-center '>Any questions? Check out the FAQ</h1>
         {faqItems.map((item,index)=>{
             const isOpen=openItems.includes(item.id);
             return(
                 
-                <div key={index} className='text-start bg-white/80 backdrop-blur-md p-6 my-4 rounded-lg shadow-md '>
+                <div key={index} className='text-start bg-white/80 backdrop-blur-md p-6 my-4 rounded-lg shadow-md  '>
                     <div className='flex justify-between items-start'>
                     <button onClick={()=>toggleItem(item.id)}>
 

@@ -1,9 +1,29 @@
 @tailwind base;
+/* RESET — right after base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  min-height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 @tailwind components;
+
+
 
 html{
   scroll-behavior: smooth;
 }
+
+
+
+
 /* Base Button Styles */
 .btn {
   @apply inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
@@ -60,3 +80,4 @@ html{
 
 
 @tailwind utilities;
+

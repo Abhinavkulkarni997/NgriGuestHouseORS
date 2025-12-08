@@ -21,11 +21,11 @@ const Footer = () => {
     info:'Facebook | Twitter | Instagram | LinkedIn'
 }]
   return (
-    <footer className='bg-[#0A1A2F] bg-indigo-500/70 backdrop-blur-md bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg w-full pt-14 pb-10 '>
-    <div className='max-w-[1280px] mx-auto px-4 py-12 grid md:grid-cols-4 gap-8 '>
+    <footer className=' bg-[#111111] text-[#1A1A1A] backdrop-blur-md  rounded-lg w-full py-10 pt-4 pb-10  '>
+    <div className=' max-w-7xl mx-auto px-4 py-12 grid md:grid-cols-4 gap-8 '>
         {footerItems.map((item,index)=>{
             return(
-                <div key={index} className=''>
+                <div key={index}>
                     <h3 className='font-semibold text-white text-lg mb-2 text-start'>{item.title}</h3>
                     <p className='font-medium text-white text-start'>{item.info}</p>
                 </div>
@@ -37,7 +37,7 @@ const Footer = () => {
 
         
       {/* Bottom section: All rights reserved*/}
-      <div className="border-t border-white/20 text-center  text-white py-6 px-4 text-sm  mt-10 pt-5">
+      <div className="border-t border-white/20 text-center  text-white  px-4 text-sm  mt-10 pt-5">
           © {currentYear} Crafted and maintained by CSIR-NGRI's IT Division, Hyderabad.
           All rights reserved.
       </div>

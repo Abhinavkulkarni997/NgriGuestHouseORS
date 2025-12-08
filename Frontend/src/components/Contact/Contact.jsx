@@ -7,7 +7,11 @@ const Contact = () => {
         info:""
     }]
   return (
-    <div className='py-12'><h1>Contact</h1></div>
+    <section className='py-12'>
+      <div className='max-w-7xl'>
+         <h1>Contact Us</h1>
+      </div>
+     </section>
   )
 }
 
