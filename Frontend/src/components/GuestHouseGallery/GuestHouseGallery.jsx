@@ -278,7 +278,7 @@ import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
-import "swiper/css/effect-coverflow"; // optional if using coverflow look
+import "swiper/css/effect-coverflow"; 
 
 // replace these imports with your images
 import thg1 from "../../assets/Gallery/thg1.jpeg";
@@ -332,7 +332,7 @@ export default function GuestHouseCenteredCarousel() {
           >
             {images.map((img, idx) => (
               <SwiperSlide
-                key={img.id}
+                key={idx}
                 className="!w-[220px] md:!w-[260px] lg:!w-[300px] xl:!w-[340px] 2xl:!w-[380px] flex justify-center"
               >
                 {/** Slide card */}
@@ -345,25 +345,8 @@ export default function GuestHouseCenteredCarousel() {
                   />
 
                   {/** gradient overlay to darken lower portion */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none"></div>
-
-                  {/** If this slide becomes active, Swiper adds class "swiper-slide-active" —
-                      we use Tailwind + a small selector in CSS below to style active slide differently */}
-                  <div className="absolute bottom-6 left-0 right-0 text-center">
-                    {/* <h3 className="text-white text-xl md:text-2xl font-semibold">
-                      {img.title}
-                    </h3> */}
-
-                    {/** show Know More button only on active slide via CSS rule */}
-                   {/* <button className="gh-knowmore mt-3 inline-block px-5 py-2 rounded-full bg-white/10 text-white border border-white/30 backdrop-blur-sm hover:bg-white/30 transition hidden">
-                      Know More
-                    </button>  */}
-                  </div>
-
-                  {/** vertical rotated label on left for non-active slides -> done via CSS */}
-                  {/* <div className="absolute left-3 bottom-6 text-white text-md font-medium rotate-90 origin-bottom-left opacity-90 pointer-events-none slide-vertical-label">
-                    {img.title}
-                  </div> */}
+                  {/* <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none"></div> */}
+                 
                 </div>
               </SwiperSlide>
             ))}
@@ -402,29 +385,6 @@ export default function GuestHouseCenteredCarousel() {
           ))}
         </div>
       </div>
-
-      {/* Additional CSS targeting Swiper active slide styling */}
-      <style jsx>{`
-        /* make active slide larger and show know more button */
-        .swiper-slide-active .gh-knowmore {
-          display: inline-block !important;
-        }
-
-        /* vertical label hidden for active (we want centered title instead) */
-        .swiper-slide-active .slide-vertical-label {
-          display: none !important;
-        }
-
-        /* non-active slides show rotated label more visible */
-        .swiper-slide .slide-vertical-label {
-          display: block;
-        }
-
-        /* style active slide with stronger scale and border-radius */
-        .swiper-slide-active img {
-          transform: scale(1.02) !important;
-        }
-      `}</style>
     </section>
   );
 }
