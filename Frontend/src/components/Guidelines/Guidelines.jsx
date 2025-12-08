@@ -12,23 +12,22 @@ const Guidelines = () => {
 'Accommodation and food charges are billed separately and are to be separately settled as per rules]'
         ]
   return (
-    <section id="guidelines" className='w-full py-16 bg-cyan-400/10 '>
-        <div className='max-w-5xl bg-white mx-auto shadow-md rounded-2xl p-10'>
-            <h1 className='text-4xl font-bold text-gray-800 border-l-8 border-cyan-500 pl-4'>Guidelines</h1>
+    <section id="guidelines" className='min-h-screen w-full py-16 bg-gradient-to-br from-cyan-50 via-cyan-400/10 to-blue-100 rounded-lg '>
+        <div className='max-w-6xl bg-white mx-auto shadow-md rounded-2xl p-10 '>
+            <h1 className='text-3xl md:text-4xl font-extrabold text-gray-800 text-center'>Guidelines</h1>
 
-            <ul className='mt-8 space-y-6'>
+            <div className='mt-12 grid grid-cols-1 md:grid-cols-2 gap-6'>
             {guideLines.map((item,index)=>(
-            
-                <li div key={index} className=' flex gap-4'>
-                  <FaCheckCircle className='w-6 h-6 text-cyan-600 flex-shrink-0'/>
-                  <p className='text-gray-700 leading-relaxed text-lg'>
+                <div div key={index} className=' flex  items-start gap-4 bg-white/80 backdrop-blur-md p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:-translate-y-1 transition-all duration-300'>
+                  <FaCheckCircle className='w-6 h-6 md:w-7 md:h-7 text-cyan-600 flex-shrink-0'/>
+                  <p className='text-start md:text-base text-gray-700 leading-relaxed break-words  min-w-0  font-medium text-xs sm:text-sm w-full'>
                     {item}
                     </p>
-                    </li>
+                    </div>
             )
             
             )}
-            </ul>
+            </div>
 
         </div>
         
