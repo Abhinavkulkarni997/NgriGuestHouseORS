@@ -18,7 +18,7 @@ const Guidelines = () => {
 
             <div className='mt-12 grid grid-cols-1 md:grid-cols-2 gap-6'>
             {guideLines.map((item,index)=>(
-                <div div key={index} className=' flex  items-start gap-4 bg-white/80 backdrop-blur-md p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:-translate-y-1 transition-all duration-300'>
+                <div  key={index} className=' flex  items-start gap-4 bg-white/80 backdrop-blur-md p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:-translate-y-1 transition-all duration-300'>
                   <FaCheckCircle className='w-6 h-6 md:w-7 md:h-7 text-cyan-600 flex-shrink-0'/>
                   <p className='text-start md:text-base text-gray-700 leading-relaxed break-words  min-w-0  font-medium text-xs sm:text-sm w-full'>
                     {item}

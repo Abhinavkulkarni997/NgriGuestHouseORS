@@ -6,8 +6,8 @@ const Hero = () => {
     <div className='w-full mx-auto'>
         <div className='relative'>
         <img src={HeroImg} alt='Hero' className='w-full h-full object-cover rounded-xl'/>
-        
-            <button className='absolute bottom-0  text-black bg-white rounded border p-2 m-2'>Hello</button>
+        <h1 className='absolute bottom-0  text-white font-extrabold text-3xl md:text-4xl '>CSIR-NGRI Guesthouse Online Reservation System</h1>
+            <button className='absolute bottom-0  text-white bg-cyan-400/10 rounded-xl border p-2 m-2'>Book Online</button>
         </div>
     </div>
     </section>
