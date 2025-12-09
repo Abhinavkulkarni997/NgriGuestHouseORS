@@ -55,36 +55,29 @@ const Faq = () => {
             const isOpen=openItems.includes(item.id);
             return(
                 
-                <div key={index} className='text-start bg-white/80 backdrop-blur-md p-6 my-4 rounded-lg shadow-md  '>
+                <div key={index} className='text-start bg-white/80 backdrop-blur-md p-4 sm:p-6 my-4 rounded-lg shadow-md  '>
                     <div className='flex justify-between items-start'>
-                    <button onClick={()=>toggleItem(item.id)}>
-
-                    <div className='font-semibold text-lg flex justify-between items-end  hover:text-indigo-600 cursor-pointer flex-1'>{item.question}
-                        <IoIosArrowDown className={`w-4 h-4 cursor-pointer text-gray-800 hover:text-indigo-800 transition-transform duration-300 ${isOpen? 'rotate-180' : ''}`} />
+                    <div onClick={()=>toggleItem(item.id)} className='text-base sm:text-sm font-semibold    hover:text-indigo-600 cursor-pointer flex-1 pr-4 break-all md:break-normal'>
+                        {item.question}
                     </div>
+                    
+                    <button onClick={()=>toggleItem(item.id)} className='flex-shrink-0 ml-2'>
+                        <IoIosArrowDown className={`w-4 h-4 cursor-pointer text-gray-800 hover:text-indigo-800 transition-transform duration-300 ${isOpen? 'rotate-180' : ''}`} />
                     </button>
                     </div>
 
                 {isOpen && (
-                    <div className='font-medium mt-3 ml-1'>
+                    <div className=' mt-3 ml-1'>
                         {Array.isArray(item.answer)? (
                             item.answer.map((point,index)=>(
-                                <div key={index} className='mb-1'>{point}</div>
+                                <div key={index} className='mb-1 text-base sm:text-sm'>{point}</div>
                             ))
 
                         ):(
-                            item.answer
+                            <div className='text-base md:text-sm '>{item.answer}</div>
                         )}
-                    
                     </div>
-            
-                
-
-                            
-
                 )}
-            
-        
                 </div>
             )
         })}
