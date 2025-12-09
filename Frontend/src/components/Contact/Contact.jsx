@@ -6,12 +6,12 @@ const Contact = () => {
     const contactItems=[{
         id:1,
         name:'Email',
-        info:'guesthouse@immt.res.in',
+        info:'guesthouse@ngri.res.in',
         icon:<IoIosMail size={26} className='text-primary'/>
     },{
         id:2,
         name:"Reception",
-        info:"0674-2379418",
+        info:"040 2343 4667",
         icon:<BsFillTelephoneFill size={26} className="text-primary"/>
     }]
   return (
