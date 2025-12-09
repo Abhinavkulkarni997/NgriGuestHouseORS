@@ -1,11 +1,11 @@
 import React from "react";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
-
+import Navbar1 from "../Navbar/Navbar1";
 const Layout = ({ children }) => {
   return (
     <>
-      <Navbar />
+      <Navbar1 />
 
       {/* Proper page wrapper (gives spacing but full width) */}
       <main className="min-h-screen w-full">

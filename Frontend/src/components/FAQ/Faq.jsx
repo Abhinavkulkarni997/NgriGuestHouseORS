@@ -1,6 +1,8 @@
 import {useState} from 'react'
 // import FAQ from '../../assets/Faq.png';
 import { FaArrowDown } from "react-icons/fa6";
+import { IoIosArrowDown } from "react-icons/io";
+
 const Faq = () => {
     const[openItems,setOpenItems]=useState([]);
     const faqItems=[{
@@ -47,7 +49,7 @@ const Faq = () => {
     }
   return (
     
-    <section className='py-16 max-w-screen-xl mx-auto px-4 bg-cyan-400/10 backdrop-blur-md rounded-lg mb-4  '>
+    <section className='py-16 sm:py-18 md:py-20 max-w-screen-xl mx-auto px-4 bg-cyan-400/10 backdrop-blur-md rounded-lg mb-4  '>
         <h1 className='font-extrabold text-3xl md:text-4xl mb-6 text-gray-800 text-center '>Any questions? Check out the FAQ</h1>
         {faqItems.map((item,index)=>{
             const isOpen=openItems.includes(item.id);
@@ -58,7 +60,7 @@ const Faq = () => {
                     <button onClick={()=>toggleItem(item.id)}>
 
                     <div className='font-semibold text-lg flex justify-between items-end  hover:text-indigo-600 cursor-pointer flex-1'>{item.question}
-                        <FaArrowDown className={`w-4 h-4 cursor-pointer text-gray-700 hover:text-indigo-800 transition-transform duration-300 ${isOpen? 'rotate-180' : ''}`} />
+                        <IoIosArrowDown className={`w-4 h-4 cursor-pointer text-gray-800 hover:text-indigo-800 transition-transform duration-300 ${isOpen? 'rotate-180' : ''}`} />
                     </div>
                     </button>
                     </div>

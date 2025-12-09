@@ -36,13 +36,13 @@ const toggleOpen=()=>{
 
   return (
     
-    <nav className='w-full fixed z-20 left-0 top-0 shadow-md bg-white/90 backdrop-blur-md bg-gradient-to-r from-white via-gray-50 to-indigo-50 rounded-lg'>
+    <nav className='w-full fixed z-20 left-0 top-0   rounded-lg'>
         <div className='max-w-screen-xl mx-auto flex flex-wrap justify-between items-center '>
             <Link to="/" className='flex items-center gap-2 '>
             <img src={logo} alt="Logo" className='w-16 h-16'/>         
             <span className='font-semibold text-gray-800 hover:text-indigo-600'>CSIR-NGRI GUEST HOUSE</span>
             </Link>
-            <ul className='hidden md:flex gap-6 '>
+            <ul className='hidden md:flex gap-6 bg-white p-2 rounded-full border border-[#1A1A1A]'>
             {navItems.map((item,index)=>(
                     <li key={index} className='cursor-pointer relative group ' >                    
                         {!item.children && (
