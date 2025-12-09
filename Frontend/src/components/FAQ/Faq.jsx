@@ -74,7 +74,7 @@ const Faq = () => {
                             ))
 
                         ):(
-                            <div className='text-base md:text-sm '>{item.answer}</div>
+                            <div className='text-sm md:text-sm '>{item.answer}</div>
                         )}
                     </div>
                 )}
