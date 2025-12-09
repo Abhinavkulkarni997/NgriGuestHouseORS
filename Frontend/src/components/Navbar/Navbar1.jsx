@@ -7,7 +7,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { FaXmark } from "react-icons/fa6";
 
 
-const Navbar = () => {
+const Navbar1 = () => {
     // const [hoverOpen,setHoverOpen]=useState(false);
     const [hoverOpen,setHoverOpen]=useState(false);
 const navItems=[
@@ -84,4 +84,4 @@ const toggleOpen=()=>{
   )
 }
 
-export default Navbar
+export default Navbar1
