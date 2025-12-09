@@ -304,7 +304,7 @@ export default function GuestHouseCenteredCarousel() {
     <section className="w-full py-12 bg-white">
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-center text-3xl md:text-4xl font-extrabold mb-6">
-          Gallery
+          Guest House Gallery
         </h2>
         {/* <div className="w-24 h-1 bg-purple-500 mx-auto mb-8 rounded"></div> */}
 
