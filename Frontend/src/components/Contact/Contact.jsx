@@ -1,50 +1,73 @@
 import React from 'react'
 import { IoIosMail } from "react-icons/io";
 import { BsFillTelephoneFill } from "react-icons/bs";
-
+import { FaMapMarkerAlt } from 'react-icons/fa';
 const Contact = () => {
     const contactItems=[{
         id:1,
         name:'Email',
-        info:'guesthouse@immt.res.in'
+        info:'guesthouse@immt.res.in',
+        icon:<IoIosMail size={26} className='text-primary'/>
     },{
         id:2,
         name:"Reception",
-        info:"0674-2379418"
+        info:"0674-2379418",
+        icon:<BsFillTelephoneFill size={26} className="text-primary"/>
     }]
   return (
-    <section className='py-10 sm:py-14 lg:py-20 bg-white shadow-md '>
-      <div className='max-w-7xl mx-auto p-10 px-4 divide-x-2'>
-        <h1 className='text-center font-extrabold text-3xl md:text-4xl'>Contact Us</h1>
-      <div className='mt-12 bg-cyan-400/10 p-4 m-2 rounded-xl'>
+    <section className='py-12 sm:py-14 lg:py-20 bg-white shadow-md mb-4  '>
+      <div className='max-w-7xl mx-auto p-10 px-4 '>
+        {/* Heading */}
+        <h1 className='text-center font-extrabold text-3xl md:text-4xl text-gray-900'>Contact Us</h1>
+
+        
+      <div className='mt-12 bg-cyan-400/10 p-4 rounded-xl grid md:grid-cols-2 gap-6 '>
       {contactItems.map((item)=>(
-        <div key={contactItems.id}>
-            <div className='bg-white border mb-2 text-center '>
-                 <IoIosMail size={24} className='rounded-full border-dashed text-indigo-500'/><h1 className='font-medium '>{item.name}{':'}{item.info}</h1>
-                 <BsFillTelephoneFill size={24} className='rounded-full border-dashed text-indigo-500'/>
-            </div>
+        <div key={item.id} className='bg-white shadow-sm hover:shadow-md transition rounded-xl p-6 flex items-start gap-4 hover:scale-105' >
+             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                {item.icon}
+              </div>
+            <div>
+                <h3 className="text-lg font-semibold text-gray-900">{item.name}</h3>
+                <p className="text-gray-700 text-base">{item.info}</p>
+              </div>
         </div>
       ))}
       </div>
 
-      {/* {google map ngri} */}
-      <div className="w-full h-80 lg:h-96 rounded-xl overflow-hidden shadow-lg p-6 mt-4 ">
-      <iframe
-        // src="https://www.google.com/maps/embed?pb=YOUR_EMBED_URL" format to show google map
-        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7613.926466963049!2d78.551246!3d17.413552!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99468558a88d%3A0xf859b391a2260979!2sNGRI%20GUEST%20HOUSE%2C%20NGRI%2C%20Habsiguda%2C%20Hyderabad%2C%20Telangana%20500007!5e0!3m2!1sen!2sin!4v1765256939740!5m2!1sen!2sin"
-        width="100%"
-        height="100%"
-        style={{ border: 0 }}
-        allowFullScreen=""
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-      ></iframe>
-    </div>
-    {/* ngri src url below */}
-{/* <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7613.926466963049!2d78.551246!3d17.413552!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99468558a88d%3A0xf859b391a2260979!2sNGRI%20GUEST%20HOUSE%2C%20NGRI%2C%20Habsiguda%2C%20Hyderabad%2C%20Telangana%20500007!5e0!3m2!1sen!2sin!4v1765256939740!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> */}
-      </div>
+       {/* Address Section */}
+       <div className='bg-cyan-400/10 p-4 rounded-xl mt-12'>
+        <div className=" bg-white p-6 rounded-xl border hover:shadow-md hover:scale-105">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+              <FaMapMarkerAlt size={22} className="text-primary" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900">Address</h3>
+              <p className="text-gray-700">
+                NGRI Guest House, CSIR-NGRI Campus, Uppal Road, Hyderabad,
+                Telangana - 500007, India.
+              </p>
+            </div>
+          </div>
+        </div>
+        </div>
 
-     </section>
+      {/* {google map ngri} */}
+     {/* Map */}
+        <div className="w-full h-80 lg:h-96 rounded-xl overflow-hidden shadow-lg mt-10">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7613.926466963049!2d78.551246!3d17.413552!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99468558a88d%3A0xf859b391a2260979!2sNGRI%20GUEST%20HOUSE%2C%20NGRI%2C%20Habsiguda%2C%20Hyderabad%2C%20Telangana%20500007!5e0!3m2!1sen!2sin!4v1765256939740!5m2!1sen!2sin"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </section>
   )
 }
 

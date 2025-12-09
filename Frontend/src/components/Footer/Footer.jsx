@@ -1,4 +1,5 @@
 import React from 'react';
+import { FiMapPin } from "react-icons/fi";
 
 const Footer = () => {
     const currentYear=new Date().getFullYear();
@@ -18,7 +19,7 @@ const Footer = () => {
 },{
     id:4,
     title:'Follow Us',
-    info:'Facebook | Twitter | Instagram | LinkedIn'
+    info:'Facebook | Instagram '
 }]
   return (
     <footer className=' bg-[#111111] text-[#1A1A1A] backdrop-blur-md  rounded-lg w-full py-10 pt-4 pb-10  '>
@@ -31,6 +32,7 @@ const Footer = () => {
                 </div>
             )
         })}
+        <button className='text-white '><FiMapPin size={24} className='text-white '></FiMapPin>Get Directions</button>
     </div>
     
         
