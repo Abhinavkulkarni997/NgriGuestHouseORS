@@ -43,7 +43,7 @@ const socialIcons=[{
             )
         })}
 
-        {/* Follow Us */}
+        {/* Follow Us division */}
         <div>
             <h3 className='font-semibold text-white text-lg mb-2 text-start'>Follow Us</h3>
             <div className='flex items-center gap-4'>
@@ -61,6 +61,7 @@ const socialIcons=[{
             </div>
            
         </div>
+        {/* Get directions button */}
         <div className='border border-white rounded-lg  hover:bg-white/10 w-[180px] m-2'>
             <a href="https://www.google.com/maps/dir//NGRI+GUEST+HOUSE+CSIR+NATIONAL+GEOPHYSICAL+RESEARCH+INSTITUTE+NGRI,+Habsiguda+Hyderabad,+Telangana+500007/@17.413552,78.5512455,16z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3bcb99468558a88d:0xf859b391a2260979!2m2!1d78.5512455!2d17.413552?entry=ttu&g_ep=EgoyMDI1MTIwMi4wIKXMDSoASAFQAw%3D%3D"
             rel="noopener noreferrer"
