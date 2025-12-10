@@ -72,7 +72,7 @@ const navItems=[
 
                         {/* Drop down if the array has children */}
                        {item.children && (
-                        <>
+                        <div className='relative'>
                         <button className={`flex items-center gap-1 
                         ${navBg ? 'text-gray-800':'text-gray-800'} hover:text-indigo-600 flex items-center justify-center font-medium
                          `}>
@@ -85,17 +85,19 @@ const navItems=[
                         </button>
                         <div className="absolute top-full left-0 right-0 h-4 bg-transparent"></div>
 
-                        <ul className='absolute hidden group-hover:block
-                         top-full transition-all delay-100 group  min-w-[150px] left-0 bg-white/80  shadow-lg rounded-lg border-b-4 border-indigo-600  p-2 '>
+                        <ul className='absolute top-full left-0 mt-2 hidden group-hover:block
+                           
+                         min-w-[180px]  bg-white backdrop-blur-sm bg-white/95 
+                          shadow-xl rounded-lg border-b-4 border-indigo-600  p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200'>
                             {item.children.map((child,index)=>(
                                 <li key={index}><Link to={child.url} 
-                                className='block px-2 py-2 text-gray-800 hover:text-indigo-600'
+                                className='block px-4 py-3 text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors duration-150'
                                 >{child.title}</Link>
                                 </li>
                             ))}
                         </ul>
                        
-                       </>
+                       </div>
                        )}
                     </li>
             ))}
@@ -118,12 +120,14 @@ const navItems=[
         </div>
 
         {/* mobile view button */}
-        <button onClick={()=>setHoverOpen(!hoverOpen)} className='md:hidden text-white text-2xl'>
-            {hoverOpen? <FaXmark size={20} />:<GiHamburgerMenu size={20}/>}
+        <button onClick={()=>setHoverOpen(!hoverOpen)} className='md:hidden  text-white text-2xl'>
+            {hoverOpen? <FaXmark size={30} className={`${navBg?'text-[#1A1A1A]':''} ` } />
+            :<GiHamburgerMenu size={30} className={`${navBg ? 'text-[#1A1A1A]':''}`}/>
+        }
         </button>
 
         {/* MOBILE NAV */}
-      {open && (
+      {hoverOpen && (
         <div className="md:hidden bg-white shadow-lg py-3 px-4 space-y-3">
           {navItems.map((item) => (
             <div key={item.id}>

@@ -9,6 +9,15 @@ export default {
       sans: ["Inter", "sans-serif"],
     },
     extend: {
+      animation:{
+        'in':'in 0.2s ease-in-out',
+      },
+      keyframes:{
+        'in':{
+          '0%':{opacity:0,transform:'translateY(-10px)'},
+          '100%':{opacity:1,transform:'translateY(0)'},
+        }
+      },
       typography: {
         DEFAULT: {
           css: {
