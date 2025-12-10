@@ -2,10 +2,10 @@ import React from "react";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import Navbar1 from "../Navbar/Navbar1";
-const Layout = ({ children }) => {
+const Layout = ({ children,hasHero=false }) => {
   return (
     <>
-      <Navbar1 />
+      <Navbar1 hasHero={hasHero}/>
 
       {/* Proper page wrapper (gives spacing but full width) */}
       <main className="min-h-screen w-full">

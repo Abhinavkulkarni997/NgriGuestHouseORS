@@ -8,21 +8,27 @@ import { FaXmark } from "react-icons/fa6";
 import { IoMoonOutline } from "react-icons/io5";
 
 
-const Navbar1 = () => {
+const Navbar1 = ({hasHero}) => {
     const [hoverOpen,setHoverOpen]=useState(false);
     const [navBg,setNavBg]=useState(false);
     
 
     useEffect(()=>{
-        const handleScroll=()=>{
-            if(window.scrollY>40 ){
-                setNavBg(true);
-            }
-            else{setNavBg(false);}
+        if(!hasHero){
+            setNavBg(true);
+            return;
         }
-        window.addEventListener("scroll",handleScroll);
-       return ()=> window.removeEventListener("scroll",handleScroll);
-    },[]);
+        const handleScroll = () => {
+    if (window.scrollY > 50) {
+      setNavBg(true);
+    } else {
+      setNavBg(false);
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, [hasHero]);
 
 const navItems=[
     // {id:0,title:"Logo",url:logo},
@@ -45,7 +51,7 @@ const navItems=[
 
   return (
     
-    <nav className={`w-full fixed z-50 left-0 top-0  transition-all duration-300 rounded-lg ${navBg?'bg-white shadow-md':'bg-transparent'}`}>
+    <nav className={`w-full fixed z-50 left-0 top-0  transition-all duration-300 rounded-lg ${navBg?'bg-white shadow-md':hasHero?'bg-transparent':'bg-white'}`}>
         <div className='max-w-7xl mx-auto flex  items-center justify-between px-6 py-4'>
 
             {/* Logo content on the left */}

@@ -13,7 +13,7 @@ function App() {
       
     <Routes>
     
-    <Route path="/" element={<Layout><Home/></Layout>}/>
+    <Route path="/" element={<Layout hasHero={true}><Home/></Layout>}/>
     <Route path="/faq" element={<Layout><Faq/></Layout>} />
     <Route path="/contact" element={<Layout><Contact/></Layout>}/>
     </Routes>
