@@ -57,7 +57,7 @@ const navItems=[
 
 
             {/* Center division nav menu desktop version */}
-            <ul className='hidden md:flex gap-6 text-lg bg-white p-2 rounded-full border border-[#1A1A1A]'>
+            <ul className='hidden md:flex gap-6 text-lg bg-white p-2 rounded-full border border-[#1A1A1A] animate-in'>
             {navItems.map((item,index)=>(
                     <li key={index} className='cursor-pointer relative group ' >                    
                         {!item.children && (
@@ -108,7 +108,7 @@ const navItems=[
             {/*Book Online Button*/}
             <div className='hidden md:flex items-center gap-4'>
                   <Link to="/onlinebooking">
-            <button className={`${navBg?'':'border border-white text-white'} border border-[#1A1A1A]  px-4 py-2 rounded-lg font-semibold hover:bg-indigo-600 hover:text-white transition` }>
+            <button className={`${navBg?'hover:text-indigo-500':'border border-white text-white '} border border-[#1A1A1A]  px-4 py-2 rounded-lg font-semibold    transition` }>
               Book Online
             </button>            
             </Link>
