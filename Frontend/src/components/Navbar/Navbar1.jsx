@@ -83,9 +83,10 @@ const navItems=[
                         <path d="M5.25 7.5L10 12.25L14.75 7.5H5.25Z" /> 
                         </svg>
                         </button>
+                        <div className="absolute top-full left-0 right-0 h-4 bg-transparent"></div>
 
                         <ul className='absolute hidden group-hover:block
-                         top-10 transition-all delay-100 group  min-w-[150px] left-0 bg-white/80  shadow-lg rounded-lg border-b-4 border-indigo-600  p-2 '>
+                         top-full transition-all delay-100 group  min-w-[150px] left-0 bg-white/80  shadow-lg rounded-lg border-b-4 border-indigo-600  p-2 '>
                             {item.children.map((child,index)=>(
                                 <li key={index}><Link to={child.url} 
                                 className='block px-2 py-2 text-gray-800 hover:text-indigo-600'
@@ -105,13 +106,13 @@ const navItems=[
             {/*Book Online Button*/}
             <div className='hidden md:flex items-center gap-4'>
                   <Link to="/onlinebooking">
- <button className="border border-indigo-600 text-indigo-600 px-4 py-2 rounded-lg font-semibold hover:bg-indigo-600 hover:text-white transition">
+            <button className={`${navBg?'':'border border-white text-white'} border border-[#1A1A1A]  px-4 py-2 rounded-lg font-semibold hover:bg-indigo-600 hover:text-white transition` }>
               Book Online
             </button>            
             </Link>
             </div>
           
-          <button><IoMoonOutline size={24} className={`${navBg ?'text-gray-800':'text-white'}`}/></button>
+          <button><IoMoonOutline size={24} className={`${navBg ?'text-gray-800':'text-white border border-white'}`}/></button>
             {/* <button onClick={()=>null}><img src={sun} className='w-10 h-10 rounded-full' /></button> */}
             
         </div>
