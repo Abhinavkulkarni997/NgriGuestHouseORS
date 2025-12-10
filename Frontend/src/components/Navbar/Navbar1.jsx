@@ -1,4 +1,4 @@
-import React, { Children, useState } from 'react'
+import React, { Children, useEffect, useState } from 'react'
 import logo from '../../assets/ngri-logo.png';
 import '../../index.css';
 import { Link } from 'react-router-dom';
@@ -8,8 +8,21 @@ import { FaXmark } from "react-icons/fa6";
 
 
 const Navbar1 = () => {
-    // const [hoverOpen,setHoverOpen]=useState(false);
     const [hoverOpen,setHoverOpen]=useState(false);
+    const [navBg,setNavBg]=useState(false);
+    
+
+    useEffect(()=>{
+        const handleScroll=()=>{
+            if(window.scrollY>40 ){
+                setNavBg(true);
+            }
+            else{setNavBg(false);}
+        }
+        window.addEventListener("scroll",handleScroll);
+       return ()=> window.removeEventListener("scroll",handleScroll);
+    },[]);
+
 const navItems=[
     // {id:0,title:"Logo",url:logo},
     // {id:1,title:'CSIR-NGRI GUEST HOUSE',url:'/'},
@@ -36,20 +49,27 @@ const toggleOpen=()=>{
 
   return (
     
-    <nav className='w-full fixed z-20 left-0 top-0   rounded-lg'>
-        <div className='max-w-screen-xl mx-auto flex flex-wrap justify-between items-center '>
+    <nav className={`w-full fixed z-50 left-0 top-0  transition-all duration-300 rounded-lg ${navBg?'bg-white shadow-md':'bg-transparent'}`}>
+        <div className='max-w-7xl mx-auto flex  items-center justify-between px-6 py-4'>
+
+            {/* Logo content on the left */}
             <Link to="/" className='flex items-center gap-2 '>
             <img src={logo} alt="Logo" className='w-16 h-16'/>         
-            <span className='font-semibold text-gray-800 hover:text-indigo-600'>CSIR-NGRI GUEST HOUSE</span>
+            <span className={`font-semibold text-lg transition-all ${navBg}?'text-gray-900':'text-white'`}>
+                CSIR-NGRI GUEST HOUSE</span>
             </Link>
+            {/* Center division nav menu desktop version */}
             <ul className='hidden md:flex gap-6 bg-white p-2 rounded-full border border-[#1A1A1A]'>
             {navItems.map((item,index)=>(
                     <li key={index} className='cursor-pointer relative group ' >                    
                         {!item.children && (
-                        <Link to={item.url} className='text-gray-800 hover:text-indigo-600 font-medium px-1'>{item.title}</Link>
+                        <Link to={item.url} className={`${navBg}?'text-gray-900':'text-white  hover:text-indigo-500 font-medium '`}>{item.title}</Link>
                         )}
+                        {/* Drop down if the array has children */}
                        {item.children &&(
-                        <button className='text-gray-800 hover:text-indigo-600 flex items-center justify-center font-medium '>{item.title}
+                        <button className={`flex items-center gap-1 
+                        ${navBg}text-gray-800 hover:text-indigo-600 flex items-center justify-center font-medium
+                         `}>{item.title}
                         {/* <span className=''> */}
                         <svg className='w-4 h-4  group-hover:rotate-180 transition-transform duration-300 ' fill="indigo" stroke="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.25 7.5L10 12.25L14.75 7.5H5.25Z" /> 
@@ -75,9 +95,26 @@ const toggleOpen=()=>{
         </div>
 
 
-            <button onClick={toggleOpen} className='lg:hidden'>
+            <button onClick={()=>setHoverOpen(!hoverOpen)} className='lg:hidden'>
                 {hoverOpen?<GiHamburgerMenu size={20} />:<FaXmark size={20}/>}
                 </button>
+
+                {/* Mobile version */}
+                {hoverOpen &&(
+                     <div className='mt-10'>
+                        {navItems.map((item,index)=>(
+                            <div key={index} className='bg-gray-100 mt-100 translation-y-1  '>
+                                {item.children}
+
+                            </div>
+                        ))}
+
+                    </div>
+                )}
+
+                    
+                   
+                
 
     </nav>
 

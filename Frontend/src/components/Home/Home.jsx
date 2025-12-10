@@ -4,6 +4,7 @@ import GuestHouseCharges from '../Charges/GuestHouseCharges';
 import Guidelines from '../Guidelines/Guidelines';
 import GuestHouseGallery from '../GuestHouseGallery/GuestHouseGallery';
 import GuestHouseGallerySwiper from '../GuestHouseGallery/GuestHouseGallerySwiper';
+import ScrollToTop from '../ScrollToTop/ScrollToTop';
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <GuestHouseCharges />
       <Guidelines />
       <GuestHouseGallery/>
+      <ScrollToTop/>
       {/* <GuestHouseGallerySwiper/> */}
     </>
   )
