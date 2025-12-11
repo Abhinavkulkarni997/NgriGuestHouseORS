@@ -30,12 +30,6 @@ const Navbar1 = ({hasHero}) => {
   return () => window.removeEventListener("scroll", handleScroll);
 }, [hasHero]);
 
-
-useEffect(() => {
-  document.body.style.overflow = hoverOpen ? "hidden" : "auto";
-}, [hoverOpen]);
-
-
 const navItems=[
     // {id:0,title:"Logo",url:logo},
     // {id:1,title:'CSIR-NGRI GUEST HOUSE',url:'/'},

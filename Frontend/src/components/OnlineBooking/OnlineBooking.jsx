@@ -2,7 +2,10 @@ import React from 'react'
 
 const OnlineBooking = () => {
     const organizationsList=[{
-        id:1,
+            id:'0',
+            name:''
+    },
+        {id:1,
         name:'AMPRI (Advanced Materials and Processes Research Institute), Bhopal'
     },{
         id:2,
@@ -135,7 +138,12 @@ const OnlineBooking = () => {
         name:'AcSIR'
     }]
 
-    const PurposeofVisit=[{
+    const PurposeOfVisit=[
+        {
+            id:0,
+            name:''
+        },
+        {
         id:1,
         name:'Personal'
     },{
@@ -145,7 +153,12 @@ const OnlineBooking = () => {
         id:3,
         name:'LTC'
     }]
-    const noOfRooms=[{
+    const Rooms=[
+    {
+        id:0,
+        name:''
+    },
+    {
         id:1,
         name:'(01) One'
     },{
@@ -164,7 +177,11 @@ const OnlineBooking = () => {
         id:6,
         name:'(06) Six'
     }]
-    const Payment=[
+    const Payment=[{
+        id:0,
+        name:''
+    },
+
         {
             id:1,
             name:'Guest'
@@ -176,21 +193,54 @@ const OnlineBooking = () => {
             name:'NGRI A/C'
         }
     ]
+
+    const handleChange=(e)=>{
+        console.log(e.target.value);
+    }
   return (
     <form className='max-w-7xl mx-auto p-6 bg-white shadow-md py-[130px] mt-10  '>
     <div>
         <h1 className='text-gray-900 font-extrabold text-3xl md:text-4xl text-center '>Accommodation Request</h1>
+        <p className='text-gray-800 font-medium text-base sm:text-sm  mt-1 text-center '>The Accomodation request has be made by a CSIR Official only, otherwise the request will be summarily rejected. 
+            Kindly provide your offical email address and upload a scanned copy of the Office ID for verification.</p>
     </div>
       <div>
         <div className=''>
             <h1>Applicant Details</h1>
         </div>
-      {/* <label for="name" class="block text-base sm:text-sm font-medium text-gray-800">Applicant Name</label> */}
-      <input type="text" id="name" name="name" required placeholder='Applicant Name'
-            class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+     
+      <input type="text" id="name" name="name" required placeholder='Applicant Name' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+
+  
+    <input type="text" id="designation" name='designation' required placeholder='Designation' className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'/>
+    <input type="file" id="OfficeId" name='officeId' placeholder='Scanned Copy of Office ID(less than 2MB)' className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring  focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'/>
+    <select id="organizationlist" type="option" required placeholder="Organization List" className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2' onChange={(e)=>handleChange(e)}>
+    {organizationsList.map((org,index)=>(
+        <option key={index} value={org.value} >
+            {org.name}
+        </option>
+    ))}
+    </select>
+
+    <select id="purpose" type="option" required placeholder="Purpose Of Visit" className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
+    {PurposeOfVisit.map((purpose,index)=>(
+        <option key={index} value={purpose}> {purpose.name} </option>
+        
+    ))}
+    </select>
+
+    <select id="rooms" type='select' placeholder='No Of Rooms' className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
+        {Rooms.map((room,index)=>(
+            <option key={index} >{room.name}</option>
+        ))}
+    </select>
     </div>
+
+    <input type="number" id="EmployeeID" name='EmployeeID' required placeholder='EmployeeID' className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'/>
+    <input type="number" id="MobileNumber" name='MobileNumber' required placeholder='Contact/Mobile Number' className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'/>
+
     
-    <label> <input type="checkbox" id="terms" name=''/>I Agree to the Terms & Conditions</label>
+    <label className='p-2'> <input type="checkbox" id="terms" name='terms'/>I Agree to the Terms & Conditions</label>
    
     
     <div>
