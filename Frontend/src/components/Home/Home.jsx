@@ -3,7 +3,7 @@ import Hero from '../Hero/Hero';
 import GuestHouseCharges from '../Charges/GuestHouseCharges';
 import Guidelines from '../Guidelines/Guidelines';
 import GuestHouseGallery from '../GuestHouseGallery/GuestHouseGallery';
-import GuestHouseGallerySwiper from '../GuestHouseGallery/GuestHouseGallerySwiper';
+// import GuestHouseGallerySwiper from '../GuestHouseGallery/GuestHouseGallerySwiper';
 import ScrollToTop from '../ScrollToTop/ScrollToTop';
 
 const Home = () => {

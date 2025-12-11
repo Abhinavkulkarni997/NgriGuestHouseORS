@@ -30,6 +30,12 @@ const Navbar1 = ({hasHero}) => {
   return () => window.removeEventListener("scroll", handleScroll);
 }, [hasHero]);
 
+
+useEffect(() => {
+  document.body.style.overflow = hoverOpen ? "hidden" : "auto";
+}, [hoverOpen]);
+
+
 const navItems=[
     // {id:0,title:"Logo",url:logo},
     // {id:1,title:'CSIR-NGRI GUEST HOUSE',url:'/'},
@@ -68,8 +74,8 @@ const navItems=[
                     <li key={index} className='cursor-pointer relative group ' >                    
                         {!item.children && (
                         <Link to={item.url} 
-                        className={`${navBg}
-                            ? 'text-gray-900':'text-white'}  
+                        className={`${navBg
+                            ? 'text-gray-900':''}  
                             hover:text-indigo-500 transition font-medium '`}
                         >
                         {item.title}
@@ -120,7 +126,7 @@ const navItems=[
             </Link>
             </div>
           
-          <button><IoMoonOutline size={24} className={`${navBg ?'text-gray-800':'text-white border border-white'}`}/></button>
+          <button><IoMoonOutline size={24} className={`${navBg ?'text-gray-800':'text-white border '}`}/></button>
             {/* <button onClick={()=>null}><img src={sun} className='w-10 h-10 rounded-full' /></button> */}
             
         </div>

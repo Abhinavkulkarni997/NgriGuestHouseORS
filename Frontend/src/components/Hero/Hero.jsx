@@ -25,7 +25,7 @@ const Hero = () => {
   return (
     <section className='h-screen w-full relative '>
       {/* code for background Image */}
-        <img src={HeroImg}  alt='Hero' className='w-full h-full object-cover absolute inset-0 '/>
+        <img src={HeroImg}  alt='Hero' className='w-full h-full object-cover absolute inset-0 z-10  '/>
         {/* Dark Overlay */}
         <div className='absolute inset-0 bg-black/40'></div>
 
