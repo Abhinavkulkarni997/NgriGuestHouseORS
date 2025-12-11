@@ -236,10 +236,57 @@ const OnlineBooking = () => {
     </select>
     </div>
 
-    <input type="number" id="EmployeeID" name='EmployeeID' required placeholder='EmployeeID' className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'/>
+    <input type="number" id="EmployeeID" name='EmployeeID' required placeholder='EmployeeID' 
+    className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'/>
     <input type="number" id="MobileNumber" name='MobileNumber' required placeholder='Contact/Mobile Number' className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'/>
 
-    
+    <input
+  type="date"
+  id="start"
+  name="trip-start"
+  value="2025-12-11"
+  min="2025-12-01"
+  max="2050-12-31" 
+  placeholder='Date Of Arrival'
+  className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'
+
+  onChange={(e)=>handleChange(e)}
+  />
+<input
+  type="time"
+  id="timeofarrival"
+  name="timeofarrival"
+  min="00:00"
+  max="23:00"
+  placeholder='time of arrival'
+      className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'
+  required />
+
+    <input
+  type="date"
+  id="start"
+  name="trip-start"
+  value="2025-12-11"
+  min="2025-12-01"
+  max="2050-12-31" 
+  placeholder='Date Of Departure'
+     className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'
+  onChange={(e)=>handleChange(e)}
+  />
+
+  <input
+  type="time"
+  id="timeofdeparture"
+  name="timeofdeparture"
+  min="00:00"
+  max="23:00"
+  placeholder='time of departure'
+      className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'
+
+  required />
+
+
+
     <label className='p-2'> <input type="checkbox" id="terms" name='terms'/>I Agree to the Terms & Conditions</label>
    
     
