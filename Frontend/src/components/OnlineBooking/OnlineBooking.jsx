@@ -194,17 +194,63 @@ const OnlineBooking = () => {
         }
     ]
 
+    const category=[{
+        id:0,
+        name:''
+    },{
+        id:1,
+        name:'(a) CSIR Employee'
+    },{
+        id:2,
+        name:'(b) CSIR Pensioner'
+    },{
+        id:3,
+        name:'(c) CSIR Student (PF/JRF/SRF/RA/Scholars)'
+    },{
+        id:4,
+        name:'Dependant spouse/child/parent/sibling of (a)/(b)'
+    },{
+        id:5,
+        name:'Non-Dependant spouse/child/parent/sibling of (a)/(b)'
+    },{
+        id:6,
+        name:'Guests/Expert Members invited for CSIR/Institute Work'
+    },{
+        id:7,
+        name:'Serving employees of ACSIR/PSUs of DSIR i.e. CEL, NRDC for Official Purpose'
+    },{
+        id:8,
+        name:'Other Relative/Friend/Personal Guest of (a)/(b)/(c)'
+    },{
+        id:9,
+        name:'NRI/Foreign Guests'
+    }
+]
+
+const Gender=[{
+    id:0,
+    name:''
+},{
+    id:1,
+    name:'MALE'
+},{
+    id:2,
+    name:'FEMALE'
+}]
+
     const handleChange=(e)=>{
         console.log(e.target.value);
     }
   return (
-    <form className='max-w-7xl mx-auto p-6 bg-white shadow-md py-[130px] mt-10  '>
+    <form className='max-w-screen-xl mx-auto p-6 bg-white shadow-md py-[130px] mt-10  '>
     <div>
         <h1 className='text-gray-900 font-extrabold text-3xl md:text-4xl text-center '>Accommodation Request</h1>
         <p className='text-gray-800 font-medium text-base sm:text-sm  mt-1 text-center '>The Accomodation request has be made by a CSIR Official only, otherwise the request will be summarily rejected. 
             Kindly provide your offical email address and upload a scanned copy of the Office ID for verification.</p>
     </div>
-      <div>
+
+    {/* Applicant Details */}
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
         <div className=''>
             <h1>Applicant Details</h1>
         </div>
@@ -234,11 +280,12 @@ const OnlineBooking = () => {
             <option key={index} >{room.name}</option>
         ))}
     </select>
-    </div>
+    
 
     <input type="number" id="EmployeeID" name='EmployeeID' required placeholder='EmployeeID' 
     className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'/>
     <input type="number" id="MobileNumber" name='MobileNumber' required placeholder='Contact/Mobile Number' className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'/>
+    <input type="email" id="email" name='EmailAddress' required placeholder='Official Email Address' className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'/>
 
     <input
   type="date"
@@ -285,7 +332,66 @@ const OnlineBooking = () => {
 
   required />
 
+  </div>
 
+
+
+  {/* Guest Details */}
+
+  <div className='flex items-center'>
+    <h1>Guest Details</h1>
+    <label className='p-2'> <input type="checkbox" id="guest" name='guest'/>Are you One of the guest</label>
+  </div>
+
+<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8'>
+  <div className='relative'>
+    <label>Name of Guest No.1</label>
+    <input type="text" id="name" name="name" required placeholder='Name of Guest No.1' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+
+  </div>
+  <div className='relative'>
+    <label>Organization</label>
+    <input type="text" id="organization" name="organization" required placeholder='Organization' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+  </div>
+  <div className='relative'>
+    <label>Age</label>
+    <input type="number" id="age" name="age" required placeholder='age' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+  </div>
+
+  <div className='relative'>
+    <label>Gender</label>
+ <select id="Gender" type='select' placeholder='Gender' className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
+        {Gender.map((gender,index)=>(
+            <option key={index} >{gender.name}</option>
+        ))}
+    </select>
+    </div>  
+
+  <div className='relative'>
+    <label>Contact No.</label>
+    <input type="number" id="contact" name="contact" required placeholder='age' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+  </div>
+    
+  <div className='relative'>
+    <label>Category</label>
+ <select id="Category" type='select' placeholder='Category' className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
+        {category.map((category,index)=>(
+            <option key={index} >{category.name}</option>
+        ))}
+    </select>
+    </div>  
+  <div className='relative'>
+    <label>Id Proof No.</label>
+    <input type="number" id="idproof" name="idproof" required placeholder='age' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+  </div>
+
+</div>
+
+<div className='relative'>
+    <label>Room allotment preference/additional information (if any)</label>
+        <input type="text" id="preference" name="preference" required placeholder='Organization' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+        <p>Eg. Guest 1 - Room 1;Guest 2 - Room 1;Guest 3 - Room 2; etc..</p>
+</div>
 
     <label className='p-2'> <input type="checkbox" id="terms" name='terms'/>I Agree to the Terms & Conditions</label>
    
