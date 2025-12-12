@@ -3,7 +3,7 @@ import React from 'react'
 const OnlineBooking = () => {
     const organizationsList=[{
             id:'0',
-            name:''
+            name:'select'
     },
         {id:1,
         name:'AMPRI (Advanced Materials and Processes Research Institute), Bhopal'
@@ -141,7 +141,7 @@ const OnlineBooking = () => {
     const PurposeOfVisit=[
         {
             id:0,
-            name:''
+            name:'select'
         },
         {
         id:1,
@@ -179,7 +179,7 @@ const OnlineBooking = () => {
     }]
     const Payment=[{
         id:0,
-        name:''
+        name:'select'
     },
 
         {
@@ -196,7 +196,7 @@ const OnlineBooking = () => {
 
     const category=[{
         id:0,
-        name:''
+        name:'select'
     },{
         id:1,
         name:'(a) CSIR Employee'
@@ -229,7 +229,7 @@ const OnlineBooking = () => {
 
 const Gender=[{
     id:0,
-    name:''
+    name:'select'
 },{
     id:1,
     name:'MALE'
@@ -242,7 +242,7 @@ const Gender=[{
         console.log(e.target.value);
     }
   return (
-    <form className='max-w-screen-xl mx-auto p-6 bg-white shadow-md py-[130px] mt-10  '>
+    <form className='max-w-7xl mx-auto p-6 bg-white shadow-md py-[130px] mt-10 py-10  '>
     <div>
         <h1 className='text-gray-900 font-extrabold text-3xl md:text-4xl text-center '>Accommodation Request</h1>
         <p className='text-gray-800 font-medium text-base sm:text-sm  mt-1 text-center '>The Accomodation request has be made by a CSIR Official only, otherwise the request will be summarily rejected. 
@@ -343,7 +343,7 @@ const Gender=[{
     <label className='p-2'> <input type="checkbox" id="guest" name='guest'/>Are you One of the guest</label>
   </div>
 
-<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8'>
+<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12'>
   <div className='relative'>
     <label>Name of Guest No.1</label>
     <input type="text" id="name" name="name" required placeholder='Name of Guest No.1' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
@@ -371,6 +371,10 @@ const Gender=[{
     <label>Contact No.</label>
     <input type="number" id="contact" name="contact" required placeholder='age' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
   </div>
+    <div className='relative'>
+    <label>Id Proof No.</label>
+    <input type="number" id="idproof" name="idproof" required placeholder='age' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+  </div>
     
   <div className='relative'>
     <label>Category</label>
@@ -380,10 +384,7 @@ const Gender=[{
         ))}
     </select>
     </div>  
-  <div className='relative'>
-    <label>Id Proof No.</label>
-    <input type="number" id="idproof" name="idproof" required placeholder='age' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
-  </div>
+
 
 </div>
 
@@ -393,10 +394,14 @@ const Gender=[{
         <p>Eg. Guest 1 - Room 1;Guest 2 - Room 1;Guest 3 - Room 2; etc..</p>
 </div>
 
-<div className='relative'>
-    <label>Enter Verification Code</label>
+<div className='relative flex items-center'>
+    {/* <label>Enter Verification Code</label> */}
+    {/* captcha image */}
+    <img></img>
         <input type="text" id="verificationcode" name="verificationcode" required placeholder='Enter Verification Code' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+        <p>Can't read image? <span  className='text-blue-500'>click here to refresh</span> </p>
 </div>
+
 
     <label className='p-2'> <input type="checkbox" id="terms" name='terms'/>I Agree to the Terms & Conditions</label>
    
