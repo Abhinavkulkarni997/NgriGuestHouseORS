@@ -389,13 +389,18 @@ const Gender=[{
 
 <div className='relative'>
     <label>Room allotment preference/additional information (if any)</label>
-        <input type="text" id="preference" name="preference" required placeholder='Organization' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+        <input type="text" id="preference" name="preference" required placeholder='Room allotment preference/additional information (if any)' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
         <p>Eg. Guest 1 - Room 1;Guest 2 - Room 1;Guest 3 - Room 2; etc..</p>
+</div>
+
+<div className='relative'>
+    <label>Enter Verification Code</label>
+        <input type="text" id="verificationcode" name="verificationcode" required placeholder='Enter Verification Code' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
 </div>
 
     <label className='p-2'> <input type="checkbox" id="terms" name='terms'/>I Agree to the Terms & Conditions</label>
    
-    
+
     <div>
         <button className='p-4 bg-[#1A1A1A] text-white rounded-lg'>Submit Request</button>
     </div>
