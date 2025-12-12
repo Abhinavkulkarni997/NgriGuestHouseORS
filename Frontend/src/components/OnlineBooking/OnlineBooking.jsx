@@ -287,6 +287,14 @@ const Gender=[{
     <input type="number" id="MobileNumber" name='MobileNumber' required placeholder='Contact/Mobile Number' className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'/>
     <input type="email" id="email" name='EmailAddress' required placeholder='Official Email Address' className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'/>
 
+          <select id="payment" type="payment" required placeholder="Payment to be borne by" className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
+    {Payment.map((payment,index)=>(
+        <option key={index} value={payment}> {payment.name} </option>
+        
+    ))}
+    </select>
+
+
     <input
   type="date"
   id="start"
@@ -340,7 +348,7 @@ const Gender=[{
 
   <div className='flex items-center'>
     <h1>Guest Details</h1>
-    <label className='p-2'> <input type="checkbox" id="guest" name='guest'/>Are you One of the guest</label>
+    <label className='p-2'> <input type="checkbox" id="guest" name='guest'/>Are you One of the guest?</label>
   </div>
 
 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 border border-gray-200 bg-cyan-400/20 rounded-xl p-4'>
@@ -378,7 +386,7 @@ const Gender=[{
     
   <div className='relative'>
     <label>Category</label>
- <select id="Category" type='select' placeholder='Category' className='mt-2 w-3/4 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
+ <select id="Category" type='select' placeholder='Category' className='mt-2 w-64 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
         {category.map((category,index)=>(
             <option key={index} >{category.name}</option>
         ))}
@@ -389,8 +397,8 @@ const Gender=[{
 </div>
 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 border border-gray-200 bg-cyan-400/20 rounded-xl p-4 mt-2 '>
   <div className='relative'>
-    <label>Name of Guest No.1</label>
-    <input type="text" id="name" name="name" required placeholder='Name of Guest No.1' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+    <label>Name of Guest No.2</label>
+    <input type="text" id="name" name="name" required placeholder='Name of Guest No.2' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
 
   </div>
   <div className='relative'>
@@ -422,7 +430,7 @@ const Gender=[{
     
   <div className='relative'>
     <label>Category</label>
- <select id="Category" type='select' placeholder='Category' className='mt-2 w-3/4 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
+ <select id="Category" type='select' placeholder='Category' className='mt-2 w-64 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
         {category.map((category,index)=>(
             <option key={index} >{category.name}</option>
         ))}
@@ -434,8 +442,8 @@ const Gender=[{
 
 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 border border-gray-200 bg-cyan-400/20 rounded-xl p-4 mt-2 '>
   <div className='relative'>
-    <label>Name of Guest No.1</label>
-    <input type="text" id="name" name="name" required placeholder='Name of Guest No.1' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+    <label>Name of Guest No.3</label>
+    <input type="text" id="name" name="name" required placeholder='Name of Guest No.3' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
 
   </div>
   <div className='relative'>
@@ -467,7 +475,7 @@ const Gender=[{
     
   <div className='relative'>
     <label>Category</label>
- <select id="Category" type='select' placeholder='Category' className='mt-2 w-3/4 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
+ <select id="Category" type='select' placeholder='Category' className='mt-2 w-64 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
         {category.map((category,index)=>(
             <option key={index} >{category.name}</option>
         ))}
@@ -478,8 +486,8 @@ const Gender=[{
 </div>
 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 border border-gray-200 bg-cyan-400/20 rounded-xl p-4 mt-2 '>
   <div className='relative'>
-    <label>Name of Guest No.1</label>
-    <input type="text" id="name" name="name" required placeholder='Name of Guest No.1' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+    <label>Name of Guest No.4</label>
+    <input type="text" id="name" name="name" required placeholder='Name of Guest No.4' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
 
   </div>
   <div className='relative'>
@@ -511,7 +519,7 @@ const Gender=[{
     
   <div className='relative'>
     <label>Category</label>
- <select id="Category" type='select' placeholder='Category' className='mt-2 w-3/4 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
+ <select id="Category" type='select' placeholder='Category' className='mt-2 w-64 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
         {category.map((category,index)=>(
             <option key={index} >{category.name}</option>
         ))}
@@ -522,8 +530,8 @@ const Gender=[{
 </div>
 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 border border-gray-200 bg-cyan-400/20 rounded-xl p-4 mt-2 '>
   <div className='relative'>
-    <label>Name of Guest No.1</label>
-    <input type="text" id="name" name="name" required placeholder='Name of Guest No.1' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+    <label>Name of Guest No.5</label>
+    <input type="text" id="name" name="name" required placeholder='Name of Guest No.5' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
 
   </div>
   <div className='relative'>
@@ -555,7 +563,7 @@ const Gender=[{
     
   <div className='relative'>
     <label>Category</label>
- <select id="Category" type='select' placeholder='Category' className='mt-2 w-3/4 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
+ <select id="Category" type='select' placeholder='Category' className='mt-2 w-64 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
         {category.map((category,index)=>(
             <option key={index} >{category.name}</option>
         ))}
@@ -566,8 +574,8 @@ const Gender=[{
 </div>
 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 border border-gray-200 bg-cyan-400/20 rounded-xl p-4 mt-2 '>
   <div className='relative'>
-    <label>Name of Guest No.1</label>
-    <input type="text" id="name" name="name" required placeholder='Name of Guest No.1' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+    <label>Name of Guest No.6</label>
+    <input type="text" id="name" name="name" required placeholder='Name of Guest No.6' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
 
   </div>
   <div className='relative'>
@@ -599,7 +607,7 @@ const Gender=[{
     
   <div className='relative'>
     <label>Category</label>
- <select id="Category" type='select' placeholder='Category' className='mt-2 w-3/4 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
+ <select id="Category" type='select' placeholder='Category' className='mt-2 w-64 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
         {category.map((category,index)=>(
             <option key={index} >{category.name}</option>
         ))}
@@ -612,7 +620,7 @@ const Gender=[{
 
 <div className='relative'>
     <label>Room allotment preference/additional information (if any)</label>
-        <input type="text" id="preference" name="preference" required placeholder='Room allotment preference/additional information (if any)' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+        <input type="text" id="preference" name="preference" required placeholder='Room allotment preference/additional information (if any)' class="mt-2  block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
         <p>Eg. Guest 1 - Room 1;Guest 2 - Room 1;Guest 3 - Room 2; etc..</p>
 </div>
 
@@ -629,7 +637,7 @@ const Gender=[{
    
 
     <div>
-        <button className='p-4 bg-[#1A1A1A] text-white rounded-lg'>Submit Request</button>
+        <button className='p-4 bg-cyan-500/70 hover:bg-cyan-400/80  text-white rounded-lg'>Submit Request</button>
     </div>
     </form>
   )
