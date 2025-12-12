@@ -248,12 +248,12 @@ const Gender=[{
         <p className='text-gray-800 font-medium text-base sm:text-sm  mt-1 text-center '>The Accomodation request has be made by a CSIR Official only, otherwise the request will be summarily rejected. 
             Kindly provide your offical email address and upload a scanned copy of the Office ID for verification.</p>
     </div>
-
-    {/* Applicant Details */}
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
-        <div className=''>
+ <div className=''>
             <h1>Applicant Details</h1>
         </div>
+    {/* Applicant Details */}
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+       
      
       <input type="text" id="name" name="name" required placeholder='Applicant Name' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
 
@@ -343,7 +343,7 @@ const Gender=[{
     <label className='p-2'> <input type="checkbox" id="guest" name='guest'/>Are you One of the guest</label>
   </div>
 
-<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12'>
+<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 border border-gray-200 bg-cyan-400/20 rounded-xl p-4'>
   <div className='relative'>
     <label>Name of Guest No.1</label>
     <input type="text" id="name" name="name" required placeholder='Name of Guest No.1' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
@@ -373,12 +373,12 @@ const Gender=[{
   </div>
     <div className='relative'>
     <label>Id Proof No.</label>
-    <input type="number" id="idproof" name="idproof" required placeholder='age' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+    <input type="number" id="idproof" name="idproof" required placeholder='Id Proof No.' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
   </div>
     
   <div className='relative'>
     <label>Category</label>
- <select id="Category" type='select' placeholder='Category' className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
+ <select id="Category" type='select' placeholder='Category' className='mt-2 w-3/4 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
         {category.map((category,index)=>(
             <option key={index} >{category.name}</option>
         ))}
@@ -387,9 +387,9 @@ const Gender=[{
 
 
 </div>
-<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12'>
+<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 border border-gray-200 bg-cyan-400/20 rounded-xl p-4 mt-2 '>
   <div className='relative'>
-    <label>Name of Guest No.2</label>
+    <label>Name of Guest No.1</label>
     <input type="text" id="name" name="name" required placeholder='Name of Guest No.1' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
 
   </div>
@@ -417,12 +417,12 @@ const Gender=[{
   </div>
     <div className='relative'>
     <label>Id Proof No.</label>
-    <input type="number" id="idproof" name="idproof" required placeholder='age' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+    <input type="number" id="idproof" name="idproof" required placeholder='Id Proof No.' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
   </div>
     
   <div className='relative'>
     <label>Category</label>
- <select id="Category" type='select' placeholder='Category' className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
+ <select id="Category" type='select' placeholder='Category' className='mt-2 w-3/4 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
         {category.map((category,index)=>(
             <option key={index} >{category.name}</option>
         ))}
@@ -431,9 +431,10 @@ const Gender=[{
 
 
 </div>
-<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12'>
+
+<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 border border-gray-200 bg-cyan-400/20 rounded-xl p-4 mt-2 '>
   <div className='relative'>
-    <label>Name of Guest No.3</label>
+    <label>Name of Guest No.1</label>
     <input type="text" id="name" name="name" required placeholder='Name of Guest No.1' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
 
   </div>
@@ -461,12 +462,12 @@ const Gender=[{
   </div>
     <div className='relative'>
     <label>Id Proof No.</label>
-    <input type="number" id="idproof" name="idproof" required placeholder='age' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+    <input type="number" id="idproof" name="idproof" required placeholder='Id Proof No.' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
   </div>
     
   <div className='relative'>
     <label>Category</label>
- <select id="Category" type='select' placeholder='Category' className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
+ <select id="Category" type='select' placeholder='Category' className='mt-2 w-3/4 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
         {category.map((category,index)=>(
             <option key={index} >{category.name}</option>
         ))}
@@ -475,9 +476,9 @@ const Gender=[{
 
 
 </div>
-<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12'>
+<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 border border-gray-200 bg-cyan-400/20 rounded-xl p-4 mt-2 '>
   <div className='relative'>
-    <label>Name of Guest No.4</label>
+    <label>Name of Guest No.1</label>
     <input type="text" id="name" name="name" required placeholder='Name of Guest No.1' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
 
   </div>
@@ -505,12 +506,12 @@ const Gender=[{
   </div>
     <div className='relative'>
     <label>Id Proof No.</label>
-    <input type="number" id="idproof" name="idproof" required placeholder='age' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+    <input type="number" id="idproof" name="idproof" required placeholder='Id Proof No.' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
   </div>
     
   <div className='relative'>
     <label>Category</label>
- <select id="Category" type='select' placeholder='Category' className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
+ <select id="Category" type='select' placeholder='Category' className='mt-2 w-3/4 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
         {category.map((category,index)=>(
             <option key={index} >{category.name}</option>
         ))}
@@ -519,9 +520,9 @@ const Gender=[{
 
 
 </div>
-<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12'>
+<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 border border-gray-200 bg-cyan-400/20 rounded-xl p-4 mt-2 '>
   <div className='relative'>
-    <label>Name of Guest No.5</label>
+    <label>Name of Guest No.1</label>
     <input type="text" id="name" name="name" required placeholder='Name of Guest No.1' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
 
   </div>
@@ -549,12 +550,12 @@ const Gender=[{
   </div>
     <div className='relative'>
     <label>Id Proof No.</label>
-    <input type="number" id="idproof" name="idproof" required placeholder='age' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+    <input type="number" id="idproof" name="idproof" required placeholder='Id Proof No.' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
   </div>
     
   <div className='relative'>
     <label>Category</label>
- <select id="Category" type='select' placeholder='Category' className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
+ <select id="Category" type='select' placeholder='Category' className='mt-2 w-3/4 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
         {category.map((category,index)=>(
             <option key={index} >{category.name}</option>
         ))}
@@ -563,9 +564,9 @@ const Gender=[{
 
 
 </div>
-<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12'>
+<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 border border-gray-200 bg-cyan-400/20 rounded-xl p-4 mt-2 '>
   <div className='relative'>
-    <label>Name of Guest No.6</label>
+    <label>Name of Guest No.1</label>
     <input type="text" id="name" name="name" required placeholder='Name of Guest No.1' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
 
   </div>
@@ -593,12 +594,12 @@ const Gender=[{
   </div>
     <div className='relative'>
     <label>Id Proof No.</label>
-    <input type="number" id="idproof" name="idproof" required placeholder='age' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
+    <input type="number" id="idproof" name="idproof" required placeholder='Id Proof No.' class="mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus:ring-opacity-50 border-2"/>
   </div>
     
   <div className='relative'>
     <label>Category</label>
- <select id="Category" type='select' placeholder='Category' className='mt-2 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
+ <select id="Category" type='select' placeholder='Category' className='mt-2 w-3/4 block p-4 rounded-xl border-gray-300 shadow-sm focus:border-cyan-400/10 focus:ring focus:ring-cyan-400/40 focus-ring-opacity-50 border-2'>
         {category.map((category,index)=>(
             <option key={index} >{category.name}</option>
         ))}
@@ -607,6 +608,7 @@ const Gender=[{
 
 
 </div>
+
 
 <div className='relative'>
     <label>Room allotment preference/additional information (if any)</label>
