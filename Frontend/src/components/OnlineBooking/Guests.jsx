@@ -1,8 +1,52 @@
 import React from 'react'
 import { useFormContext,useFieldArray } from 'react-hook-form' 
 const Guests = () => {
+       const category=[{
+        id:0,
+        name:'select'
+    },{
+        id:1,
+        name:'(a) CSIR Employee'
+    },{
+        id:2,
+        name:'(b) CSIR Pensioner'
+    },{
+        id:3,
+        name:'(c) CSIR Student (PF/JRF/SRF/RA/Scholars)'
+    },{
+        id:4,
+        name:'Dependant spouse/child/parent/sibling of (a)/(b)'
+    },{
+        id:5,
+        name:'Non-Dependant spouse/child/parent/sibling of (a)/(b)'
+    },{
+        id:6,
+        name:'Guests/Expert Members invited for CSIR/Institute Work'
+    },{
+        id:7,
+        name:'Serving employees of ACSIR/PSUs of DSIR i.e. CEL, NRDC for Official Purpose'
+    },{
+        id:8,
+        name:'Other Relative/Friend/Personal Guest of (a)/(b)/(c)'
+    },{
+        id:9,
+        name:'NRI/Foreign Guests'
+    }
+]
+const Gender=[{
+    id:0,
+    name:'select'
+},{
+    id:1,
+    name:'MALE'
+},{
+    id:2,
+    name:'FEMALE'
+}]
+    
     const {register,control,formState:{errors}}=useFormContext();
     const  {fields,append,remove}=useFieldArray({control,name:"guests"});
+
   return (
     <div>
         <h1 className='text-lg font-semibold mb-4'>Guests Details</h1>
@@ -29,15 +73,14 @@ const Guests = () => {
                         </div>
 
                         <div>
-                            <label className=''>Age</label>
+                            <label className='block text-sm'>Age</label>
                             <input type="number" {...register(`guests.${index}.age`,{valueAsNumber:true})} className='mt-1 block w-full rounded-lg p-3'/>
                         </div>
 
                         <div>
+                            <label className='block text-sm'>Gender</label>
                         <select {...register(`guests.${index}.gender`)} className='mt-1 block w-full rounded-lg p-3'>
-                            <option value="">Select</option> 
-                            <option value="male">MALE</option> 
-                            <option value="female">FEMALE</option> 
+                            {Gender.map((g)=><option key={g.id} value={g.name}>{g.name}</option>)}
 
                         </select>
                         </div>
@@ -52,10 +95,21 @@ const Guests = () => {
                             <input {...register(`guests.${index}.idProof`)} className="mt-1 block w-full rounded-lg border p-3" />
                         </div>
 
+                        <div>
+                            <label className='block text-sm'>Category</label>
+                            <select {...register(`guests.${index}.category`)} className='mt-1 block w-ful rounded-lg border p-3'>
+                                {category.map((c)=><option key={c.id} value={c.name}>{c.name}</option>)}
+                            </select>
+                        </div>
 
                     </div>
                 </div>
             })}
+
+            <div className='flex gap-3'>
+               <button type="button" onClick={()=>append({name:'',guests:''})}>Add Guest</button> 
+               <p>You can add upto 6 guests</p>
+            </div>
         </div>
         
         </div>
