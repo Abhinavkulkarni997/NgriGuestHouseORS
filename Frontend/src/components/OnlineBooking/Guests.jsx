@@ -107,7 +107,9 @@ const Gender=[{
             })}
 
             <div className='flex gap-3'>
-               <button type="button" onClick={()=>append({name:'',guests:''})}>Add Guest</button> 
+               <button type="button" onClick={() => append({ name: "", organization: "", age: "", gender: "", contact: "", idProof: "", category: "" })} className="px-4 py-2 bg-cyan-600 text-white rounded-md">
+            Add Guest
+          </button>
                <p>You can add upto 6 guests</p>
             </div>
         </div>
