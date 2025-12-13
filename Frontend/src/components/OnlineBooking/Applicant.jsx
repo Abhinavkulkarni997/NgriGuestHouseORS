@@ -191,9 +191,21 @@ const Applicant = () => {
         {errors.organization && <p className="text-red-600">{errors.organization.message}</p>}
     </div>
     <Input name="employeeId" label="Employee ID" placeholder="Employee ID" required/>
-    <Input name="mobileNumber" label="Mobile Number" placeholder="Enter Mobile Number"/>
-    <Input name="officialEmail" label='Official EmailID' type="email" placeholder="Official Email Address"/>
+    <Input name="mobileNumber" label="Mobile Number" placeholder="Enter Mobile Number" required/>
+    <Input name="officialEmail" label='Official EmailID' type="email" placeholder="Official Email Address" required/>
+
+     <div>
+        <label className="block text-sm font-medium text-gray-700">Payment to be borne by</label>
+        <select {...register("paymentBy")} className="mt-1 block w-full rounded-lg border p-3"></select>
+        <option value="">select</option>
+        {payments.map(p=><option key={p.id} value={p.name}>{p.name}</option>)}
+
     </div>
+
+
+
+    </div>
+   
   )
 }
 
