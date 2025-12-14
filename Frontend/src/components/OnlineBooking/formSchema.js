@@ -64,4 +64,4 @@ import {z} from "zod";
 
 }
 
-export default {guestSchema,bookingSchema,defaultValues};
+export  {guestSchema,bookingSchema,defaultValues};

@@ -63,7 +63,7 @@ const MultistepForm = () => {
   }
 
   return (
-    <div className='min-h-screen flex items-start justify-center bg-gray-50 py-10 px-4'>
+    <div className='min-h-screen flex items-start justify-center bg-gray-50 py-[120px] px-4'>
       <div className='w-full max-w-4xl bg-white rounded-2xl shadow-lg p-6'>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)} noValidate>

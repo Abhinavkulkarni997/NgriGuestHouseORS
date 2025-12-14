@@ -196,9 +196,10 @@ const Applicant = () => {
 
      <div>
         <label className="block text-sm font-medium text-gray-700">Payment to be borne by</label>
-        <select {...register("paymentBy")} className="mt-1 block w-full rounded-lg border p-3"></select>
-        <option value="">select</option>
+        <select {...register("paymentBy")} className="mt-1 block w-full rounded-lg border p-3">
+        {/* <option value="">select</option> */}
         {payments.map(p=><option key={p.id} value={p.name}>{p.name}</option>)}
+        </select>
 
     </div>
 
