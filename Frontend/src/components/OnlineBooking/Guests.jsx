@@ -112,6 +112,14 @@ const Gender=[{
           </button>
                <p className='text-m text-gray-800 self-center'>You can add upto 6 guests</p>
             </div>
+
+              <div className="sm:col-span-2">
+          <label className="inline-flex items-center gap-2">
+            <input {...register("agreeTerms")} type="checkbox" />
+            <span className="text-sm">I agree to Terms & Conditions</span>
+          </label>
+          {errors.agreeTerms && <p className="text-red-600">{errors.agreeTerms.message}</p>}
+        </div>
         </div>
         
         </div>
