@@ -46,20 +46,31 @@ import {z} from "zod";
    departureTime:z.string().min(1,"Departure time required"),
 
    // step 3 - Guests:array
-   guests:z.array(guestSchema).max(6),
+   guests:z.array(guestSchema).min(1).max(6),
 
    // terms
    agreeTerms: z.literal(true, {
       errorMap: () => ({ message: "You must accept terms" })
     })
   })
-  .refine(
-    (data) => new Date(data.departureDate) > new Date(data.arrivalDate),
-    {
-      message: "Departure date must be after arrival date",
-      path: ["departureDate"]
-    }
-  );
+  .superRefine(
+    (data,ctx) => {
+      if(!data.arrivalDate|| !data.arrivalTime || !data.departureDate || !data.departureTime){
+         return;
+      }
+    
+      
+     const arrival=new Date(`${data.arrivalDate}T${data.arrivalTime}`);
+     const departure=new Date(`${data.departure}T${data.departureTime}`);
+
+     if(arrival>=departure){
+      ctx.addIssue({
+         path:["departureDate"],
+         message:"Departure date & time must be after arrival",
+      })
+     }
+  });
+
 
  const defaultValues={
    applicantName:"",

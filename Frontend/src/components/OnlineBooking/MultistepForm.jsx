@@ -23,6 +23,7 @@ const MultiStepForm = () => {
   const steps=4;
 
   const next=async()=>{
+    console.log("next")
     let valid=false;
     if(step===1){
       valid=await trigger([
@@ -32,7 +33,9 @@ const MultiStepForm = () => {
       valid=await trigger(["purpose","numberOfRooms","arrivalDate","arrivalTime","departureDate","departureTime"]);
     }else if(step===3){
       valid =await trigger(["guests"]);
-    }else valid=true;
+    }else if(step===4){
+        valid =await trigger(["agreeTerms"])
+    };
      console.log("STEP:", step, "VALID:", valid);
     console.log("ERRORS:", methods.formState.errors);
 

@@ -175,7 +175,7 @@ const Applicant = () => {
     <div>
     <h2 className="text-lg font-semibold mb-4">Applicant Details</h2>
 
-    <div className="gid grid-cols-1 sm:grid-cols-2 gap-4 ">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
         <Input name="applicantName" label="Applicant Name" placeholder="Full name" />
         <Input name="designation" label="Designation" placeholder="Designation" />
     </div>
