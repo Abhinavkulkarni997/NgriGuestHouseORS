@@ -69,7 +69,7 @@ import {z} from "zod";
      const arrival=new Date(`${data.arrivalDate}T${data.arrivalTime}`);
      const departure=new Date(`${data.departure}T${data.departureTime}`);
 
-     if(arrival>=departure){
+     if(departure<=arrival){
       ctx.addIssue({
          path:["departureDate"],
          message:"Departure date & time must be after arrival",

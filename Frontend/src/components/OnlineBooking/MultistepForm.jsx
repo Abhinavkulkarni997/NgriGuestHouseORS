@@ -8,8 +8,10 @@ import Visit from './Visit';
 import Review from './Review';
 import { submitBooking } from './api';
 import Guests from './Guests';
+import {useNavigate} from 'react-router-dom';
 
 const MultiStepForm = () => {
+  const navigate=useNavigate();
   const methods=useForm({
     defaultValues,
     resolver:zodResolver(bookingSchema),
@@ -61,6 +63,7 @@ const MultiStepForm = () => {
       });
       const res=await submitBooking(fd);
       alert("Booking submitted. Booking ID: "+ (res.bookingId || "N/A"));
+      navigate('/success')
     }catch(err){
       alert("SUbmit error: "+err.message)
     }finally{

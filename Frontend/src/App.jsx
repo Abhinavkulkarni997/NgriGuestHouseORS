@@ -8,6 +8,8 @@ import Layout  from './components/Layout/Layout';
 import Home from './components/Home/Home';
 import OnlineBooking from './components/OnlineBooking/OnlineBooking';
 import MultiStepForm from './components/OnlineBooking/MultiStepForm';
+import Success from './components/OnlineBooking/Success';
+import BookingStatus from './components/OnlineBooking/BookingStatus';
 function App() {
 
   return (
@@ -19,6 +21,8 @@ function App() {
     <Route path="/faq" element={<Layout><Faq/></Layout>} />
     <Route path="/contact" element={<Layout><Contact/></Layout>}/>
     <Route path="/onlinebooking" element={<Layout><MultiStepForm/></Layout>}/>
+    <Route path="/success" element={<Layout><Success/></Layout>}/>
+    <Route path="/bookingstatus" element={<Layout><BookingStatus/></Layout>} />
     </Routes>
 
         
