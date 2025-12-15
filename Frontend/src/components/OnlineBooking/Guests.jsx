@@ -68,45 +68,45 @@ const genders=[
 
                     <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
                         <div>
-                            <label className='text-sm'>Name</label>
+                            <label className='font-medium text-sm text-gray-700'>Name</label>
                             <input {...register(`guests.${index}.name`)} className='mt-1 block w-full rounded-lg border p-3'/>
                             {errors.guests?.[index]?.name &&(<p className='text-red-600 text-sm'>{errors.guests[index].name.message}</p>)}
                             </div>
 
                         <div>
-                            <label className='text-sm'>Organization </label>
+                            <label className='font-medium text-sm text-gray-700'>Organization </label>
                             <input {...register(`guests.${index}.organization`)} className='mt-1 block w-full rounded-lg p-3'/>
                         </div>
 
                         <div>
-                            <label className=' text-sm'>Age</label>
+                            <label className='font-medium text-sm text-gray-700'>Age</label>
                             <input type="number" {...register(`guests.${index}.age`,{valueAsNumber:true})} className='mt-1 block w-full rounded-lg p-3'/>
                         </div>
 
                         <div>
-                            <label className='block text-sm'>Gender</label>
+                            <label className='font-medium text-sm text-gray-700'>Gender</label>
                         <select {...register(`guests.${index}.gender`)} className='mt-1 block w-full rounded-lg p-3'>
                             <option value="">Select</option>
-                            {genders.map((g)=><option key={g.id} value={g.name}>{g.name}</option>)}
+                            {genders.map((g)=>(<option key={g.id} value={g.name}>{g.name}</option>))}
 
                         </select>
                         </div>
 
                         <div>
-                            <label className=" text-sm">Contact No.</label>
+                            <label className="font-medium text-sm text-gray-700">Contact No.</label>
                             <input {...register(`guests.${index}.contact`)} className="mt-1 block w-full rounded-lg border p-3" />
                         </div>
 
                         <div>
-                            <label className=" text-sm">ID Proof No.</label>
+                            <label className="font-medium text-sm text-gray-700">ID Proof No.</label>
                             <input {...register(`guests.${index}.idProof`)} className="mt-1 block w-full rounded-lg border p-3" />
                         </div>
 
                         <div>
-                            <label className=' text-sm'>Category</label>
+                            <label className='font-medium text-sm text-gray-700'>Category</label>
                             <select {...register(`guests.${index}.category`)} className='mt-1 block w-ful rounded-lg border p-3'>
                                 <option value="">Select</option>
-                                {category.map((c)=><option key={c.id} value={c.name}>{c.name}</option>)}
+                                {category.map((c)=>(<option key={c.id} value={c.name}>{c.name}</option>))}
                             </select>
                         </div>
 

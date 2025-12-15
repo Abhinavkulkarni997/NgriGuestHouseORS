@@ -10,7 +10,7 @@ const ProgressBar = ({step,steps=4}) => {
         </div>
 
         <div className='h-2 b-gray-200 rounded-full overflow-hidden'>
-            <div className='h-2 bg-cyan-600' style={{width:`{percent}%`}}></div>
+            <div className='h-2 bg-cyan-600' style={{width:`${percent}%`}}></div>
         </div>
     </div>
   )

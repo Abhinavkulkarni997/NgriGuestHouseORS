@@ -39,7 +39,13 @@ import {z} from "zod";
 
    //  step-2- Visit details
    purpose:z.string().min(1,"select purpose"),
-   numberOfRooms:z.preprocess((v)=>Number(v),z.number().int().positive().min(1)),
+//    numberOfRooms: z.preprocess(
+//   (val) => (val === "" || Number.isNaN(val) ? undefined : val),
+//   z.number({
+//     required_error: "Number of rooms is required",
+//   }).int().min(1, "Select at least 1 room")
+// ),
+   numberOfRooms: z.number().min(1,"Please Select number of Rooms"),
    arrivalDate:z.string().min(1,"Arrival date required"),
    arrivalTime:z.string().min(1,"Arrival time required"),
    departureDate:z.string().min(1,"Departure date required"),
@@ -82,7 +88,7 @@ import {z} from "zod";
    officialEmail:"",
    paymentBy:"",
    purpose:"",
-   numberOfRooms:1,
+   numberOfRooms:0,
    arrivalDate:"",
    arrivalTime:"",
    departureDate:"",

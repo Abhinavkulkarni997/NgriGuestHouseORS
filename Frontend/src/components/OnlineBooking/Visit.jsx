@@ -33,16 +33,21 @@ const Visit = () => {
         <h2 className='text-lg font-semibold mb-4'>Visit Details</h2> 
 
         <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+            <div>
              <label className="block text-sm font-medium text-gray-700">Purpose of Visit</label>
             <select {...register("purpose")} className="mt-1  w-full rounded-lg border p-3">
                 <option value="">Select Purpose</option>
             {purposes.map(p => <option key={p} value={p}>{p}</option>)}
           </select>
           {errors.purpose && <p className="text-red-600">{errors.purpose.message}</p>}
+          </div>
+
            <div>
           <label className="block text-sm font-medium text-gray-700">Number of Rooms</label>
-          <input {...register("numberOfRooms", { valueAsNumber: true })} type="number" min="1" className="mt-1  w-full rounded-lg border p-3" />
-          <select {...register()}
+          <select {...register("numberOfRooms", { valueAsNumber: true })}   className="mt-1  w-full rounded-lg border p-3" >
+            <option value={0}>Select</option>
+            {rooms.map((r)=>(<option key={r.id} value={r.id}>{r.name}</option>))}
+        </select>
           {errors.numberOfRooms && (<p className='text-red-600'>{errors.numberOfRooms.message}</p>)}
         </div>
 
