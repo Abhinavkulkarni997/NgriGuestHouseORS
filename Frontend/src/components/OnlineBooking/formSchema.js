@@ -73,10 +73,19 @@ import {z} from "zod";
       ctx.addIssue({
          path:["departureDate"],
          message:"Departure date & time must be after arrival",
+         code: z.ZodIssueCode.custom,
       })
      }
+     if (!data.agreeTerms) {
+    ctx.addIssue({
+      path: ["agreeTerms"],
+      message: "You must accept Terms & Conditions",
+      code: z.ZodIssueCode.custom,
+    });
+  }
   });
 
+  
 
  const defaultValues={
    applicantName:"",
