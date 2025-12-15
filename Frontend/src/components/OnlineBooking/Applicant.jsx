@@ -1,26 +1,27 @@
 import React from "react";
 import {useFormContext,Controller} from "react-hook-form";
 
-const Input=({name,label,type="text",placeholder})=>{
+const Input=({name,label,type="text",placeholder,...rest})=>{
     const {register,formState:{errors}}=useFormContext();
     return(
-        <>
+        <div>
         <label className="block text-sm font-medium text-gray-700">{label}</label>
-        <input {...register(name)} type={type} placeholder={placeholder}
+        <input {...register(name)} type={type} placeholder={placeholder} {...rest}
         className="mt-1 block w-full rounded-lg border p-3 outline-none focus:ring-2 focus:ring-cyan-400/80"
         />
         {errors[name] && <p className="text-sm text-red-600 mt-1">{errors[name].message}</p>}
-        </>
+        </div>
     )
 }
 
 
 const Applicant = () => {
-    const {register,control,formState:{errors}}=useFormContext();
-     const organizations=[{
-            id:'0',
-            name:'select'
-    },
+    const {register,formState:{errors}}=useFormContext();
+     const organizations=[
+    //     {
+    //         id:'0',
+    //         name:'select'
+    // },
         {id:1,
         name:'AMPRI (Advanced Materials and Processes Research Institute), Bhopal'
     },{
@@ -153,10 +154,11 @@ const Applicant = () => {
         id:44,
         name:'AcSIR'
     }]
-     const payments=[{
-        id:0,
-        name:'select'
-    },
+     const payments=[
+    //     {
+    //     id:0,
+    //     name:'select'
+    // },
 
         {
             id:1,
@@ -173,31 +175,32 @@ const Applicant = () => {
     <div>
     <h2 className="text-lg font-semibold mb-4">Applicant Details</h2>
 
-    <div className="gid grid-cols-1 sm:grid-cols-2 gap-4">
-        <Input name="applicantName" label="Applicant Name" placeholder="Full name" required/>
-        <Input name="designation" label="Designation" placeholder="Designation" required/>
+    <div className="gid grid-cols-1 sm:grid-cols-2 gap-4 ">
+        <Input name="applicantName" label="Applicant Name" placeholder="Full name" />
+        <Input name="designation" label="Designation" placeholder="Designation" />
     </div>
 
     <div>
         <label className="block text-sm font-medium">Scanned Copy of Office ID(less than 2MB)</label>
-        <Input {...register("officeIdFile")} type="file" accept=".pdf,.jpg,.png" className="mt-1 block w-full" required/>
-        {errors.officeIdFile && <p className="text-red-600">{errors.officeIdFile.message}</p>}
+        <Input {...register("officeIdFile")} type="file" accept="application/pdf" className="mt-1 block w-full rounded-lg border p-3" />
+        {/* {errors.officeIdFile && <p className="text-red-600">{errors.officeIdFile.message}</p>} */}
     </div>
     <div>
         <label className="block text-sm font-medium text-gray-700">Organization</label>
         <select {...register("organization")} className="mt-1 block w-full rounded-lg border p-3">
+            <option value="">Select organization</option>
             {organizations.map(o=><option key={o.id} value={o.name}>{o.name}</option>)}
         </select>
-        {errors.organization && <p className="text-red-600">{errors.organization.message}</p>}
+        {errors.organization && <p className="text-red-600 mt-1">{errors.organization.message}</p>}
     </div>
-    <Input name="employeeId" label="Employee ID" placeholder="Employee ID" required/>
-    <Input name="mobileNumber" label="Mobile Number" placeholder="Enter Mobile Number" required/>
-    <Input name="officialEmail" label='Official EmailID' type="email" placeholder="Official Email Address" required/>
+    <Input name="employeeId" label="Employee ID" placeholder="Employee ID" />
+    <Input name="mobileNumber" label="Mobile Number" placeholder="Enter Mobile Number" />
+    <Input name="officialEmail" label='Official EmailID' type="email" placeholder="Official Email Address"/>
 
      <div>
         <label className="block text-sm font-medium text-gray-700">Payment to be borne by</label>
         <select {...register("paymentBy")} className="mt-1 block w-full rounded-lg border p-3">
-        {/* <option value="">select</option> */}
+            <option value="">Select</option>
         {payments.map(p=><option key={p.id} value={p.name}>{p.name}</option>)}
         </select>
 

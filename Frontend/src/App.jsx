@@ -7,7 +7,7 @@ import { Routes,Route } from 'react-router-dom';
 import Layout  from './components/Layout/Layout';
 import Home from './components/Home/Home';
 import OnlineBooking from './components/OnlineBooking/OnlineBooking';
-import MultistepForm from './components/OnlineBooking/MultistepForm';
+import MultiStepForm from './components/OnlineBooking/MultiStepForm';
 function App() {
 
   return (
@@ -18,7 +18,7 @@ function App() {
     <Route path="/" element={<Layout hasHero={true}><Home/></Layout>}/>
     <Route path="/faq" element={<Layout><Faq/></Layout>} />
     <Route path="/contact" element={<Layout><Contact/></Layout>}/>
-    <Route path="/onlinebooking" element={<Layout><MultistepForm/></Layout>}/>
+    <Route path="/onlinebooking" element={<Layout><MultiStepForm/></Layout>}/>
     </Routes>
 
         

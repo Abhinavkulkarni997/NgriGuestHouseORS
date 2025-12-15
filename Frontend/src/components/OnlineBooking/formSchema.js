@@ -2,8 +2,8 @@ import {z} from "zod";
  const guestSchema=z.object({
     name:z.string().min(1,"Guest name is required"),
     organization:z.string().optional(),
-    age:z.preprocess((v)=>(v===""?undefined:Number(v)),z.number().int().positive().optional()),
-    gender:z.enum(["MALE","FEMALE"]).or(z.string()).optional(),
+    age:z.preprocess((v)=>(v==="" || v===null?undefined:Number(v)),z.number().int().positive().optional()),
+    gender:z.enum(["MALE","FEMALE"]).optional(),
     contact:z.string().min(0).optional(),
     idProof:z.string().optional(),
     category:z.string().optional()
@@ -11,22 +11,35 @@ import {z} from "zod";
  });
 
  const bookingSchema=z.object({
-    applicationName:z.string().min(1,"Applicant name required"),
+   // Step1 Applicant details
+    applicantName:z.string().min(1,"Applicant name required"),
     designation:z.string().min(1,"Designation required"),
-    officeIdFile:z
-    .any()
-    .refine((f)=>!f || (f && f.size<=2*1024*1024),"Max file size 2MB")
-    .optional(),
+    officeIdFile: z
+  .any()
+  .optional()
+  .refine(
+    (files) => {
+      if (!files || files.length === 0) return true;
+
+      const file = files[0];
+
+      return (
+        file.type === "application/pdf" &&
+        file.size <= 2 * 1024 * 1024
+      );
+    },
+    "Only PDF files up to 2MB are allowed"
+  ),
     organization:z.string().min(1,"Choose organization"),
-    employeeId:z.string().optional(),
-    mobileNumber:z.string().min(7,"Enter mobile number"),
+    employeeId:z.string().min(4,"EmployeeID is required"),
+    mobileNumber:z.string().regex(/^[0-9]{10}$/,'Enter valid 10 digit mobile number'),
     officialEmail:z.string().email("Invalid email"),
     paymentBy:z.string().optional(),
 
 
    //  step-2- Visit details
    purpose:z.string().min(1,"select purpose"),
-   numberOfRooms:z.number().int().positive().min(1),
+   numberOfRooms:z.preprocess((v)=>Number(v),z.number().int().positive().min(1)),
    arrivalDate:z.string().min(1,"Arrival date required"),
    arrivalTime:z.string().min(1,"Arrival time required"),
    departureDate:z.string().min(1,"Departure date required"),
@@ -36,15 +49,24 @@ import {z} from "zod";
    guests:z.array(guestSchema).max(6),
 
    // terms
-   agreeTerms:z.boolean().refine(Boolean,"You must accept terms")
- });
+   agreeTerms: z.literal(true, {
+      errorMap: () => ({ message: "You must accept terms" })
+    })
+  })
+  .refine(
+    (data) => new Date(data.departureDate) > new Date(data.arrivalDate),
+    {
+      message: "Departure date must be after arrival date",
+      path: ["departureDate"]
+    }
+  );
 
  const defaultValues={
    applicantName:"",
    designation:"",
    officeIdFile:null,
    organization:"",
-   employeeID:"",
+   employeeId:"",
    mobileNumber:"",
    officialEmail:"",
    paymentBy:"",

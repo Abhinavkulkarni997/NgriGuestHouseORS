@@ -9,7 +9,7 @@ import Review from './Review';
 import { submitBooking } from './api';
 import Guests from './Guests';
 
-const MultistepForm = () => {
+const MultiStepForm = () => {
   const methods=useForm({
     defaultValues,
     resolver:zodResolver(bookingSchema),
@@ -26,13 +26,16 @@ const MultistepForm = () => {
     let valid=false;
     if(step===1){
       valid=await trigger([
-        "applicantName","designation","organization","mobileNumber","officialEmail","officeIdFile","agreeTerms"
+        "applicantName","designation","organization","mobileNumber","officialEmail","officeIdFile"
       ]);
     }else if(step===2){
       valid=await trigger(["purpose","numberOfRooms","arrivalDate","arrivalTime","departureDate","departureTime"]);
     }else if(step===3){
       valid =await trigger(["guests"]);
     }else valid=true;
+     console.log("STEP:", step, "VALID:", valid);
+    console.log("ERRORS:", methods.formState.errors);
+
     if(valid) setStep((s)=>Math.min(steps,s+1));
   };
 
@@ -47,7 +50,7 @@ const MultistepForm = () => {
           fd.append("guests",JSON.stringify(data.guests));
           return;
         }
-        if(k==="OfficeIdFile" && data.officeIdFile && data.officeIdFile[0]){
+        if(k==="officeIdFile" && data.officeIdFile?.[0]){
           fd.append("officeIdFile",data.officeIdFile[0]);
           return;
         }
@@ -74,14 +77,16 @@ const MultistepForm = () => {
             {step===3 && <Guests/>}
             {step===4 && <Review getValues={getValues}/>}
 
-            <div className='mt-6 flex-items-center justify-between'>
+            <div className='mt-6 flex items-center justify-between'>
               <div>
                 {step >1 && <button type="button" onClick={prev} className='px-4 py-2 rounded-md bg-gray-200'>Back</button>}
               </div>
               <div>
                 {step < steps && (
                   <button type="button" onClick={next} className='px-6 py-2 bg-cyan-600 text-white rounded-md'>Next</button>
+                  
                 )}
+            
                 {step===steps && (
                   <button type="submit" disabled={submitting} className='px-6 py-2 bg-cyan-700 text-white rounded-md'>{submitting?"Submitting...":"Submit Request"}</button>
                 )}
@@ -95,4 +100,4 @@ const MultistepForm = () => {
   )
 }
 
-export default MultistepForm
+export default MultiStepForm
