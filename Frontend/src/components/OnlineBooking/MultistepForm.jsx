@@ -85,7 +85,7 @@ const MultiStepForm = () => {
 
             <div className='mt-6 flex items-center justify-between'>
               <div>
-                {step >1 && <button type="button" onClick={prev} className='px-4 py-2 rounded-md bg-gray-200'>Back</button>}
+                {step >1 && <button type="button" onClick={prev} className='px-4 py-2 rounded-md bg-[#1A1A1A] text-white'>Back</button>}
               </div>
               <div>
                 {step < steps && (

@@ -15,7 +15,7 @@ import {z} from "zod";
     applicantName:z.string().min(1,"Applicant name required"),
     designation:z.string().min(1,"Designation required"),
     officeIdFile: z
-  .any()
+  .instanceof(FileList)
   .optional()
   .refine(
     (files) => {
@@ -67,7 +67,7 @@ import {z} from "zod";
     
       
      const arrival=new Date(`${data.arrivalDate}T${data.arrivalTime}`);
-     const departure=new Date(`${data.departure}T${data.departureTime}`);
+     const departure=new Date(`${data.departureDate}T${data.departureTime}`);
 
      if(departure<=arrival){
       ctx.addIssue({

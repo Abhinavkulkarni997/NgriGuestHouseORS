@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import Navbar1 from "../Navbar/Navbar1";
+import ScrollToTop from "../ScrollToTop/ScrollToTop";
 const Layout = ({ children,hasHero=false }) => {
   return (
     <>
@@ -13,6 +14,7 @@ const Layout = ({ children,hasHero=false }) => {
           {children}
         </div>
       </main>
+            <ScrollToTop/>
 
       <Footer />
     </>
