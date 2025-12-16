@@ -14,6 +14,9 @@ import {z} from "zod";
    // Step1 Applicant details
     applicantName:z.string().min(1,"Applicant name required"),
     designation:z.string().min(1,"Designation required"),
+    isApplicantGuest:z.boolean().optional(),
+    
+
     officeIdFile: z
   .instanceof(FileList)
   .optional()
@@ -36,6 +39,8 @@ import {z} from "zod";
     officialEmail:z.string().email("Invalid email"),
     paymentBy:z.string().optional(),
 
+  
+
 
    //  step-2- Visit details
    purpose:z.string().min(1,"select purpose"),
@@ -45,7 +50,12 @@ import {z} from "zod";
 //     required_error: "Number of rooms is required",
 //   }).int().min(1, "Select at least 1 room")
 // ),
-   numberOfRooms: z.number().min(1,"Please Select number of Rooms"),
+  numberOfRooms: z.preprocess(
+  (val) => (val === "" || val === undefined ? undefined : Number(val)),
+  z.number({
+    required_error: "Number of rooms is required",
+  }).int().min(1, "Please select number of rooms")
+),
    arrivalDate:z.string().min(1,"Arrival date required"),
    arrivalTime:z.string().min(1,"Arrival time required"),
    departureDate:z.string().min(1,"Departure date required"),
@@ -55,9 +65,9 @@ import {z} from "zod";
    guests:z.array(guestSchema).min(1).max(6),
 
    // terms
-   agreeTerms: z.literal(true, {
-      errorMap: () => ({ message: "You must accept terms" })
-    })
+  agreeTerms: z.literal(true, {
+  errorMap: () => ({ message: "You must accept terms" })
+})
   })
   .superRefine(
     (data,ctx) => {
@@ -97,7 +107,7 @@ import {z} from "zod";
    officialEmail:"",
    paymentBy:"",
    purpose:"",
-   numberOfRooms:0,
+   numberOfRooms:"",
    arrivalDate:"",
    arrivalTime:"",
    departureDate:"",

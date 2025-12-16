@@ -1,8 +1,59 @@
-import React from 'react'
-import { useFormContext,useFieldArray } from 'react-hook-form' 
+import React, { useEffect } from 'react'
+import { useFormContext,useFieldArray,useWatch } from 'react-hook-form' 
 const Guests = () => {
-        const {register,control,formState:{errors}}=useFormContext();
+        const {register,control,setValue,formState:{errors}}=useFormContext();
     const  {fields,append,remove}=useFieldArray({control,name:"guests"});
+    const isApplicantGuest=useWatch({
+        control,
+        name:'isApplicantGuest',
+    });
+
+    const applicantName=useWatch({control,name:"applicantName"});
+    const organization=useWatch({control,name:"organization"});
+    const mobileNumber=useWatch({control,name:"mobileNumber"});
+
+    useEffect(()=>{
+        if(isApplicantGuest){
+            const alreadyAdded=fields.some((g)=>g.isApplicant===true);
+
+        if(!alreadyAdded){
+            append({
+                name:applicantName||"",
+                organization:organization||"",
+                contact:mobileNumber||"",
+                age:"",
+                gender:"",
+                idProof:"",
+                category:"",
+                isApplicant:true, 
+            });
+        }
+        }else{
+            // logic to remove auto-added guests
+            const index=fields.findIndex((g)=>g.isApplicant===true);
+            if(index!==-1){
+                remove(index);
+            }
+        }
+    },[isApplicantGuest,
+        applicantName,
+        organization,
+        mobileNumber,
+    fields,
+    append,
+    remove]);
+
+    useEffect(()=>{
+        const index=fields.findIndex((g)=>g.isApplicant);
+        if(index!==-1){
+            setValue(`guests${index}.applicantName`,applicantName||'')
+            setValue(`guests${index}.organization`,organization||'')
+            setValue(`guests${index}.contact`,mobileNumber||'')
+        }
+    },[applicantName,organization,mobileNumber])
+
+
+
        const category=[
     //     {
     //     id:0,
@@ -57,25 +108,32 @@ const genders=[
         <h1 className='text-lg font-semibold mb-4'>Guests Details</h1>
 
         <div className='space-y-4'>
+            {/* checkbox for one of the guest */}
+        <label className='flex items-center gap-2 mb-4'>
+            <input {...register('isApplicantGuest')}type="checkbox"/>
+            <span className="text-sm">Are you one of the guests?</span>
+        </label>
+        {/* guests list */}
             {fields.map((field,index)=>(
                 <div key={field.id} className='border rounded-lg p-4 bg-white'>
                     <div className='flex justify-between items-center mb-3'>
                         <strong>Guest #{index+1} </strong>
                         {/* <div className='flex gap-2'> */}
-                            {fields.length>1 &&(<button type="button" onClick={()=>remove(index)} className='text-red-600 text-sm'>Remove</button>)}
+                            {/* {fields.length>1 &&(<button type="button" onClick={()=>remove(index)} className='text-red-600 text-sm'>Remove</button>)} */}
+                             {!field.isApplicant &&(<button type="button" onClick={()=>remove(index)} className='text-red-600 text-sm'>Remove</button>)}
                             {/* </div> */}
                     </div>
 
                     <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
                         <div>
                             <label className='font-medium text-sm text-gray-700'>Name</label>
-                            <input {...register(`guests.${index}.name`)} className='mt-1  w-full rounded-lg border p-3'/>
+                            <input {...register(`guests.${index}.name`)} className='mt-1  w-full rounded-lg border p-3' disabled={field.isApplicant}/>
                             {errors.guests?.[index]?.name &&(<p className='text-red-600 text-sm'>{errors.guests[index].name.message}</p>)}
                             </div>
 
                         <div>
                             <label className='font-medium text-sm text-gray-700'>Organization </label>
-                            <input {...register(`guests.${index}.organization`)} className='mt-1 border w-full rounded-lg p-3'/>
+                            <input {...register(`guests.${index}.organization`)} className='mt-1 border w-full rounded-lg p-3' disabled={field.isApplicant}/>
                         </div>
 
                         <div>
@@ -94,7 +152,7 @@ const genders=[
 
                         <div>
                             <label className="font-medium text-sm text-gray-700">Contact No.</label>
-                            <input {...register(`guests.${index}.contact`)} className="mt-1  w-full rounded-lg border p-3" />
+                            <input {...register(`guests.${index}.contact`)} className="mt-1  w-full rounded-lg border p-3" disabled={field.isApplicant}/>
                         </div>
 
                         <div>
@@ -115,7 +173,7 @@ const genders=[
             ))}
 
             {/* <div className='flex gap-3'> */}
-               <button type="button" onClick={() => append({ name: "", organization: "", age: "", gender: "", contact: "", idProof: "", category: "" })} className="px-4 py-2 bg-cyan-600 text-white rounded-md">
+               <button type="button" disabled={fields.length>=6} onClick={() => append({ name: "", organization: "", age: "", gender: "", contact: "", idProof: "", category: "" })} className="px-4 py-2 bg-cyan-600 text-white rounded-md">
             Add Guest
           </button>
                <p className='text-sm text-gray-800 self-center'>You can add upto 6 guests</p>
