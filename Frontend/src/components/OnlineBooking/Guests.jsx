@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useFormContext,useFieldArray,useWatch } from 'react-hook-form' 
 const Guests = () => {
         const {register,control,setValue,formState:{errors}}=useFormContext();
-    const  {fields,append,remove}=useFieldArray({control,name:"guests"});
+    const  {fields,append,remove,update}=useFieldArray({control,name:"guests"});
     const isApplicantGuest=useWatch({
         control,
         name:'isApplicantGuest',
@@ -12,36 +12,65 @@ const Guests = () => {
     const organization=useWatch({control,name:"organization"});
     const mobileNumber=useWatch({control,name:"mobileNumber"});
 
-    useEffect(()=>{
-        if(isApplicantGuest){
-            const alreadyAdded=fields.some((g)=>g.isApplicant===true);
+    // useEffect(()=>{
+    //     if(isApplicantGuest){
+    //         const alreadyAdded=fields.some((g)=>g.isApplicant===true);
 
-        if(!alreadyAdded){
-            append({
-                name:applicantName||"",
-                organization:organization||"",
-                contact:mobileNumber||"",
+    //     if(!alreadyAdded){
+    //         append({
+    //             name:applicantName||"",
+    //             organization:organization||"",
+    //             contact:mobileNumber||"",
+    //             age:"",
+    //             gender:"",
+    //             idProof:"",
+    //             category:"",
+    //             isApplicant:true, 
+    //         });
+    //     }
+    //     }else{
+    //         // logic to remove auto-added guests
+    //         const index=fields.findIndex((g)=>g.isApplicant===true);
+    //         if(index!==-1){
+    //             remove(index);
+    //         }
+    //     }
+    // },[isApplicantGuest,
+    //     applicantName,
+    //     organization,
+    //     mobileNumber,
+    // fields,
+    // append,
+    // remove]);
+
+    useEffect(()=>{
+        if(!fields.length) return;
+        if(isApplicantGuest){
+            update(0,{
+                ...fields[0],
+                name:applicantName || "",
+                organization:organization || "",
+                contact:mobileNumber || "",
                 age:"",
                 gender:"",
                 idProof:"",
                 category:"",
-                isApplicant:true, 
+                isApplicant:true,
             });
-        }
         }else{
-            // logic to remove auto-added guests
-            const index=fields.findIndex((g)=>g.isApplicant===true);
-            if(index!==-1){
-                remove(index);
-            }
+            update(0,{
+                ...fields[0],
+                name:"",
+                organization:"",
+                contact:"",
+                age:"",
+                gender:"",
+                idProof:"",
+                category:"",
+                isApplicant:false
+            })
         }
-    },[isApplicantGuest,
-        applicantName,
-        organization,
-        mobileNumber,
-    fields,
-    append,
-    remove]);
+    },[isApplicantGuest,applicantName,organization,mobileNumber])
 
     useEffect(()=>{
         const index=fields.findIndex((g)=>g.isApplicant);
@@ -119,8 +148,8 @@ const genders=[
                     <div className='flex justify-between items-center mb-3'>
                         <strong>Guest #{index+1} </strong>
                         {/* <div className='flex gap-2'> */}
-                            {/* {fields.length>1 &&(<button type="button" onClick={()=>remove(index)} className='text-red-600 text-sm'>Remove</button>)} */}
-                             {!field.isApplicant &&(<button type="button" onClick={()=>remove(index)} className='text-red-600 text-sm'>Remove</button>)}
+                            {!field.isApplicant && fields.length>1 &&(<button type="button" onClick={()=>remove(index)} className='text-red-600 text-sm'>Remove</button>)}
+                             {/* {index!==0 &&(<button type="button" onClick={()=>remove(index)} className='text-red-600 text-sm'>Remove</button>)} */}
                             {/* </div> */}
                     </div>
 

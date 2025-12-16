@@ -115,7 +115,7 @@ import {z} from "zod";
 
    guests:[
       {
-         name:"",organization:"",age:"",gender:"",contact:"",idProof:"",category:""}
+         name:"",organization:"",age:"",gender:"",contact:"",idProof:"",category:"",isApplicant:false}
       
    ],
    agreeTerms:false
