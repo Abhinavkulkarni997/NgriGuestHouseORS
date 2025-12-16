@@ -50,7 +50,7 @@ const Guests = () => {
             setValue(`guests${index}.organization`,organization||'')
             setValue(`guests${index}.contact`,mobileNumber||'')
         }
-    },[applicantName,organization,mobileNumber])
+    },[applicantName,organization,mobileNumber,fields,setValue])
 
 
 
