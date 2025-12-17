@@ -15,7 +15,8 @@ const MultiStepForm = () => {
   const methods=useForm({
     defaultValues,
     resolver:zodResolver(bookingSchema),
-    mode:"onTouched"
+    mode:"onTouched",
+    // shouldUnregister:true
   });
 
   const {handleSubmit,trigger,getValues}=methods;

@@ -4,9 +4,10 @@ import {z} from "zod";
     organization:z.string().optional(),
     age:z.preprocess((v)=>(v==="" || v===null?undefined:Number(v)),z.number().int().positive().optional()),
     gender:z.enum(["MALE","FEMALE"]).optional(),
-    contact:z.string().min(0).optional(),
+    contact:z.string().regex(/^[0-9]{10}$/,'Enter valid 10 digit mobile number'),
     idProof:z.string().optional(),
-    category:z.string().optional()
+    category:z.string().optional(),
+    isApplicantGuest:z.boolean().optional(),
 
  });
 
@@ -15,7 +16,6 @@ import {z} from "zod";
     applicantName:z.string().min(1,"Applicant name required"),
     designation:z.string().min(1,"Designation required"),
     isApplicantGuest:z.boolean().optional(),
-    
 
     officeIdFile: z
   .instanceof(FileList)
@@ -100,7 +100,7 @@ import {z} from "zod";
  const defaultValues={
    applicantName:"",
    designation:"",
-   officeIdFile:null,
+   officeIdFile:undefined,
    organization:"",
    employeeId:"",
    mobileNumber:"",
@@ -115,7 +115,7 @@ import {z} from "zod";
 
    guests:[
       {
-         name:"",organization:"",age:"",gender:"",contact:"",idProof:"",category:"",isApplicant:false}
+         name:"",organization:"",age:undefined,gender:undefined,contact:"",idProof:"",category:"",isApplicant:false}
       
    ],
    agreeTerms:false

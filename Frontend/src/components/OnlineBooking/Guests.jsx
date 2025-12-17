@@ -11,6 +11,8 @@ const Guests = () => {
     const applicantName=useWatch({control,name:"applicantName"});
     const organization=useWatch({control,name:"organization"});
     const mobileNumber=useWatch({control,name:"mobileNumber"});
+    
+    // const guests=useWatch({control,name:"guests"});
 
     // useEffect(()=>{
     //     if(isApplicantGuest){
@@ -43,43 +45,69 @@ const Guests = () => {
     // append,
     // remove]);
 
-    useEffect(()=>{
-        if(!fields.length) return;
-        if(isApplicantGuest){
-            update(0,{
-                ...fields[0],
-                name:applicantName || "",
-                organization:organization || "",
-                contact:mobileNumber || "",
-                age:"",
-                gender:"",
-                idProof:"",
-                category:"",
-                isApplicant:true,
-            });
-        }else{
-            update(0,{
-                ...fields[0],
-                name:"",
-                organization:"",
-                contact:"",
-                age:"",
-                gender:"",
-                idProof:"",
-                category:"",
-                isApplicant:false
-            })
-        }
-    },[isApplicantGuest,applicantName,organization,mobileNumber])
+   useEffect(() => {
+  if (!fields.length) return;
 
-    useEffect(()=>{
-        const index=fields.findIndex((g)=>g.isApplicant);
-        if(index!==-1){
-            setValue(`guests${index}.applicantName`,applicantName||'')
-            setValue(`guests${index}.organization`,organization||'')
-            setValue(`guests${index}.contact`,mobileNumber||'')
-        }
-    },[applicantName,organization,mobileNumber,fields,setValue])
+  if (isApplicantGuest) {
+    update(0, {
+      ...fields[0],
+      name: applicantName || "",
+      organization: organization || "",
+      contact: mobileNumber || "",
+      isApplicant: true,
+    });
+  } else {
+    update(0, {
+      ...fields[0],
+      name: "",
+      organization: "",
+      contact: "",
+      isApplicant: false,
+    });
+  }
+}, [isApplicantGuest, applicantName, organization, mobileNumber]);
+
+
+
+
+//     useEffect(() => {
+//   const index =
+//     guests?.findIndex(g => g?.isApplicant === true) ?? -1;
+
+//   if (isApplicantGuest) {
+//     if (index === -1) {
+//       append({
+//         name: applicantName || "",
+//         organization: organization || "",
+//         contact: mobileNumber || "",
+//         age: "",
+//         gender: "",
+//         idProof: "",
+//         category: "",
+//         isApplicant: true,
+//       });
+//     } else {
+//       setValue(`guests.${index}.name`, applicantName || "");
+//       setValue(`guests.${index}.organization`, organization || "");
+//       setValue(`guests.${index}.contact`, mobileNumber || "");
+//     }
+//   } else {
+//     if (index !== -1) {
+//       remove(index); // values will vanish if shouldUnregister:true
+//     }
+//   }
+// }, [isApplicantGuest, applicantName, organization, mobileNumber]);
+
+    
+
+    // useEffect(()=>{
+    //     const index=fields.findIndex((g)=>g.isApplicant);
+    //     if(index!==-1){
+    //         setValue(`guests${index}.name`,applicantName||'')
+    //         setValue(`guests${index}.organization`,organization||'')
+    //         setValue(`guests${index}.contact`,mobileNumber||'')
+    //     }
+    // },[applicantName,organization,mobileNumber,fields,setValue])
 
 
 

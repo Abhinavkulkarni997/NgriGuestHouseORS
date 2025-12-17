@@ -8,8 +8,7 @@ const Review = ({getValues}) => {
     <div>
       <h2 className='text-lg font-semibold mb-4'>Review & Submit</h2>
       <div className='space-y-4 text-sm'>
-        <section>
-        
+        {/* <section>
           <strong>Applicant:</strong>
           <pre className='bg-gray-50 p-3 rounded'>
             {JSON.stringify({
@@ -22,10 +21,21 @@ const Review = ({getValues}) => {
               paymentBy:data.paymentBy,
             },null,2)}
           </pre>
-        
-        </section>
+        </section> */}
+        <div className='border rounded-lg p-4'>
+          <h3 className='font-semibold mb-2'>Applicant Details</h3>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm'>
+          <p><strong>Name:</strong>&nbsp;{data.applicantName}</p>
+          <p><strong>Designation:</strong>&nbsp;{data.designation}</p>
+          <p><strong>Organization:</strong>&nbsp;{data.organization}</p>
+          <p><strong>EmployeeId:</strong>&nbsp;{data.employeeId}</p>
+          <p><strong>Contact No:</strong>&nbsp;{data.mobileNumber}</p>
+          <p><strong>OfficialEmail:</strong>&nbsp;{data.officialEmail}</p>
+          {data.paymentBy && <p><strong>PaymentBy:</strong>&nbsp;{data.paymentBy}</p>}
+          </div>
+        </div>
 
-        <section>
+        {/* <section>
       
           <strong>Visit:</strong>
           <pre className='bg-gray-50 p-3 rounded'>
@@ -37,16 +47,44 @@ const Review = ({getValues}) => {
             },null,2)}
           </pre>
         
-          </section>
+          </section> */}
 
+          <div className='border rounded-lg p-4'>
+            <h3 className='font-semibold mb-2'>Visitor Details</h3>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm'>
+              <p><strong>Purpose:</strong>&nbsp;{data.purpose}</p>
+              <p><strong>No. Of Rooms:</strong>&nbsp;{data.numberOfRooms}</p>
+              <p><strong>Arrival Date:</strong>&nbsp;{data.arrivalDate}</p>
+              <p><strong>Arrival Time:</strong>&nbsp;{data.arrivalTime}</p>
+              <p><strong>Departure Date:</strong>&nbsp;{data.departureDate}</p>
+              <p><strong>Departure Time:</strong>&nbsp;{data.departureTime}</p>
+            </div>
+          </div>
           
 
-          <section>
+          {/* <section>
             <strong>Guests:</strong>
             <pre className="bg-gray-50 p-3 rounded">
               {JSON.stringify(data.guests,null,2)}
             </pre>
-            </section>
+            </section> */}
+
+            <div className='border rounded-lg p-4'>
+              <h3 className='font-semibold mb-2'>Guests Details</h3>
+              {data.guests.map((g,i)=>(
+                <div key={i} className='border rounded-md p-3 mb-3'>
+                  <p><strong>Name:</strong>&nbsp;{g.name}</p>
+                  <p><strong>Organization:</strong>&nbsp;{g.organization||"-"}</p>
+                  <p><strong>Contact:</strong>&nbsp;{g.contact||"-"}</p>
+                  <p><strong>Gender:</strong>&nbsp;{g.gender || "-"}</p>
+                  <p><strong>Category:</strong>&nbsp;{g.category || "-"}</p>
+
+                  </div>
+              ))}
+
+              
+            
+            </div>
 
          {/* TERMS */}
         <div className="mt-4">
