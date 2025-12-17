@@ -93,6 +93,28 @@ import {z} from "zod";
       code: z.ZodIssueCode.custom,
     });
   }
+
+  if(data.isApplicantGuest){
+   const firstGuest=data.guests[0];
+   if(!firstGuest){
+      ctx.addIssue({
+         path:["guests"],
+         message:"Applicant must be added as guest",
+         code:z.ZodIssueCode.custom,
+      });
+   }else{
+      if(firstGuest.name!==data.applicantName){
+         ctx.addIssue({
+            path:["guests",0,"name"],
+            message:"Applicant name must match",
+            code:z.ZodIssueCode.custom,
+         })
+      }
+  }
+
+  }
+
+
   });
 
   
