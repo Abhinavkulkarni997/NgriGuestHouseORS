@@ -64,6 +64,9 @@ import {z} from "zod";
    // step 3 - Guests:array
    guests:z.array(guestSchema).min(1).max(6),
 
+   captcha:z.string().min(1,"Enter captcha"),
+   captchaValue:z.string(),
+
    // terms
   agreeTerms: z.literal(true, {
   errorMap: () => ({ message: "You must accept terms" })
@@ -71,6 +74,17 @@ import {z} from "zod";
   })
   .superRefine(
     (data,ctx) => {
+
+      if(data.captcha!==data.captchaValue){
+    ctx.addIssue({
+      path:["captcha"],
+      message:"Captcha does not match",
+      code:z.ZodIssueCode.custom,
+    })
+  }
+
+
+
       if(!data.arrivalDate|| !data.arrivalTime || !data.departureDate || !data.departureTime){
          return;
       }
@@ -114,6 +128,8 @@ import {z} from "zod";
 
   }
 
+  
+
 
   });
 
@@ -140,7 +156,11 @@ import {z} from "zod";
          name:"",organization:"",age:undefined,gender:undefined,contact:"",idProof:"",category:"",isApplicant:false}
       
    ],
-   agreeTerms:false
+   agreeTerms:false,
+   captcha:"",
+   captchaValue:"",
+
+   
 
 }
 
