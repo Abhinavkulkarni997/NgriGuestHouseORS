@@ -10,11 +10,15 @@ import { submitBooking } from './api';
 import Guests from './Guests';
 import {useNavigate} from 'react-router-dom';
 
+
 const MultiStepForm = () => {
+  const [captchaText,setCaptchaText] = useState("");
   const navigate=useNavigate();
   const methods=useForm({
     defaultValues,
-    resolver:zodResolver(bookingSchema),
+    resolver:zodResolver(bookingSchema,{
+      context:{captchaText}
+    }),
     mode:"onTouched",
     // shouldUnregister:true
   });
@@ -35,10 +39,11 @@ const MultiStepForm = () => {
     }else if(step===2){
       valid=await trigger(["purpose","numberOfRooms","arrivalDate","arrivalTime","departureDate","departureTime"]);
     }else if(step===3){
-      valid =await trigger(["guests"]);
-    }else if(step===4){
-        valid =await trigger(["agreeTerms"])
-    };
+      valid =await trigger(["guests",'agreeTerms','captcha']);
+    }
+    // }else if(step===4){
+    //     valid =await trigger(["agreeTerms"])
+    // };
      console.log("STEP:", step, "VALID:", valid);
     console.log("ERRORS:", methods.formState.errors);
 

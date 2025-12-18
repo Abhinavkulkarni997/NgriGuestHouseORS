@@ -86,7 +86,7 @@ const Review = ({getValues}) => {
             
             </div>
 
-         {/* TERMS */}
+         {/* TERMS
         <div className="mt-4">
           <label className="inline-flex items-center gap-2">
             <input type="checkbox" {...register("agreeTerms")} />
@@ -97,10 +97,10 @@ const Review = ({getValues}) => {
               {errors.agreeTerms.message}
             </p>
           )}
-        </div>
+        </div> */}
 
         {/* CAPTCHA (Mock now, replace later) */}
-        <div>
+        {/* <div>
           <label className="block text-sm font-medium">
             Enter Captcha
           </label>
@@ -114,7 +114,7 @@ const Review = ({getValues}) => {
               {errors.captcha.message}
             </p>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

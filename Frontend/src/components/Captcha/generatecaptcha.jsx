@@ -9,4 +9,4 @@ const generateCaptcha = (length=6) => {
   return result;
 }
 
-export default generateCaptcha
+export default generateCaptcha;

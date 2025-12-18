@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useFormContext,useFieldArray,useWatch } from 'react-hook-form' 
+import Captcha from '../Captcha/Captcha';
 const Guests = () => {
         const {register,control,setValue,formState:{errors}}=useFormContext();
     const  {fields,append,remove,update}=useFieldArray({control,name:"guests"});
@@ -236,13 +237,21 @@ const genders=[
                <p className='text-sm text-gray-800 self-center'>You can add upto 6 guests</p>
             {/* </div> */}
 
-              {/* <div className="sm:col-span-2">
-          <label className="inline-flex items-center gap-2">
-            <input {...register("agreeTerms")} type="checkbox" />
-            <span className="text-sm">I agree to Terms & Conditions</span>
-          </label>
-          {errors.agreeTerms && <p className="text-red-600">{errors.agreeTerms.message}</p>}
-        </div> */}
+
+            {/* Terms and conditions  */}
+            <div className="sm:col-span-2 mt-4">
+                <label className="inline-flex items-center gap-2">
+                <input {...register("agreeTerms")} type="checkbox" />
+                <span className="text-base">I agree to Terms & Conditions</span>
+                </label>
+                {errors.agreeTerms && <p className="text-red-600 text-sm">Please agree to Terms & Conditions</p>}
+            </div> 
+
+
+            <div className='sm:col-span-2 mt-2'>
+                <Captcha captchaText={captchaText} setCaptchaText={setCaptchaText}/>
+            </div>
+         
         </div>
         
         </div>

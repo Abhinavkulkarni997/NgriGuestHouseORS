@@ -65,7 +65,7 @@ import {z} from "zod";
    guests:z.array(guestSchema).min(1).max(6),
 
    captcha:z.string().min(1,"Enter captcha"),
-   captchaValue:z.string(),
+  
 
    // terms
   agreeTerms: z.literal(true, {
@@ -74,12 +74,13 @@ import {z} from "zod";
   })
   .superRefine(
     (data,ctx) => {
+      const captchaFormContext=ctx.parent?.captchaText;
 
-      if(data.captcha!==data.captchaValue){
+      if(captchaFormContext && data.captcha!==data.captchaValue){
     ctx.addIssue({
       path:["captcha"],
       message:"Captcha does not match",
-      code:z.ZodIssueCode.custom,
+      code:"custom",
     })
   }
 
