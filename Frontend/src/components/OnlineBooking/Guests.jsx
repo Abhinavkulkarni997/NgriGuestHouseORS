@@ -248,8 +248,8 @@ const genders=[
             </div> 
 
 
-            <div className='sm:col-span-2 mt-2'>
-                <Captcha captchaText={captchaText} setCaptchaText={setCaptchaText}/>
+            <div className=' mt-2'>
+                <Captcha/>
             </div>
          
         </div>
