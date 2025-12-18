@@ -18,7 +18,7 @@ const Captcha = () => {
     setCaptcha(newCaptcha);
     setValue("captchaValue", newCaptcha, { shouldValidate: false });
     setValue('captcha','')
-    setTimeout(() => {setIsSpinning(false)}, 1000);
+    setTimeout(() => setIsSpinning(false), 500);
   };
   useEffect(() => {
     refreshCaptcha();
@@ -42,8 +42,8 @@ const Captcha = () => {
           <span className="flex items-center gap-1 text-cyan-600 font-medium group-hover:underline">
             click here to
             <FiRefreshCcw
-              className={`transition-transform duration-500 ${
-                isSpinning ? "rotate-180" : ""
+              className={`h-4 w-4 ${
+                isSpinning ? "animate-spin" : ""
               }`}
             />
             Refresh
