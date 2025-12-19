@@ -1,13 +1,19 @@
-// import GuestHouseResponse from "../models/GuestHouseResponse";
 const Booking=require("../models/Booking");
 const crypto=require("crypto");
 
  const createBooking=async (req,res)=>{
     try{
-      const data=req.body;
+      const {captcha,captchaValue,...data}=req.body;
 
+      if(typeof data.guests==="string"){
+        data.guests=JSON.parse(data.guests);
+      }
     //   logic to generate booking ID
-      const bookingId="GH-"+crypto.randomBytes(4).toString("hex").toUpperCase();
+    const year=new Date().getFullYear();
+      const count=await Booking.countDocuments({bookingId:new RegExp(`^${year}/NGRI/GH/`)});
+      const sequence=String(count+1).padStart(4,"0");
+      const bookingId=`${year}/NGRI/GH/${sequence}`;
+
     //   combining date and time
 
     const arrivalDateTime=new Date(`${data.arrivalDate}T${data.arrivalTime}`);
@@ -15,9 +21,11 @@ const crypto=require("crypto");
 
       const booking=new Booking({
         ...data,
+        numberOfRooms:Number(data.numberOfRooms),
         bookingId,
         arrivalDateTime,
         departureDateTime,
+        status:"PENDING"
       })
         await booking.save();
         res.status(201).json({success:true,bookingId,message:'Booking response submitted successfully'});
@@ -29,4 +37,4 @@ const crypto=require("crypto");
     
 }
 
-module.exports ={createBooking}
+module.exports = {createBooking};

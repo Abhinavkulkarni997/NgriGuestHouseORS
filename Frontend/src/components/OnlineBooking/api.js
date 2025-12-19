@@ -1,7 +1,7 @@
 import React from 'react'
 
 export async function submitBooking(formData){
-    const res= await fetch("/api/bookings",{
+    const res= await fetch("/api/booking",{
         method:"POST",
         body:formData
     });

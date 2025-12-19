@@ -112,6 +112,7 @@ const bookingSchema =new mongoose.Schema(
         bookingId:{
             type:String,
             unique:true,
+            index:true
         },
         
     },
