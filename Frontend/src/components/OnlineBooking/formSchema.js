@@ -65,6 +65,7 @@ import {z} from "zod";
    guests:z.array(guestSchema).min(1).max(6),
 
    captcha:z.string().min(1,"Enter captcha"),
+   captchaValue: z.string().optional(),
   
 
    // terms
@@ -74,9 +75,9 @@ import {z} from "zod";
   })
   .superRefine(
     (data,ctx) => {
-      const captchaFormContext=ctx.parent?.captchaText;
+      const captchaText=ctx?.context?.captchaText;
 
-      if(captchaFormContext && data.captcha!==data.captchaValue){
+      if(captchaText && data.captcha!==data.captchaText){
     ctx.addIssue({
       path:["captcha"],
       message:"Captcha does not match",
@@ -101,13 +102,13 @@ import {z} from "zod";
          code: z.ZodIssueCode.custom,
       })
      }
-     if (!data.agreeTerms) {
-    ctx.addIssue({
-      path: ["agreeTerms"],
-      message: "You must accept Terms & Conditions",
-      code: z.ZodIssueCode.custom,
-    });
-  }
+  //    if (!data.agreeTerms) {
+  //   ctx.addIssue({
+  //     path: ["agreeTerms"],
+  //     message: "You must accept Terms & Conditions",
+  //     code: z.ZodIssueCode.custom,
+  //   });
+  // }
 
   if(data.isApplicantGuest){
    const firstGuest=data.guests[0];

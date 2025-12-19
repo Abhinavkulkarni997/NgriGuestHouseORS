@@ -1,8 +1,9 @@
 import React from 'react'
+import { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 const Visit = () => {
-    const {register,formState:{errors}}=useFormContext();
+    const {register,watch,trigger,formState:{errors}}=useFormContext();
     const purposes=["Personal","Office","LTC"]
     const rooms=[
     // {
@@ -28,6 +29,16 @@ const Visit = () => {
         id:6,
         name:'(06) Six'
     }]
+
+      const arrivalDate = watch("arrivalDate");
+  const arrivalTime = watch("arrivalTime");
+  const departureDate = watch("departureDate");
+  const departureTime = watch("departureTime");
+    useEffect(()=>{
+      if(arrivalDate && arrivalTime && departureDate && departureTime){
+        trigger(["departureDate","departureTime"]);
+      }
+    },[arrivalDate,arrivalTime,departureDate,departureTime])
   return (
     <div>
         <h2 className='text-lg font-semibold mb-4'>Visit Details</h2> 
@@ -48,13 +59,13 @@ const Visit = () => {
             <option value={0}>Select</option>
             {rooms.map((r)=>(<option key={r.id} value={r.id}>{r.name}</option>))}
         </select>
-          {errors.numberOfRooms && (<p className='text-red-600'>{errors.numberOfRooms.message}</p>)}
+          {errors.numberOfRooms && (<p className='text-red-600 text-sm mt-1'>{errors.numberOfRooms.message}</p>)}
         </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700">Arrival Date</label>
           <input {...register("arrivalDate")} type="date" className="mt-1 w-full rounded-lg border p-3" />
-          {errors.arrivalDate && <p className="text-red-600">{errors.arrivalDate.message}</p>}
+          {errors.arrivalDate && <p className="text-red-600 text-sm mt-1">{errors.arrivalDate.message}</p>}
         </div>
 
         <div>
@@ -65,7 +76,7 @@ const Visit = () => {
         <div>
           <label className="block text-sm font-medium text-gray-700">Departure Date</label>
           <input {...register("departureDate")} type="date" className="mt-1 w-full rounded-lg border p-3" />
-          {errors.departureDate && <p className='text-red-600'>{errors.departureDate.message}</p>}
+          {errors.departureDate && <p className='text-red-600 text-sm mt-1'>{errors.departureDate.message}</p>}
         </div>
 
         <div>
