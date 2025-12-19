@@ -91,9 +91,12 @@ const bookingSchema =new mongoose.Schema(
 
         // Step 3:Guests
         guests:{
-            type:[guestSchema],
-            required:true,
-        },
+             type: [{
+                name: String,
+                isApplicant: { type: Boolean, default: false }
+                }],
+                default: []
+            },
 
         // Terms & Captcha
         agreeTerms:{

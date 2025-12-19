@@ -55,19 +55,24 @@ const MultiStepForm = () => {
   const onSubmit=async(data)=>{
     try{
       setSubmitting(true);
-      const fd=new  FormData();
-      Object.keys(data).forEach((k)=>{
-        if(k==='guests'){
-          fd.append("guests",JSON.stringify(data.guests));
-          return;
-        }
-        if(k==="officeIdFile" && data.officeIdFile?.[0]){
-          fd.append("officeIdFile",data.officeIdFile[0]);
-          return;
-        }
-        fd.append(k,data[k]??"");
-      });
-      const res=await submitBooking(fd);
+      // const fd=new  FormData();
+      // Object.keys(data).forEach((k)=>{
+      //   if(k==='guests'){
+      //     fd.append("guests",JSON.stringify(data.guests));
+      //     return;
+      //   }
+      //   if(k==="officeIdFile" && data.officeIdFile?.[0]){
+      //     fd.append("officeIdFile",data.officeIdFile[0]);
+      //     return;
+      //   }
+      //   fd.append(k,data[k]??"");
+      // });
+      const payload={
+        ...data,
+        guests:data.guests,
+        numberOfRooms:Number(data.numberOfRooms),
+      }
+       const res=await submitBooking(payload);
       alert("Booking submitted. Booking ID: "+ (res.bookingId || "N/A"));
       navigate('/success')
     }catch(err){

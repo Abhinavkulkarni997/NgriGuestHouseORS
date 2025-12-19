@@ -18,9 +18,9 @@ console.log("bookingRoutes type:", typeof bookingRoutes);
 app.use("/api",bookingRoutes);
 
 
-router.get("/booking", (req, res) => {
-  res.send("Booking API is running");
-});
+// router.get("/booking", (req, res) => {
+//   res.send("Booking API is running");
+// });
 
 
 // MongoDb Connection
