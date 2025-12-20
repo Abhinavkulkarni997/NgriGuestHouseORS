@@ -1,6 +1,6 @@
 import React from 'react';
 import SuccessImg from '../../assets/Success/success.png';
-import {ueNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 const  Success= () => {
   const navigate=useNavigate();
   return (
