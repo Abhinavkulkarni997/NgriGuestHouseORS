@@ -191,11 +191,11 @@ const Applicant = () => {
             <option value="">Select organization</option>
             {organizations.map(o=><option key={o.id} value={o.name}>{o.name}</option>)}
         </select>
-        {errors.organization && <p className="text-red-600 mt-1">{errors.organization.message}</p>}
+        {errors.organization && (<p className="text-red-600 text-sm mt-1">{errors.organization.message}</p>)}
     </div>
     <Input name="employeeId" label="Employee ID" placeholder="Employee ID" />
     <Input name="mobileNumber" label="Mobile Number" placeholder="Enter Mobile Number" />
-    <Input name="officialEmail" label='Official EmailID' type="email" placeholder="Official Email Address"/>
+    <Input name="officialEmail" label='Official Email ID' type="email" placeholder="Official Email Address"/>
 
      <div>
         <label className="block text-sm font-medium text-gray-700">Payment to be borne by</label>
@@ -203,6 +203,8 @@ const Applicant = () => {
             <option value="">Select</option>
         {payments.map(p=><option key={p.id} value={p.name}>{p.name}</option>)}
         </select>
+       
+
 
     </div>
 

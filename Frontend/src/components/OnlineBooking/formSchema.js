@@ -36,8 +36,8 @@ import {z} from "zod";
     organization:z.string().min(1,"Choose organization"),
     employeeId:z.string().min(4,"EmployeeID is required"),
     mobileNumber:z.string().regex(/^[0-9]{10}$/,'Enter valid 10 digit mobile number'),
-    officialEmail:z.string().email("Invalid email"),
-    paymentBy:z.string().optional(),
+    officialEmail:z.string().email("Enter Email Id / Invalid email"),
+    paymentBy:z.string().min(1,"Please select who will bear the Payment"),
 
   
 

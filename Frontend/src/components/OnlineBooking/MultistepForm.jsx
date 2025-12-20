@@ -34,7 +34,7 @@ const MultiStepForm = () => {
     let valid=false;
     if(step===1){
       valid=await trigger([
-        "applicantName","designation","organization","mobileNumber","officialEmail","officeIdFile"
+        "applicantName","designation","organization","mobileNumber","officialEmail","officeIdFile",
       ]);
     }else if(step===2){
       valid=await trigger(["purpose","numberOfRooms","arrivalDate","arrivalTime","departureDate","departureTime"]);
