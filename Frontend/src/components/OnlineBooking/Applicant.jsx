@@ -203,6 +203,7 @@ const Applicant = () => {
             <option value="">Select</option>
         {payments.map(p=><option key={p.id} value={p.name}>{p.name}</option>)}
         </select>
+        {errors.paymentBy &&(<p className="text-red-600 text-sm mt-1">{errors.paymentBy.message}</p>)}
        
 
 

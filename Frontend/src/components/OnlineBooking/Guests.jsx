@@ -66,7 +66,7 @@ const Guests = () => {
       isApplicant: false,
     });
   }
-}, [isApplicantGuest, applicantName, organization, mobileNumber]);
+}, [isApplicantGuest, applicantName, organization, mobileNumber,]);
 
 
 
@@ -211,6 +211,8 @@ const genders=[
                         <div>
                             <label className="font-medium text-sm text-gray-700">Contact No.</label>
                             <input {...register(`guests.${index}.contact`)} className="mt-1  w-full rounded-lg border p-3" disabled={field.isApplicant}/>
+                            {errors.guests?.[index]?.contact &&(<p className='text-red-600 text-sm'>{errors.guests[index].contact.message}</p>)}
+
                         </div>
 
                         <div>

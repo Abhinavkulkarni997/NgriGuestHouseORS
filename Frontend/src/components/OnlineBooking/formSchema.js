@@ -91,11 +91,26 @@ import {z} from "zod";
          return;
       }
     
+      if(data.arrivalDate){
+        const today=new Date();
+        today.setHours(0,0,0,0);
+
+        const arrivalDate=new Date(data.arrivalDate);
+        arrivalDate.setHours(0,0,0,0);
       
+      if(arrivalDate<today){
+        ctx.addIssue({
+          path:["arrivalDate"],
+          message:"Arrival date cannot be in the Past Date",
+          code:z.ZodIssueCode.custom,
+        })
+      }
+      
+    }
      const arrival=new Date(`${data.arrivalDate}T${data.arrivalTime}`);
      const departure=new Date(`${data.departureDate}T${data.departureTime}`);
 
-     if(departure<=arrival){
+     if(departure<=arrival ){
       ctx.addIssue({
          path:["departureDate"],
          message:"Departure date & time must be after arrival",
