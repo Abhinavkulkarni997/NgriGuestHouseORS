@@ -8,6 +8,18 @@ console.log("FILE:", req.file);
     try{
       const data=req.body;
 
+      if(typeof data.guests==="string"){
+        try{
+          data.guests=JSON.parse(data.guests);
+
+        }catch(e){
+          return res.status(400).json({
+            success:false,
+            message:"Invalid guests data format",
+          })
+        }
+      }
+
   const arrivalDateTime=new Date(`${data.arrivalDate}T${data.arrivalTime}`);
     const departureDateTime=new Date(`${data.departureDate}T${data.departureTime}`);
    
