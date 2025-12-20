@@ -3,6 +3,8 @@ const Booking=require("../models/Booking");
 
  const createBooking=async (req,res)=>{
     console.log("Booking API HIT HERE");
+    console.log("BODY:", req.body);
+console.log("FILE:", req.file);
     try{
       const data=req.body;
 

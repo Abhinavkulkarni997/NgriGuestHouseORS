@@ -30,7 +30,7 @@ const Visit = () => {
         name:'(06) Six'
     }]
 
-      const arrivalDate = watch("arrivalDate");
+  const arrivalDate = watch("arrivalDate");
   const arrivalTime = watch("arrivalTime");
   const departureDate = watch("departureDate");
   const departureTime = watch("departureTime");
@@ -38,7 +38,7 @@ const Visit = () => {
       if(arrivalDate && arrivalTime && departureDate && departureTime){
         trigger(["departureDate","departureTime"]);
       }
-    },[arrivalDate,arrivalTime,departureDate,departureTime])
+    },[arrivalDate,arrivalTime,departureDate,departureTime,trigger]);
   return (
     <div>
         <h2 className='text-lg font-semibold mb-4'>Visit Details</h2> 
@@ -76,7 +76,7 @@ const Visit = () => {
         <div>
           <label className="block text-sm font-medium text-gray-700">Departure Date</label>
           <input {...register("departureDate")} type="date" className="mt-1 w-full rounded-lg border p-3" />
-          {errors.departureDate && <p className='text-red-600 text-sm mt-1'>{errors.departureDate.message}</p>}
+          {errors.departureDate && (<p className='text-red-600 text-sm mt-1'>{errors.departureDate.message}</p>)}
         </div>
 
         <div>
