@@ -9,12 +9,19 @@ const nodemailer=require('nodemailer');
     }
 });
 
-
+mailTransporter.verify((err, success) => {
+  if (err) {
+    console.error("Mail transporter error:", err);
+  } else {
+    console.log("Mail transporter ready");
+  }
+});
 
 
 const sendAcknowledgementEmail=async({toEmail,name,bookingId,bookingDate})=>{
     const mailOptions={
-    from:`"CSIR-NGRI Guest House" <${process.env.EMAIL_USER}`,
+    from: `"CSIR-NGRI Guest House" <${process.env.EMAIL_USER}>`,
+
     to:toEmail,
     subject:'CSIR-NGRI Guest House Request Acknowledgement',
     text:`Dear ${name},

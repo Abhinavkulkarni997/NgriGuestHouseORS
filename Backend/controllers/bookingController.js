@@ -1,7 +1,7 @@
 const Booking=require("../models/Booking");
-const { default: sendAcknowledgementEmail } = require("../services/mailservice");
+const { sendAcknowledgementEmail } = require("../services/mailservice");
 // const crypto=require("crypto");
-const mailservice=require('../services/mailservice');
+
 
  const createBooking=async (req,res)=>{
     console.log("Booking API HIT HERE");
@@ -44,7 +44,8 @@ const mailservice=require('../services/mailservice');
       })
    
         await booking.save();
-        await sendAcknowledgementEmail({toEmail:booking.officialEmail,name:booking.applicantName,bookingId:bookingId,bookingDate: new Date().toLocaleDateString(),});
+        await sendAcknowledgementEmail({toEmail:booking.officialEmail,name:booking.applicantName,bookingId:bookingId,bookingDate: new Date().toLocaleDateString("en-IN"),});
+        // await sendAcknowledgementEmail({to: process.env.ADMIN_EMAIL,name: "Admin",bookingId,date,});
         res.status(201).json({success:true,bookingId,message:'Booking response submitted successfully'});
 
     }catch(error){
