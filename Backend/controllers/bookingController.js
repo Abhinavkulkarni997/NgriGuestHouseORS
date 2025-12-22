@@ -1,5 +1,5 @@
 const Booking=require("../models/Booking");
-const { sendAcknowledgementEmail } = require("../services/mailservice");
+const { sendAcknowledgementEmail,sendAdminAlertEmail } = require("../services/mailservice");
 // const crypto=require("crypto");
 
 

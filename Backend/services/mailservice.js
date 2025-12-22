@@ -13,7 +13,7 @@ mailTransporter.verify((err, success) => {
   if (err) {
     console.error("Mail transporter error:", err);
   } else {
-    console.log("Mail transporter ready");
+    console.log("Mail transporter ready",success);
   }
 });
 
@@ -40,6 +40,16 @@ const sendAcknowledgementEmail=async({toEmail,name,bookingId,bookingDate})=>{
     Thanks & Regards,
     CSIR-NGRI Guest House I/C`,
 }
+ try{
+    await mailTransporter.sendMail(mailOptions);
+    console.log("Acknowledgement email sent to",toEmail);
+   }
+    catch(error){
+        console.log("Error in sending Email:",error.message);
+    }
+
+  
+}
 
 const sendAdminAlertEmail=async({bookingId,applicantName})=>{
     const mailOptions={
@@ -53,18 +63,17 @@ const sendAdminAlertEmail=async({bookingId,applicantName})=>{
         
         Please login to admin dashboard to review.
         `
-
-
     }
-
-}
-   try{
+     try{
     await mailTransporter.sendMail(mailOptions);
-    console.log("Acknowledgement email sent to",toEmail);
+    console.log("Guest House Booking email sent to",to);
    }
     catch(error){
         console.log("Error in sending Email:",error.message);
     }
+
 }
+
+
 
 module.exports= {sendAcknowledgementEmail,sendAdminAlertEmail};
