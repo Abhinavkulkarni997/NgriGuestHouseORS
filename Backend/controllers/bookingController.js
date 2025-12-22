@@ -45,7 +45,7 @@ const { sendAcknowledgementEmail } = require("../services/mailservice");
    
         await booking.save();
         await sendAcknowledgementEmail({toEmail:booking.officialEmail,name:booking.applicantName,bookingId:bookingId,bookingDate: new Date().toLocaleDateString("en-IN"),});
-        // await sendAcknowledgementEmail({to: process.env.ADMIN_EMAIL,name: "Admin",bookingId,date,});
+        await sendAdminAlertEmail({bookingId,applicantName:booking.applicantName});
         res.status(201).json({success:true,bookingId,message:'Booking response submitted successfully'});
 
     }catch(error){

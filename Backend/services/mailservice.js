@@ -40,6 +40,24 @@ const sendAcknowledgementEmail=async({toEmail,name,bookingId,bookingDate})=>{
     Thanks & Regards,
     CSIR-NGRI Guest House I/C`,
 }
+
+const sendAdminAlertEmail=async({bookingId,applicantName})=>{
+    const mailOptions={
+        from:`"CSIR-NGRI Guest House" <${process.env.EMAIL_USER}>`,
+        to:process.env.EMAIL_ADMIN,
+        subject:'New Guest House Booking Received (${bookingId})',
+        text:`
+        A new Guest House Booking received 
+        Booking Id:${bookingId}
+        Applicant:${applicantName}
+        
+        Please login to admin dashboard to review.
+        `
+
+
+    }
+
+}
    try{
     await mailTransporter.sendMail(mailOptions);
     console.log("Acknowledgement email sent to",toEmail);
@@ -49,4 +67,4 @@ const sendAcknowledgementEmail=async({toEmail,name,bookingId,bookingDate})=>{
     }
 }
 
-module.exports= {sendAcknowledgementEmail};
+module.exports= {sendAcknowledgementEmail,sendAdminAlertEmail};
