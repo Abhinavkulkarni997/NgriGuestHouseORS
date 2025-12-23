@@ -5,10 +5,10 @@ import invoices from '../assets/AdminDashboard/Home/invoices.svg';
 import profile from '../assets/AdminDashboard/Home/profile.svg';
 import settings from '../assets/AdminDashboard/Home/settings.svg'
 import menu from '../assets/AdminDashboard/Home/menu.svg';
-import close from '../assets/AdminDashboard/Home/close'
+// import close from '../assets/AdminDashboard/Home/close';
 import Nlogo from '../assets/AdminDashboard/Home/ngri-logo.png';
 const SideBar=()=>{
-    const [menuOpen,,setMenuOpen]=useState(false);
+    const [menuOpen,setMenuOpen]=useState(false);
     const menu=[
         {
             id:0,name:'Home',url:'/',icon:<img src={home} alt="home" size={25}/>,title:"Home",
@@ -28,17 +28,20 @@ const SideBar=()=>{
     return(
         <div className="min-h-screen top-0 left-0 absolutemx-auto flex justify-between items-center ">
             <div className="max-w-7xl mx-auto bg-[#faf7e5]">
-                <div className="">
+                <Link to='/' className="flex items-center justify-center gap-2">
                     <img src={Nlogo} size={25} alt="ngri-logo" />
-                    <h1 className="text-gray-800 font-medium  ">NGRI-GUEST HOUSE </h1>
-                </div>
-                <ul className="">
+                    <span className="text-gray-800 font-medium  ">NGRI-GUEST HOUSE </span>
+                </Link>
+                <aside className="left-0 ">
+                    <ul className="flex items-center justify-items-center space-y-4">
                     {menu.map((item,index)=>(
                     <li key={index}>
                        {item.icon} {item.title}{item.url}
                     </li>
                 ))}
                 </ul>
+                </aside>
+            
                 
             </div>
         </div>

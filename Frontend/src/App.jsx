@@ -10,12 +10,15 @@ import OnlineBooking from './components/OnlineBooking/OnlineBooking';
 import MultiStepForm from './components/OnlineBooking/MultiStepForm';
 import Success from './components/Success/Success';
 import BookingStatus from './components/OnlineBooking/BookingStatus';
+import AdminLayout from './Admin/AdminLayout';
+
 function App() {
 
   return (
     <>
       
     <Routes>
+      {/* Public Routes */}
     
     <Route path="/" element={<Layout hasHero={true}><Home/></Layout>}/>
     <Route path="/faq" element={<Layout><Faq/></Layout>} />
@@ -23,6 +26,15 @@ function App() {
     <Route path="/onlinebooking" element={<Layout><MultiStepForm/></Layout>}/>
     <Route path="/success" element={<Layout><Success/></Layout>}/>
     <Route path="/bookingstatus" element={<Layout><BookingStatus/></Layout>} />
+    
+    {/* Admin Routes */}
+    <Route path="/admin" element={<AdminLayout/>} >
+    <Route index element={<AdminDashboard/>}/>
+    <Route path='bookings' element={<Bookings/>}/>
+    <Route path="invoices" element={<Invoices/>}/>
+    <Route path="adminProfile" element={<AdminProfile/>}/>
+    <Route path="/settings" element={<Settings/>} />
+    </Route>
     </Routes>
 
         
