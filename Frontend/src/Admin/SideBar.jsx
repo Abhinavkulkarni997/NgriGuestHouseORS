@@ -4,7 +4,7 @@ import booking from '../assets/AdminDashboard/Home/booking.svg';
 import invoices from '../assets/AdminDashboard/Home/invoices.svg';
 import profile from '../assets/AdminDashboard/Home/profile.svg';
 import settings from '../assets/AdminDashboard/Home/settings.svg'
-import menu from '../assets/AdminDashboard/Home/menu.svg';
+import sidemenu from '../assets/AdminDashboard/Home/menu.svg';
 // import close from '../assets/AdminDashboard/Home/close';
 import Nlogo from '../assets/AdminDashboard/Home/ngri-logo.png';
 import { Link } from "react-router-dom";
@@ -38,33 +38,28 @@ const SideBar=()=>{
                 </div>
                 
 
-                <button onClick={()=>setMenuOpen(!menuOpen)}>
-                    
-                </button>
-                {menuOpen && (
-                    <>
-                   
+                <button onClick={()=>setMenuOpen(!menuOpen)}><img src={sidemenu} className="w-6 h-6 absolute-0 right-0"/>
+                    {menuOpen?
+                      <>
                      <div>
                     <Link to='/admin' className="flex items-center justify-center gap-2">
                     <img src={Nlogo} className="w-20 h-20" alt="ngri-logo" />
                     <span className="text-gray-800 font-extrabold  ">NGRI-GUEST HOUSE </span>
                 </Link>
-
                 </div>
-                
-            
                     <ul className="w-6 h-6 space-y-4 cursor-pointer flex  flex-wrap items-center ">
                     {menu.map((item,index)=>(
                     <li key={index} className="flex items-center gap-3 p-2">
                        <Link to={`/admin${item.url}`} >{item.icon}
-                       <span>{item.title}</span></Link>
-                       
+                       <span className="flex flex-1">{item.title}</span></Link>   
                     </li>
                 ))}
                 </ul>
                  </>
-
-                )}
+                
+                :''}
+                </button>
+             
                 
                
             
