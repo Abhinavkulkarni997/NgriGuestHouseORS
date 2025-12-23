@@ -1,15 +1,18 @@
 import React from 'react';
 import SideBar from './SideBar';
-const AdminLayout=({children})=>{
+import { Outlet } from 'react-router-dom';
+const AdminLayout=()=>{
 
 return(
-<>
-<div>
+
+<div className='flex'>
     <SideBar/>
-    {children}
+    <div className='flex-1 p-4'>
+    <Outlet/>
+    </div>
+   
 </div>
 
-</>
 )
 }
 
