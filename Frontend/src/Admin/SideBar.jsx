@@ -27,18 +27,15 @@ const SideBar=()=>{
         }
     ]
     return(
-        <div className="min-h-screen  mx-auto">
-            <div className="max-w-7xl mx-auto bg-gradient-to-r from-[#faf7e5]  via-slate-100 backdrop-blur-md bg-opacity-60 transition-all">
-                <div>
+        <div className="min-h-screen  mx-auto ">
+            <div className="max-w-7xl mx-auto bg-gradient-to-r from-[#faf7e5]  via-slate-100 backdrop-blur-md bg-opacity-60 transition-all border h-full ">
+                {/* <div>
                     <Link to='/admin' className="flex items-center justify-center gap-2">
                     <img src={Nlogo} className="w-20 h-20" alt="ngri-logo" />
                     <span className="text-gray-800 font-extrabold  ">NGRI-GUEST HOUSE </span>
                 </Link>
-
-                </div>
-                
-
-                <button onClick={()=>setMenuOpen(!menuOpen)}><img src={sidemenu} className="w-6 h-6 absolute-0 right-0"/>
+                </div> */}
+                <button onClick={()=>setMenuOpen(!menuOpen)}><img src={sidemenu} className="w-6 h-6"/>
                     {menuOpen?
                       <>
                      <div>
@@ -47,6 +44,8 @@ const SideBar=()=>{
                     <span className="text-gray-800 font-extrabold  ">NGRI-GUEST HOUSE </span>
                 </Link>
                 </div>
+
+               
                     <ul className="w-6 h-6 space-y-4 cursor-pointer flex  flex-wrap items-center ">
                     {menu.map((item,index)=>(
                     <li key={index} className="flex items-center gap-3 p-2">
@@ -55,15 +54,11 @@ const SideBar=()=>{
                     </li>
                 ))}
                 </ul>
+                
                  </>
-                
                 :''}
-                </button>
-             
                 
-               
-            
-            
+                </button>
                 
             </div>
         </div>
