@@ -1,15 +1,18 @@
 import React from 'react'
-
-const TopBar = () => {
+ import sidemenu from '../assets/AdminDashboard/Home/menu.svg';
+const TopBar = ({onToggle}) => {
   return (
-    <div className='w-full fixed'>
-        <div className='max-w-7xl mx-auto flex items-center justify-center'>
-            <div>
-                <h1>Admin Dashboard</h1>
-            </div>
-        </div>
+ 
+        <header className='h-14 flex items-center  px-4 border-b '>
+                  <button onClick={onToggle} className='p-2'>
+                    <img src={sidemenu} className="w-6 h-6"/></button>
+                <h1 className='ml-4 font-semibold'>Admin Dashboard</h1>
+
+                <div className='ml-auto'> Profile</div>
+         
+        </header>
         
-    </div>
+
   )
 }
 

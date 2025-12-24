@@ -1,8 +1,8 @@
 import React,{useState} from 'react';
 import SideBar from './SideBar';
-// import { Outlet } from 'react-router-dom';
+ import { Outlet } from 'react-router-dom';
 import TopBar from './TopBar';
-const AdminLayout=({children})=>{
+const AdminLayout=()=>{
     const [collapsed,setCollapsed] = useState(false);
 return(
 
@@ -10,10 +10,11 @@ return(
     <SideBar collapsed={collapsed}/>
     <div className='flex flex-col flex-1'>
           <TopBar onToggle={()=>setCollapsed(!collapsed)}/>
-    </div>
-    <main className='overflow-y-auto p-4 bg-gray-50'>
-        {children}
+             <main className='flex-1 overflow-y-auto p-4 bg-gray-50'>
+        <Outlet/>
     </main>
+    </div>
+   
    
 </div>
 

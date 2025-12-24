@@ -8,7 +8,7 @@ import sidemenu from '../assets/AdminDashboard/Home/menu.svg';
 // import close from '../assets/AdminDashboard/Home/close';
 import Nlogo from '../assets/AdminDashboard/Home/ngri-logo.png';
 import { Link } from "react-router-dom";
-const SideBar=()=>{
+const SideBar=({collapsed})=>{
     const [menuOpen,setMenuOpen]=useState(false);
     const menu=[
         {
@@ -27,41 +27,53 @@ const SideBar=()=>{
         }
     ]
     return(
-        <div className="min-h-screen  mx-auto ">
-            <div className="max-w-7xl mx-auto bg-gradient-to-r from-[#faf7e5]  via-slate-100 backdrop-blur-md bg-opacity-60 transition-all border h-full ">
-                {/* <div>
-                    <Link to='/admin' className="flex items-center justify-center gap-2">
-                    <img src={Nlogo} className="w-20 h-20" alt="ngri-logo" />
-                    <span className="text-gray-800 font-extrabold  ">NGRI-GUEST HOUSE </span>
-                </Link>
-                </div> */}
-                <button onClick={()=>setMenuOpen(!menuOpen)}><img src={sidemenu} className="w-6 h-6"/>
-                    {menuOpen?
-                      <>
-                     <div className="flex items-center justify-center gap-2">
-                    <Link to='/admin' >
-                    <img src={Nlogo} className="w-20 h-20" alt="ngri-logo" />
-                    <span className="text-gray-800 font-extrabold  ">NGRI-GUEST HOUSE </span>
-                </Link>
-                </div>
+        // <div className="min-h-screen  mx-auto ">
+        //     <div className="max-w-7xl mx-auto bg-gradient-to-r from-[#faf7e5]  via-slate-100 backdrop-blur-md bg-opacity-60 transition-all border h-full ">
+        //         {/* <div>
+        //             <Link to='/admin' className="flex items-center justify-center gap-2">
+        //             <img src={Nlogo} className="w-20 h-20" alt="ngri-logo" />
+        //             <span className="text-gray-800 font-extrabold  ">NGRI-GUEST HOUSE </span>
+        //         </Link>
+        //         </div> */}
+        //         <button onClick={()=>setMenuOpen(!menuOpen)}><img src={sidemenu} className="w-6 h-6"/>
+        //             {menuOpen?
+        //               <>
+        //              <div className="flex items-center justify-center gap-2">
+        //             <Link to='/admin' >
+        //             <img src={Nlogo} className="w-20 h-20" alt="ngri-logo" />
+        //             <span className="text-gray-800 font-extrabold  ">NGRI-GUEST HOUSE </span>
+        //         </Link>
+        //         </div>
 
                
-                    <ul className="w-6 h-6 space-y-4 cursor-pointer flex  flex-wrap items-center ">
-                    {menu.map((item,index)=>(
+        //             <ul className="w-6 h-6 space-y-4 cursor-pointer flex  flex-wrap items-center ">
+        //             {menu.map((item,index)=>(
+        //             <li key={index} className="flex items-center gap-3 p-2">
+        //                <Link to={`/admin${item.url}`} >{item.icon}
+        //                <span className="flex flex-1 ">{item.title}</span></Link>   
+        //             </li>
+        //         ))}
+        //         </ul>
+                
+        //          </>
+        //         :''}
+                
+        //         </button>
+                
+        //     </div>
+        // </div>
+        <aside className={`h-screen transition-all duration-300${collapsed?'w-16':'w-64'} bg-[#faf7e5] border-r`}>
+
+            <ul className="p-4 space-y-4 cursor-pointer ">
+                     {menu.map((item,index)=>(
                     <li key={index} className="flex items-center gap-3 p-2">
                        <Link to={`/admin${item.url}`} >{item.icon}
-                       <span className="flex flex-1 ">{item.title}</span></Link>   
+                       {!collapsed &&(<span>{item.title}</span>)}</Link>   
                     </li>
                 ))}
                 </ul>
-                
-                 </>
-                :''}
-                
-                </button>
-                
-            </div>
-        </div>
+
+        </aside>
     )
 }
 
