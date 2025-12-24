@@ -63,10 +63,11 @@ const SideBar=({collapsed})=>{
         //     </div>
         // </div>
         <aside className={`h-screen transition-all duration-300${collapsed?'w-16':'w-64'} bg-[#faf7e5] border-r`}>
-
+           
             <ul className="p-4 space-y-4 cursor-pointer ">
+                
                      {menu.map((item,index)=>(
-                    <li key={index} className="flex items-center gap-3 p-2">
+                    <li key={index} className=" flex  items-center gap-3 p-2">
                        <Link to={`/admin${item.url}`} >{item.icon}
                        {!collapsed &&(<span>{item.title}</span>)}</Link>   
                     </li>
