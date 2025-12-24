@@ -63,7 +63,12 @@ const SideBar=({collapsed})=>{
         //     </div>
         // </div>
         <aside className={`h-screen transition-all duration-300${collapsed?'w-16':'w-64'} bg-[#faf7e5] border-r`}>
-           
+           <div className="p-2">
+                     <Link to='/admin' className="flex items-center justify-center gap-2">
+                     <img src={Nlogo} className="w-20 h-20" alt="ngri-logo" />
+                     <span className="text-gray-800 font-extrabold  ">NGRI-GUEST HOUSE </span>
+                 </Link>
+                </div>
             <ul className="p-4 space-y-4 cursor-pointer ">
                 
                      {menu.map((item,index)=>(
