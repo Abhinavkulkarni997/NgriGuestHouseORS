@@ -38,8 +38,8 @@ const SideBar=()=>{
                 <button onClick={()=>setMenuOpen(!menuOpen)}><img src={sidemenu} className="w-6 h-6"/>
                     {menuOpen?
                       <>
-                     <div>
-                    <Link to='/admin' className="flex items-center justify-center gap-2">
+                     <div className="flex items-center justify-center gap-2">
+                    <Link to='/admin' >
                     <img src={Nlogo} className="w-20 h-20" alt="ngri-logo" />
                     <span className="text-gray-800 font-extrabold  ">NGRI-GUEST HOUSE </span>
                 </Link>
@@ -50,7 +50,7 @@ const SideBar=()=>{
                     {menu.map((item,index)=>(
                     <li key={index} className="flex items-center gap-3 p-2">
                        <Link to={`/admin${item.url}`} >{item.icon}
-                       <span className="flex flex-1">{item.title}</span></Link>   
+                       <span className="flex flex-1 ">{item.title}</span></Link>   
                     </li>
                 ))}
                 </ul>
