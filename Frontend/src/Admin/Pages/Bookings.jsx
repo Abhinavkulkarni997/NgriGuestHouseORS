@@ -1,8 +1,16 @@
 import React, { useEffect } from 'react'
-
+import {axios} from 'axios';
 const Bookings = () => {
-    useEffect(()=>{
-        axio
+   const [bookings, setBookings] = useState([]);
+   useEffect(()=>{
+        axios.get('/')
+        .then(response=>{
+            console.log("Bookings Submitted data:", response.data);
+            setBookings(response.data);
+        })
+        .catch(error=>{
+            console.error(error);
+        })
     })
   return (
     <div className=''>
@@ -12,4 +20,4 @@ const Bookings = () => {
   )
 }
 
-export default Bookings
+export default Bookings;
