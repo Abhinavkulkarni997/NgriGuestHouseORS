@@ -4,6 +4,7 @@ const cors=require("cors");
 const mongoose=require("mongoose");
 const router=express.Router();
 const bookingRoutes = require("./routes/bookingRoutes");
+const adminRoutes=require("./routes/adminRoutes");
 
 const app=express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 // routes
 console.log("bookingRoutes type:", typeof bookingRoutes);
 app.use("/api",bookingRoutes);
+app.use('/api/admin',adminRoutes);
 
 
 // router.get("/booking", (req, res) => {

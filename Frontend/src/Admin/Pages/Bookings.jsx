@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
-import {axios} from 'axios';
+import React, { useEffect,useState } from 'react'
+import api from '../../api/bookingapi';
 const Bookings = () => {
    const [bookings, setBookings] = useState([]);
    useEffect(()=>{
-        axios.get('/')
+        api.get('/admin/bookings')
         .then(response=>{
             console.log("Bookings Submitted data:", response.data);
-            setBookings(response.data);
+            setBookings(response.data.bookings);
         })
         .catch(error=>{
             console.error(error);
