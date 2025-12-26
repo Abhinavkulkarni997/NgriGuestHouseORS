@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const Bookings = () => {
+    useEffect(()=>{
+        axio
+    })
   return (
-    <div>Bookings</div>
+    <div className=''>
+        <h1 className="text-2xl font-bold">Bookings Page</h1>
+
+    </div>
   )
 }
 

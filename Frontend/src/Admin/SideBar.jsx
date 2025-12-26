@@ -62,19 +62,19 @@ const SideBar=({collapsed})=>{
                 
         //     </div>
         // </div>
-        <aside className={`h-screen transition-all duration-300${collapsed?'w-16':'w-64'} bg-[#faf8ee] border-r`}>
+        <aside className={`h-screen transition-all duration-300${collapsed?'w-16':'w-64'} bg-[#f8f7f0] border-r`}>
            <div className="p-2">
-                     <Link to='/admin' className="flex items-center  gap-2">
+                     <Link to='/admin' className="flex items-center  gap-2 px-4 py-3">
                      <img src={Nlogo} className="w-10 h-10" alt="ngri-logo" />
-                     {!collapsed && <span className="text-gray-800 font-extrabold  ">NGRI-GUEST HOUSE </span>}
+                     {!collapsed && <span className="text-gray-900 font-bold">NGRI-GUEST HOUSE </span>}
                  </Link>
                 </div>
             <ul className="p-4 space-y-4 cursor-pointer ">
                 
                      {menu.map((item,index)=>(
-                    <li key={index} className=" flex  items-center gap-3 p-2 mt-4">
+                    <li key={index} className=" flex  items-center gap-3 p-2 mt-4 hover:bg-gray-200 rounded-md">
                        <Link to={`/admin${item.url}`} className="flex items-center gap-2">{item.icon}
-                       {!collapsed &&(<span>{item.title}</span>)}</Link>   
+                       {!collapsed &&(<span >{item.title}</span>)}</Link>   
                     </li>
                 ))}
                 </ul>
