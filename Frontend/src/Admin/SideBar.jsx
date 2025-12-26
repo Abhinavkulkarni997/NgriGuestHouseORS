@@ -1,15 +1,15 @@
-import React,{useState} from "react";
+// import React,{useState} from "react";
 import home from '../assets/AdminDashboard/Home/home.svg';
 import booking from '../assets/AdminDashboard/Home/booking.svg';
 import invoices from '../assets/AdminDashboard/Home/invoices.svg';
 import profile from '../assets/AdminDashboard/Home/profile.svg';
 import settings from '../assets/AdminDashboard/Home/settings.svg'
-import sidemenu from '../assets/AdminDashboard/Home/menu.svg';
+// import sidemenu from '../assets/AdminDashboard/Home/menu.svg';
 // import close from '../assets/AdminDashboard/Home/close';
 import Nlogo from '../assets/AdminDashboard/Home/ngri-logo.png';
 import { Link } from "react-router-dom";
 const SideBar=({collapsed})=>{
-    const [menuOpen,setMenuOpen]=useState(false);
+    // const [menuOpen,setMenuOpen]=useState(false);
     const menu=[
         {
             id:0,name:'Home',url:'/',icon:<img src={home} alt="home" className="w-6 h-6"/>,title:"Home",
@@ -62,18 +62,18 @@ const SideBar=({collapsed})=>{
                 
         //     </div>
         // </div>
-        <aside className={`h-screen transition-all duration-300${collapsed?'w-16':'w-64'} bg-[#faf7e5] border-r`}>
+        <aside className={`h-screen transition-all duration-300${collapsed?'w-16':'w-64'} bg-[#faf8ee] border-r`}>
            <div className="p-2">
-                     <Link to='/admin' className="flex items-center justify-center gap-2">
-                     <img src={Nlogo} className="w-20 h-20" alt="ngri-logo" />
-                     <span className="text-gray-800 font-extrabold  ">NGRI-GUEST HOUSE </span>
+                     <Link to='/admin' className="flex items-center  gap-2">
+                     <img src={Nlogo} className="w-10 h-10" alt="ngri-logo" />
+                     {!collapsed && <span className="text-gray-800 font-extrabold  ">NGRI-GUEST HOUSE </span>}
                  </Link>
                 </div>
             <ul className="p-4 space-y-4 cursor-pointer ">
                 
                      {menu.map((item,index)=>(
-                    <li key={index} className=" flex  items-center gap-3 p-2">
-                       <Link to={`/admin${item.url}`} >{item.icon}
+                    <li key={index} className=" flex  items-center gap-3 p-2 mt-4">
+                       <Link to={`/admin${item.url}`} className="flex items-center gap-2">{item.icon}
                        {!collapsed &&(<span>{item.title}</span>)}</Link>   
                     </li>
                 ))}
