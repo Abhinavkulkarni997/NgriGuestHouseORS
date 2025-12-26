@@ -12,6 +12,7 @@ import Success from './components/Success/Success';
 import BookingStatus from './components/OnlineBooking/BookingStatus';
 import AdminLayout from './Admin/AdminLayout';
 import AdminDashboard from './Admin/AdminDashBoard';
+import Bookings from './Admin/Pages/Bookings';
 
 function App() {
 
@@ -31,10 +32,10 @@ function App() {
     {/* Admin Routes */}
     <Route path="/admin" element={<AdminLayout/>} >
     <Route index element={<AdminDashboard/>}/>
-    {/* <Route path='bookings' element={<Bookings/>}/>
-    <Route path="invoices" element={<Invoices/>}/>
+      <Route path='bookings' element={<Bookings/>}/>
+    {/* <Route path="invoices" element={<Invoices/>}/>
     <Route path="adminProfile" element={<AdminProfile/>}/>
-    <Route path="settings" element={<Settings/>} /> */}
+    <Route path="settings" element={<Settings/>} />  */}
     </Route>
     </Routes>
 
