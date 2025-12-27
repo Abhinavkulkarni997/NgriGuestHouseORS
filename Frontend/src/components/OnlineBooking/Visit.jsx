@@ -75,7 +75,7 @@ const Visit = () => {
 
         <div>
           <label className="block text-sm font-medium text-gray-700">Departure Date</label>
-          <input {...register("departureDate")} type="date" className="mt-1 w-full rounded-lg border p-3" />
+          <input {...register("departureDate")} min={new Date().toISOString().split("T")[0]} type="date" className="mt-1 w-full rounded-lg border p-3" />
           {errors.departureDate && (<p className='text-red-600 text-sm mt-1'>{errors.departureDate.message}</p>)}
         </div>
 
