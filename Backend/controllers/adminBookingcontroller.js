@@ -22,6 +22,13 @@ const updateBookingStatus=async(req,res)=>{
             {status,remarks},
             {new:true}
         );
+
+        // send email based on status
+        if(status==="Approved"){
+            sendApprovedEmail(booking);
+        }else if(status==="Rejected"){
+            sendRejectionEmail(booking);
+        }
         res.status(200).json({success:true,booking});
 }catch(error){
         console.error("Error updating booking status:",error);
