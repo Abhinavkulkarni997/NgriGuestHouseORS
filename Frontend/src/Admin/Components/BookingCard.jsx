@@ -8,8 +8,9 @@ const BookingCard = ({booking,onApprove,onReject}) => {
         {/* header */}
         <div className='flex justify-between items-center'>
             <div>
-                 <h3 className='font-semibold text-lg'>
-            {booking.applicantName} 
+               
+                 <h3 className='font-medium text-lg'>
+            <p><b>Applicant Name:</b></p> {booking.applicantName} 
         </h3>
          <p className='text-sm text-gray-800'>
             <b>Organization:</b>{booking.organization}
@@ -58,8 +59,11 @@ const BookingCard = ({booking,onApprove,onReject}) => {
                 {booking.guests.map((guest,index)=>(
                     <div key={index} className='border rounded p-2 mt-2 text-sm'>
                         <p><strong>Name:</strong> {guest.name}</p>
+                        <p><strong>Organization:</strong> {guest.organization}</p>
                         <p><strong>Age:</strong> {guest.age}</p>
                         <p><strong>Gender:</strong> {guest.gender}</p>
+                        <p><strong>Contact No:</strong> {guest.contact}</p>
+                        <p><strong>ID Proof:</strong> {guest.idProof}</p>
                         <p><strong>Category:</strong> {guest.category}</p>
                         </div>
                 ))}
