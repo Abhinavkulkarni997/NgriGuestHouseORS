@@ -93,6 +93,12 @@ const bookingSchema =new mongoose.Schema(
         guests:{
              type: [{
                 name: String,
+                organization: String,
+                age: Number,
+                gender: String,
+                contact: String,
+                idProof: String,
+                category: String,
                 isApplicant: { type: Boolean, default: false }
                 }],
                 default: []

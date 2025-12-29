@@ -59,7 +59,7 @@ const Bookings = () => {
     //     </table>
 
     // </div>
-    <div className='p-6 space-y-6'>
+    <div className='p-6 space-y-4'>
         <h1 className='text-2xl font-bold'>Bookings</h1>
         <div className='grid gap-6'>
             {bookings.map(booking=>(

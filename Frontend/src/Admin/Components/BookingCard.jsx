@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 
-const BookingCard = ({booking,onApprove,onReject}) => {
+const BookingCard = ({booking,onApprove,onReject,onView}) => {
     const [open,setOpen]=useState(false);
   return (
     <div className='bg-white rounded-xl shadow-md border p-5 space-y-4 '>
@@ -10,9 +10,10 @@ const BookingCard = ({booking,onApprove,onReject}) => {
             <div>
                
                  <h3 className='font-medium text-lg'>
-            <p><b>Applicant Name:</b></p> {booking.applicantName} 
+            <p><b>Applicant Name:</b> {booking.applicantName} </p>
+            <p><b>Booking ID:</b>{booking.bookingId}</p>
         </h3>
-         <p className='text-sm text-gray-800'>
+         <p className='text-sm mt-1'>
             <b>Organization:</b>{booking.organization}
             </p>
           <p className='text-sm mt-1'>
@@ -40,16 +41,18 @@ const BookingCard = ({booking,onApprove,onReject}) => {
  */}
    <div className='mt-3 flex gap-3'>
             <button onClick={()=>setOpen(!open)} className='rounded-lg px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white  text-sm'>
-                {open?'Hide Guest Details':'View Guest Details'}
+                {open?'Hide  Details':'View Details'}
 
             </button>
 
         </div>
+        {/* guest details */}
          {open && (
             <div className='mt-4 border-t pt-4 space-y-3'>
              {/* <p><strong>Booking ID:</strong>{booking.bookingId}</p>
             <p><b>Designation:</b>{booking.designation}</p>
             <p><b>Organization:</b>{booking.organization}</p> */}
+            {/* <p><strong>Booking ID:</strong>{booking.bookingId}</p> */}
             <p><b>Email:</b>{booking.officialEmail}</p>
             <p><b>Mobile:</b>{booking.mobileNumber}</p>
 
