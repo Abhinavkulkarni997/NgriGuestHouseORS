@@ -116,6 +116,14 @@ const bookingSchema =new mongoose.Schema(
             enum:["PENDING","APPROVED","REJECTED"],
             default:"PENDING",
         },
+        adminRemarks:{
+            type:String,
+            default:"",
+        },
+        officeIdFile:{
+            type:String,
+
+        },
 
         // Booking ID
         bookingId:{

@@ -36,5 +36,47 @@ const updateBookingStatus=async(req,res)=>{
     }
 }
 
-module.exports={getAllBookings,updateBookingStatus};
+const approveBooking=async(req,res)=>{
+    try{
+        const {remarks}=req.body;
+        const bookingId=req.params.id;
+        const booking=await Bookings.findByIdAndUpdate(
+            bookingId,
+            {status:"APPROVED",
+            adminRemarks:remarks,
+            approvedAt:new Date()
+            },
+            {new:true}
+        );
+        // TODO : sen approval email here
+        // sendApprovedEmail(booking);
+        res.status(200).json({success:true,booking});
+    }catch(error){
+        console.error("Error approving booking:",error);
+        res.status(500).json({success:false,message:"Server Error failed to approve booking"});
+    }
+}
+
+
+const rejectBooking=async(req,res)=>{
+    try{
+        const {remarks}=req.body;
+        const bookingId=req.params.id;
+        const booking=await Bookings.findByIdAndUpdate(
+            bookingId,
+            {status:"REJECTED",
+            adminRemarks:remarks,
+            rejectedAt:new Date()
+            },
+            {new:true}
+        );
+        // TODO : send rejection email here
+        // sendRejectionEmail(booking);
+        res.status(200).json({success:true,booking});   
+    }catch(error){
+        console.error("Error rejecting booking:",error);
+        res.status(500).json({success:false,message:"Server Error failed to reject booking"});
+    }
+}
+module.exports={getAllBookings,updateBookingStatus,approveBooking,rejectBooking};
 
