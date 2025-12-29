@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useFormContext,useFieldArray,useWatch } from 'react-hook-form' 
 import Captcha from '../Captcha/Captcha';
 const Guests = () => {
-        const {register,control,setValue,formState:{errors}}=useFormContext();
+        const {register,control,formState:{errors}}=useFormContext();
     const  {fields,append,remove,update}=useFieldArray({control,name:"guests"});
     const isApplicantGuest=useWatch({
         control,
