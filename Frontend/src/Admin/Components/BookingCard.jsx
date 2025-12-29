@@ -39,7 +39,7 @@ const BookingCard = ({booking,onApprove,onReject,onView}) => {
              <b>Departure:</b>{new Date(booking.departureDateTime).toLocaleString()}</p>
         </div>
  */}
-   <div className='mt-3 flex gap-3'>
+        <div className='mt-3 flex gap-3'>
             <button onClick={()=>setOpen(!open)} className='rounded-lg px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white  text-sm'>
                 {open?'Hide  Details':'View Details'}
 
