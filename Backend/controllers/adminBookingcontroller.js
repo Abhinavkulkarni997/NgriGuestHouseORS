@@ -14,27 +14,27 @@ const getAllBookings=async(req,res)=>{
 }
 
 
-const updateBookingStatus=async(req,res)=>{
-    try{
-        const {status,remarks}=req.body;
-        const booking=await Bookings.findByIdAndUpdate(
-            req.params.id,
-            {status,remarks},
-            {new:true}
-        );
+// const updateBookingStatus=async(req,res)=>{
+//     try{
+//         const {status,remarks}=req.body;
+//         const booking=await Bookings.findByIdAndUpdate(
+//             req.params.id,
+//             {status,remarks},
+//             {new:true}
+//         );
 
-        // send email based on status
-        if(status==="Approved"){
-            sendApprovedEmail(booking);
-        }else if(status==="Rejected"){
-            sendRejectionEmail(booking);
-        }
-        res.status(200).json({success:true,booking});
-}catch(error){
-        console.error("Error updating booking status:",error);
-        res.status(500).json({success:false,message:"Server Error failed to update booking status"});
-    }
-}
+//         // send email based on status
+//         if(status==="Approved"){
+//             sendApprovedEmail(booking);
+//         }else if(status==="Rejected"){
+//             sendRejectionEmail(booking);
+//         }
+//         res.status(200).json({success:true,booking});
+// }catch(error){
+//         console.error("Error updating booking status:",error);
+//         res.status(500).json({success:false,message:"Server Error failed to update booking status"});
+//     }
+// }
 
 const approveBooking=async(req,res)=>{
     try{
@@ -78,5 +78,5 @@ const rejectBooking=async(req,res)=>{
         res.status(500).json({success:false,message:"Server Error failed to reject booking"});
     }
 }
-module.exports={getAllBookings,updateBookingStatus,approveBooking,rejectBooking};
+module.exports={getAllBookings,approveBooking,rejectBooking};
 
