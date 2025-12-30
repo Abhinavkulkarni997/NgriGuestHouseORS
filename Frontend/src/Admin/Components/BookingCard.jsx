@@ -3,6 +3,7 @@ import React,{useState} from 'react'
 const BookingCard = ({booking,onApprove,onReject,onView}) => {
     const [open,setOpen]=useState(false);
     const [remarks,setRemarks]=useState('');
+   
   return (
     <div className='bg-white rounded-xl shadow-md border p-5 space-y-4 '>
 

@@ -14,18 +14,28 @@ const Bookings = () => {
         })
     },[]);
 
+         const refreshBookings=async()=>{
+        const res=await api.get('/admin/bookings');
+        setBookings(res.data.bookings);
+    }
+    useEffect(()=>{
+        refreshBookings();
+    },[]);
+
     const approveBooking = async(id,remarks) => {
         // Implement approve booking logic here
         await api.patch(`/admin/bookings/${id}/approve`,{remarks});
         console.log("Approved booking with ID:", id,remarks);
-        // refreshBookings();
+        refreshBookings();
     }
     const rejectBooking = async(id,remarks) => {
         // Implement reject booking logic here
         await api.patch(`/admin/bookings/${id}/reject`,{remarks});
         console.log("Rejected booking with ID:",id,remarks);
-        // refreshBookings();
+        refreshBookings();
     }
+
+
   return (
     // <div className='h-screen sm:px-6 py-6  rounded-lg shadow p-4'>
     //     <div><h1 className="text-2xl font-bold">Bookings Page</h1></div>
