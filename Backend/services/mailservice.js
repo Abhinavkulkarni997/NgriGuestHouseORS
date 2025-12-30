@@ -1,5 +1,6 @@
 const nodemailer=require('nodemailer');
-
+const fs=require('fs');
+const path=require('path');
 // creation of transportation object 
  const mailTransporter=nodemailer.createTransport({
     service:'gmail',
@@ -74,6 +75,38 @@ const sendAdminAlertEmail=async({bookingId,applicantName})=>{
 
 }
 
+const sendApprovedEmail=async(booking)=>{
+    const templatePath=path.join(__dirname,"../template/bookingApproved.html");
+    let html=fs.readFileSync(templatePath,"utf-8");
+    html=html
+    .replace("{{name}}",booking.applicantName)
+    .replace("{{booingId}}",booking.bookingId)
+    .replace("{{arrival}}",new Date(booking.arrivalDateTime).toLocaleString())
+    .replace("{{departure}}",new Date(booking.departureDateTime).toLocaleString());
+  
+    await mailTransporter.sendMail({
+        from:`"CSIR-NGRI Guest House"<${process.env.EMAIL_USER}>`,
+        to:booking.officialEmail,
+        subject:"Booking Approved-CSIR-NGRI Guest House",
+        html,
+    })
+}
 
+const sendRejectedEmail=async(booking)=>{
+    const templatePath=path.join(__dirname,"../template/bookingRejected.html");
+    let html=fs.readFileSync(templatePath,"utf-8");
+    html=html
+    .replace("{{name}}",booking.applicantName)
+    .replace("{{booingId}}",booking.bookingId)
+    .replace("{{arrival}}",new Date(booking.arrivalDateTime).toLocaleString())
+    .replace("{{departure}}",new Date(booking.departureDateTime).toLocaleString());
+  
+    await mailTransporter.sendMail({
+        from:`"CSIR-NGRI Guest House"<${process.env.EMAIL_USER}>`,
+        to:booking.officialEmail,
+        subject:"Booking Rejected-CSIR-NGRI Guest House",
+        html,
+    })
+}
 
-module.exports= {sendAcknowledgementEmail,sendAdminAlertEmail};
+module.exports= {sendAcknowledgementEmail,sendAdminAlertEmail,sendApprovedEmail};

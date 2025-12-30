@@ -21,8 +21,12 @@ const  Success= () => {
         <div>
              <p className='text-red-600 text-center text-sm mt-10'>Acknowledgement has been sent to your Registered Email.</p>
         </div>
+
+        <div className='flex items-center justify-center mt-4'>
+                <button className='rounded-lg text-center p-4 bg-cyan-600 text-white font-medium' onClick={()=>navigate('/')}>Go to Home</button>
+
+        </div>
       
-      <button className='rounded-lg text-center p-4 bg-cyan-600 text-white font-medium' onClick={()=>navigate('/')}>Go to Home</button>
 
        
       </div>
