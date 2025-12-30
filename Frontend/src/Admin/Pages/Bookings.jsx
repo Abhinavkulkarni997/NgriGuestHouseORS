@@ -14,6 +14,7 @@ const Bookings = () => {
         })
     },[]);
 
+    // after approving or rejecting booking refresh the bookings list
          const refreshBookings=async()=>{
         const res=await api.get('/admin/bookings');
         setBookings(res.data.bookings);
@@ -23,13 +24,13 @@ const Bookings = () => {
     },[]);
 
     const approveBooking = async(id,remarks) => {
-        // Implement approve booking logic here
+        // Implementing approve booking logic here
         await api.patch(`/admin/bookings/${id}/approve`,{remarks});
         console.log("Approved booking with ID:", id,remarks);
         refreshBookings();
     }
     const rejectBooking = async(id,remarks) => {
-        // Implement reject booking logic here
+        // Implementing reject booking logic here
         await api.patch(`/admin/bookings/${id}/reject`,{remarks});
         console.log("Rejected booking with ID:",id,remarks);
         refreshBookings();
