@@ -14,13 +14,17 @@ const Bookings = () => {
         })
     },[]);
 
-    const approveBooking = (id) => {
+    const approveBooking = async(id,remarks) => {
         // Implement approve booking logic here
-        console.log("Approved booking with ID:", id);
+        await api.patch(`/admin/bookings/${id}/approve`,{remarks});
+        console.log("Approved booking with ID:", id,remarks);
+        // refreshBookings();
     }
-    const rejectBooking = (id) => {
+    const rejectBooking = async(id,remarks) => {
         // Implement reject booking logic here
-        console.log("Rejected booking with ID:",id);
+        await api.patch(`/admin/bookings/${id}/reject`,{remarks});
+        console.log("Rejected booking with ID:",id,remarks);
+        // refreshBookings();
     }
   return (
     // <div className='h-screen sm:px-6 py-6  rounded-lg shadow p-4'>

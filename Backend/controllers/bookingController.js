@@ -36,6 +36,7 @@ const { sendAcknowledgementEmail,sendAdminAlertEmail } = require("../services/ma
 
       const booking=new Booking({
         ...data,
+        officeIdFile:req.file?.filename,
         numberOfRooms:Number(data.numberOfRooms),
         bookingId,
         arrivalDateTime,

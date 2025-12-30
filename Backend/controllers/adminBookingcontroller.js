@@ -1,5 +1,7 @@
 
 const Bookings=require('../models/Booking');
+const path=require('path');
+// const emailService=require('../Services/mailService');
 
 const getAllBookings=async(req,res)=>{
     try{
@@ -48,7 +50,7 @@ const approveBooking=async(req,res)=>{
             },
             {new:true}
         );
-        // TODO : sen approval email here
+        // TODO : send approval email here
         // sendApprovedEmail(booking);
         res.status(200).json({success:true,booking});
     }catch(error){
@@ -78,5 +80,24 @@ const rejectBooking=async(req,res)=>{
         res.status(500).json({success:false,message:"Server Error failed to reject booking"});
     }
 }
-module.exports={getAllBookings,approveBooking,rejectBooking};
+
+const idCardView=async(req,res)=>{
+    try{
+        const booking=await Bookings.findById(req.params.id);
+        if(!booking || !booking.officeIdFile){
+            return res.status(404).json({
+                success:false,
+                message:"ID card not found"
+            });
+        }
+
+        const filePath=path.join(__dirname,'../uploads',booking.officeIdFile);
+        res.sendFile(filePath);
+    }
+    catch(error){
+        console.error("Error fetching ID card:",error);
+        res.status(500).json({success:false,message:"Server Error failed to fetch ID card"});
+    }
+}
+module.exports={getAllBookings,approveBooking,rejectBooking,idCardView};
 

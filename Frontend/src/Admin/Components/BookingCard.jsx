@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 
 const BookingCard = ({booking,onApprove,onReject,onView}) => {
     const [open,setOpen]=useState(false);
+    const [remarks,setRemarks]=useState('');
   return (
     <div className='bg-white rounded-xl shadow-md border p-5 space-y-4 '>
 
@@ -23,7 +24,7 @@ const BookingCard = ({booking,onApprove,onReject,onView}) => {
        
         {/* Body */}
         <span className={`px-3 py-1 text-sm rounded-full
-        ${booking.status==='Approved'?'bg-green-100 text-green-700':booking.status==='Rejected'?'bg-red-100 text-red-700':'bg-yellow-100 text-yellow-700'}`}>
+        ${booking.status==='APPROVED'?'bg-green-100 text-green-700':booking.status==='REJECTED'?'bg-red-100 text-red-700':'bg-yellow-100 text-yellow-700'}`}>
             {booking.status}
         </span>
         </div>
@@ -77,9 +78,9 @@ const BookingCard = ({booking,onApprove,onReject,onView}) => {
              {booking.status==='PENDING' &&(
                  <div className='flex flex-wrap gap-3 pt-3 border-t'>
             <button className='px-4 py-2 text-sm border rounded-lg bg-cyan-600 hover:bg-cyan-700 text-white '>
-                View ID Card
+                <a href={`http://localhost:5000/api/admin/bookings/${booking._id}/idCard`} target="_blank" rel="noreferrer" className='text-white'>View ID Card</a>
             </button>
-            <input type='text' placeholder='Add Remarks' className='flex-1 px-3 py-2 border rounded text-sm'/>
+            <input type='text' value={remarks} onChange={(e)=>setRemarks(e.target.value)} placeholder='Add Remarks' className='flex-1 px-3 py-2 border rounded text-sm'/>
             <button onClick={()=>onApprove(booking._id)} className='px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700'>
                 Approve
             </button>
