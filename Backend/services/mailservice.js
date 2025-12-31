@@ -109,4 +109,4 @@ const sendRejectedEmail=async(booking)=>{
     })
 }
 
-module.exports= {sendAcknowledgementEmail,sendAdminAlertEmail,sendApprovedEmail};
+module.exports= {sendAcknowledgementEmail,sendAdminAlertEmail,sendApprovedEmail,sendRejectedEmail};

@@ -1,7 +1,7 @@
 
 const Bookings=require('../models/Booking');
 const path=require('path');
-// const emailService=require('../Services/mailService');
+ const {sendApprovedEmail,sendRejectedEmail}=require('../services/mailservice');
 
 const getAllBookings=async(req,res)=>{
     try{
@@ -50,8 +50,8 @@ const approveBooking=async(req,res)=>{
             },
             {new:true}
         );
-        // TODO : send approval email here
-        // sendApprovedEmail(booking);
+        //  send approval email here
+        await sendApprovedEmail(booking);
         res.status(200).json({success:true,booking});
     }catch(error){
         console.error("Error approving booking:",error);
@@ -72,8 +72,8 @@ const rejectBooking=async(req,res)=>{
             },
             {new:true}
         );
-        // TODO : send rejection email here
-        // sendRejectionEmail(booking);
+        // send rejection email here
+        await sendRejectedEmail(booking);
         res.status(200).json({success:true,booking});   
     }catch(error){
         console.error("Error rejecting booking:",error);
