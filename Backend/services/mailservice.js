@@ -79,11 +79,11 @@ const sendApprovedEmail=async(booking)=>{
     const templatePath=path.join(__dirname,"../template/bookingApproved.html");
     let html=fs.readFileSync(templatePath,"utf-8");
     html=html
-    .replace("{{name}}",booking.applicantName)
-    .replace("{{booingId}}",booking.bookingId)
-    .replace("{{arrival}}",new Date(booking.arrivalDateTime).toLocaleString())
-    .replace("{{departure}}",new Date(booking.departureDateTime).toLocaleString());
-  
+    .replace(/{{name}}/g, booking.applicantName)
+    .replace(/{{bookingId}}/g, booking.bookingId)
+    .replace(/{{arrival}}/g, new Date(booking.arrivalDateTime).toLocaleString())
+    .replace(/{{departure}}/g, new Date(booking.departureDateTime).toLocaleString());
+
     await mailTransporter.sendMail({
         from:`"CSIR-NGRI Guest House"<${process.env.EMAIL_USER}>`,
         to:booking.officialEmail,
@@ -96,11 +96,11 @@ const sendRejectedEmail=async(booking)=>{
     const templatePath=path.join(__dirname,"../template/bookingRejected.html");
     let html=fs.readFileSync(templatePath,"utf-8");
     html=html
-    .replace("{{name}}",booking.applicantName)
-    .replace("{{booingId}}",booking.bookingId)
-    .replace("{{arrival}}",new Date(booking.arrivalDateTime).toLocaleString())
-    .replace("{{departure}}",new Date(booking.departureDateTime).toLocaleString());
-  
+    .replace(/{{name}}/g, booking.applicantName)
+    .replace(/{{bookingId}}/g, booking.bookingId)
+    .replace(/{{arrival}}/g, new Date(booking.arrivalDateTime).toLocaleString())
+    .replace(/{{departure}}/g, new Date(booking.departureDateTime).toLocaleString());
+
     await mailTransporter.sendMail({
         from:`"CSIR-NGRI Guest House"<${process.env.EMAIL_USER}>`,
         to:booking.officialEmail,
