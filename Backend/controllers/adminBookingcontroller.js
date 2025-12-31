@@ -1,5 +1,6 @@
 
 const Bookings=require('../models/Booking');
+const Room =require('../models/Room');
 const path=require('path');
  const {sendApprovedEmail,sendRejectedEmail}=require('../services/mailservice');
 
