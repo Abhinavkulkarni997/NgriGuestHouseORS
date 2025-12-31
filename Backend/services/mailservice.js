@@ -76,7 +76,7 @@ const sendAdminAlertEmail=async({bookingId,applicantName})=>{
 }
 
 const sendApprovedEmail=async(booking)=>{
-    const templatePath=path.join(__dirname,"../template/bookingApproved.html");
+    const templatePath=path.resolve(__dirname,"../template/bookingApproved.html");
     let html=fs.readFileSync(templatePath,"utf-8");
     html=html
     .replace(/{{name}}/g, booking.applicantName)
@@ -93,7 +93,7 @@ const sendApprovedEmail=async(booking)=>{
 }
 
 const sendRejectedEmail=async(booking)=>{
-    const templatePath=path.join(__dirname,"../template/bookingRejected.html");
+    const templatePath=path.resolve(__dirname,"../template/bookingRejected.html");
     let html=fs.readFileSync(templatePath,"utf-8");
     html=html
     .replace(/{{name}}/g, booking.applicantName)

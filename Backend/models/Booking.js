@@ -131,6 +131,15 @@ const bookingSchema =new mongoose.Schema(
             unique:true,
             index:true
         },
+
+        // adding room schema here
+        allocatedRoom:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Room",
+        },
+        roomNumber:String,
+        roomType:String,
+        approvedAt:Date,
         
     },
     {timestamps:true}
