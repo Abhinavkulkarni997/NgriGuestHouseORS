@@ -92,6 +92,35 @@ const rejectBooking=async(req,res)=>{
     }
 }
 
+const allocateRoom=async(req,res)=>{
+    const booking =await Bookings.findById(
+       {status:"ALLOCATED",
+        adminRemarks:remarks,
+        allocatedAt:new Date()
+       },{
+        new:true
+       }
+    );
+
+    try{
+        await sendAllocatedEmail(booking);
+    }
+    catch(emailError){
+        console.error("Error sending allocation email:",emailError.message);
+    }
+    try{
+        const {roomNumber,roomType}=req.body;
+        booking.allocatedRoom=roomNumber;
+        booking.roomType=roomType;
+        
+
+        res.status(200).json({success:true,booking});
+    }catch(error){
+        console.log("Error in allocating room",error);
+        res.status(500).json({success:false,message:"Server Error failed to allocate room"})
+    }
+}
+
 const idCardView=async(req,res)=>{
     try{
         const booking=await Bookings.findById(req.params.id);
@@ -110,5 +139,5 @@ const idCardView=async(req,res)=>{
         res.status(500).json({success:false,message:"Server Error failed to fetch ID card"});
     }
 }
-module.exports={getAllBookings,approveBooking,rejectBooking,idCardView};
+module.exports={getAllBookings,approveBooking,rejectBooking,idCardView,allocateRoom};
 
