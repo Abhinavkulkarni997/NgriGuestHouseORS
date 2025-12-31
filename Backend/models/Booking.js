@@ -76,7 +76,7 @@ const bookingSchema =new mongoose.Schema(
             required:true,
         },
         numberOfRooms:{
-            type:String,
+            type: Number,
             required:true,
             min:1
         },
@@ -113,7 +113,7 @@ const bookingSchema =new mongoose.Schema(
         // Booking status
         status:{
             type:String,
-            enum:["PENDING","APPROVED","REJECTED","ALLOCATED "],
+            enum:["PENDING","APPROVED","REJECTED","ALLOCATED"],
             default:"PENDING",
         },
         adminRemarks:{
@@ -140,6 +140,12 @@ const bookingSchema =new mongoose.Schema(
         roomNumber:String,
         roomType:String,
         approvedAt:Date,
+        allocatedAt:{
+            type:Date,
+        },
+        rejectedAt:{
+            type:Date,
+        }
         
     },
     {timestamps:true}

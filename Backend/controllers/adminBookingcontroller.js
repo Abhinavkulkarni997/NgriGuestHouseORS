@@ -47,7 +47,8 @@ const approveBooking=async(req,res)=>{
             bookingId,
             {status:"APPROVED",
             adminRemarks:remarks,
-            approvedAt:new Date()
+            approvedAt:new Date(),
+         
             },
             {new:true}
         );
@@ -94,30 +95,42 @@ const rejectBooking=async(req,res)=>{
 }
 
 const allocateRoom=async(req,res)=>{
-    const booking =await Bookings.findById(
-       {status:"ALLOCATED",
-        adminRemarks:remarks,
-        allocatedAt:new Date()
-       },{
-        new:true
-       }
-    );
-
     try{
-        await sendAllocatedEmail(booking);
-    }
-    catch(emailError){
-        console.error("Error sending allocation email:",emailError.message);
-    }
-    try{
-        const {roomNumber,roomType}=req.body;
-        booking.allocatedRoom=roomNumber;
-        booking.roomType=roomType;
-        
+          const {roomId}=req.body;
+           // Fetch booking details
+            const booking =await Bookings.findById(req.params.id);
+            if(!booking){
+            return res.status(404).json({success:false,message:"Booking not found"});
+        }
+        if(booking.status!=="APPROVED"){
+            return res.status(400).json({success:false,message:"Only approved bookings can be allocated rooms"});
+        }
 
+        // Fetch room details
+        const room=await Room.findById(roomId);
+        if(!room || room.isActive){
+            return res.status(404).json({success:false,message:"Room not available for allocation"});
+        }
+
+        // Allocate room to booking
+        booking.allocatedRoom=room._id;
+        booking.roomNumber=room.roomNumber;
+        booking.roomType=room.roomType;
+        booking.status="ALLOCATED";
+        booking.allocatedAt=new Date(),
+        await booking.save();
+
+        // Marking room as active
+        room.isActive=true;
+        await room.save();
+
+        // send room allocation email(with room details)
+
+        // await sendRoomAllocationEmail(booking);
         res.status(200).json({success:true,booking});
-    }catch(error){
-        console.log("Error in allocating room",error);
+    }
+    catch(error){
+        console.log("Error in allocating room:",error);
         res.status(500).json({success:false,message:"Server Error failed to allocate room"})
     }
 }
