@@ -56,7 +56,7 @@ const sendAdminAlertEmail=async({bookingId,applicantName})=>{
     const mailOptions={
         from:`"CSIR-NGRI Guest House" <${process.env.EMAIL_USER}>`,
         to:process.env.EMAIL_ADMIN,
-        subject:'New Guest House Booking Received (${bookingId})',
+        subject:`New Guest House Booking Received (${bookingId})`,
         text:`
         A new Guest House Booking received 
         Booking Id:${bookingId}

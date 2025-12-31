@@ -50,8 +50,13 @@ const approveBooking=async(req,res)=>{
             },
             {new:true}
         );
-        //  send approval email here
-        await sendApprovedEmail(booking);
+        //  send approval email 
+        try{
+            await sendApprovedEmail(booking);
+        }catch(emailError){
+            console.error("Error sending approval email:",emailError.message);
+        }
+        
         res.status(200).json({success:true,booking});
     }catch(error){
         console.error("Error approving booking:",error);
@@ -72,8 +77,14 @@ const rejectBooking=async(req,res)=>{
             },
             {new:true}
         );
-        // send rejection email here
-        await sendRejectedEmail(booking);
+        // send rejection email 
+        try{
+             await sendRejectedEmail(booking);
+        }
+        catch(emailError){
+            console.error("Error sending rejection email:",emailError.message);
+        }
+       
         res.status(200).json({success:true,booking});   
     }catch(error){
         console.error("Error rejecting booking:",error);
