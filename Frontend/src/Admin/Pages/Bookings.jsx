@@ -1,6 +1,7 @@
 import React, { useEffect,useState } from 'react'
 import api from '../../api/bookingapi';
 import BookingCard from '../Components/BookingCard';
+import BookingsTab from '../Components/BookingsTab';
 const Bookings = () => {
    const [bookings, setBookings] = useState([]);
    useEffect(()=>{
@@ -82,7 +83,7 @@ const Bookings = () => {
     // </div>
     <div className='p-6 space-y-4'>
         <h1 className='text-2xl font-bold'>Bookings</h1>
-        <div className='grid gap-6'>
+        {/* <div className='grid gap-6'>
             {bookings.map(booking=>(
                 <BookingCard
                 key={booking._id}
@@ -92,7 +93,14 @@ const Bookings = () => {
                 onReject={rejectBooking}
                 />
             ))}
-        </div>
+        </div> */}
+        <BookingsTab
+        bookings={bookings}
+        onApprove={approveBooking}
+        onReject={rejectBooking}
+        onAllocate={onAllocateBooking}
+        />
+
     </div>
   )
 }
