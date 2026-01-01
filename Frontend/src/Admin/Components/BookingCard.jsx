@@ -94,7 +94,7 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate}) => {
             {/* Approved */}
             {booking.status==="APPROVED" &&(
                 <div className="pt-3 flex flex-wrap gap-3 border-t">
-                    <button onClick={()=>onAllocate(booking._id)} className='px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-800'>
+                    <button onClick={()=>onAllocate(booking._id)} className='px-4 py-2 bg-indigo-700 text-white rounded-lg hover:bg-indigo-800'>
                         Allocate Room
                     </button>
                 </div>
