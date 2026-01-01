@@ -153,5 +153,10 @@ const idCardView=async(req,res)=>{
         res.status(500).json({success:false,message:"Server Error failed to fetch ID card"});
     }
 }
-module.exports={getAllBookings,approveBooking,rejectBooking,idCardView,allocateRoom};
+
+const getAvailableRooms=async(req,res)=>{
+    const availableRooms=await Room.find({isActive:false});
+    res.status(200).json({success:true,availableRooms});
+}
+module.exports={getAllBookings,approveBooking,rejectBooking,idCardView,allocateRoom,getAvailableRooms};
 

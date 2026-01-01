@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 
-const BookingCard = ({booking,onApprove,onReject,onView}) => {
+const BookingCard = ({booking,onApprove,onReject,onAllocate}) => {
     const [open,setOpen]=useState(false);
     const [remarks,setRemarks]=useState('');
    
@@ -90,16 +90,18 @@ const BookingCard = ({booking,onApprove,onReject,onView}) => {
             </button>
         </div>
             )}
-       
-            </div>
 
+            {/* Approved */}
+            {booking.status==="APPROVED" &&(
+                <div className="pt-3 flex flex-wrap gap-3 border-t">
+                    <button onClick={()=>onAllocate(booking._id)} className='px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-800'>
+                        Allocate Room
+                    </button>
+                </div>
             )}
-
-   
-      
-
-
-       
+            
+            </div>
+            )}
         </div>
         
     

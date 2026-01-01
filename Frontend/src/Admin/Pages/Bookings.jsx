@@ -36,6 +36,12 @@ const Bookings = () => {
         refreshBookings();
     }
 
+    const onAllocateBooking=async(id,remarks)=>{
+        // if the room is approved then we are implementing the allocation logic here and filter is added in BookingCard
+        await api.patch(`/admin/bookings/${id}/allocate-room`,{remarks});
+        console.log("Allocated room for booking ID:",id,remarks);
+        refreshBookings();
+    }
 
   return (
     // <div className='h-screen sm:px-6 py-6  rounded-lg shadow p-4'>
@@ -82,6 +88,7 @@ const Bookings = () => {
                 key={booking._id}
                 booking={booking}
                 onApprove={approveBooking}
+                onAllocate={onAllocateBooking}
                 onReject={rejectBooking}
                 />
             ))}
