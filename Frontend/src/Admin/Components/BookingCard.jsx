@@ -25,7 +25,9 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate}) => {
        
         {/* Body */}
         <span className={`px-3 py-1 text-sm rounded-full
-        ${booking.status==='APPROVED'?'bg-green-100 text-green-700':booking.status==='REJECTED'?'bg-red-100 text-red-700':'bg-yellow-100 text-yellow-700'}`}>
+        ${booking.status==='APPROVED'?'bg-green-100 text-green-700'
+        :booking.status==='ALLOCATED'?'bg-indigo-100 text-indigo-700'
+        :booking.status==='REJECTED'?'bg-red-100 text-red-700':'bg-yellow-100 text-yellow-700'}`}>
             {booking.status}
         </span>
         </div>
@@ -82,10 +84,10 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate}) => {
                 <a href={`http://localhost:5000/api/admin/bookings/${booking._id}/idCard`} target="_blank" rel="noreferrer" className='text-white'>View ID Card</a>
             </button>
             <input type='text' value={remarks} onChange={(e)=>setRemarks(e.target.value)} placeholder='Add Remarks' className='flex-1 px-3 py-2 border rounded text-sm'/>
-            <button onClick={()=>onApprove(booking._id)} className='px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700'>
+            <button onClick={()=>onApprove(booking._id,remarks)} className='px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700'>
                 Approve
             </button>
-            <button onClick={()=>onReject(booking._id)} className='px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700'>
+            <button onClick={()=>onReject(booking._id,remarks)} className='px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700'>
                 Reject
             </button>
         </div>
@@ -94,7 +96,7 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate}) => {
             {/* Approved */}
             {booking.status==="APPROVED" &&(
                 <div className="pt-3 flex flex-wrap gap-3 border-t">
-                    <button onClick={()=>onAllocate(booking._id)} className='px-4 py-2 bg-indigo-700 text-white rounded-lg hover:bg-indigo-800'>
+                    <button onClick={()=>onAllocate(booking._id,remarks)} className='px-4 py-2 bg-indigo-700 text-white rounded-lg hover:bg-indigo-800'>
                         Allocate Room
                     </button>
                 </div>
