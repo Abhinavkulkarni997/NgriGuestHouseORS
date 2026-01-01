@@ -27,14 +27,14 @@ const BookingsTab=({bookings,onApprove,onReject,onAllocate})=>{
                 
                 </ul> }
            {
-            filteredBookings.map((booking)=>{
+            filteredBookings.map((booking)=>(
                 <BookingCard
                 key={booking._id}
                 booking={booking}
                 onApprove={onApprove}
                 onReject={onReject}
                 onAllocate={onAllocate}
-            />})}
+            />))}
            </div>
     )
 }
