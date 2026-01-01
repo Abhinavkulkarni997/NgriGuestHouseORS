@@ -10,7 +10,7 @@ const BookingsTab=({bookings,onApprove,onReject,onAllocate})=>{
         (b)=>b.status===activeTab
     )
     return(
-        <div className='mb-4 border-b border-default'>
+        <div className='mb-4  border-default'>
             {/* Tabs */}
             {<ul className="flex  border-b mb-6">
                {tabMenu.map((tab)=>(
