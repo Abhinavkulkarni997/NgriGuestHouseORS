@@ -145,6 +145,12 @@ const bookingSchema =new mongoose.Schema(
         },
         rejectedAt:{
             type:Date,
+        },
+        vacatedAt:{
+            type:Date,
+        },
+        vacateRemarks:{
+            type:String,
         }
         
     },

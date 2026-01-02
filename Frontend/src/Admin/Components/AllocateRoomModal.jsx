@@ -13,6 +13,13 @@ const AllocateRoomModal=({booking,bookingId,onClose,onSuccess})=>{
                 setRooms(response.data.availableRooms)})
         .catch(error=>{console.error(error.message)})
     },[]);
+    useEffect(() => {
+  document.body.style.overflow = 'hidden';
+  return () => {
+    document.body.style.overflow = 'auto';
+  };
+}, []);
+
 
     const handleAllocate=async()=>{
         if(!selectedRoom){
@@ -38,18 +45,20 @@ const AllocateRoomModal=({booking,bookingId,onClose,onSuccess})=>{
     }
 
     return (
-        <div className="fixed inset-0  bg-black/40 bg-opacity-50 flex items-center justify-center z-50">
-            <div className='bg-white rounded-lg shadow-lg p-6 w-full max-w-md space-y-4'>
+        <div className="fixed inset-0  bg-black/50  flex items-center justify-center z-50 " style={{margin:0,padding:0}}>
+            <div className='bg-white rounded-lg shadow-lg p-6 w-full max-w-md mx-4'>
+                <div className='relative overflow-hidden'>
                 <h1 className='text-lg font-extrabold mb-4 '>Allocate Room</h1>
-                <h2 className='text-lg font-semibold mb-4'>Applicant Name: {booking.name}</h2>
-                <h2 className='text-lg font-semibold mb-4'>Allocate Room for Booking ID: {bookingId}</h2>
+                <h2 className='text-lg font-semibold mb-4'>Applicant Name: {booking?.applicantName}</h2>
+                <h2 className='text-lg font-semibold mb-4'>Allocate Room for Booking ID: {booking.bookingId}</h2>
                
-                    <label className='block text-sm font-medium text-gray-700 mb-2'>Select Room:</label>
-                    <select value={selectedRoom} onChange={(e)=>setSelectedRoom(e.target.value)} className='w-full border rounded px-3 py-2'>
+               <div>
+                    <label className=' text-sm font-medium text-gray-700 mb-2'>Select Room:</label>
+                    <select value={selectedRoom} onChange={(e)=>setSelectedRoom(e.target.value)} className='mt-1 w-full border rounded px-3 py-2 max-w-full truncate'>
                         <option value="">Select Room</option>
                         {rooms.map((room)=>(
-                            <option key={room._id} value={room._id}>
-                               Room {room.roomNumber} ({room.roomType})
+                            <option key={room._id} value={room._id} >
+                                {`Room ${room.roomNumber} • ${room.roomType}`}
                             </option>
                         ))}
                     </select>
@@ -59,7 +68,8 @@ const AllocateRoomModal=({booking,bookingId,onClose,onSuccess})=>{
                             <p className='text-red-600 mt-2'>No rooms available for allocation.</p>
                         )
                     }
-        
+                    </div>
+                    </div>
 
             <div className='flex justify-end gap-3 pt-4'>
                 <button onClick={onClose} className='px-4 py-2 border rounded'>

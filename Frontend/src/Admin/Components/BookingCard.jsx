@@ -109,6 +109,7 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onSuccess}) => {
             {/* modal */}
             {showAllocateModal && (
                 <AllocateRoomModal
+                booking={booking}
                 bookingId={booking._id}
                 onClose={()=>setShowAllocateModal(false)}
                 onSuccess={()=>onAllocate(booking._id)}

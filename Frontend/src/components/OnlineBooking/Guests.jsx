@@ -222,7 +222,7 @@ const genders=[
 
                         <div>
                             <label className='font-medium text-sm text-gray-700'>Category</label>
-                            <select {...register(`guests.${index}.category`)} className='mt-1  w-ful; rounded-lg border p-3'>
+                            <select {...register(`guests.${index}.category`)} className='mt-1  w-full rounded-lg border p-3'>
                                 <option value="">Select</option>
                                 {category.map((c)=>(<option key={c.id} value={c.name}>{c.name}</option>))}
                             </select>

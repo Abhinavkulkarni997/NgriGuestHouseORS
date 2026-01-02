@@ -135,6 +135,28 @@ const allocateRoom=async(req,res)=>{
     }
 }
 
+const vacateRoom=async(req,res)=>{
+   
+    try{
+         const {remarks}=req.body;
+         const booking=await Bookings.findById(req.params.id);
+         if(!booking){
+            return res.status(404).json({success:false,message:"Booking not found"});
+         }
+         if(booking.status!=="ALLOCATED"){
+            return res.status(400).json({success:false,message:"Only allocated Booking can be vacated"});
+         }
+
+        //  vacate the room
+        const room=await Room.findById(booking.allocatedRoom);
+        if(room){
+            room.isActive=false;
+            await room.save();
+        }
+
+    }
+}
+
 const idCardView=async(req,res)=>{
     try{
         const booking=await Bookings.findById(req.params.id);
@@ -158,5 +180,5 @@ const getAvailableRooms=async(req,res)=>{
     const availableRooms=await Room.find({isActive:false});
     res.status(200).json({success:true,availableRooms});
 }
-module.exports={getAllBookings,approveBooking,rejectBooking,idCardView,allocateRoom,getAvailableRooms};
+module.exports={getAllBookings,approveBooking,rejectBooking,idCardView,allocateRoom,getAvailableRooms,vacateRoom};
 
