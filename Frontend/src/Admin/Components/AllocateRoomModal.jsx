@@ -8,7 +8,9 @@ const AllocateRoomModal=({booking,bookingId,onClose,onSuccess})=>{
 
     useEffect(()=>{
          api.get('/admin/rooms/available')
-         .then(response=>setRooms(response.data.availableRooms))
+         .then(response=>
+            {console.log("Available rooms:",response.data.availableRooms);
+                setRooms(response.data.availableRooms)})
         .catch(error=>{console.error(error.message)})
     },[]);
 
