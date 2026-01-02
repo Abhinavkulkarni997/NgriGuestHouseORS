@@ -52,7 +52,7 @@ const AllocateRoomModal=({bookingId,onClose,onSuccess})=>{
             </div>
 
             <div className='flex justify-end gap-3 pt-4'>
-                <button onClick={onClose} className=''>
+                <button onClick={onClose} className='px-4 py-2 border rounded'>
                     Cancel
                 </button>
                 <button onClick={handleAllocate} className='px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg' disabled={loading}>
