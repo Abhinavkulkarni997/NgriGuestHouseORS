@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import api from '../../api/bookingapi';
 
-const AllocateRoomModal=({bookingId,onClose,onSuccess})=>{
+const AllocateRoomModal=({booking,bookingId,onClose,onSuccess})=>{
     const [rooms,setRooms]=useState([]);
     const [selectedRoom,setSelectedRoom]=useState('');
     const [loading,setLoading]=useState(false);
@@ -14,7 +14,7 @@ const AllocateRoomModal=({bookingId,onClose,onSuccess})=>{
 
     const handleAllocate=async()=>{
         if(!selectedRoom){
-            return alert("Please select a room to allocate")
+            return alert("Please select a room to allocate");
         }
 
         setLoading(true);
@@ -38,8 +38,10 @@ const AllocateRoomModal=({bookingId,onClose,onSuccess})=>{
     return (
         <div className="fixed inset-0 bg-black/40 bg-opacity-50 flex items-center justify-center z-50">
             <div className='bg-white rounded-lg shadow-lg p-6 w-full max-w-md space-y-4'>
-                <h2 className='text-xl font-semibold mb-4'>Allocate Room for Booking ID: {bookingId}</h2>
-                <div className='mb-4'>
+                <h1 className='text-lg font-extrabold mb-4 '>Allocate Room</h1>
+                {/* <h2 className='text-lg font-semibold mb-4'>Applicant Name: {applicantName}</h2>
+                <h2 className='text-lg font-semibold mb-4'>Allocate Room for Booking ID: {bookingId}</h2> */}
+               
                     <label className='block text-sm font-medium text-gray-700 mb-2'>Select Room:</label>
                     <select value={selectedRoom} onChange={(e)=>setSelectedRoom(e.target.value)} className='w-full border rounded px-3 py-2'>
                         <option value="">Select Room</option>
@@ -49,13 +51,15 @@ const AllocateRoomModal=({bookingId,onClose,onSuccess})=>{
                             </option>
                         ))}
                     </select>
-            </div>
+        
 
             <div className='flex justify-end gap-3 pt-4'>
                 <button onClick={onClose} className='px-4 py-2 border rounded'>
                     Cancel
                 </button>
-                <button onClick={handleAllocate} className='px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg' disabled={loading}>
+                <button onClick={handleAllocate} 
+                className='px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg' 
+                disabled={loading}>
                          {loading?'Allocating...':'Confirm Allocation'}
                 </button>
            

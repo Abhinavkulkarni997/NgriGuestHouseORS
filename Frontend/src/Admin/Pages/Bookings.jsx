@@ -44,6 +44,7 @@ const Bookings = () => {
         refreshBookings();
     }
 
+
   return (
     // <div className='h-screen sm:px-6 py-6  rounded-lg shadow p-4'>
     //     <div><h1 className="text-2xl font-bold">Bookings Page</h1></div>

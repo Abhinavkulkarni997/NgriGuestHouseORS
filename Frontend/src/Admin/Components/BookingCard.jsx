@@ -1,8 +1,10 @@
 import React,{useState} from 'react'
+import AllocateRoomModal from './AllocateRoomModal';
 
-const BookingCard = ({booking,onApprove,onReject,onAllocate}) => {
+const BookingCard = ({booking,onApprove,onReject,onAllocate,onSuccess}) => {
     const [open,setOpen]=useState(false);
     const [remarks,setRemarks]=useState('');
+    const [showAllocateModal,setShowAllocateModal]=useState(false);
    
   return (
     <div className='bg-white rounded-xl shadow-md border p-5 space-y-4 '>
@@ -96,11 +98,24 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate}) => {
             {/* Approved */}
             {booking.status==="APPROVED" &&(
                 <div className="pt-3 flex flex-wrap gap-3 border-t">
-                    <button onClick={()=>onAllocate(booking._id,remarks)} className='px-4 py-2 bg-indigo-700 text-white rounded-lg hover:bg-indigo-800'>
+                    <button onClick={()=>setShowAllocateModal(true)} className='px-4 py-2 bg-indigo-700 text-white rounded-lg hover:bg-indigo-800'>
                         Allocate Room
                     </button>
                 </div>
             )}
+
+           
+
+            {/* modal */}
+            {showAllocateModal && (
+                <AllocateRoomModal
+                bookingId={booking._id}
+                onClose={()=>setShowAllocateModal(false)}
+                onSuccess={()=>onAllocate(booking._id)}
+                />
+            )}
+
+
             
             </div>
             )}
