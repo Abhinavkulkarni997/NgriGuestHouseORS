@@ -153,9 +153,22 @@ const vacateRoom=async(req,res)=>{
             room.isActive=false;
             await room.save();
         }
+        //update booking
+        booking.status="VACATED";
+        booking.vacatedAt=new Date();
+        booking.vacateRemarks=remarks||"";
+        booking.allocatedRoom=null;
+        await booking.save(); 
 
+        res.status(200).json({success:true,booking})
+    }catch(error){
+        console.log("Error in vacating the room: ",error);
+        res.status(500).json({
+            success:false,
+            message:"Server Error while vacating the room"
+        });
     }
-}
+};
 
 const idCardView=async(req,res)=>{
     try{

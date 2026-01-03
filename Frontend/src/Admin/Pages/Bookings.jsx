@@ -44,6 +44,12 @@ const Bookings = () => {
         refreshBookings();
     }
 
+    const onVacateBooking=async(id,remarks)=>{
+        await api.patch(`/admin/bookings/${id}/vacate-room`,{remarks});
+        console.log("Vacated room for booking ID:",id,remarks);
+        refreshBookings();
+    }
+
 
   return (
     // <div className='h-screen sm:px-6 py-6  rounded-lg shadow p-4'>
@@ -100,6 +106,7 @@ const Bookings = () => {
         onApprove={approveBooking}
         onReject={rejectBooking}
         onAllocate={onAllocateBooking}
+        onVacate={onVacateBooking}
         />
 
     </div>

@@ -1,10 +1,12 @@
 import React,{useState} from 'react'
 import AllocateRoomModal from './AllocateRoomModal';
+import VacateRoomModal from './VacateRoomModal';
 
-const BookingCard = ({booking,onApprove,onReject,onAllocate,onSuccess}) => {
+const BookingCard = ({booking,onApprove,onReject,onAllocate,onSuccess,onVacate}) => {
     const [open,setOpen]=useState(false);
     const [remarks,setRemarks]=useState('');
     const [showAllocateModal,setShowAllocateModal]=useState(false);
+    const [showVacateModal,setShowVacateModal]=useState(false);
    
   return (
     <div className='bg-white rounded-xl shadow-md border p-5 space-y-4 '>
@@ -105,14 +107,31 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onSuccess}) => {
             )}
 
            
+           
 
-            {/* modal */}
+            {/* Allocate modal */}
             {showAllocateModal && (
                 <AllocateRoomModal
                 booking={booking}
                 bookingId={booking._id}
                 onClose={()=>setShowAllocateModal(false)}
                 onSuccess={()=>onAllocate(booking._id)}
+                />
+            )}
+
+             {/* Allocated for vacate */}
+            {booking.status==="ALLOCATED" &&(
+                <div className='pt-3 flex flex-wrap gap-3 border-t'>
+                    <button onClick={()=>setShowVacateModal(true)} className='px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700'>Vacate Room</button>
+                </div>
+            )}
+
+            {showVacateModal &&(
+                <VacateRoomModal
+                booking={booking}
+                bookingId={booking._id}
+                onClose={()=>setShowVacateModal(false)}
+                onSuccess={()=>onVacate(booking._id)}
                 />
             )}
 
