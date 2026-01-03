@@ -8,7 +8,7 @@ const VacateRoomModal = ({booking,bookingId,onClose,onSuccess}) => {
     const handleVacate=async()=>{
         setLoading(true);
         try{
-            await api.patch(`/admin/bookings/${bookingId}/vacate`,{remarks});
+            await api.patch(`/admin/bookings/${bookingId}/vacate-room`,{remarks});
             onSuccess();
             onClose();
         }catch(err){

@@ -131,7 +131,7 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onSuccess,onVacate})
                 booking={booking}
                 bookingId={booking._id}
                 onClose={()=>setShowVacateModal(false)}
-                onSuccess={()=>onVacate(booking._id)}
+                onSuccess={onSuccess}
                 />
             )}
 

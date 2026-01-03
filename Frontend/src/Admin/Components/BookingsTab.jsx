@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import BookingCard from './BookingCard';
 
 const tabMenu=["PENDING","APPROVED","ALLOCATED","VACATED","REJECTED"];
-const BookingsTab=({bookings,onApprove,onReject,onAllocate})=>{
+const BookingsTab=({bookings,onApprove,onReject,onAllocate,onSuccess})=>{
 
     const [activeTab, setActiveTab] = useState("PENDING");
 
@@ -45,6 +45,7 @@ const BookingsTab=({bookings,onApprove,onReject,onAllocate})=>{
                 onApprove={onApprove}
                 onReject={onReject}
                 onAllocate={onAllocate}
+                onVacate={onSuccess}
             />)))}
 
             </div>

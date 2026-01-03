@@ -113,7 +113,7 @@ const bookingSchema =new mongoose.Schema(
         // Booking status
         status:{
             type:String,
-            enum:["PENDING","APPROVED","REJECTED","ALLOCATED"],
+            enum:["PENDING","APPROVED","REJECTED","ALLOCATED","VACATED"],
             default:"PENDING",
         },
         adminRemarks:{

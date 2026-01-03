@@ -3,6 +3,7 @@ const Bookings=require('../models/Booking');
 const Room =require('../models/Room');
 const path=require('path');
  const {sendApprovedEmail,sendRejectedEmail}=require('../services/mailservice');
+const { rmSync } = require('fs');
 
 const getAllBookings=async(req,res)=>{
     try{
@@ -147,6 +148,13 @@ const vacateRoom=async(req,res)=>{
             return res.status(400).json({success:false,message:"Only allocated Booking can be vacated"});
          }
 
+         if(!booking.allocatedRoom){
+            return response.status(400).json({
+                success:false,message:"No room is currently allocated to this booking"
+            })
+
+         }
+
         //  vacate the room
         const room=await Room.findById(booking.allocatedRoom);
         if(room){
@@ -158,6 +166,7 @@ const vacateRoom=async(req,res)=>{
         booking.vacatedAt=new Date();
         booking.vacateRemarks=remarks||"";
         booking.allocatedRoom=null;
+        console.log("Allowed statuses:", booking.schema.path("status").enumValues);
         await booking.save(); 
 
         res.status(200).json({success:true,booking})

@@ -106,7 +106,7 @@ const Bookings = () => {
         onApprove={approveBooking}
         onReject={rejectBooking}
         onAllocate={onAllocateBooking}
-        onVacate={onVacateBooking}
+        onSuccess={refreshBookings}
         />
 
     </div>
