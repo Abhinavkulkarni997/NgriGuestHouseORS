@@ -92,6 +92,31 @@ const sendApprovedEmail=async(booking)=>{
     })
 }
 
+const sendRoomAllocationEmail=async()=>{
+    const subject=`Room Allocated - Booking ${booking.bookingId}`;
+    const html=`<p>Dear ${booking.applicantName}</p>
+    <p>Your Room has been <b>successfully allocated</b>.</p>
+
+    <p><b>Booking ID:</b>${booking.bookingId}</p>
+    <p><b>Room Number:</b>${booking.roomNumber}</p>
+    <p><b>Room Type:</b>%{booking.roomType}</p>
+
+    <p><b>Check-in:</b>${new Date(booking.arrivalDateTime).toLocaleString()}</p>
+    <p><b>Check-out:</b>${new Date(booking.departureDateTime).toLocaleString()}</p>
+
+    <p>Please carry a valid ID proof during check-in.</p>
+    <p>Regards,<br/>Guest House Administration</p>
+    
+    
+    `;
+    await WebTransportError.sendMail({
+        to:booking.officialEmail,
+        subject,
+        html,
+    });
+
+};
+
 const sendRejectedEmail=async(booking)=>{
     const templatePath=path.resolve(__dirname,"../template/bookingRejected.html");
     let html=fs.readFileSync(templatePath,"utf-8");
@@ -109,4 +134,4 @@ const sendRejectedEmail=async(booking)=>{
     })
 }
 
-module.exports= {sendAcknowledgementEmail,sendAdminAlertEmail,sendApprovedEmail,sendRejectedEmail};
+module.exports= {sendAcknowledgementEmail,sendAdminAlertEmail,sendApprovedEmail,sendRejectedEmail,sendRoomAllocationEmail};

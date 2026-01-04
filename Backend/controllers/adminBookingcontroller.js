@@ -121,13 +121,20 @@ const allocateRoom=async(req,res)=>{
         booking.allocatedAt=new Date(),
         await booking.save();
 
+         // send room allocation email(with room details)
+
+        try{
+            await sendRoomAllocationEmail(booking);
+        }catch(emailError){
+            console.error("Allocation email failed:",emailError.message)
+        }
+
         // Marking room as active
         room.isActive=true;
         await room.save();
 
-        // send room allocation email(with room details)
-
-        // await sendRoomAllocationEmail(booking);
+       
+     
         res.status(200).json({success:true,message:"Room allocated successfully",booking});
     }
     catch(error){
