@@ -41,6 +41,12 @@ const VacateRoomModal = ({booking,bookingId,onClose,onSuccess}) => {
             <h2 className="text-lg font-semibold mb-4">Vacate Room</h2>
             <h2 className='text-lg font-semibold mb-4'>Applicant Name:{booking.applicantName}</h2>
             <h2 className='text-lg font-semibold mb-4'>Booking Id:{booking.bookingId}</h2>
+            {booking.roomNumber &&(
+                <div className='text-sm bg-gray-100 rounded-md p-3 mb-4 text-gray-600 '>
+                   <p><b>Allocated Room:{" "}</b>{booking.roomNumber}</p>
+                   <p><b>Room Type:{" "}</b>{booking.roomType}</p>
+                </div>
+            )}
             <textarea placeholder='Vacate remarks (optional)'
             value={remarks}
             onChange={(e)=>setRemarks(e.target.value)}

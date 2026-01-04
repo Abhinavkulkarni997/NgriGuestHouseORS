@@ -36,7 +36,7 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
         :booking.status==='ALLOCATED'?'bg-indigo-100 text-indigo-700'
         :booking.status==='REJECTED'?'bg-red-100 text-red-700':'bg-yellow-100 text-yellow-700'}`}>
             {booking.status}
-            {booking.roomNumber &&  `: Room ${booking.roomNumber}`}
+            {booking.roomNumber &&  `: Room ${booking.roomNumber} ${booking.roomType}`}
         </span>
         </div>
 

@@ -69,6 +69,13 @@ const AllocateRoomModal=({booking,bookingId,onClose,onSuccess})=>{
                             </option>
                         ))}
                     </select>
+                    {selectedRoom &&(
+                        <p className='text-sm text-gray-600 mt-2'>
+                            selected Room:{
+                                rooms.find(r=>r._id===selectedRoom)?.roomNumber
+                            }
+                        </p>
+                    )}
 
                     {
                         rooms.length===0 &&(
