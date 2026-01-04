@@ -128,7 +128,7 @@ const allocateRoom=async(req,res)=>{
         // send room allocation email(with room details)
 
         // await sendRoomAllocationEmail(booking);
-        res.status(200).json({success:true,booking});
+        res.status(200).json({success:true,message:"Room allocated successfully",booking});
     }
     catch(error){
         console.log("Error in allocating room:",error);
@@ -149,7 +149,7 @@ const vacateRoom=async(req,res)=>{
          }
 
          if(!booking.allocatedRoom){
-            return response.status(400).json({
+            return res.status(400).json({
                 success:false,message:"No room is currently allocated to this booking"
             })
 
@@ -169,7 +169,7 @@ const vacateRoom=async(req,res)=>{
         console.log("Allowed statuses:", booking.schema.path("status").enumValues);
         await booking.save(); 
 
-        res.status(200).json({success:true,booking})
+        res.status(200).json({success:true,message:"Room vacated successfully",booking})
     }catch(error){
         console.log("Error in vacating the room: ",error);
         res.status(500).json({

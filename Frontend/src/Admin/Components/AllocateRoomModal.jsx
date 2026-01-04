@@ -23,24 +23,31 @@ const AllocateRoomModal=({booking,bookingId,onClose,onSuccess})=>{
 
     const handleAllocate=async()=>{
         if(!selectedRoom){
-            return alert("Please select a room to allocate");
+             alert("Please select a room to allocate");
+            return;
         }
 
         setLoading(true);
         try{
-            await api.patch(`/admin/bookings/${bookingId}/allocate-room`,{roomId:selectedRoom});
-            setLoading(false);
-            alert("Room allocated successfully");
+            const response=await api.patch(`/admin/bookings/${bookingId}/allocate-room`,{roomId:selectedRoom});
+            if(response.status===200 || response.status===201){
+                 alert(response.data?.message||"Room allocated successfully");
             // after successful allocation call the onSuccess callback to refresh the bookings list
             onSuccess();
             // onClose is used to close the modal
             onClose();
+            }else{
+                throw new Error("Unexpected response");
+            }
+           
         }
         catch(error){
-            console.log("Error in allocating room:",error);
-            alert("Failed to allocate room. Please try again.");
+            console.error("Error in allocating room:",error?.response||error);
+            alert("Failed to allocate room. Please try again.UI update failed");
+            // onSuccess();
+            // onClose();
+        }finally{
             setLoading(false);
-            return;
         }
     }
 

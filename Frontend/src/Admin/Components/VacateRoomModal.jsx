@@ -8,14 +8,24 @@ const VacateRoomModal = ({booking,bookingId,onClose,onSuccess}) => {
     const handleVacate=async()=>{
         setLoading(true);
         try{
-            await api.patch(`/admin/bookings/${bookingId}/vacate-room`,{remarks});
+           const response= await api.patch(`/admin/bookings/${bookingId}/vacate-room`,{remarks});
+
+           if(response.status===200){
+            alert("Room vacated successfully");
             onSuccess();
             onClose();
-        }catch(err){
-            alert("Failed to vacate room",err);
+           }else{
+            throw new Error("Unexpected response");
+           }
+          
+        }catch(error){
+            console.error("Vacate error:Failed to vacate room",error?.response||error);
+            alert(error.response?.data?.message||"Vacation completed but UI update failed");
+            // onSuccess();
+            // onClose();
 
         }finally{
-            setLoading(false)
+            setLoading(false);
         }
     }
 

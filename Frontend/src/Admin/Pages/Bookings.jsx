@@ -34,20 +34,20 @@ const Bookings = () => {
         // Implementing reject booking logic here
         await api.patch(`/admin/bookings/${id}/reject`,{remarks});
         console.log("Rejected booking with ID:",id,remarks);
-        refreshBookings();
+        await refreshBookings();
     }
 
-    const onAllocateBooking=async(id,remarks)=>{
+    const onAllocateBooking=async()=>{
         // if the room is approved then we are implementing the allocation logic here and filter is added in BookingCard
-        await api.patch(`/admin/bookings/${id}/allocate-room`,{remarks});
-        console.log("Allocated room for booking ID:",id,remarks);
-        refreshBookings();
+        // await api.patch(`/admin/bookings/${id}/allocate-room`,{remarks});
+        // console.log("Allocated room for booking ID:",id,remarks);
+        await refreshBookings();
     }
 
-    const onVacateBooking=async(id,remarks)=>{
-        await api.patch(`/admin/bookings/${id}/vacate-room`,{remarks});
-        console.log("Vacated room for booking ID:",id,remarks);
-        refreshBookings();
+    const onVacateBooking=async()=>{
+        // await api.patch(`/admin/bookings/${id}/vacate-room`,{remarks});
+        // console.log("Vacated room for booking ID:",id,remarks);
+        await refreshBookings();
     }
 
 
@@ -106,7 +106,8 @@ const Bookings = () => {
         onApprove={approveBooking}
         onReject={rejectBooking}
         onAllocate={onAllocateBooking}
-        onSuccess={refreshBookings}
+        onVacate={onVacateBooking}
+        
         />
 
     </div>

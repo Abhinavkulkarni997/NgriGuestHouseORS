@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import AllocateRoomModal from './AllocateRoomModal';
 import VacateRoomModal from './VacateRoomModal';
 
-const BookingCard = ({booking,onApprove,onReject,onAllocate,onSuccess,onVacate}) => {
+const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
     const [open,setOpen]=useState(false);
     const [remarks,setRemarks]=useState('');
     const [showAllocateModal,setShowAllocateModal]=useState(false);
@@ -100,7 +100,7 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onSuccess,onVacate})
             {/* Approved */}
             {booking.status==="APPROVED" &&(
                 <div className="pt-3 flex flex-wrap gap-3 border-t">
-                    <button onClick={()=>setShowAllocateModal(true)} className='px-4 py-2 bg-indigo-700 text-white rounded-lg hover:bg-indigo-800'>
+                    <button onClick={()=>setShowAllocateModal(true)} className='px-4 py-2 bg-indigo-700 text-white rounded-lg hover:bg-indigo-800 disabled:opacity-50' disabled={rooms.length===0}>
                         Allocate Room
                     </button>
                 </div>
@@ -115,7 +115,7 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onSuccess,onVacate})
                 booking={booking}
                 bookingId={booking._id}
                 onClose={()=>setShowAllocateModal(false)}
-                onSuccess={()=>onAllocate(booking._id)}
+                onSuccess={()=>onAllocate()}
                 />
             )}
 
@@ -131,7 +131,7 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onSuccess,onVacate})
                 booking={booking}
                 bookingId={booking._id}
                 onClose={()=>setShowVacateModal(false)}
-                onSuccess={onSuccess}
+                onSuccess={()=>onVacate()}
                 />
             )}
 
