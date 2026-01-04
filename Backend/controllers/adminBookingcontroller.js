@@ -165,7 +165,7 @@ const vacateRoom=async(req,res)=>{
         booking.status="VACATED";
         booking.vacatedAt=new Date();
         booking.vacateRemarks=remarks||"";
-        booking.allocatedRoom=null;
+        // booking.allocatedRoom=null;
         console.log("Allowed statuses:", booking.schema.path("status").enumValues);
         await booking.save(); 
 

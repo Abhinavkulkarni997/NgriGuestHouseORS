@@ -2,11 +2,14 @@ import React,{useState} from 'react'
 import AllocateRoomModal from './AllocateRoomModal';
 import VacateRoomModal from './VacateRoomModal';
 
+
 const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
     const [open,setOpen]=useState(false);
     const [remarks,setRemarks]=useState('');
     const [showAllocateModal,setShowAllocateModal]=useState(false);
     const [showVacateModal,setShowVacateModal]=useState(false);
+
+    // const hasRooms=availableRooms?.length>0;
    
   return (
     <div className='bg-white rounded-xl shadow-md border p-5 space-y-4 '>
@@ -33,6 +36,7 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
         :booking.status==='ALLOCATED'?'bg-indigo-100 text-indigo-700'
         :booking.status==='REJECTED'?'bg-red-100 text-red-700':'bg-yellow-100 text-yellow-700'}`}>
             {booking.status}
+            {booking.roomNumber &&  `: Room ${booking.roomNumber}`}
         </span>
         </div>
 
@@ -100,9 +104,11 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
             {/* Approved */}
             {booking.status==="APPROVED" &&(
                 <div className="pt-3 flex flex-wrap gap-3 border-t">
-                    <button onClick={()=>setShowAllocateModal(true)} className='px-4 py-2 bg-indigo-700 text-white rounded-lg hover:bg-indigo-800 disabled:opacity-50' disabled={rooms.length===0}>
+                    <button onClick={()=>setShowAllocateModal(true)} className='px-4 py-2 bg-indigo-700 text-white rounded-lg hover:bg-indigo-800 '>
                         Allocate Room
                     </button>
+
+                  
                 </div>
             )}
 
@@ -135,7 +141,22 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
                 />
             )}
 
-
+            {/* To Display Room Details */}
+            {(booking.status==="ALLOCATED" || booking.status==="VACATED") &&(
+                <div className='mt-3 p-3 rounded-lg bg-gray-50 border text-sm space-y-1'>
+                    <p>
+                        <strong>Room Number:{" "}</strong>{booking.roomNumber}
+                    </p>
+                    <p>
+                        <strong>Room Type:{" "}</strong>{booking.roomType}
+                    </p>
+                    {booking.status==="VACATED" &&(
+                        <p className='text-red-600'><strong>Vacated On:</strong>{" "}
+                        {new Date(booking.vacatedAt).toLocaleString()}
+                        </p>
+                    )}
+                </div>
+            )}
             
             </div>
             )}

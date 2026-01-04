@@ -2,8 +2,10 @@ import React, { useEffect,useState } from 'react'
 import api from '../../api/bookingapi';
 import BookingCard from '../Components/BookingCard';
 import BookingsTab from '../Components/BookingsTab';
+// import axios from 'axios';
 const Bookings = () => {
    const [bookings, setBookings] = useState([]);
+//    const [availableRooms,setAvailableRooms]=useState([]);
    useEffect(()=>{
         api.get('/admin/bookings')
         .then(response=>{
@@ -14,6 +16,8 @@ const Bookings = () => {
             console.error(error);
         })
     },[]);
+
+  
 
     // after approving or rejecting booking refresh the bookings list
          const refreshBookings=async()=>{
@@ -50,6 +54,13 @@ const Bookings = () => {
         await refreshBookings();
     }
 
+    // const fetchAvailableRooms=async()=>{
+    //     const res=await axios.get('/api/admin/rooms/available')
+    //     setAvailableRooms(res.data);
+    // }
+    //   useEffect(()=>{
+    //    fetchAvailableRooms();
+    // },[]);
 
   return (
     // <div className='h-screen sm:px-6 py-6  rounded-lg shadow p-4'>
@@ -103,6 +114,7 @@ const Bookings = () => {
         </div> */}
         <BookingsTab
         bookings={bookings}
+        // availableRooms={availableRooms}
         onApprove={approveBooking}
         onReject={rejectBooking}
         onAllocate={onAllocateBooking}

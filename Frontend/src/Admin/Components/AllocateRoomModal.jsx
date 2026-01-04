@@ -65,7 +65,7 @@ const AllocateRoomModal=({booking,bookingId,onClose,onSuccess})=>{
                         <option value="">Select Room</option>
                         {rooms.map((room)=>(
                             <option key={room._id} value={room._id} >
-                                {`Room ${room.roomNumber} • ${room.roomType}`}
+                                {`Room ${room.roomNumber} : ${room.roomType}`}
                             </option>
                         ))}
                     </select>
