@@ -1,10 +1,11 @@
-
 const Bookings=require('../models/Booking');
 const Room =require('../models/Room');
 const path=require('path');
  const {sendApprovedEmail,sendRejectedEmail}=require('../services/mailservice');
 const { rmSync } = require('fs');
 
+
+// logic to fetch bookings
 const getAllBookings=async(req,res)=>{
     try{
         const bookings=await Bookings.find().sort({createdAt:-1});
@@ -40,6 +41,9 @@ const getAllBookings=async(req,res)=>{
 //     }
 // }
 
+
+
+
 const approveBooking=async(req,res)=>{
     try{
         const {remarks}=req.body;
@@ -67,7 +71,7 @@ const approveBooking=async(req,res)=>{
     }
 }
 
-
+// logic for reject Booking
 const rejectBooking=async(req,res)=>{
     try{
         const {remarks}=req.body;
@@ -95,6 +99,7 @@ const rejectBooking=async(req,res)=>{
     }
 }
 
+// logic for allocating room
 const allocateRoom=async(req,res)=>{
     try{
           const {roomId}=req.body;
@@ -187,6 +192,7 @@ const vacateRoom=async(req,res)=>{
     }
 };
 
+// logic for idCard View 
 const idCardView=async(req,res)=>{
     try{
         const booking=await Bookings.findById(req.params.id);
@@ -217,7 +223,7 @@ const getAvailableRooms=async(req,res)=>{
 const getCalendarBookings=async(req,res)=>{
     try{
         const bookings=await Bookings.find({status:{$in:["ALLOCATED","VACATED"]}})
-        .select("arrivalDateTime departureDateTime applicantName,status,roomNumber,roomType")
+        .select("arrivalDateTime departureDateTime applicantName status roomNumber roomType");
 
         const calendarEvents=bookings.map((b=>({
               id:b._id,
@@ -228,16 +234,12 @@ const getCalendarBookings=async(req,res)=>{
               roomNumber:b.roomNumber,
               roomType:b.roomType,
               applicantName:b.applicantName,
-        })))
-          
+        })));
 
-
-
-
-        res.status(200).json({success:true,calendarEvents});
+        res.status(200).json({success:true,events:calendarEvents});
     }catch(error){
-        console.error("error in fetching the calendar details",error);
-        res.status(500).json({success:false,message:"Server Error failed to fetch calendar details"});
+        console.error("error in fetching the calendar details:",error);
+        res.status(500).json({success:false,message:"Calendar Fetch Failed"});
     }
 }
 
