@@ -13,6 +13,7 @@ import BookingStatus from './components/OnlineBooking/BookingStatus';
 import AdminLayout from './Admin/AdminLayout';
 import AdminDashboard from './Admin/AdminDashBoard';
 import Bookings from './Admin/Pages/Bookings';
+import BookingsCalendar from './Admin/Pages/BookingsCalendar';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
     <Route path="/admin" element={<AdminLayout/>} >
     <Route index element={<AdminDashboard/>}/>
       <Route path='bookings' element={<Bookings/>}/>
+      <Route path='calendar' element={<BookingsCalendar/>}/>
     {/* <Route path="invoices" element={<Invoices/>}/>
     <Route path="adminProfile" element={<AdminProfile/>}/>
     <Route path="settings" element={<Settings/>} />  */}

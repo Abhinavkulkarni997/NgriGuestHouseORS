@@ -49,7 +49,7 @@ const Faq = () => {
     }
   return (
     
-    <section className='py-16 sm:py-18 md:py-20 max-w-screen-xl mx-auto px-4 bg-cyan-400/10 backdrop-blur-md rounded-lg mb-4  '>
+    <section className='py-[140px] sm:py-[140px] md:py-[140px] lg:py-[140px] max-w-screen-xl mx-auto px-4 bg-cyan-400/10 backdrop-blur-md rounded-lg mb-4  '>
         <h1 className='font-extrabold text-3xl md:text-4xl mb-6 text-gray-800 text-center '>Any questions? Check out the FAQ</h1>
         {faqItems.map((item,index)=>{
             const isOpen=openItems.includes(item.id);

@@ -1,6 +1,7 @@
 // import React,{useState} from "react";
 import home from '../assets/AdminDashboard/Home/home.svg';
 import booking from '../assets/AdminDashboard/Home/booking.svg';
+import calendar from '../assets/AdminDashboard/Home/calendar.svg';
 import invoices from '../assets/AdminDashboard/Home/invoices.svg';
 import profile from '../assets/AdminDashboard/Home/profile.svg';
 import settings from '../assets/AdminDashboard/Home/settings.svg'
@@ -19,11 +20,16 @@ const SideBar=({collapsed})=>{
         },
         {
             id:2,name:"Invoices",url:'/invoices',icon:<img src={invoices} alt="Invoices" className="w-6 h-6"/>,title:"Invoices",
-        },{
-            id:3,name:'Admin Profile', url:'/adminprofile',icon:<img src={profile} alt="AdminProfile" className="w-6 h-6" />,title:"Admin Profile",
+        },
+        {
+            id:3,name:"",url:'/calendar',icon:<img src={calendar} alt="Calendar" className='w-6 h-6'/>,title:"Calendar",
+        },
+        
+        {
+            id:4,name:'Admin Profile', url:'/adminprofile',icon:<img src={profile} alt="AdminProfile" className="w-6 h-6" />,title:"Admin Profile",
 
         },{
-            id:4,name:'Settings', url:'/settings',icon:<img src={settings} alt="settings" className="w-6 h-6" />,title:'Settings'
+            id:5,name:'Settings', url:'/settings',icon:<img src={settings} alt="settings" className="w-6 h-6" />,title:'Settings'
         }
     ]
     return(

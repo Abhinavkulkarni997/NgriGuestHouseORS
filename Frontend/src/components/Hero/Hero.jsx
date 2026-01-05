@@ -25,13 +25,13 @@ const Hero = () => {
   return (
     <section className='h-screen w-full relative '>
       {/* code for background Image */}
-        <img src={HeroImg}  alt='Hero' className='w-full h-full object-cover absolute inset-0 z-10  '/>
+        <img src={HeroImg}  alt='Hero' className='w-full h-full object-cover absolute inset-0 z-10 rounded-2xl  '/>
         {/* Dark Overlay */}
         <div className='absolute inset-0 bg-black/40'></div>
 
         {/* Center Content */}
         <div className='relative z-10  h-full w-full flex flex-col items-center justify-center text-center px-6'>
-           <h1 className='text-white font-extrabold text-3xl md:text-5xl  leading-tight max-w-3xl'>
+           <h1 className='text-white font-extrabold text-3xl md:text-5xl  leading-tight max-w-3xl '>
             CSIR-NGRI Guesthouse <br/>Online Reservation System</h1>
         <p className='text-white mt-4 font-medium text-lg md:text-xl'>CSIR-NATIONAL GEOPHYSICAL RESEARCH INSTITUTE</p>
         <p className='text-white text-base md:text-lg '>Telangana,Hyderabad-500007</p>
