@@ -4,9 +4,11 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import api from '../../api/bookingapi';
+import CalendarEventModal from '../Components/calendarEventModal';
 
 const BookingsCalendar = () => {
     const [events,setEvents]=useState([]);
+    const[selectedEvent,setSelectedEvent]=useState([]);
     useEffect(()=>{
         api.get('/admin/bookings/calendar')
         .then(res=>setEvents(res.data.events))
@@ -25,6 +27,7 @@ const BookingsCalendar = () => {
             right:"dayGridMonth,timeGridWeek,timeGridDay"
         }}
         events={events}
+        eventClick={(info)=>setSelectedEvent(info.event)}
         height="auto"
         eventClassNames={(arg)=>{
             if(arg.event.extendedProps.status==="ALLOCATED")
@@ -33,8 +36,12 @@ const BookingsCalendar = () => {
                 return ["bg-green-700","text-white"];
             return [];
         }}
+
         
         />
+        {selectedEvent &&(
+            <CalendarEventModal event={selectedEvent} onClose={()=>setSelectedEvent(null)}/>
+        )}
         </div>
   )
 }
