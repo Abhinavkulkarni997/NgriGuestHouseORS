@@ -2,7 +2,7 @@ import React from 'react';
 
 
 const CalendarEventModal = ({event,onClose}) => {
-    if(!event) return null;
+    if(!event || !event.extendedProps) return null;
 
    const {
     applicantName,
@@ -17,11 +17,11 @@ const CalendarEventModal = ({event,onClose}) => {
             <h2 className='text-xl font-bold mb-4'>Booking Details</h2>
 
             <div className='space-y-2 text-sm'>
-                <p><b>Applicant:</b>{applicantName}</p>
-                <p><b>Room:</b>{roomNumber} ({roomType})</p>
-                <p><b>Status:</b>{status}</p>
-                <p><b>Check-in:</b>{new Date(event.start).toLocaleString()}</p>
-                <p><b>Check-out:</b>{new Date(event.end).toLocaleString()}</p>
+                <p><b>Applicant:{" "}</b>{applicantName}</p>
+                <p><b>Room:{" "}</b>{roomNumber} ({roomType})</p>
+                <p><b>Status:{" "}</b>{status}</p>
+                <p><b>Check-in:{" "}</b>{new Date(event.start).toLocaleString()}</p>
+                <p><b>Check-out:{" "}</b>{new Date(event.end).toLocaleString()}</p>
             </div>
             <div className='flex justify-end gap-3 mt-6'>
                 <button onClick={onClose} className='px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300'>
