@@ -11,5 +11,5 @@ router.patch("/bookings/:id/allocate-room",allocateRoom);
 router.patch("/bookings/:id/vacate-room",vacateRoom);
 router.get('/rooms/available',getAvailableRooms);
 router.get('/bookings/:id/idCard',idCardView);
-router.get('/bookings/calender',getCalendarBookings);
+router.get('/bookings/calendar',getCalendarBookings);
 module.exports=router;
