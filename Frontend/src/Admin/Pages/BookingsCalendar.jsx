@@ -28,9 +28,9 @@ const BookingsCalendar = () => {
         height="auto"
         eventClassNames={(arg)=>{
             if(arg.event.extendedProps.status==="ALLOCATED")
-                return ["bg-indigo-600","text-white"];
+                return ["bg-red-600","text-white"];
             if(arg.event.extendedProps.status==="VACATED")
-                return ["bg-gray-400","text-white"];
+                return ["bg-green-700","text-white"];
             return [];
         }}
         
