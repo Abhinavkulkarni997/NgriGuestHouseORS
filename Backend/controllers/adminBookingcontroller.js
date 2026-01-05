@@ -143,6 +143,7 @@ const allocateRoom=async(req,res)=>{
     }
 }
 
+// logic to vacate the room
 const vacateRoom=async(req,res)=>{
    
     try{
@@ -209,5 +210,38 @@ const getAvailableRooms=async(req,res)=>{
     const availableRooms=await Room.find({isActive:false});
     res.status(200).json({success:true,availableRooms});
 }
-module.exports={getAllBookings,approveBooking,rejectBooking,idCardView,allocateRoom,getAvailableRooms,vacateRoom};
+
+
+
+// logic for calendar building
+const getCalendarBookings=async(req,res)=>{
+    try{
+        const bookings=await Bookings.find({status:{$in:["ALLOCATED","VACATED"]}})
+        .select("arrivalDateTime departureDateTime applicantName,status,roomNumber,roomType")
+
+        const calendarEvents=bookings.map((b=>({
+              id:b._id,
+              title:`Room ${b.roomNumber} ${b.applicantName}`,
+              start:b.arrivalDateTime,
+              end:b.departureDateTime,
+              status:b.status,
+              roomNumber:b.roomNumber,
+              roomType:b.roomType,
+              applicantName:b.applicantName,
+        })))
+          
+
+
+
+
+        res.status(200).json({success:true,calendarEvents});
+    }catch(error){
+        console.error("error in fetching the calendar details",error);
+        res.status(500).json({success:false,message:"Server Error failed to fetch calendar details"});
+    }
+}
+
+
+
+module.exports={getAllBookings,approveBooking,rejectBooking,idCardView,allocateRoom,getAvailableRooms,vacateRoom,getCalendarBookings};
 
