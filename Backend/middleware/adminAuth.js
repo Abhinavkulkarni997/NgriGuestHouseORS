@@ -8,7 +8,7 @@ const adminAuth=(req,res,next)=>{
         req.admin=decoded;
         next();
     }catch(error){
-        res.status(401).json({message:error.message});
+        res.status(401).json({message:"Invalid token"});
     }
 }
 

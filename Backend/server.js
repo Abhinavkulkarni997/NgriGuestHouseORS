@@ -20,6 +20,11 @@ app.use("/api",bookingRoutes);
 app.use('/api/admin',adminRoutes);
 
 
+// 
+app.use(require('cookie-parser')());
+app.use()
+
+
 // router.get("/booking", (req, res) => {
 //   res.send("Booking API is running");
 // });
