@@ -19,4 +19,4 @@ adminSchema.methods.comparePassword=function(password){
     return bcrypt.hash(password,this.password);
 }
 
-models.exports=mongoose.model("Admin",adminSchema);
+module.exports=mongoose.model("Admin",adminSchema);

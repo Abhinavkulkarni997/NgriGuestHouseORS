@@ -5,6 +5,7 @@ const mongoose=require("mongoose");
 const router=express.Router();
 const bookingRoutes = require("./routes/bookingRoutes");
 const adminRoutes=require("./routes/adminRoutes");
+const adminAuthRoutes=require("./routes/adminAuthRoutes");
 
 const app=express();
 
@@ -22,7 +23,7 @@ app.use('/api/admin',adminRoutes);
 
 // 
 app.use(require('cookie-parser')());
-app.use()
+app.use("/api/admin/auth",adminAuthRoutes);
 
 
 // router.get("/booking", (req, res) => {
