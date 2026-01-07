@@ -6,7 +6,7 @@ const router=express.Router();
 const bookingRoutes = require("./routes/bookingRoutes");
 const adminRoutes=require("./routes/adminRoutes");
 const adminAuthRoutes=require("./routes/adminAuthRoutes");
-
+const cookieParser=require("cookie-parser");
 const app=express();
 
 
@@ -22,7 +22,8 @@ app.use('/api/admin',adminRoutes);
 
 
 // 
-app.use(require('cookie-parser')());
+
+app.use(cookieParser);
 app.use("/api/admin/auth",adminAuthRoutes);
 
 
