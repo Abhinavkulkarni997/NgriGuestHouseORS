@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const {getAllBookings,approveBooking,rejectBooking, idCardView,allocateRoom,getAvailableRooms,vacateRoom, getCalendarBookings}=require('../controllers/adminBookingcontroller');
-const {adminAuth}=require('../middleware/adminAuth');
+const adminAuth=require('../middleware/adminAuth');
 router.get('/bookings',adminAuth,getAllBookings);
 // router.patch("/bookings/:id/status",updateBookingStatus);
 
