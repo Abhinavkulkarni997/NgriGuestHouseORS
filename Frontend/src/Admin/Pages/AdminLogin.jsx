@@ -54,7 +54,7 @@ const AdminLogin = () => {
                     <label htmlFor='Email' className='block text-sm font-medium mb-1'>Email</label>
                     <div className='relative'>
                          <input type='email' required value={email} onChange={(e)=>setEmail(e.target.value)} placeholder='Enter Email Address'
-                    className="w-full border rounded-lg px-3 py-2  pr-4 pl-12"
+                    className="w-full border rounded-lg px-3 py-2 hover:border-cyan-600 pr-10 pl-12"
                     />
                         <div className='absolute inset-y-0 left-0 flex items-center pointer-events-none pl-3'>
                             <img src={emailimg} alt="email" className='w-6 h-6 bg-white text-white'/>
