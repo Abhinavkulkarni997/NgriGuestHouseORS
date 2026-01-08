@@ -14,6 +14,7 @@ import AdminLayout from './Admin/AdminLayout';
 import AdminDashboard from './Admin/AdminDashBoard';
 import Bookings from './Admin/Pages/Bookings';
 import BookingsCalendar from './Admin/Pages/BookingsCalendar';
+import AdminLogin from './Admin/Pages/AdminLogin';
 
 function App() {
 
@@ -30,6 +31,9 @@ function App() {
     <Route path="/success" element={<Layout><Success/></Layout>}/>
     <Route path="/bookingstatus" element={<Layout><BookingStatus/></Layout>} />
     
+
+    {/* Admin Login */}
+    <Route path='/admin/login' element={<AdminLogin/>}/>
     {/* Admin Routes */}
     <Route path="/admin" element={<AdminLayout/>} >
     <Route index element={<AdminDashboard/>}/>
