@@ -15,7 +15,7 @@ import AdminDashboard from './Admin/AdminDashBoard';
 import Bookings from './Admin/Pages/Bookings';
 import BookingsCalendar from './Admin/Pages/BookingsCalendar';
 import AdminLogin from './Admin/Pages/AdminLogin';
-import AdminAuthProvider from './Admin/context/AdminAuthContext';
+import {AdminAuthProvider} from './Admin/Context/AdminAuthContext';
 import ProtectedAdminRoute from './Admin/Components/ProtectedAdminRoute';
 
 function App() {

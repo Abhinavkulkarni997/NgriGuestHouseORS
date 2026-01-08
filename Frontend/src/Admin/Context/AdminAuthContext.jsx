@@ -8,7 +8,7 @@ export const AdminAuthProvider = ({children}) => {
     const [loading,setLoading]=useState(true);
 
     useEffect(()=>{
-        api.get("/admin/auth/me")
+        api.get("/admin/auth/login")
         .then((res)=>setAdmin(res.data.admin))
         .catch(()=>setAdmin(null))
         .finally(()=>setLoading(false));
