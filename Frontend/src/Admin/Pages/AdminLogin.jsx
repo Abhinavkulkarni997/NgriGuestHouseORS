@@ -3,7 +3,8 @@ import {useNavigate} from 'react-router-dom';
 import api from '../../api/bookingapi';
 import logo from '../../assets/ngri-logo.png';
 import emailimg from '../../assets/AdminDashboard/Login/email (2).svg';
-import open from '../../assets/AdminDashboard/Login/open.svg';
+import eyeopen from '../../assets/AdminDashboard/Login/eyeopen.svg';
+import eyeclosed from  '../../assets/AdminDashboard/Login/eyeclosed.svg';
 import passwordimg  from '../../assets/AdminDashboard/Login/password.svg';
 const AdminLogin = () => {
     const navigate=useNavigate();
@@ -67,13 +68,16 @@ const AdminLogin = () => {
                     <label htmlFor='password' className='block text-sm font-medium mb-1'>Password </label>
                     <div className='relative'>
                     <input type={showPassword?'text':'password'} required value={password} onChange={(e)=>setPassword(e.target.value)}
-                    className='w-full border rounded-lg px-3 py-2 hover:border-cyan-600 pr-4 pl-12' placeholder='Enter Password'/>
+                    className='w-full border rounded-lg px-3 py-2 hover:border-cyan-600 pr-10 pl-12' placeholder='Enter Password'/>
+                    {/* left icon */}
                     <div className='absolute inset-y-0 left-0 flex items-center pointer-events-none pl-3'>
                         <img src={passwordimg} alt='password' className='w-6 h-6 bg-white text-white' />
                             
                     </div>
-                    <div className='absolute inset-y-0 right-0 flex items-center pointer-events-none pl-3'>
-                           <button onClick={toggleShowPassword}><img src={open} className='w-6 h-6 '/> {showPassword?'Hide':'show'}</button>
+                    <div className='absolute inset-y-0 right-0 flex items-center  pr-3'>
+                           <button type="button" onClick={toggleShowPassword} className='focus:outline-none'><img src={showPassword?eyeopen:eyeclosed} className='w-6 h-6 '/> 
+                           
+                           </button>
                           
                     </div>
                  
