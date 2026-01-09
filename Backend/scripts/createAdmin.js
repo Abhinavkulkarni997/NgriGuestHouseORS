@@ -2,7 +2,7 @@ const mongoose=require("mongoose");
 const Admin=require('../models/Admin');
 const bcrypt=require("bcryptjs");
 
-mongoose.connect('mongodb://localhost:27017/guesthouse');
+mongoose.connect('mongodb://localhost:27017/guestHouseDB');
 
 const createAdmin=async()=>{
     try{
@@ -13,7 +13,7 @@ const createAdmin=async()=>{
     }
     await Admin.create({
         email:'admin@ngri.com',
-        password:await bcrypt.hash('Admin@123',10)
+        password:'Admin@123'
     })
     console.log('user created successfully');
     process.exit();
