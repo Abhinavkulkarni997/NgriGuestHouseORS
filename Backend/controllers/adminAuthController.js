@@ -10,7 +10,7 @@ const adminLogin=async(req,res)=>{
         return res.status(401).json({message:"Invalid credentials"});
     }
 
-    const isMatch=await bcrypt.comparePassword(password,admin.password);
+    const isMatch=await Admin.comparePassword(password,admin.password);
     if(!isMatch){
         return res.status(401).json({message:"Invalid credentials"});
     }
@@ -25,7 +25,7 @@ const adminLogin=async(req,res)=>{
             sameSite:"strict",
             maxAge:24*60*60*1000
         });
-        
+
         return res.status(200).json({
             token,
             success:true,
@@ -37,3 +37,6 @@ const adminLogin=async(req,res)=>{
     }
 };
 module.exports={adminLogin};
+
+
+

@@ -1,13 +1,15 @@
 import axios from 'axios';
 
 const api=axios.create({
-    baseURL:'http://localhost:5000/api'
+    baseURL:'http://localhost:5000/api',
+    withCredentials:true,
 });
 
 api.interceptors.response.use(
     (res)=>res,
     (error)=>{
-        if(error.response?.status===401){
+        const isLoginRequest=error.config?.url?.includes("/admin/auth/login");
+        if(error.response?.status===401 && !isLoginRequest) {
             localStorage.removeItem("adminUser");
             localStorage.removeItem("adminToken");
             window.location.href="/admin/login";

@@ -22,17 +22,23 @@ const AdminLogin = () => {
     }
 
     const handleSubmit=async(e)=>{
+        console.log("ADMIN LOGIN HIT");
         e.preventDefault();
-        setError("");
+        console.log("SUBMIT CLICKED",email,password);
         setLoading(true);
+        setError("");
     try{
+        console.log("SENDING REQUEST...");
         const res=await api.post("/admin/auth/login",{
             email,
             password,
         });
+        console.log("LOGIN RESPONSE:",res.data);
+        
         login(res.data.token,res.data.admin);
         navigate("/admin");
     }catch(err){
+        console.log("LOGIN ERROR:",err);
         setError(err.response?.data?.message||"Login failed");
     }finally{
         setLoading(false);
@@ -45,13 +51,18 @@ const AdminLogin = () => {
                 <div className='flex items-center justify-center gap-3 mb-6'>
                      <img src={logo} alt='ngri' className='w-8 h-8'/>
                 <h2 className='text-xl font-bold  text-center'>Guest House Admin Login</h2>
-                {
+              
+                </div>
+
+                  {
                     error &&(
-                        <p className='text-red-600 text-sm mb-4 text-center'>{error}</p>
+                        <div className='mb-4'>
+                               <p className='text-red-600 text-sm mb-4 text-center'>{error}</p>
+                        </div>
+                     
                     )
                 }
 
-                </div>
                
                 <div className='mb-4'>
                     <label htmlFor='Email' className='block text-sm font-medium mb-1'>Email</label>
@@ -78,7 +89,8 @@ const AdminLogin = () => {
                             
                     </div>
                     <div className='absolute inset-y-0 right-0 flex items-center  pr-3'>
-                           <button type="button" onClick={toggleShowPassword} className='focus:outline-none'><img src={showPassword?eyeopen:eyeclosed} className='w-6 h-6 '/> 
+                           <button type="button" onClick={toggleShowPassword} className='focus:outline-none'><img src={showPassword?eyeopen:eyeclosed} className='w-6 h-6 '
+                           alt={showPassword ? "Hide password" : "Show password"}/> 
                            </button>
                           
                     </div>
@@ -86,7 +98,7 @@ const AdminLogin = () => {
                 </div>
 
                 <div className='mb-4' >
-                    <button className='w-full bg-cyan-600 hover:bg-cyan-700 text-white py-2 rounded-lg' type='submit' disabled={loading}>{loading?"Logging in":"Login"}</button>
+                    <button className='w-full bg-cyan-600 hover:bg-cyan-700 text-white py-2 rounded-lg disabled:opacity-50' type='submit' disabled={loading}>{loading?"Logging in...":"Login"}</button>
                 </div>
                 
             </form>
