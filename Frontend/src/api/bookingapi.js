@@ -5,8 +5,21 @@ const api=axios.create({
     withCredentials:true,
 });
 
+api.interceptors.request.use(
+    (config)=>{
+        const token=localStorage.getItem('adminToken');
+        if(token){
+            config.headers.Authorization=`Bearer ${token}`;
+        }
+        return config;
+    },
+    (error)=>{
+        return Promise.reject(error);
+    }
+);
+
 api.interceptors.response.use(
-    (res)=>res,
+    (response)=>response,
     (error)=>{
         const isLoginRequest=error.config?.url?.includes("/admin/auth/login");
         if(error.response?.status===401 && !isLoginRequest) {
