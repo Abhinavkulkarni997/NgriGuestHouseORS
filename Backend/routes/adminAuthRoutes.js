@@ -1,8 +1,8 @@
 const express=require("express");
 const router=express.Router();
-const {loginAdmin}=require("../controllers/adminAuthController");
+const {adminLogin}=require("../controllers/adminAuthController");
 
-router.post("/login",loginAdmin);
+router.post("/login",adminLogin);
 
 
 module.exports=router;
