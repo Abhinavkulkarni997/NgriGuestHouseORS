@@ -6,9 +6,11 @@ import emailimg from '../../assets/AdminDashboard/Login/email (2).svg';
 import eyeopen from '../../assets/AdminDashboard/Login/eyeopen.svg';
 import eyeclosed from  '../../assets/AdminDashboard/Login/eyeclosed.svg';
 import passwordimg  from '../../assets/AdminDashboard/Login/password.svg';
+import {useAdminAuth} from '../Context/AdminAuthContext';
 const AdminLogin = () => {
     const navigate=useNavigate();
 
+    const {login}=useAdminAuth();
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
     const[loading,setLoading]=useState(false);
@@ -24,10 +26,11 @@ const AdminLogin = () => {
         setError("");
         setLoading(true);
     try{
-        await api.post("/admin/auth/login",{
+        const res=await api.post("/admin/auth/login",{
             email,
             password,
         });
+        login(res.data.token,res.data.admin);
         navigate("/admin");
     }catch(err){
         setError(err.response?.data?.message||"Login failed");
@@ -76,15 +79,11 @@ const AdminLogin = () => {
                     </div>
                     <div className='absolute inset-y-0 right-0 flex items-center  pr-3'>
                            <button type="button" onClick={toggleShowPassword} className='focus:outline-none'><img src={showPassword?eyeopen:eyeclosed} className='w-6 h-6 '/> 
-                           
                            </button>
                           
                     </div>
-                 
-                 
                     </div>
                 </div>
-
 
                 <div className='mb-4' >
                     <button className='w-full bg-cyan-600 hover:bg-cyan-700 text-white py-2 rounded-lg' type='submit' disabled={loading}>{loading?"Logging in":"Login"}</button>
