@@ -3,11 +3,19 @@ const fs=require('fs');
 const path=require('path');
 // creation of transportation object 
  const mailTransporter=nodemailer.createTransport({
-    service:'gmail',
+     service:'gmail',
+    // service:'smtp.office365.com',
+    // secure:false,
+    // port:587,
     auth:{
         user:process.env.EMAIL_USER,
         pass:process.env.EMAIL_PASS,
-    }
+        //  user: 'ngriguesthouse@hotmail.com',
+        // pass:'a8121511670!V',
+    },
+      tls: {
+        ciphers: 'SSLv3' 
+    },
 });
 
 mailTransporter.verify((err, success) => {

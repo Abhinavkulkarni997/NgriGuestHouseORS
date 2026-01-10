@@ -1,10 +1,17 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { useAdminAuth } from './Context/AdminAuthContext';
 import {useNavigate} from 'react-router-dom';
-const AdminDashBoard = () => {
+import api from '../api/bookingapi';
+
+const AdminDashBoard = ({booking}) => {
+  const [status,setStatus]=useState('');
   const {admin,logout}=useAdminAuth();
   const navigate=useNavigate();
 
+  // useEffect(()=>{
+  //   api.get('/')
+  // })
+  const bookings=booking.filter(b=>b.id=booking._id);
   const handleLogout=()=>{
     logout();
     navigate("/admin/login");
@@ -24,6 +31,9 @@ const AdminDashBoard = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-white shadow rounded-xl p-6">
           <p className='text-gray-500'>Total Bookings</p>
+
+          
+
           <h2 className='text-3xl font-bold mt-2'>-</h2>
         </div>
 
