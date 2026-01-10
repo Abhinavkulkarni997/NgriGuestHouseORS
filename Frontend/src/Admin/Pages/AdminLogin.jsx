@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {useNavigate} from 'react-router-dom';
 import api from '../../api/bookingapi';
 import logo from '../../assets/ngri-logo.png';
@@ -10,7 +10,7 @@ import {useAdminAuth} from '../Context/AdminAuthContext';
 const AdminLogin = () => {
     const navigate=useNavigate();
 
-    const {login}=useAdminAuth();
+    const {login,isAuthenticated}=useAdminAuth();
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
     const[loading,setLoading]=useState(false);
@@ -44,6 +44,15 @@ const AdminLogin = () => {
         setLoading(false);
     }
     };
+
+
+    // prevent Admin from seeing login page after logging in
+    useEffect(()=>{
+        if(isAuthenticated){
+            navigate("/admin")
+        }
+    },[]);
+
   return (
 
         <div className='min-h-screen flex items-center justify-center bg-gray-100'>
