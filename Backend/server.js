@@ -6,6 +6,7 @@ const router=express.Router();
 const bookingRoutes = require("./routes/bookingRoutes");
 const adminRoutes=require("./routes/adminRoutes");
 const adminAuthRoutes=require("./routes/adminAuthRoutes");
+const adminDashboardRoutes=require('./routes/adminDashboardRoutes');
 const cookieParser=require("cookie-parser");
 const app=express();
 
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 console.log("bookingRoutes type:", typeof bookingRoutes);
 app.use("/api",bookingRoutes);
 app.use('/api/admin',adminRoutes);
+app.use("/admin/dashboard",adminDashboardRoutes);
 
 
 // 

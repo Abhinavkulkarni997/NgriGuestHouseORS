@@ -4,14 +4,22 @@ import {useNavigate} from 'react-router-dom';
 import api from '../api/bookingapi';
 
 const AdminDashBoard = ({booking}) => {
-  // const [status,setStatus]=useState('');
+   const [stats,setStats]=useState(null);
+   const [loading,setLoading]=useState(true);
   const {admin,logout}=useAdminAuth();
   const navigate=useNavigate();
 
-  // useEffect(()=>{
-  //   api.get('/')
-  // })
-  // const bookings=booking.filter(b=>b.id=booking._id);
+  useEffect(()=>{
+    api.get('/admin/dashboard/overview')
+    .then(res=>setStats(res.data))
+    .catch(err=>console.error(err))
+    .finally(()=>setLoading(false));
+  },[]);
+
+  if (loading){
+    return <p>Loading Dashboard...</p>
+  }
+
   const handleLogout=()=>{
     logout();
     navigate("/admin/login");
