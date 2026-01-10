@@ -4,14 +4,14 @@ import {useNavigate} from 'react-router-dom';
 import api from '../api/bookingapi';
 
 const AdminDashBoard = ({booking}) => {
-  const [status,setStatus]=useState('');
+  // const [status,setStatus]=useState('');
   const {admin,logout}=useAdminAuth();
   const navigate=useNavigate();
 
   // useEffect(()=>{
   //   api.get('/')
   // })
-  const bookings=booking.filter(b=>b.id=booking._id);
+  // const bookings=booking.filter(b=>b.id=booking._id);
   const handleLogout=()=>{
     logout();
     navigate("/admin/login");
