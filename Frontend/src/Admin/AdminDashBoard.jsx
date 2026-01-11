@@ -3,7 +3,7 @@ import { useAdminAuth } from './Context/AdminAuthContext';
 import {useNavigate} from 'react-router-dom';
 import api from '../api/bookingapi';
 
-const AdminDashBoard = ({booking}) => {
+const AdminDashBoard = () => {
    const [stats,setStats]=useState(null);
    const [loading,setLoading]=useState(true);
   const {admin,logout}=useAdminAuth();
@@ -36,28 +36,31 @@ const AdminDashBoard = ({booking}) => {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white shadow rounded-xl p-6">
-          <p className='text-gray-500'>Total Bookings</p>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <StatsCard title="Total Bookings" value={stats.totalBookings}/>
+      <StatsCard title="Pending" value={stats.pendingBookings}/>
+      <StatsCard title="Approved" value={stats.approvedBookings}/>
+      <StatsCard title="Allocated" value={stats.allocatedBookings}/>
+      <StatsCard title="Rejected" value={stats.rejectedBookings}/>
+      <StatsCard title="Vacated" value={stats.vacatedBookings}/>
+      <StatsCard title="Today Check-ins" value={stats.todayCheckIns}/>
+      <StatsCard title="Today Check-outs" value={stats.todayCheckOuts}/>
 
-          
-
-          <h2 className='text-3xl font-bold mt-2'>-</h2>
-        </div>
-
-        <div className="bg-white shadow rounded-xl p-6">
-          <p className='text-gray-500'>Pending Bookings</p>
-          <h2 className='text-3xl font-bold mt-2'>-</h2>
-        </div>
-
-        <div className="bg-white shadow rounded-xl p-6">
-          <p className='text-gray-500'>Today's Check-ins</p>
-          <h2 className='text-3xl font-bold mt-2'>-</h2>
-        </div>
-      </div>
+        
+      
    
     </div>
-  )
-}
+    </div>
+    )
+    };
+
+    const StatsCard=({title,value})=>(
+      <div className="bg-white shadow rounded-xl p-6">
+          <p className='text-sm text-gray-500'>{title}</p>
+          <h2 className='text-2xl font-bold mt-2'>{value}</h2>
+        </div>
+    );
+  
+
 
 export default AdminDashBoard

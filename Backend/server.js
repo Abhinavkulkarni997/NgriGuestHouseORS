@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 console.log("bookingRoutes type:", typeof bookingRoutes);
 app.use("/api",bookingRoutes);
 app.use('/api/admin',adminRoutes);
-app.use("/admin/dashboard",adminDashboardRoutes);
+app.use("/api/admin/dashboard",adminDashboardRoutes);
 
 
 // 
