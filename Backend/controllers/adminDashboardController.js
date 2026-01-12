@@ -3,10 +3,13 @@ const Booking=require("../models/Booking");
 const getDashboardOverview=async(req,res)=>{
     try{
         const todayStart=new Date();
-        todayStart.setUTCHours(0,0,0,0);
+        todayStart.setHours(0,0,0,0);
 
         const todayEnd=new Date();
-        todayEnd.setUTCHours(23,59,59,999);
+        todayEnd.setHours(23,59,59,999);
+        console.log("UTC START:", todayStart.toISOString());
+        console.log("UTC END:", todayEnd.toISOString());
+
         const [
             totalBookings,
             pendingBookings,
@@ -25,14 +28,14 @@ const getDashboardOverview=async(req,res)=>{
             Booking.countDocuments({status:"REJECTED"}),
             Booking.countDocuments({status:"VACATED"}),  
             Booking.countDocuments({
-  allocatedAt: { $gte: todayStart, $lte: todayEnd },
-  status: "ALLOCATED",
-}),
+            allocatedAt: { $gte: todayStart, $lte: todayEnd },
+            status: "ALLOCATED"
+            }),
+            Booking.countDocuments({
+            vacatedAt: { $gte: todayStart, $lte: todayEnd },
+            status: "VACATED"
+            }),
 
-           Booking.countDocuments({
-  vacatedAt: { $gte: todayStart, $lte: todayEnd },
-  status: "VACATED",
-}),
          
         ]);
         res.json({
