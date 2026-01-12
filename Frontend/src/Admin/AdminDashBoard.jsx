@@ -11,7 +11,9 @@ const AdminDashBoard = () => {
 
   useEffect(()=>{
     api.get('/admin/dashboard/overview')
-    .then(res=>setStats(res.data))
+    .then(res=>{
+      console.log("API RESPONSE DATA:",res.data),
+      setStats(res.data)})
     .catch(err=>console.error(err))
     .finally(()=>setLoading(false));
   },[]);
