@@ -38,7 +38,7 @@ const AdminDashBoard = () => {
   }
   return (
     <div className="p-6">
-      <div className='flex justify-between items-center mb-6'>
+      <div className='flex justify-between items-center mb-6 gap-2'>
       <h1 className="text-2xl font-bold">
         Welcome,{admin?.email}
       </h1>
