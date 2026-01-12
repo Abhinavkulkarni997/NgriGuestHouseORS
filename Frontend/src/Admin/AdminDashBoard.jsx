@@ -4,7 +4,17 @@ import {useNavigate} from 'react-router-dom';
 import api from '../api/bookingapi';
 
 const AdminDashBoard = () => {
-   const [stats,setStats]=useState(null);
+   const [stats,setStats]=useState({
+    totalBookings:0,
+  pendingBookings:0,
+  approvedBookings:0,
+  allocatedBookings:0,
+  rejectedBookings:0,
+  vacatedBookings:0,
+  todaysCheckIns:0,
+  todaysCheckOuts:0,
+
+   });
    const [loading,setLoading]=useState(true);
   const {admin,logout}=useAdminAuth();
   const navigate=useNavigate();
@@ -45,8 +55,8 @@ const AdminDashBoard = () => {
       <StatsCard title="Allocated" value={stats.allocatedBookings}/>
       <StatsCard title="Rejected" value={stats.rejectedBookings}/>
       <StatsCard title="Vacated" value={stats.vacatedBookings}/>
-      <StatsCard title="Today Check-ins" value={stats.todayCheckIns}/>
-      <StatsCard title="Today Check-outs" value={stats.todayCheckOuts}/>
+      <StatsCard title="Today Check-ins" value={stats.todaysCheckIns}/>
+      <StatsCard title="Today Check-outs" value={stats.todaysCheckOuts}/>
 
         
       
