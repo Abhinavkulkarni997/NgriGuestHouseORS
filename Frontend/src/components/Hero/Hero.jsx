@@ -19,8 +19,9 @@
 
 // export default Hero
 
-import React from 'react'
-import HeroImg from '../../assets/Hero/hero.jpg'
+import React from 'react';
+import HeroImg from '../../assets/Hero/hero.jpg';
+import {Link} from 'react-router-dom';
 const Hero = () => {
   return (
     <section className='h-screen w-full relative '>
@@ -36,7 +37,7 @@ const Hero = () => {
         <p className='text-white mt-4 font-medium text-lg md:text-xl'>CSIR-NATIONAL GEOPHYSICAL RESEARCH INSTITUTE</p>
         <p className='text-white text-base md:text-lg '>Telangana,Hyderabad-500007</p>
         <p className='text-white text-base md:text-lg'>guesthouse@ngri.res.in</p>
-          <button className='mt-6 px-6 py-3  text-white bg-cyan-500/80 hover:bg-cyan-400/80  rounded-lg border shadow-lg'>Book Online</button>
+          <Link to="/onlinebooking"><button className='mt-6 px-6 py-3  text-white bg-cyan-500/80 hover:bg-cyan-400/80  rounded-lg border shadow-lg'>Book Online</button></Link>
         </div>
        
     </section>
