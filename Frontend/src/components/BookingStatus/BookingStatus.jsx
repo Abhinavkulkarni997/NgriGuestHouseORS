@@ -22,7 +22,7 @@ const BookingStatus= () => {
                 <input type="email" name="email" className='border-2 border-black rounded pl-2 hover:border-cyan-600 px-4 py-2' placeholder='Email Address'/>
             </div>
             <div className='m-4 px-4 py-2'>
-                <label htmlFor='booking' className='text-sm block mb-1'>Booking Id</label>
+                <label htmlFor='booking' className='text-sm block mb-1'>Booking ID</label>
                 <input type="text" name="bookingid" className='border-2 border-black rounded pl-2 hover:border-cyan-600 px-4 py-2' placeholder='Booking Id'/>
             </div>
             <div className='mt-2'>
