@@ -18,7 +18,7 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
         <div className='flex justify-between items-center'>
             <div>
                
-                 <h3 className='font-medium text-lg'>
+            <h3 className='font-medium text-lg'>
             <p><b>Applicant Name:</b> {booking.applicantName} </p>
             <p><b>Booking ID:</b>{booking.bookingId}</p>
         </h3>

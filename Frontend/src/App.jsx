@@ -9,7 +9,7 @@ import Home from './components/Home/Home';
 import OnlineBooking from './components/OnlineBooking/OnlineBooking';
 import MultiStepForm from './components/OnlineBooking/MultiStepForm';
 import Success from './components/Success/Success';
-import BookingStatus from './components/OnlineBooking/BookingStatus';
+import BookingStatus from './components/BookingStatus/BookingStatus';
 import AdminLayout from './Admin/AdminLayout';
 import AdminDashboard from './Admin/AdminDashBoard';
 import Bookings from './Admin/Pages/Bookings';
