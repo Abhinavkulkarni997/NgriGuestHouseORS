@@ -15,6 +15,7 @@ const AdminDashBoard = () => {
   todaysCheckOuts:0,
 
    });
+   const [today,setToday] = useState({checkIns:[],checkOuts:[]})
    const [loading,setLoading]=useState(true);
   const {admin,logout}=useAdminAuth();
   const navigate=useNavigate();
@@ -27,6 +28,18 @@ const AdminDashBoard = () => {
     .catch(err=>console.error(err))
     .finally(()=>setLoading(false));
   },[]);
+
+// useEffect hook for todays activities
+  useEffect(()=>{
+    api.get('/admin/dashboard/today')
+    .then(res=>{
+      console.log("TODAY API RESPONSE DATA:",res.data),
+      setToday({checkIns:res.data.todaysCheckIns,
+        checkOuts:res.data.todaysCheckOuts,
+      })
+    }).catch(err=>console.error(err))
+    .finally(()=>setLoading(false));
+  })
 
   if (loading){
     return <p>Loading Dashboard...</p>
@@ -57,12 +70,15 @@ const AdminDashBoard = () => {
       <StatsCard title="Vacated" value={stats.vacatedBookings}/>
       <StatsCard title="Today Check-ins" value={stats.todaysCheckIns}/>
       <StatsCard title="Today Check-outs" value={stats.todaysCheckOuts}/>
+    </div>
 
-        
-      
-   
+    <div className="mt-8">
+      <h2>Today's CheckIns</h2>
     </div>
     </div>
+
+
+
     )
     };
 

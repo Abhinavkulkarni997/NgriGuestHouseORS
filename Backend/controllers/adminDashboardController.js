@@ -71,19 +71,19 @@ const getTodayActivities=async(req,res)=>{
     const todaysCheckIns=await Booking.find({
         arrivalDateTime: {$gte:start,$lte:end},
         status:{$in:["APPROVED","ALLOCATED"]}
-    }).select("bookingId applicantName departureTime status")
+    }).select("bookingId applicantName arrivalDateTime status")
 
     const todaysCheckOuts=await Booking.find({
         departureDateTime:{$gte:start,$lte:end},
         status:"ALLOCATED",
-    })
+    }).select("bookingId applicantName roomNumber departureDateTime")
 
     res.json({
         todaysCheckIns,
         todaysCheckOuts
     })
 }catch(error){
-    console.error(error);
+    console.error("Todays activity error:",error);
     res.json(500).json({message:"Server Error Failed todays activities dashboard data"});
 }
 
