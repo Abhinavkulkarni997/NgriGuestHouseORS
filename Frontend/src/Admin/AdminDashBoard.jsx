@@ -73,7 +73,55 @@ const AdminDashBoard = () => {
     </div>
 
     <div className="mt-8">
-      <h2>Today's CheckIns</h2>
+      <h2 className='text-xl font-semibold mb-3'>Today's CheckIns</h2>
+      <div className='overflow-x-auto'>
+        <table className='w-full border '>
+          <thead className='bg-gray-100 '>
+            <tr>
+              <th>Booking ID</th>
+              <th>Name</th>
+              <th>Arrival</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {today.checkIns.map(b=>(
+              <tr key={b._id} className='border-t'>
+                <td>{b.bookingId}</td>
+                <td>{b.applicantName}</td>
+                <td>{new Date(b.arrivalDateTime).toLocaleDateString()}</td>
+                <td>{b.status}</td>
+              </tr> 
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div className='mt-8'>
+      <h2 className='text-xl font-semibold mb-3'>Today's Checkouts</h2>
+      <div className='overflow-x-auto'>
+        <table className='w-full border'>
+          <thead>
+          <tr>
+            <th>Booking ID</th>
+            <th>Name</th>
+            <th></th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+            {today.checkOuts.map(b=>(
+              <tr>
+              <td>{b.booking._id}</td>
+              <td>{b.applicantName}</td>
+              </tr>
+            ))}
+          </tbody>
+
+        </table>
+      </div>
+
     </div>
     </div>
 
