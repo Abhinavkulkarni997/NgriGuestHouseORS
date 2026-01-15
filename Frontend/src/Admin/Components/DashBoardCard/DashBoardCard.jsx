@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
 
-const DashBoardCard = () => {
-  return (
-    <div>DashBoardCard</div>
+const DashBoardCard = ({title,value,subtitle,color}) => {
+  return(
+    <div className='bg-white rounded-xl shadow p-5 border-l-4' style={{borderColor:color}}>
+      <p className='text-sm text-gray-500'>{title}</p>
+      <h2 className='text-3xl font-bold mt-2'>{value}</h2>
+      {subtitle && (<p className='text-xs text-gra-400 mt-1'>{subtitle}</p>)}
+
+    </div>
   )
+
 }
 
-export default DashBoardCard
+export default DashBoardCard;
