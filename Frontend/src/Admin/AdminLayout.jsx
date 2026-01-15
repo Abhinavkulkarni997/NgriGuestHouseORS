@@ -9,17 +9,23 @@ return(
 
 <div className=' h-screen flex overflow-hidden '>
     {/* sidebar */}
-    <SideBar collapsed={collapsed} mobileOpen={mobileOpen} onClose={()=>setMobileOpen(false)}/>
+    <SideBar 
+    collapsed={collapsed} 
+    mobileOpen={mobileOpen}
+    onClose={()=>setMobileOpen(false)}/>
         {/* Overlay for mobile */}
         {
             mobileOpen &&(
-                <div className='fixed inset-0 bg-black bg-opacity-40 z-30 md:hidden' onClick={()=>setMobileOpen(false)}/>
+                <div className='fixed inset-0 bg-black bg-opacity-40 z-30 md:hidden' 
+                onClick={()=>setMobileOpen(false)}/>
             )
         }
 
         {/* main content */}
     <div className='flex flex-col flex-1'>
-          <TopBar onToggleDesktop={()=>setCollapsed(!collapsed)} onToggleMobile={()=>setMobileOpen(true)}/>
+          <TopBar onToggleDesktop={()=>setCollapsed(!collapsed)} 
+          onToggleMobile={()=>setMobileOpen(true)}/>
+          
              <main className='flex-1 overflow-y-auto p-4 bg-gray-50'>
         <Outlet/>
     </main>

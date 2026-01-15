@@ -31,7 +31,7 @@ const BookingsTab=({bookings,onApprove,onReject,onAllocate,onVacate,availableRoo
 
             {/* Booking Cards */}
 
-            <div className='grid gap-6'>
+            <div className='grid  gap-6 '>
                 {filteredBookings.length===0 ?(
                     <p className='text-gray-500 text-center'>
                         NO {activeTab} BOOKINGS FOUND.
