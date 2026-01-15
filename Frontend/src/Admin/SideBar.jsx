@@ -68,13 +68,14 @@ const SideBar=({collapsed,mobileOpen,onCloseMobile})=>{
                 
         //     </div>
         // </div>
-        <aside className={`fixed md:static top-0 left-0 h-screen bg-[#f8f70] z-40 border-r transition-all duration-300${collapsed?'md:w-16':'md:w-64'} w-64 bg-[#f8f7f0] border-r`}>
+        <aside className={`fixed md:static top-0 left-0 h-screen  z-40  transition-all duration-300
+        ${collapsed?'md:w-24':'md:w-64'} w-64 bg-[#f8f7f0] border-r ${mobileOpen?'translate-x-0':'-translate-x-full md:translate-x-0'}`}>
            <div className="p-2 border-b">
 
             {/* logo */}
-            <Link to='/admin' className="flex items-center  gap-2 px-4 py-3">
+            <Link to='/admin' className="flex items-center  gap-1 px-4 py-3">
             <img src={Nlogo} className="w-10 h-10" alt="ngri-logo" />
-            {!collapsed && <span className="text-gray-900 font-bold">NGRI-GUEST HOUSE </span>}
+            {!collapsed && <span className="text-gray-900 font-semibold ">NGRI-GUEST HOUSE </span>}
             </Link>
             </div>
 
@@ -82,8 +83,9 @@ const SideBar=({collapsed,mobileOpen,onCloseMobile})=>{
             <ul className="p-4 space-y-4 cursor-pointer ">
                 
                      {menu.map((item,index)=>(
-                    <li key={index} className=" flex  items-center gap-3 p-2 mt-4 hover:bg-gray-200 rounded-md">
-                       <Link to={`/admin${item.url}`} className="flex items-center gap-2">{item.icon}
+                        //   <li key={index} className="flex items-center gap-3 p-2  mt-4 hover:bg-gray-200 rounded-md" onClose={onCloseMobile}>
+                    <li key={index} className="  mt-4 hover:bg-gray-200 rounded-md" onClose={onCloseMobile}>
+                       <Link to={`/admin${item.url}`} className="flex items-center gap-3 p-2">{item.icon}
                        {!collapsed &&(<span >{item.title}</span>)}</Link>   
                     </li>
                 ))}
