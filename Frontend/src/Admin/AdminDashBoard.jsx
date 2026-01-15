@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import { useAdminAuth } from './Context/AdminAuthContext';
 import {useNavigate} from 'react-router-dom';
 import api from '../api/bookingapi';
+import DashBoardCard from './Components/DashBoardCard/DashBoardCard';
 
 const AdminDashBoard = () => {
    const [stats,setStats]=useState({
@@ -39,7 +40,7 @@ const AdminDashBoard = () => {
       })
     }).catch(err=>console.error(err))
     .finally(()=>setLoading(false));
-  })
+  },[]);
 
   if (loading){
     return <p>Loading Dashboard...</p>
@@ -61,15 +62,27 @@ const AdminDashBoard = () => {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <StatsCard title="Total Bookings" value={stats.totalBookings}/>
-      <StatsCard title="Pending" value={stats.pendingBookings}/>
-      <StatsCard title="Approved" value={stats.approvedBookings}/>
-      <StatsCard title="Allocated" value={stats.allocatedBookings}/>
-      <StatsCard title="Rejected" value={stats.rejectedBookings}/>
-      <StatsCard title="Vacated" value={stats.vacatedBookings}/>
+      {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <StatsCard title="Total Bookings" value={stats.totalBookings} color="#2563eb" />
+      <StatsCard title="Pending" value={stats.pendingBookings} color="#f59e0b"/>
+      <StatsCard title="Approved" value={stats.approvedBookings} color="#16a34a"/>
+      <StatsCard title="Allocated" value={stats.allocatedBookings} color="#6b7280"/>
+      <StatsCard title="Rejected" value={stats.rejectedBookings} color="#22c55e"/>
+      <StatsCard title="Vacated" value={stats.vacatedBookings} color="#0ea5e9"/>
       <StatsCard title="Today Check-ins" value={stats.todaysCheckIns}/>
       <StatsCard title="Today Check-outs" value={stats.todaysCheckOuts}/>
+    </div> */}
+
+
+     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <DashBoardCard title="Total Bookings" value={stats.totalBookings} color="#2563eb" />
+      <DashBoardCard title="Pending" value={stats.pendingBookings} color="#f59e0b"/>
+      <DashBoardCard title="Approved" value={stats.approvedBookings} color="#16a34a"/>
+      <DashBoardCard title="Allocated" value={stats.allocatedBookings} color="#206491"/>
+      <DashBoardCard title="Rejected" value={stats.rejectedBookings} color="#22c55e"/>
+      <DashBoardCard title="Vacated" value={stats.vacatedBookings} color="#0ea5e9"/>
+      <DashBoardCard title="Today Check-ins" value={stats.todaysCheckIns} color="#f05695"/>
+      <DashBoardCard title="Today Check-outs" value={stats.todaysCheckOuts} color="#17b55b"/>
     </div>
 
     <div className="mt-8">
@@ -128,12 +141,12 @@ const AdminDashBoard = () => {
     </div>
     )};
 
-    const StatsCard=({title,value})=>(
-      <div className="bg-white shadow rounded-xl p-4 cursor-pointer">
-          <p className='text-sm text-gray-500'>{title}</p>
-          <h2 className='text-2xl font-bold mt-2'>{value}</h2>
-        </div>
-    );
+    // const StatsCard=({title,value,color})=>(
+    //   <div className="bg-white shadow rounded-xl p-4 cursor-pointer border-l-4" style={{borderColor:color}}>
+    //       <p className='text-sm text-gray-500'>{title}</p>
+    //       <h2 className='text-2xl font-bold mt-2'>{value}</h2>
+    //     </div>
+    // );
   
 
 
