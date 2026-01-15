@@ -9,7 +9,7 @@ import settings from '../assets/AdminDashboard/Home/settings.svg'
 // import close from '../assets/AdminDashboard/Home/close';
 import Nlogo from '../assets/AdminDashboard/Home/ngri-logo.png';
 import { Link } from "react-router-dom";
-const SideBar=({collapsed})=>{
+const SideBar=({collapsed,mobileOpen,onCloseMobile})=>{
     // const [menuOpen,setMenuOpen]=useState(false);
     const menu=[
         {
@@ -68,13 +68,17 @@ const SideBar=({collapsed})=>{
                 
         //     </div>
         // </div>
-        <aside className={`h-screen transition-all duration-300${collapsed?'w-16':'w-64'} bg-[#f8f7f0] border-r`}>
-           <div className="p-2">
-                     <Link to='/admin' className="flex items-center  gap-2 px-4 py-3">
-                     <img src={Nlogo} className="w-10 h-10" alt="ngri-logo" />
-                     {!collapsed && <span className="text-gray-900 font-bold">NGRI-GUEST HOUSE </span>}
-                 </Link>
-                </div>
+        <aside className={`fixed md:static top-0 left-0 h-screen bg-[#f8f70] z-40 border-r transition-all duration-300${collapsed?'md:w-16':'md:w-64'} w-64 bg-[#f8f7f0] border-r`}>
+           <div className="p-2 border-b">
+
+            {/* logo */}
+            <Link to='/admin' className="flex items-center  gap-2 px-4 py-3">
+            <img src={Nlogo} className="w-10 h-10" alt="ngri-logo" />
+            {!collapsed && <span className="text-gray-900 font-bold">NGRI-GUEST HOUSE </span>}
+            </Link>
+            </div>
+
+                {/* menu */}
             <ul className="p-4 space-y-4 cursor-pointer ">
                 
                      {menu.map((item,index)=>(
