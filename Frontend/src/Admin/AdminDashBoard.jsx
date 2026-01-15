@@ -15,7 +15,7 @@ const AdminDashBoard = () => {
   todaysCheckOuts:0,
 
    });
-   const [today,setToday] = useState({checkIns:[],checkOuts:[]})
+   const [today,setToday] = useState({checkIns:[],checkOuts:[]});
    const [loading,setLoading]=useState(true);
   const {admin,logout}=useAdminAuth();
   const navigate=useNavigate();
@@ -102,19 +102,21 @@ const AdminDashBoard = () => {
       <h2 className='text-xl font-semibold mb-3'>Today's Checkouts</h2>
       <div className='overflow-x-auto'>
         <table className='w-full border'>
-          <thead>
+          <thead className='bg-gray-100'>
           <tr>
             <th>Booking ID</th>
             <th>Name</th>
-            <th></th>
-            <th></th>
+            <th>Departure</th>
+            <th>status</th>
           </tr>
           </thead>
           <tbody>
             {today.checkOuts.map(b=>(
-              <tr>
-              <td>{b.booking._id}</td>
+              <tr key={b._id} className='border-t'>
+              <td>{b._id}</td>
               <td>{b.applicantName}</td>
+              <td>{new Date(b.departureDateTime).toLocaleDateString()}</td>
+              <td>{b.status}</td>
               </tr>
             ))}
           </tbody>
@@ -124,11 +126,7 @@ const AdminDashBoard = () => {
 
     </div>
     </div>
-
-
-
-    )
-    };
+    )};
 
     const StatsCard=({title,value})=>(
       <div className="bg-white shadow rounded-xl p-6">
