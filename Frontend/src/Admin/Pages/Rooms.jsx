@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import api from "../../api/bookingapi";
 const Rooms=()=>{
-    const [rooms,setRooms]=useState();
+    const [rooms,setRooms]=useState([]);
 
     useEffect(()=>{
         api.get("/admin/rooms/occupancy").then((
@@ -28,9 +28,9 @@ const Rooms=()=>{
                 ):(
                     <p className="mt-3 text-sm font-medium text-green-700">
                         Available</p>
-                )};
+                )}
                 </div>
-            ))};
+            ))}
         </div>
 
     );

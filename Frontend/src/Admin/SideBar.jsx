@@ -26,15 +26,15 @@ const SideBar=({collapsed,mobileOpen,onCloseMobile})=>{
         {
             id:3,name:"Calendar",url:'/calendar',icon:<img src={calendar} alt="Calendar" className='w-6 h-6'/>,title:"Calendar",
         },
-        {
-            id:4,name:"Rooms",url:'/Rooms',icon:<img src={room} alt="Rooms" className='w-6 h-6'/>,title:"Rooms",
-        },
+        // {
+        //     id:4,name:"Rooms",url:'/rooms',icon:<img src={room} alt="Rooms" className='w-6 h-6'/>,title:"Rooms",
+        // },
         
         {
-            id:5,name:'Admin Profile', url:'/adminprofile',icon:<img src={profile} alt="AdminProfile" className="w-6 h-6" />,title:"Admin Profile",
+            id:4,name:'Admin Profile', url:'/adminprofile',icon:<img src={profile} alt="AdminProfile" className="w-6 h-6" />,title:"Admin Profile",
 
         },{
-            id:6,name:'Settings', url:'/settings',icon:<img src={settings} alt="settings" className="w-6 h-6" />,title:'Settings'
+            id:5,name:'Settings', url:'/settings',icon:<img src={settings} alt="settings" className="w-6 h-6" />,title:'Settings'
         }
     ]
     return(

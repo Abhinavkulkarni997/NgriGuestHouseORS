@@ -46,5 +46,24 @@ const getRoomHistory=async(req,res)=>{
     }
 }
 
+const getRoomCalendar=async(req,res)=>{
+    const {start,end}=req.query;
+    try{
+        const rooms=await Room.find({isActive:true}).lean();
+        const bookings=await Booking.find({
+            status:{$in:["ALLOCATED","VACATED"]},
+            arrivalDateTime:{$lte:new Date(end)},
+            departureDateTime:{$gte:new Date(start)},
+        })
+        .populate("allocateRoom","roomNumber")
+        .lean();
+        res.json({rooms,bookings});
+    }catch(error){
+        console.error(error);
+        res.status(500).json("Failed to load calendar data");
+    }
 
-module.exports={getRoomOccupancy,getRoomHistory};
+}
+
+
+module.exports={getRoomOccupancy,getRoomHistory,getRoomCalendar};

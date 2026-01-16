@@ -7,6 +7,7 @@ const bookingRoutes = require("./routes/bookingRoutes");
 const adminRoutes=require("./routes/adminRoutes");
 const adminAuthRoutes=require("./routes/adminAuthRoutes");
 const adminDashboardRoutes=require('./routes/adminDashboardRoutes');
+const adminRoomRoutes=require('./routes/adminRoomRoutes');
 const cookieParser=require("cookie-parser");
 const app=express();
 
@@ -29,6 +30,7 @@ console.log("bookingRoutes type:", typeof bookingRoutes);
 app.use("/api",bookingRoutes);
 app.use('/api/admin',adminRoutes);
 app.use("/api/admin/dashboard",adminDashboardRoutes);
+app.use("/api/admin/rooms",adminRoomRoutes);
 
 
 // 
