@@ -14,6 +14,7 @@ import AdminLayout from './Admin/AdminLayout';
 import AdminDashboard from './Admin/AdminDashBoard';
 import Bookings from './Admin/Pages/Bookings';
 import BookingsCalendar from './Admin/Pages/BookingsCalendar';
+import Rooms from './Admin/Pages/Rooms';
 import AdminLogin from './Admin/Pages/AdminLogin';
 // import {AdminAuthProvider} from './Admin/Context/AdminAuthContext';
 import ProtectedAdminRoute from './Admin/Routes/ProtectedAdminRoute';
@@ -47,6 +48,7 @@ function App() {
     <Route index element={<AdminDashboard/>}/>
       <Route path='bookings' element={<Bookings/>}/>
       <Route path='calendar' element={<BookingsCalendar/>}/>
+      <Route path='Rooms' element={<Rooms/>}/>
     {/* <Route path="invoices" element={<Invoices/>}/>
     <Route path="adminProfile" element={<AdminProfile/>}/>
     <Route path="settings" element={<Settings/>} />  */}
