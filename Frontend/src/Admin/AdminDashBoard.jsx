@@ -3,6 +3,7 @@ import { useAdminAuth } from './Context/AdminAuthContext';
 import {useNavigate} from 'react-router-dom';
 import api from '../api/bookingapi';
 import DashBoardCard from './Components/DashBoardCard/DashBoardCard';
+import ActionCard from './Components/ActionCards/ActionCard'; 
 
 const AdminDashBoard = () => {
    const [stats,setStats]=useState({
@@ -79,13 +80,13 @@ const AdminDashBoard = () => {
       <DashBoardCard title="Pending" value={stats.pendingBookings} color="#f59e0b"/>
       <DashBoardCard title="Approved" value={stats.approvedBookings} color="#16a34a"/>
       <DashBoardCard title="Allocated" value={stats.allocatedBookings} color="#206491"/>
-      <DashBoardCard title="Rejected" value={stats.rejectedBookings} color="#22c55e"/>
+      <DashBoardCard title="Rejected" value={stats.rejectedBookings} color="#ff0000"/>
       <DashBoardCard title="Vacated" value={stats.vacatedBookings} color="#0ea5e9"/>
       <DashBoardCard title="Today Check-ins" value={stats.todaysCheckIns} color="#f05695"/>
       <DashBoardCard title="Today Check-outs" value={stats.todaysCheckOuts} color="#17b55b"/>
     </div>
 
-    <div className="mt-8">
+    {/* <div className="mt-8">
       <h2 className='text-xl font-semibold mb-3'>Today's CheckIns</h2>
       <div className='overflow-x-auto'>
         <table className='w-full border '>
@@ -109,9 +110,9 @@ const AdminDashBoard = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </div> */}
 
-    <div className='mt-8'>
+    {/* <div className='mt-8'>
       <h2 className='text-xl font-semibold mb-3'>Today's Checkouts</h2>
       <div className='overflow-x-auto'>
         <table className='w-full border'>
@@ -137,6 +138,18 @@ const AdminDashBoard = () => {
         </table>
       </div>
 
+    </div> */}
+
+    {/* Action Card for showing quick actions */}
+    <div className='mt-8'>
+      <h2 className='text-lg font-semibold mb-4'>Quick Actions</h2>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+          <ActionCard title={`${stats.todaysCheckIns} Arrivals Today`} subtitle="View bookings arriving today" accent="green" onClick={()=>navigate("/admin/bookings?filter=today-checkin")}/>
+          <ActionCard title={`${stats.pendingBookings} Pending Approvals`} subtitle="Review pending bookings requests" accent="yellow" onClick={()=>navigate("/admin/bookings?status=PENDING")}/>
+          <ActionCard title={`${stats.allocatedBookings} Active Stays`} subtitle="View currently occupied rooms"   accent="blue" onClick={()=>navigate("/admin/bookings?status=ALLOCATED")}/>
+
+      </div>
+    
     </div>
     </div>
     )};
