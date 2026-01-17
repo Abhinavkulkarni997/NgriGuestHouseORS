@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../api/bookingapi';
-const RoomsCalendar = ({start,end}) => {
+const RoomsCalendar = () => {
+    const today=new Date();
+    const startDate=new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate()
+    );
+    const endDate=new Date(startDate);
+    endDate.setDate(endDate.getDate() + 1);
+
     const [rooms,setRooms]=useState([]);
     const [bookings,setBookings]=useState([]);
-    const [dateRange,setDateRange]=useState({start,end});
+    const [dateRange,setDateRange]=useState({start:startDate,end:endDate});
 
     useEffect(()=>{
         api.get("/admin/rooms/calendar",{
-            params:dateRange,
+            params:dateRange.start.toDateString(),
+            end:dateRange.end.toDateString(),
         })
         .then((res)=>{
             setRooms(res.data.rooms);
@@ -18,7 +28,7 @@ const RoomsCalendar = ({start,end}) => {
     // Date (7-14 DAYS VIEW)
     const days=[];
     for(let i=0;i<7;i++){
-        const d=new Date(start);
+        const d=new Date(dateRange.start);
         d.setDate(d.getDate()+i);
         days.push(d);
     }
@@ -52,8 +62,10 @@ const RoomsCalendar = ({start,end}) => {
                     {days.map((day)=>{
                         const booking=isOccupied(room._id,day);
                         return(
-                            <div key={day.toDateString()} className={`h-10 border-l${booking?"bg-red-400":"bg-green-200"}`} title={booking ?"booking.applicantName":"Available"}>
-                            
+                            <div key={day.toDateString()} 
+                            className={`h-10 border-l 
+                            ${booking?"bg-red-400":"bg-green-200"}`} 
+                            title={booking ?"booking.applicantName":"Available"}>
                             </div>
                         )
                     })}

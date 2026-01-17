@@ -29,6 +29,9 @@ const SideBar=({collapsed,mobileOpen,onCloseMobile})=>{
         // {
         //     id:4,name:"Rooms",url:'/rooms',icon:<img src={room} alt="Rooms" className='w-6 h-6'/>,title:"Rooms",
         // },
+        {
+            id:4,name:"Rooms Calendar",url:'/rooms-calendar',icon:<img src={room} className='w-6 h-6'/>,title:"Rooms Calendar",
+        },
         
         {
             id:4,name:'Admin Profile', url:'/adminprofile',icon:<img src={profile} alt="AdminProfile" className="w-6 h-6" />,title:"Admin Profile",

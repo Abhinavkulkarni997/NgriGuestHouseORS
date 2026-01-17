@@ -49,8 +49,8 @@ function App() {
     <Route index element={<AdminDashboard/>}/>
       <Route path='bookings' element={<Bookings/>}/>
       <Route path='calendar' element={<BookingsCalendar/>}/>
-      <Route path='occupiedrooms' element={<Rooms/>}/>
-      <Route path='roomscalendar' element={<RoomsCalendar/>}/>
+      <Route path='rooms' element={<Rooms/>}/>
+      <Route path='rooms-calendar' element={<RoomsCalendar/>}/>
     {/* <Route path="invoices" element={<Invoices/>}/>
     <Route path="adminProfile" element={<AdminProfile/>}/>
     <Route path="settings" element={<Settings/>} />  */}
