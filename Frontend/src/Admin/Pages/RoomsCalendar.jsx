@@ -8,7 +8,7 @@ const RoomsCalendar = () => {
         today.getDate()
     );
     const endDate=new Date(startDate);
-    endDate.setDate(endDate.getDate() + 1);
+    endDate.setDate(endDate.getDate() + 6);
 
     const [rooms,setRooms]=useState([]);
     const [bookings,setBookings]=useState([]);
@@ -16,13 +16,16 @@ const RoomsCalendar = () => {
 
     useEffect(()=>{
         api.get("/admin/rooms/calendar",{
-            params:dateRange.start.toDateString(),
+            params:
+            {
+            start: dateRange.start.toDateString(),
             end:dateRange.end.toDateString(),
+            }
         })
         .then((res)=>{
             setRooms(res.data.rooms);
-            setBookings(res.data.Bookings);
-        });
+            setBookings(res.data.bookings);
+        }).catch(console.error);
     },[dateRange]);
 
     // Date (7-14 DAYS VIEW)
@@ -36,7 +39,7 @@ const RoomsCalendar = () => {
     const isOccupied=(roomId,day)=>{
         return bookings.find((b)=>{
             return(
-                b.allocatedRoom?._id===roomId && 
+               b.allocatedRoom && b.allocatedRoom?._id.toString()===roomId.toString() && 
                 new Date(b.arrivalDateTime)<=day &&
                 new Date(b.departureDateTime)>=day
             );
@@ -64,8 +67,8 @@ const RoomsCalendar = () => {
                         return(
                             <div key={day.toDateString()} 
                             className={`h-10 border-l 
-                            ${booking?"bg-red-400":"bg-green-200"}`} 
-                            title={booking ?"booking.applicantName":"Available"}>
+                            ${booking ? "bg-red-400":"bg-green-200"}`} 
+                            title={booking ? "booking.applicantName":"Available"}>
                             </div>
                         )
                     })}

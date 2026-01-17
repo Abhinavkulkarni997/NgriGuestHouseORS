@@ -16,7 +16,7 @@ const BookingsCalendar = () => {
     },[]);
 
   return (
-    <div className='bg-white rounded-xl shadow p-4'>
+    <div className='bg-white rounded-xl shadow p-4 '>
         <h1 className="text-2xl font-bold mb-4">Room Occupancy Calendar</h1>
         <FullCalendar
         plugins={[dayGridPlugin,timeGridPlugin,interactionPlugin]}

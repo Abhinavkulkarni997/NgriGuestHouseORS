@@ -49,13 +49,16 @@ const getRoomHistory=async(req,res)=>{
 const getRoomCalendar=async(req,res)=>{
     const {start,end}=req.query;
     try{
-        const rooms=await Room.find({isActive:true}).lean();
+        const rooms=await Room.find({isActive:true})
+        .sort({roomNumber:1})
+        .lean();
         const bookings=await Booking.find({
             status:{$in:["ALLOCATED","VACATED"]},
             arrivalDateTime:{$lte:new Date(end)},
             departureDateTime:{$gte:new Date(start)},
         })
-        .populate("allocateRoom","roomNumber")
+        .populate("allocatedRoom","roomNumber")
+        .select("arrivalDateTime departureDateTime applicantName allocatedRoom")
         .lean();
         res.json({rooms,bookings});
     }catch(error){
