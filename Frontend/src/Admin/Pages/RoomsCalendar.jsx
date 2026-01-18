@@ -46,10 +46,10 @@ const RoomsCalendar = () => {
         });
     }
   return (
-    <div className='overflow-x-auto'>
-        <div className="min-w-[1080px]">
+    <div className='overflow-x-auto ' >
+        <div className="max-w-7xl">
             {/* header code */}
-            <div className="grid grid-cols-[120px_repeat(7,1fr)] font-semibold">
+            <div className="grid grid-cols-[120px_repeat(7,1fr)] font-semibold ">
                 <div>Room</div>
                 {days.map((d)=>(
                     <div key={d.toDateString()} className="text-center">
@@ -67,8 +67,11 @@ const RoomsCalendar = () => {
                         return(
                             <div key={day.toDateString()} 
                             className={`h-10 border-l 
-                            ${booking ? "bg-red-400":"bg-green-200"}`} 
-                            title={booking ? "booking.applicantName":"Available"}>
+                            ${booking ?"bg-red-400":"bg-green-200"}`} 
+                            title={booking ? `Guest:${booking.applicantName}
+                             From: ${new Date(booking.arrivalDateTime).toDateString()} 
+                             To: ${new Date(booking.departureDateTime).toDateString()}`
+                             :"Available"}>
                             </div>
                         )
                     })}
