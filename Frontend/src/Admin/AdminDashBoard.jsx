@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import api from '../api/bookingapi';
 import DashBoardCard from './Components/DashBoardCard/DashBoardCard';
 import ActionCard from './Components/ActionCards/ActionCard'; 
+import RoomOccupancyCards from './Pages/RoomOccupancyCards';
 
 const AdminDashBoard = () => {
    const [stats,setStats]=useState({
@@ -52,7 +53,7 @@ const AdminDashBoard = () => {
     navigate("/admin/login");
   }
   return (
-    <div className="p-2">
+    <div className="p-2 space-y-10">
       <div className='flex justify-between items-center mb-6 gap-3'>
       <h1 className="text-xl font-semibold">
         Welcome,{admin?.email}
@@ -151,8 +152,19 @@ const AdminDashBoard = () => {
       </div>
     
     </div>
+
+      {/* // Room Occupancy */}
+    <div>
+      <h2 className='text-xl font-semibold mb-4'>
+        Live Room Occupancy
+      </h2>
+      <RoomOccupancyCards/>
     </div>
+    </div>
+
     )};
+
+  
 
     // const StatsCard=({title,value,color})=>(
     //   <div className="bg-white shadow rounded-xl p-4 cursor-pointer border-l-4" style={{borderColor:color}}>

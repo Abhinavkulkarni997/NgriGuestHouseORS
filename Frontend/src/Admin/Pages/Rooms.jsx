@@ -20,8 +20,12 @@ const Rooms=()=>{
                             <p className="text-sm">
                                 {room.currentBooking.applicantName}
                             </p>
-                            <p className="text-xs text-gray-500">from {" "}
+                            <p className="text-xs text-gray-500">From: {" "}
                                  {new Date(room.currentBooking.arrivalDateTime
+                    ).toLocaleDateString()}
+                    </p>
+                        <p className="text-xs text-gray-500">To: {" "}
+                                 {new Date(room.currentBooking.departureDateTime
                     ).toLocaleDateString()}
                     </p>
                 </div>

@@ -32,7 +32,13 @@ const RoomOccupancyCards = () => {
                         <p className='font-medium'>
                             {room.currentBooking.applicantName}
                         </p>
-                        <p 
+                        <p className='text-gray-500'>
+                            {"From:"}{" "}
+                            {new Date(room.currentBooking.arrivalDateTime).toLocaleDateString()}
+                            {" "}{"To:"}{" "}
+                            {new Date(room.currentBooking.departureDateTime).toLocaleDateString()}
+
+                        </p>
 
                     </div>
                 )}
@@ -44,4 +50,4 @@ const RoomOccupancyCards = () => {
   )
 }
 
-export default RoomOccupancyCards
+export default RoomOccupancyCards;
