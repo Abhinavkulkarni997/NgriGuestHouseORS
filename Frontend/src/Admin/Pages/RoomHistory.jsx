@@ -22,7 +22,9 @@ const RoomHistory=()=>{
             <h1 className='text-xl font-semibold mb-4'>Rooms History</h1>
 
             {history.length===0?(
-                <div className='bg-gray-50 p-6 rounded-lg text-center text-gray-500'>No booking history found for this room</div>
+                <div className='bg-gray-50 p-6 rounded-lg text-center text-gray-500'>
+                    No booking history found for this room
+                    </div>
             ):(
                 <div className='space-y-4'>
                     {history.map(b=>(
@@ -38,8 +40,8 @@ const RoomHistory=()=>{
                                From:{" "} {new Date(b.arrivalDateTime).toLocaleDateString()}
                                 {" "}
                                 To:{" "}{new Date(b.departureDateTime).toLocaleDateString()}
-
                             </p>
+                            
                             <p className='text-xs text-gray-400 mt-1'>
                                Booking ID: {b.bookingId}
                             </p>
