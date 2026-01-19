@@ -6,6 +6,7 @@ const Rooms=()=>{
     useEffect(()=>{
         api.get("/admin/rooms/occupancy").then((
             res=>setRooms(res.data)))
+            .catch((error)=>console.error(error));
     },[]);
     return(
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
