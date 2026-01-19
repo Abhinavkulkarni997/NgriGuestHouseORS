@@ -81,7 +81,7 @@ const getRoomDirectory=async (req,res)=>{
         .lean()
 
         const lastBookingMap={};
-        lastBookingMap.forEach(b=>{
+        lastBookings.forEach(b=>{
             if(!lastBookingMap[b.allocatedRoom]){
                 lastBookingMap[b.allocatedRoom]=b;
             }
