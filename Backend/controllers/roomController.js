@@ -86,8 +86,12 @@ const getRoomDirectory=async (req,res)=>{
                 lastBookingMap[b.allocatedRoom]=b;
             }
     });
-    const result=
-        res.json(result);
+    const result=rooms.map(room=>({
+        ...room,
+        lastBooking:lastBookingMap[room._id] || null,
+    }));
+
+    res.json(result);
     }catch(error){
         console.error(error);
         res.status(500).json("Failed to load room directory data");
