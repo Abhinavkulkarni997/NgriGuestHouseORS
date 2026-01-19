@@ -19,7 +19,7 @@ import AdminLogin from './Admin/Pages/AdminLogin';
 // import {AdminAuthProvider} from './Admin/Context/AdminAuthContext';
 import ProtectedAdminRoute from './Admin/Routes/ProtectedAdminRoute';
 import RoomsCalendar from './Admin/Pages/RoomsCalendar';
-
+import RoomDirectory from './Admin/Pages/RoomDirectory';
 function App() {
 
   return (
@@ -49,7 +49,8 @@ function App() {
     <Route index element={<AdminDashboard/>}/>
       <Route path='bookings' element={<Bookings/>}/>
       <Route path='calendar' element={<BookingsCalendar/>}/>
-      <Route path='rooms' element={<Rooms/>}/>
+      <Route path='active-stays' element={<Rooms/>}/>
+      <Route path='rooms' element={<RoomDirectory/>}/>
       <Route path='rooms-calendar' element={<RoomsCalendar/>}/>
     {/* <Route path="invoices" element={<Invoices/>}/>
     <Route path="adminProfile" element={<AdminProfile/>}/>

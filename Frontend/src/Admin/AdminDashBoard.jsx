@@ -147,7 +147,7 @@ const AdminDashBoard = () => {
       <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
           <ActionCard title={`${stats.todaysCheckIns} Arrivals Today`} subtitle="View bookings arriving today" accent="green" onClick={()=>navigate("/admin/bookings?filter=today-checkin")}/>
           <ActionCard title={`${stats.pendingBookings} Pending Approvals`} subtitle="Review pending bookings requests" accent="yellow" onClick={()=>navigate("/admin/bookings?status=PENDING")}/>
-          <ActionCard title={`${stats.allocatedBookings} Active Stays`} subtitle="View currently occupied rooms"   accent="blue" onClick={()=>navigate("/admin/rooms")}/>
+          <ActionCard title={`${stats.allocatedBookings} Active Stays`} subtitle="View currently occupied rooms"   accent="blue" onClick={()=>navigate("/admin/active-stays")}/>
 
       </div>
     
