@@ -20,6 +20,7 @@ import AdminLogin from './Admin/Pages/AdminLogin';
 import ProtectedAdminRoute from './Admin/Routes/ProtectedAdminRoute';
 import RoomsCalendar from './Admin/Pages/RoomsCalendar';
 import RoomDirectory from './Admin/Pages/RoomDirectory';
+import RoomHistory from './Admin/Pages/RoomHistory';
 function App() {
 
   return (
@@ -51,6 +52,7 @@ function App() {
       <Route path='calendar' element={<BookingsCalendar/>}/>
       <Route path='active-stays' element={<Rooms/>}/>
       <Route path='rooms' element={<RoomDirectory/>}/>
+      <Route path='rooms-history' element={<RoomHistory/>}/>
       <Route path='rooms-calendar' element={<RoomsCalendar/>}/>
     {/* <Route path="invoices" element={<Invoices/>}/>
     <Route path="adminProfile" element={<AdminProfile/>}/>
