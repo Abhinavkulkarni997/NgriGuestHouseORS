@@ -69,4 +69,30 @@ const getRoomCalendar=async(req,res)=>{
 }
 
 
-module.exports={getRoomOccupancy,getRoomHistory,getRoomCalendar};
+const getRoomDirectory=async (req,res)=>{
+    try{
+        const rooms=await 
+        Room.find()
+        .sort({roomNumber:1})
+        .lean();
+        
+        const lastBookings=await Booking.find({allocatedRoom:{$ne:null}})
+        .sort({allocatedAt:-1})
+        .lean()
+
+        const lastBookingMap={};
+        lastBookingMap.forEach(b=>{
+            if(!lastBookingMap[b.allocatedRoom]){
+                lastBookingMap[b.allocatedRoom]=b;
+            }
+    });
+    const result=
+        res.json(result);
+    }catch(error){
+        console.error(error);
+        res.status(500).json("Failed to load room directory data");
+    }
+}
+
+
+module.exports={getRoomOccupancy,getRoomHistory,getRoomCalendar,getRoomDirectory};
