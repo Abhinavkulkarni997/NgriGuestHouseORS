@@ -6,7 +6,7 @@ const {getRoomOccupancy,getRoomHistory,getRoomCalendar,getRoomDirectory}=require
 router.get("/occupancy",adminAuth,getRoomOccupancy);
 router.get("/:roomId/history",adminAuth,getRoomHistory);
 router.get("/calendar",adminAuth,getRoomCalendar);
-router.get("/",adminAuth,getRoomDirectory);
+router.get("/directory",adminAuth,getRoomDirectory);
 
 
 

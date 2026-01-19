@@ -8,7 +8,7 @@ const RoomDirectory=()=>{
     const navigate=useNavigate();
 
     useEffect(()=>{
-        api.get("/admin/rooms/occupancy")
+        api.get("/admin/rooms/directory")
         .then(res=>setRooms(res.data))
         .catch(err=>console.error(err))
         .finally(()=>setLoading(false));
@@ -26,7 +26,7 @@ const RoomDirectory=()=>{
                     onClick={()=>navigate(`/admin/rooms/${room.roomId}`)}>
                     <h2 className="text-lg font-bold">Room {room.roomNumber}</h2>
                     <p className='text-sm text-gray-500'>{room.roomType}</p>
-
+                    
                         <div className='mt-3'>
                         <span className={`px-3 py-1 text-sm rounded-full
                              ${room.occupied 
@@ -40,6 +40,7 @@ const RoomDirectory=()=>{
                     </div>
                 ))}
             </div>
+            
             
         </div>
     )

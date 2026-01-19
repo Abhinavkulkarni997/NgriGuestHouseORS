@@ -33,6 +33,10 @@ const getRoomHistory=async(req,res)=>{
     try{
         const {roomId}=req.params;
 
+        if(!roomId || !mongoose.Types.ObjectId.isValid(roomId)){
+            return res.statue(400).json({message:"Invalid room ID"});
+        }
+
         const history=await Booking.find({
             allocatedRoom:roomId,
         })
