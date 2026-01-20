@@ -3,17 +3,17 @@ import {useParams} from 'react-router-dom';
 import api from '../../api/bookingapi';
 
 const RoomHistory=()=>{
-    const {roomId}=useParams();
+    const {roomNumber}=useParams();
     const [history,setHistory]=useState([]);
     const [loading,setLoading]=useState(true);
 
     useEffect(()=>{
-        api.get(`/admin/rooms/${roomId}/history`)
+        api.get(`/admin/rooms/${roomNumber}/history`)
         .then((res)=>setHistory(res.data))
         .catch((error)=>console.error(error))
         .finally(()=>setLoading(false));
 
-    },[roomId]);
+    },[roomNumber]);
 
     if(loading){return <p>Loading Room History....</p>}
 
@@ -41,7 +41,7 @@ const RoomHistory=()=>{
                                 {" "}
                                 To:{" "}{new Date(b.departureDateTime).toLocaleDateString()}
                             </p>
-                            
+
                             <p className='text-xs text-gray-400 mt-1'>
                                Booking ID: {b.bookingId}
                             </p>

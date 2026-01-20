@@ -52,7 +52,7 @@ function App() {
       <Route path='calendar' element={<BookingsCalendar/>}/>
       <Route path='active-stays' element={<Rooms/>}/>
       <Route path='rooms' element={<RoomDirectory/>}/>
-      <Route path='rooms/:roomId' element={<RoomHistory/>}/>
+      <Route path='rooms/:roomNumber/history' element={<RoomHistory/>}/>
       <Route path='rooms-calendar' element={<RoomsCalendar/>}/>
     {/* <Route path="invoices" element={<Invoices/>}/>
     <Route path="adminProfile" element={<AdminProfile/>}/>

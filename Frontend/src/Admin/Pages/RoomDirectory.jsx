@@ -20,20 +20,23 @@ const RoomDirectory=()=>{
             <h1 className='text-xl font-semibold mb-4'>Room Directory</h1>
 
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
-                {rooms.map(room=>(
-                    <div key={room.roomId}
+                {rooms.map((room,index)=>(
+                    <div key={index}
                     className='bg-white rounded-xl shadow p-4 border cursor-pointer hover:shadow-md'
-                    onClick={()=>navigate(`/admin/rooms/${room.roomId}`)}>
+                    onClick={()=>navigate(`/admin/rooms/${room.roomNumber}/history`)}>
                     <h2 className="text-lg font-bold">Room {room.roomNumber}</h2>
                     <p className='text-sm text-gray-500'>{room.roomType}</p>
                     
                         <div className='mt-3'>
-                        <span className={`px-3 py-1 text-sm rounded-full
-                             ${room.occupied 
+                        {/* <span className={`px-3 py-1 text-sm rounded-full
+                             ${room.roomNumber
                              ? "bg-red-100 text-red-600"
                              :"bg-green-100 text-green-600"
                              }`}>
                             {room.occupied ? "Occupied":"Vacant"}
+                        </span> */}
+                          <span className="px-3 py-1 text-sm rounded-full text-gray-600 bg-gray-100">
+                            Room {room.roomNumber}
                         </span>
                         </div>
                         <p className="mt-3 font-medium text-sm text-cyan-600 ">View History</p>

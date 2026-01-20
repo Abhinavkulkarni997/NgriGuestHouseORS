@@ -1,5 +1,6 @@
 const Booking=require('../models/Booking');
 const Room=require("../models/Room");
+const mongoose = require('mongoose');
 
 const getRoomOccupancy=async(req,res)=>{
     try{
@@ -31,17 +32,17 @@ const getRoomOccupancy=async(req,res)=>{
 
 const getRoomHistory=async(req,res)=>{
     try{
-        const {roomId}=req.params;
+        const {roomNumber}=req.params;
 
-        if(!roomId || !mongoose.Types.ObjectId.isValid(roomId)){
-            return res.statue(400).json({message:"Invalid room ID"});
+        if(!roomNumber){
+            return res.status(400).json({message:"Invalid room Number"});
         }
 
         const history=await Booking.find({
-            allocatedRoom:roomId,
+        roomNumber:roomNumber
         })
         .sort({allocatedAt:-1})
-        .select("bookingId applicantName arrivalDateTime departureDateTime status");
+        .select("bookingId applicantName arrivalDateTime departureDateTime status paymentBy roomType roomNumber");
 
         res.json(history);
     }catch(error){
