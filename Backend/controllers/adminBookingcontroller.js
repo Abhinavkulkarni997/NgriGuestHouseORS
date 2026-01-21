@@ -3,6 +3,7 @@ const Room =require('../models/Room');
 const path=require('path');
  const {sendApprovedEmail,sendRejectedEmail}=require('../services/mailservice');
 const { rmSync } = require('fs');
+const {generateInvoice}=require('../services/InvoiceService');
 
 
 // logic to fetch bookings
@@ -182,7 +183,7 @@ const vacateRoom=async(req,res)=>{
         console.log("Allowed statuses:", booking.schema.path("status").enumValues);
         await booking.save(); 
 
-        await booking.Invoice();
+        await generateInvoice(booking);
 
         res.status(200).json({success:true,message:"Room vacated successfully",booking})
     }catch(error){

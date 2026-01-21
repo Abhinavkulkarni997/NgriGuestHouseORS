@@ -14,17 +14,17 @@ module.exports={
         AC:200,
         NON_AC:160,
     },
-    NON_OFFICIAL:{
+    OFFICIAL_EXPERT:{
         label:"Non official/expert members invited for CSIR work",
         AC:200,
         NON_AC:160,
     },
-    SERVING_EMPLOYEES:{
+    ASI_PSU_EMPLOYEE:{
         label:"Serving employees of AcSIR/PSU's of DSIR (Official Purpose)",
         AC:300,
         NON_AC:240,
     },
-    NON_CSIR:{
+    OTHER_GUEST:{
         label:"Non CSIR/Other Guests",
         AC:600,
         NON_AC:500
