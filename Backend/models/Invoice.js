@@ -10,7 +10,34 @@ const invoiceSchema=new mongoose.Schema(
         },
         
             invoiceNumber:{
+                type:String,
+                required:true,
+                unique:true,
 
+            },
+            guestCategory:{
+                type:String,
+                required:true,
+            },
+            roomNumber:String,
+            roomType:String,
+            acType:{
+                type:String,
+                enum:["AC","NON_AC"],
+            },
+            ratePerDay:{
+                type:Number,
+                required:true,
+            },
+            numberOfDays:{
+                type:Number,
+                required:true,
+            },
+
+            baseAmount:Number,
+            getAmount:{
+                type:Number,
+                required:true,
             }
         
     }
