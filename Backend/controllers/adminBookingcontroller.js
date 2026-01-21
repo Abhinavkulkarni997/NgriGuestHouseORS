@@ -182,6 +182,8 @@ const vacateRoom=async(req,res)=>{
         console.log("Allowed statuses:", booking.schema.path("status").enumValues);
         await booking.save(); 
 
+        await booking.Invoice();
+
         res.status(200).json({success:true,message:"Room vacated successfully",booking})
     }catch(error){
         console.log("Error in vacating the room: ",error);
