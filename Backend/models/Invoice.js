@@ -35,10 +35,45 @@ const invoiceSchema=new mongoose.Schema(
             },
 
             baseAmount:Number,
-            getAmount:{
+            getPercent:{
                 type:Number,
                 required:true,
+            },
+
+            totalAmount:{
+                type:Number,
+                required:true
+            },
+            paymentBy:{
+                    type:String,
+                    required:true,
+
+                },
+            generatedAt:{
+                type:String,
+                required:true
+                },
+            gstAmount:{
+                type:String,
+                required:true
+            },
+            totalAmount:{
+                type:String,
+                required:true
+            },
+            paymentBy:{
+                type:String,
+                required:true
+            },
+            generatedAt:{
+                type:String,
+                required:true
+            }
+
+
             }
         
     }
 )
+
+module.exports=model("Invoice",invoiceSchema);

@@ -2,7 +2,8 @@
 import home from '../assets/AdminDashboard/Home/home.svg';
 import booking from '../assets/AdminDashboard/Home/booking.svg';
 import calendar from '../assets/AdminDashboard/Home/calendar.svg';
-import room from '../assets/AdminDashboard/Home/room.svg';
+import room from '../assets/AdminDashboard/Home/rooms.svg'
+import roomCalendar from '../assets/AdminDashboard/Home/room.svg';
 import invoices from '../assets/AdminDashboard/Home/invoices.svg';
 import profile from '../assets/AdminDashboard/Home/profile.svg';
 import settings from '../assets/AdminDashboard/Home/settings.svg'
@@ -30,7 +31,7 @@ const SideBar=({collapsed,mobileOpen,onCloseMobile})=>{
             id:4,name:"Rooms",url:'/rooms',icon:<img src={room} alt="Rooms" className='w-6 h-6'/>,title:"Rooms",
         },
         {
-            id:5,name:"Rooms Calendar",url:'/rooms-calendar',icon:<img src={room} className='w-6 h-6'/>,title:"Rooms Calendar",
+            id:5,name:"Rooms Calendar",url:'/rooms-calendar',icon:<img src={roomCalendar} className='w-6 h-6'/>,title:"Rooms Calendar",
         },
         
         {
