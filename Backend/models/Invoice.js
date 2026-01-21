@@ -8,12 +8,10 @@ const invoiceSchema=new mongoose.Schema(
             required:true,
             unique:true,
         },
-        
             invoiceNumber:{
                 type:String,
                 required:true,
                 unique:true,
-
             },
             guestCategory:{
                 type:String,
@@ -37,8 +35,9 @@ const invoiceSchema=new mongoose.Schema(
             baseAmount:Number,
             getPercent:{
                 type:Number,
-                required:true,
+                default:0,
             },
+            gstAmount:Number,
 
             totalAmount:{
                 type:Number,
@@ -46,13 +45,8 @@ const invoiceSchema=new mongoose.Schema(
             },
             paymentBy:{
                     type:String,
-                    required:true,
-
                 },
-            generatedAt:{
-                type:String,
-                required:true
-                },
+          
             gstAmount:{
                 type:String,
                 required:true
@@ -66,14 +60,13 @@ const invoiceSchema=new mongoose.Schema(
                 required:true
             },
             generatedAt:{
-                type:String,
-                required:true
+                type:Date,
+                default:Date.now,
             }
-
-
-            }
+            },
+            {timeStamps:true}
         
-    }
+    
 )
 
-module.exports=model("Invoice",invoiceSchema);
+module.exports=mongoose.model("Invoice",invoiceSchema);
