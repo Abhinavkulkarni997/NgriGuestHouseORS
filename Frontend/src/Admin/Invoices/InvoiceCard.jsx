@@ -1,0 +1,33 @@
+import {useNavigate} from "react-router-dom";
+
+const InvoiceCard=({invoice})=>{
+    const navigate=useNavigate();
+
+    return(
+        <div className="bg-white rounded-xl border shadow-sm p-4 flex flex-col justify-between">
+            <div>
+                <div className="flex justify-between items-center">
+                    <h2 className="font-semibold text-sm">
+                        Invoice #{invoice.invoiceNumber}
+                    </h2>
+                    <span className={`text-xs px-2 py-1 rounded-full ${invoice.status==="PAID"?"bg-green-100 text-green-600":"bg-yellow-100 text-yellow-600"}`}>{invoice.status}    
+                    </span>
+                    </div>
+
+                <p className="mt-2 text-sm text-gray-700">{invoice.guestName}</p>
+                <p className="text-xs text-gray-500">Room {invoice.roomNumber} {" "} {invoice.roomType}</p>
+            </div>
+
+            <div className="mt-4 flex justify-between items-center">
+                <p classname="font-semibold text-cyan-600">
+                    ₹{invoice.totalAmount}
+                </p>
+
+                <button onClick={()=>navigate(`/admin/invoices/${invoice._id}`)} className="text-sm text-cyan-600 font-medium hover:underline">View</button>
+            </div>
+
+        </div>
+    )
+}
+
+export default InvoiceCard;
