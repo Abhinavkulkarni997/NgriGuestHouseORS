@@ -22,7 +22,7 @@ const SideBar=({collapsed,mobileOpen,onCloseMobile})=>{
             id:1,name:'Bookings',url:'/bookings',icon:<img src={booking} alt="bookings" className="w-6 h-6"/>,title:"Bookings",
         },
         {
-            id:2,name:"Invoices",url:'/invoices',icon:<img src={invoices} alt="Invoices" className="w-6 h-6"/>,title:"Invoices",
+            id:2,name:"Invoices",url:'/invoices/:invoiceId',icon:<img src={invoices} alt="Invoices" className="w-6 h-6"/>,title:"Invoices",
         },
         {
             id:3,name:"Calendar",url:'/calendar',icon:<img src={calendar} alt="Calendar" className='w-6 h-6'/>,title:"Calendar",

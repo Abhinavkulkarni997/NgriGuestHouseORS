@@ -7,8 +7,9 @@ const InvoiceView=()=>{
     const [invoice,setInvoice]=useState(null);
 
     useEffect(()=>{
-        api.get("/admin/invoices/${invoicesId}")
-        .then((response)=>{response.data})
+        if(!invoiceId) return;
+        api.get(`/admin/invoices/${invoiceId}`)
+        .then((response)=>setInvoice(response.data))
         .catch((error)=>console.log(error));
     },[invoiceId]);
 

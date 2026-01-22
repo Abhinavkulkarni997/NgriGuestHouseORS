@@ -55,7 +55,7 @@ function App() {
       <Route path='rooms' element={<RoomDirectory/>}/>
       <Route path='rooms/:roomNumber/history' element={<RoomHistory/>}/>
       <Route path='rooms-calendar' element={<RoomsCalendar/>}/>
-    <Route path="invoices" element={<InvoiceView/>}/>
+    <Route path="invoices/:invoiceId" element={<InvoiceView/>}/>
     {/* <Route path="adminProfile" element={<AdminProfile/>}/>
     <Route path="settings" element={<Settings/>} />   */}
     </Route>
