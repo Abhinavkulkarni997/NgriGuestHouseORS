@@ -8,6 +8,7 @@ const adminRoutes=require("./routes/adminRoutes");
 const adminAuthRoutes=require("./routes/adminAuthRoutes");
 const adminDashboardRoutes=require('./routes/adminDashboardRoutes');
 const adminRoomRoutes=require('./routes/adminRoomRoutes');
+const adminInvoiceRoutes=require('./routes/InvoiceRoutes');
 const cookieParser=require("cookie-parser");
 const app=express();
 
@@ -33,6 +34,7 @@ app.use("/api",bookingRoutes);
 app.use('/api/admin',adminRoutes);
 app.use("/api/admin/dashboard",adminDashboardRoutes);
 app.use("/api/admin/rooms",adminRoomRoutes);
+app.use("/api/admin/invoices",adminInvoiceRoutes);
 
 
 // 

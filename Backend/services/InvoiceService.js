@@ -1,10 +1,31 @@
+const Invoice=require('../models/Invoice');
 const rateCard=require("../config/rateCard");
-const Invoice=require("../models/Invoice");
+const counter = require('../models/counter');
+
+
 const generateInvoice=async(booking)=>{
+    // invoice number
+    const counter=await counter.findOneAndUpdate(
+        {name:"invoice"},
+        {$inc:{seq:q}},
+        {new:true,upsert:true}
+    );
+
+    const invoiceNumber=`Inv-${String(counter.seq).padStart(5,"0")}`;
+
+    // rate calculation
     const category=booking.guestCategory;
+
+    if(!rateCard[category]){
+        throw new Error("Invalid guest category");
+    }
     const acType=booking.AcType="AC"?"AC":"NON_AC";
 
     const rate=rateCard[category][acType];
+
+    if(!rate){
+        throw new Error("Rate not found for category/ac Type");
+    }
 
     const days=Math.ceil(
         (new Date(booking.departureDateTime)-new Date(booking.arrivalDateTime))/(1000*60*60*24) 
@@ -12,12 +33,12 @@ const generateInvoice=async(booking)=>{
     const baseAmount=rate*days;
 
     const gstPercent=0;
-    const gstAmount=0;
+    const gstAmount=(baseAmount*gstPercent)/100;
     const totalAmount=baseAmount+gstAmount;
 
     const invoice=await Invoice.create({
         booking:booking._id,
-        invoiceNumber:`INV-${booking.bookingId}`,
+        invoiceNumber,
         guestCategory:category,
         roomNumber:booking.roomNumber,
         roomType:booking.roomType,

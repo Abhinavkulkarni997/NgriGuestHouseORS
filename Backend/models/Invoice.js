@@ -22,6 +22,7 @@ const invoiceSchema=new mongoose.Schema(
             acType:{
                 type:String,
                 enum:["AC","NON_AC"],
+                required:true,
             },
             ratePerDay:{
                 type:Number,
@@ -32,12 +33,19 @@ const invoiceSchema=new mongoose.Schema(
                 required:true,
             },
 
-            baseAmount:Number,
+            baseAmount:{
+                type:Number,
+                required:true,
+
+            },
             getPercent:{
                 type:Number,
                 default:0,
             },
-            gstAmount:Number,
+            gstAmount:
+            {type:Number,
+                default:0,
+            },
 
             totalAmount:{
                 type:Number,
@@ -45,28 +53,15 @@ const invoiceSchema=new mongoose.Schema(
             },
             paymentBy:{
                     type:String,
+                    required:true,
                 },
-          
-            gstAmount:{
-                type:String,
-                required:true
-            },
-            totalAmount:{
-                type:String,
-                required:true
-            },
-            paymentBy:{
-                type:String,
-                required:true
-            },
             generatedAt:{
                 type:Date,
                 default:Date.now,
-            }
             },
-            {timeStamps:true}
-        
-    
-)
+          
+            },
+            {timestamps:true}
+);
 
 module.exports=mongoose.model("Invoice",invoiceSchema);
