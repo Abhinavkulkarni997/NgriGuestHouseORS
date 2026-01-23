@@ -21,6 +21,7 @@ import ProtectedAdminRoute from './Admin/Routes/ProtectedAdminRoute';
 import RoomsCalendar from './Admin/Pages/RoomsCalendar';
 import RoomDirectory from './Admin/Pages/RoomDirectory';
 import RoomHistory from './Admin/Pages/RoomHistory';
+import InvoiceList from './Admin/Invoices/InvoiceList';
 import InvoiceView from './Admin/Invoices/InvoiceView';
 function App() {
 
@@ -55,6 +56,7 @@ function App() {
       <Route path='rooms' element={<RoomDirectory/>}/>
       <Route path='rooms/:roomNumber/history' element={<RoomHistory/>}/>
       <Route path='rooms-calendar' element={<RoomsCalendar/>}/>
+    <Route path="invoices" element={<InvoiceList/>}/>
     <Route path="invoices/:invoiceId" element={<InvoiceView/>}/>
     {/* <Route path="adminProfile" element={<AdminProfile/>}/>
     <Route path="settings" element={<Settings/>} />   */}

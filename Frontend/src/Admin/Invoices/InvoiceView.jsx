@@ -4,16 +4,22 @@ import api from "../../api/bookingapi";
 
 const InvoiceView=()=>{
     const {invoiceId}= useParams();
+    console.log("Invoice id from URL:",invoiceId);
+    console.log("Parameters",useParams());
     const [invoice,setInvoice]=useState(null);
 
     useEffect(()=>{
         if(!invoiceId) return;
         api.get(`/admin/invoices/${invoiceId}`)
-        .then((response)=>setInvoice(response.data))
-        .catch((error)=>console.log(error));
+        .then((response)=>{setInvoice(response.data),
+            console.log("Invoice Data ",response.data)}
+    ).catch((error)=>console.log(error));
     },[invoiceId]);
+   
 
     if(!invoice) return <p className="p-4">Loading Invoice...</p>;
+
+ 
 
     return(
         <div className="p-4 max-w-4xl mx-auto">

@@ -7,7 +7,9 @@ const InvoiceList=()=>{
 
     useEffect(()=>{
         api.get('/admin/invoices')
-        .then(response=>{setInvoices(response.data)})
+        .then(response=>{setInvoices(response.data),
+            console.log("invoiceList response data")
+        })
         .finally(()=>setLoading(false));
     },[]);
 
