@@ -10,16 +10,17 @@ const InvoiceCard=({invoice})=>{
                     <h2 className="font-semibold text-sm">
                         Invoice #{invoice.invoiceNumber}
                     </h2>
-                    <span className={`text-xs px-2 py-1 rounded-full ${invoice.status==="PAID"?"bg-green-100 text-green-600":"bg-yellow-100 text-yellow-600"}`}>{invoice.status}    
+                    <span className={`text-xs px-2 py-1 rounded-full text-gray-600 bg-gray-100`}>
+                           GENERATED   
                     </span>
                     </div>
 
-                <p className="mt-2 text-sm text-gray-700">{invoice.guestName}</p>
+                <p className="mt-2 text-sm text-gray-700">{invoice.guestCategory}</p>
                 <p className="text-xs text-gray-500">Room {invoice.roomNumber} {" "} {invoice.roomType}</p>
             </div>
 
             <div className="mt-4 flex justify-between items-center">
-                <p classname="font-semibold text-cyan-600">
+                <p className="font-semibold text-cyan-600">
                     ₹{invoice.totalAmount}
                 </p>
 

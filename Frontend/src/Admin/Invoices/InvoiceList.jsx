@@ -7,15 +7,17 @@ const InvoiceList=()=>{
 
     useEffect(()=>{
         api.get('/admin/invoices')
-        .then(response=>{setInvoices(response.data),
-            console.log("invoiceList response data")
+        .then(response=>{
+            console.log("invoiceList response data",response.data);
+            setInvoices(Array.isArray(response.data)? response.data:response.data.data||[]);
         })
+        .catch(err=>console.error(err))
         .finally(()=>setLoading(false));
     },[]);
 
     if(loading){return <p className="p-4">Loading invoices....</p>};
 
-    if(!invoices.length)
+    if(!Array.isArray(invoices) || invoices.length===0)
         return(
     <div className="p-6 text-center text-gray-500">
         No invoices generated yet
