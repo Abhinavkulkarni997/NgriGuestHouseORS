@@ -1,4 +1,8 @@
 const Invoice=require('../models/Invoice');
+const Booking=require('../models/Booking');
+const {generateInvoice}=require('../services/InvoiceService');
+
+
 
 const getAllInvoices=async(req,res)=>{
     const invoices=await Invoice.find()
@@ -17,4 +21,21 @@ res.json(invoice);
 }
 
 
-module.exports={getAllInvoices,getInvoiceById};
+const createInvoiceForBooking=async(req,res)=>{
+    try{
+        const booking =await Booking.findById(req.params.bookingId);
+        if(!booking){
+            return res.status(404).json({message:"Booking not found"});
+        }
+
+        const invoice=await generateInvoice(booking);
+        res.status(201).json(invoice);
+    }catch(error){
+        console.error(error);
+        res.status(500).json({message:"Server error"});
+    }
+
+    
+}
+
+module.exports={getAllInvoices,getInvoiceById,createInvoiceForBooking};
