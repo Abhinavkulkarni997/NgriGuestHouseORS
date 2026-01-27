@@ -4,6 +4,7 @@ const Counter = require('../models/counter');
 
 
 const generateInvoice=async(booking)=>{
+    console.log('Full Booking Object:', booking);
     // invoice number
     const counter=await Counter.findOneAndUpdate(
         {name:"invoice"},
@@ -19,7 +20,7 @@ const generateInvoice=async(booking)=>{
     console.log('Guest Category:', category);
     console.log('Available rate card categories:', Object.keys(rateCard));
 
-    if(!rateCard[category]){
+    if(!category || !rateCard[category]){
         throw new Error("Invalid guest category");
     }
     const acType=booking.AcType === "AC"?"AC":"NON_AC";
