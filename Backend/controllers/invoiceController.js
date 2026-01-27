@@ -28,14 +28,39 @@ const createInvoiceForBooking=async(req,res)=>{
             return res.status(404).json({message:"Booking not found"});
         }
 
+
+        console.log("guest Category ",booking.guestCategory);
+        console.log("AC Type:",booking.AcType);
+
+        console.log('Full Booking Object:', JSON.stringify(booking, null, 2));
+    
+
         const invoice=await generateInvoice(booking);
         res.status(201).json(invoice);
     }catch(error){
         console.error(error);
         res.status(500).json({message:"Server error"});
     }
-
-    
 }
 
-module.exports={getAllInvoices,getInvoiceById,createInvoiceForBooking};
+const updateInvoiceForBooking=async(req,res)=>{
+        try{
+            const {guestCategory,AcType}=req.body;
+            const booking=await Booking.findByIdAndUpdate(req.params.id,
+                {guestCategory,AcType},
+                {new:true}
+            );
+            
+            if(!booking){
+                return res.status(404).json({message:"Invoice not found"});
+            }
+
+            res.json({message:"Booking updated successfully"},booking);
+
+        }catch(error){
+            console.error(error);
+            res.status(500).json({message:"Server error",error: error.message});
+        }
+    }
+
+module.exports={getAllInvoices,getInvoiceById,createInvoiceForBooking, updateInvoiceForBooking};
