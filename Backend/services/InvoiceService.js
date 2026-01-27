@@ -1,31 +1,35 @@
 const Invoice=require('../models/Invoice');
 const rateCard=require("../config/rateCard");
-const counter = require('../models/counter');
+const Counter = require('../models/counter');
 
 
 const generateInvoice=async(booking)=>{
     // invoice number
-    const counter=await counter.findOneAndUpdate(
+    const counter=await Counter.findOneAndUpdate(
         {name:"invoice"},
-        {$inc:{seq:q}},
+        {$inc:{seq:1}},
         {new:true,upsert:true}
     );
 
-    const invoiceNumber=`Inv-${String(counter.seq).padStart(5,"0")}`;
+    const invoiceNumber = `Inv-${String(counter.seq).padStart(5,"0")}`;
 
     // rate calculation
     const category=booking.guestCategory;
 
+    console.log('Guest Category:', category);
+    console.log('Available rate card categories:', Object.keys(rateCard));
+
     if(!rateCard[category]){
         throw new Error("Invalid guest category");
     }
-    const acType=booking.AcType="AC"?"AC":"NON_AC";
+    const acType=booking.AcType === "AC"?"AC":"NON_AC";
 
     const rate=rateCard[category][acType];
 
-    if(!rate){
-        throw new Error("Rate not found for category/ac Type");
+   if (!rate) {
+        throw new Error(`Rate not found for category: ${category}, AC Type: ${acType}`);
     }
+    
 
     const days=Math.ceil(
         (new Date(booking.departureDateTime)-new Date(booking.arrivalDateTime))/(1000*60*60*24) 

@@ -38,7 +38,7 @@ const invoiceSchema=new mongoose.Schema(
                 required:true,
 
             },
-            getPercent:{
+            gstPercent:{
                 type:Number,
                 default:0,
             },

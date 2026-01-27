@@ -70,6 +70,25 @@ const bookingSchema =new mongoose.Schema(
             type:String,
         },
 
+
+         guestCategory: {
+            type: String,
+            enum: [
+                'CSIR_EMPLOYEE',
+                'PROJECT_FELLOW',
+                'NON_DEPENDANT_FAMILY',
+                'OFFICIAL_EXPERT',
+                'ASI_PSU_EMPLOYEE',
+                'OTHER_GUEST',
+                'NRI_FOREIGN'
+            ],
+            required: true
+        },
+        AcType: {
+            type: String,
+            enum: ["AC", "NON_AC"],
+            required: true
+        },
         // step 2:Visit Details
         purpose:{
             type:String,
