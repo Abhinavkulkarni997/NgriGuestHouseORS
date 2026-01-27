@@ -11,7 +11,7 @@ const adminAuth=require('../middleware/adminAuth');
 router.get("/",adminAuth,getAllInvoices);
 router.get("/:id",adminAuth,getInvoiceById);
 router.post("/booking/:bookingId",adminAuth,createInvoiceForBooking);
-router.patch("/booking/:bookingId/update",adminAuth,updateInvoiceForBooking);
+// router.patch("/booking/:bookingId/update",adminAuth,updateInvoiceForBooking);
 
 
 module.exports=router;

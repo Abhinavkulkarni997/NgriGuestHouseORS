@@ -43,24 +43,24 @@ const createInvoiceForBooking=async(req,res)=>{
     }
 }
 
-const updateInvoiceForBooking=async(req,res)=>{
-        try{
-            const {guestCategory,AcType}=req.body;
-            const booking=await Booking.findByIdAndUpdate(req.params.id,
-                {guestCategory,AcType},
-                {new:true}
-            );
+// const updateInvoiceForBooking=async(req,res)=>{
+//         try{
+//             const {guestCategory,AcType}=req.body;
+//             const booking=await Booking.findByIdAndUpdate(req.params.id,
+//                 {guestCategory,AcType},
+//                 {new:true}
+//             );
             
-            if(!booking){
-                return res.status(404).json({message:"Invoice not found"});
-            }
+//             if(!booking){
+//                 return res.status(404).json({message:"Invoice not found"});
+//             }
 
-            res.json({message:"Booking updated successfully"},booking);
+//             res.json({message:"Booking updated successfully"},booking);
 
-        }catch(error){
-            console.error(error);
-            res.status(500).json({message:"Server error",error: error.message});
-        }
-    }
+//         }catch(error){
+//             console.error(error);
+//             res.status(500).json({message:"Server error",error: error.message});
+//         }
+//     }
 
-module.exports={getAllInvoices,getInvoiceById,createInvoiceForBooking, updateInvoiceForBooking};
+module.exports={getAllInvoices,getInvoiceById,createInvoiceForBooking};
