@@ -89,7 +89,7 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
              {booking.status==='PENDING' &&(
                  <div className='flex flex-wrap gap-3 pt-3 border-t'>
             <button className='px-4 py-2 text-sm border rounded-lg bg-cyan-600 hover:bg-cyan-700 text-white '>
-                <a href={`http://localhost:5000/api/admin/bookings/${booking._id}/idCard`} target="_blank" rel="noreferrer" className='text-white'>View ID Card</a>
+                <a href={`/api/admin/bookings/${booking._id}/idCard`} target="_blank" rel="noreferrer" className='text-white'>View ID Card</a>
             </button>
             <input type='text' value={remarks} onChange={(e)=>setRemarks(e.target.value)} placeholder='Add Remarks' className='flex-1 px-3 py-2 border rounded text-sm'/>
             <button onClick={()=>onApprove(booking._id,remarks)} className='px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700'>
