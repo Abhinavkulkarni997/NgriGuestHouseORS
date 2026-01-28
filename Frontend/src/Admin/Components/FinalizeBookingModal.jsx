@@ -52,7 +52,13 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
                 className='w-full border p-2 mt-3'
                 >
                     <option value="">Select Category</option>
-
+                    <option value="CSIR_EMPLOYEE">CSIR Employee</option>
+                    <option value="PROJECT_FELLOW">Project Fellow</option>
+                    <option value="NON_DEPENDANT_FAMILY">Non Dependant Family</option>
+                    <option value="OFFICIAL_EXPERT">Official Expert</option>
+                    <option value="ASI_PSU_EMPLOYEE">ASI PSU Employee</option>
+                    <option value="OTHER_GUEST">Other Guest</option>
+                    <option value="NRI_FOREIGN">NRI/Foreign</option>
 
                     </select>
             </div>
