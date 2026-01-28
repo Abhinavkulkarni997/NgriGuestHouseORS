@@ -111,6 +111,13 @@ const finalizeBooking=async(req,res)=>{
             return res.status(404).json({success:false,message:"Booking not found"});
         }
 
+        if (booking.status === "FINALIZED") {
+      return res.status(400).json({
+        success: false,
+        message: "Booking already finalized"
+      });
+    }
+
         if(booking.status!=="VACATED"){
             return res.status(400).json({success:false,message:"Only vacated bookings can be finalized"});
         }
@@ -129,7 +136,7 @@ const finalizeBooking=async(req,res)=>{
 
         // Freeze billing values
         booking.guestCategory=guestCategory;
-        booking.acType=acType;
+        booking.acType=acType ||booking.acType;
         booking.ratePerDay=ratePerDay;
         booking.gstPercent=gstPercent;
         booking.numberOfDays=numberOfDays;
@@ -175,11 +182,11 @@ const allocateRoom=async(req,res)=>{
             return res.status(404).json({success:false,message:"Room not available for allocation"});
         }
 
-        if (!booking.guestCategory || !booking.acType) {
-            return res.status(400).json({
-            message: "Finalize Guest Category and AC Type before allocating room"
-            });
-        }
+        // if (!booking.guestCategory || !booking.acType) {
+        //     return res.status(400).json({
+        //     message: "Finalize Guest Category and AC Type before allocating room"
+        //     });
+        // }
         // Allocate room to booking
         booking.allocatedRoom=room._id;
         booking.roomNumber=room.roomNumber;
