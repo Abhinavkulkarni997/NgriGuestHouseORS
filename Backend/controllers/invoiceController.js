@@ -30,11 +30,15 @@ const createInvoiceForBooking=async(req,res)=>{
 
 
         console.log("guest Category ",booking.guestCategory);
-        console.log("AC Type:",booking.AcType);
+        console.log("aC Type:",booking.acType);
 
         console.log('Full Booking Object:', JSON.stringify(booking, null, 2));
-    
 
+        if (!booking.guestCategory || !booking.acType) {
+  return res.status(400).json({
+    message: "Cannot generate invoice. Guest Category or AC Type is missing in booking."
+  });
+}
         const invoice=await generateInvoice(booking);
         res.status(201).json(invoice);
     }catch(error){

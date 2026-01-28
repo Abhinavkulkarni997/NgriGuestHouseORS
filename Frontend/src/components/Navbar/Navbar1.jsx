@@ -51,7 +51,7 @@ const navItems=[
 
   return (
     
-    <nav className={`w-full fixed z-50 left-0 top-0  transition-all duration-300 rounded-lg ${navBg?'bg-white shadow-md':hasHero?'bg-transparent':'bg-white'}`}>
+    <nav className={`w-full fixed z-50 left-0 top-0  transition-all duration-300 rounded-b-lg ${navBg?'bg-white shadow-md':hasHero?'bg-transparent':'bg-white'}`}>
         <div className='max-w-7xl mx-auto flex  items-center justify-between px-6 py-4'>
 
             {/* Logo content on the left */}

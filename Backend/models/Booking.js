@@ -70,7 +70,6 @@ const bookingSchema =new mongoose.Schema(
             type:String,
         },
 
-
          guestCategory: {
             type: String,
             enum: [
@@ -84,7 +83,7 @@ const bookingSchema =new mongoose.Schema(
             ],
             required: true
         },
-        AcType: {
+        acType: {
             type: String,
             enum: ["AC", "NON_AC"],
             required: true

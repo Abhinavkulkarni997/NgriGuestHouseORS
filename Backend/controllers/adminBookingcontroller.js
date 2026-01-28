@@ -100,6 +100,42 @@ const rejectBooking=async(req,res)=>{
     }
 }
 
+// 
+const finalizeBooking=async(req,res)=>{
+    try{
+        const {guestCategory,acType}=req.body;
+        const bookingId=req.params.id;
+
+        if(!guestCategory || !acType){
+            return res.status(400).json({
+                success:false,
+                message:"Guest Category and AC Type are required to finalize booking"
+            });
+        }
+        const booking=await Bookings.findById(bookingId);
+
+        if(!booking){
+            return res.status(404).json({success:false,message:"Booking not found"});
+        }
+
+        if(booking.status!=="APPROVED"){
+            return res.status(400).json({success:false,message:"Only approved bookings can be finalized"});
+        }
+
+        booking.status="APPROVED";
+        booking.guestCategory=guestCategory;
+        booking.acType=acType;
+        await booking.save();
+
+        res.status(200).json({success:true,message:"Booking finalized successfully",booking});
+    }catch(error){
+        console.error("Error in finalizing booking:",error);
+        res.status(500).json({success:false,message:"Server Error failed to finalize booking"})
+    }
+}
+
+
+
 // logic for allocating room
 const allocateRoom=async(req,res)=>{
     try{
@@ -119,6 +155,11 @@ const allocateRoom=async(req,res)=>{
             return res.status(404).json({success:false,message:"Room not available for allocation"});
         }
 
+        if (!booking.guestCategory || !booking.acType) {
+            return res.status(400).json({
+            message: "Finalize Guest Category and AC Type before allocating room"
+            });
+        }
         // Allocate room to booking
         booking.allocatedRoom=room._id;
         booking.roomNumber=room.roomNumber;
@@ -248,5 +289,5 @@ const getCalendarBookings=async(req,res)=>{
 
 
 
-module.exports={getAllBookings,approveBooking,rejectBooking,idCardView,allocateRoom,getAvailableRooms,vacateRoom,getCalendarBookings};
+module.exports={getAllBookings,approveBooking,rejectBooking,idCardView,allocateRoom,getAvailableRooms,vacateRoom,getCalendarBookings,finalizeBooking};
 

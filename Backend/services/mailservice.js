@@ -13,9 +13,9 @@ const path=require('path');
         //  user: 'ngriguesthouse@hotmail.com',
         // pass:'a8121511670!V',
     },
-      tls: {
-        ciphers: 'SSLv3' 
-    },
+    //   tls: {
+    //     ciphers: 'SSLv3' 
+    // },
 });
 
 mailTransporter.verify((err, success) => {
@@ -75,7 +75,7 @@ const sendAdminAlertEmail=async({bookingId,applicantName})=>{
     }
      try{
     await mailTransporter.sendMail(mailOptions);
-    console.log("Guest House Booking email sent to",to);
+    console.log("Guest House Booking email sent to", process.env.EMAIL_ADMIN);
    }
     catch(error){
         console.log("Error in sending Email:",error.message);
@@ -100,14 +100,14 @@ const sendApprovedEmail=async(booking)=>{
     })
 }
 
-const sendRoomAllocationEmail=async()=>{
+const sendRoomAllocationEmail=async(booking)=>{
     const subject=`Room Allocated - Booking ${booking.bookingId}`;
     const html=`<p>Dear ${booking.applicantName}</p>
     <p>Your Room has been <b>successfully allocated</b>.</p>
 
     <p><b>Booking ID:</b>${booking.bookingId}</p>
     <p><b>Room Number:</b>${booking.roomNumber}</p>
-    <p><b>Room Type:</b>%{booking.roomType}</p>
+    <p><b>Room Type:</b>${booking.roomType}</p>
 
     <p><b>Check-in:</b>${new Date(booking.arrivalDateTime).toLocaleString()}</p>
     <p><b>Check-out:</b>${new Date(booking.departureDateTime).toLocaleString()}</p>
@@ -118,6 +118,7 @@ const sendRoomAllocationEmail=async()=>{
     
     `;
     await WebTransportError.sendMail({
+         from: `"CSIR-NGRI Guest House" <${process.env.EMAIL_USER}>`,
         to:booking.officialEmail,
         subject,
         html,
