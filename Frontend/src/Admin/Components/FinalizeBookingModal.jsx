@@ -42,9 +42,9 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
 
 
                 <p><b>Booking ID:</b> {booking.bookingId}</p>
-                <p><b>Guest Category:</b> {booking.guestCategory}</p>
+                <p><b>Guest Category:</b> {guestCategory | "Not selected"}</p>
                 <p><b>Room:</b> {booking.roomNumber}({booking.roomType})</p>
-                <p><b>Remarks:</b> {remarks}</p>
+           
 
 
                 <select value={guestCategory}
@@ -63,15 +63,35 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
                     </select>
 
 
-                    <input type="number" value={ratePerDay} onChange={(e)=>setRatePerDay(e.target.value)} className='w-full border p-2 mt-3' placeholder="Rate Per Day"/>Rate Per Day
-                    <input type="number" value={gstPercent} onChange={(e)=>setGstPercent(e.target.value)} className='w-full border p-2 mt-3' placeholder="GST Percent"/>Gst Percent
-                    <textarea value={remarks} onChange={(e)=>setRemarks(e.target.value)} className='w-full border p-2 mt-3' placeholder="Remarks"/> Remarks
+                    <input 
+                    type="number" 
+                    value={ratePerDay} 
+                    onChange={(e)=>setRatePerDay(e.target.value)} 
+                    className='w-full border p-2 mt-3'
+                     placeholder="Rate Per Day"/>
 
+                    <input
+                     type="number"
+                      value={gstPercent} 
+                      onChange={(e)=>setGstPercent(e.target.value)} 
+                      className='w-full border p-2 mt-3' 
+                      placeholder="GST Percent"/>
+                      
+                    <textarea value={remarks}
+                     onChange={(e)=>setRemarks(e.target.value)}
+                     className='w-full border p-2 mt-3' placeholder="Remarks"/> 
+
+                     <div className='flex justify-end gap-3 mt-4'>
+                        <button onClick={onClose}>Cancel</button>
+                        <button onClick={handleFinalize} 
+                        disabled={loading} 
+                        className='bg-green-600 text-white px-4 py-2 rounded'>
+                            {loading ? "Finalizing...":"Finalize & Generate Invoice"}
+                        </button>
+                     </div>
             </div>
-
         </div>
-        
-    )
-}
+    );
+};
 
 export default FinalizeBookingModal;

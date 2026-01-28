@@ -1,7 +1,7 @@
 const Bookings=require('../models/Booking');
 const Room =require('../models/Room');
 const path=require('path');
- const {sendApprovedEmail,sendRejectedEmail}=require('../services/mailservice');
+ const {sendRoomAllocationEmail,sendApprovedEmail,sendRejectedEmail}=require('../services/mailservice');
 const { rmSync } = require('fs');
 const {generateInvoice}=require('../services/InvoiceService');
 
@@ -100,34 +100,54 @@ const rejectBooking=async(req,res)=>{
     }
 }
 
-// 
+// finalize booking logic for invoice generation
 const finalizeBooking=async(req,res)=>{
     try{
-        const {guestCategory,acType}=req.body;
-        const bookingId=req.params.id;
+        const {guestCategory,acType,ratePerDay,gstPercent=0,remarks}=req.body;
 
-        if(!guestCategory || !acType){
-            return res.status(400).json({
-                success:false,
-                message:"Guest Category and AC Type are required to finalize booking"
-            });
-        }
-        const booking=await Bookings.findById(bookingId);
+        const booking=await Bookings.findById(req.params.id);
 
         if(!booking){
             return res.status(404).json({success:false,message:"Booking not found"});
         }
 
-        if(booking.status!=="APPROVED"){
-            return res.status(400).json({success:false,message:"Only approved bookings can be finalized"});
+        if(booking.status!=="VACATED"){
+            return res.status(400).json({success:false,message:"Only vacated bookings can be finalized"});
         }
 
-        booking.status="APPROVED";
+        if(!guestCategory || !ratePerDay){
+            return res.status(400).json({
+                success:false,
+                message:"Guest Category and rate per day are required to finalize booking"
+            });
+        }
+
+        // calculation of  stay duration
+        const arrival=new Date(booking.arrivalDateTime);
+        const vacated=new Date(booking.vacatedAt);
+        const numberOfDays=Math.max(1,Math.ceil((vacated-arrival)/(1000*60*60*24)));
+
+        // Freeze billing values
         booking.guestCategory=guestCategory;
         booking.acType=acType;
+        booking.ratePerDay=ratePerDay;
+        booking.gstPercent=gstPercent;
+        booking.numberOfDays=numberOfDays;
+        booking.finalizeRemarks=remarks||"";
+        booking.status="FINALIZED";
+        booking.finalizedAt=new Date();
+
         await booking.save();
 
-        res.status(200).json({success:true,message:"Booking finalized successfully",booking});
+        // Generate Invoice
+        const invoice=await generateInvoice(booking);
+
+        booking.invoice=invoice._id;
+        await booking.save();
+
+
+       
+        res.status(200).json({success:true,message:"Booking finalized successfully",invoiceId:invoice._id});
     }catch(error){
         console.error("Error in finalizing booking:",error);
         res.status(500).json({success:false,message:"Server Error failed to finalize booking"})
@@ -224,7 +244,7 @@ const vacateRoom=async(req,res)=>{
         console.log("Allowed statuses:", booking.schema.path("status").enumValues);
         await booking.save(); 
 
-        await generateInvoice(booking);
+        // await generateInvoice(booking);
 
         res.status(200).json({success:true,message:"Room vacated successfully",booking})
     }catch(error){
