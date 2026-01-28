@@ -61,6 +61,14 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
                     <option value="NRI_FOREIGN">NRI/Foreign</option>
 
                     </select>
+
+
+                    <input type="number" value={ratePerDay} onChange={(e)=>setRatePerDay(e.target.value)} className='w-full border p-2 mt-3' placeholder="Rate Per Day"/>Rate Per Day
+
+                    <input type="number" value={gstPercent} onChange={(e)=>setGstPercent(e.target.value)} className='w-full border p-2 mt-3' placeholder="GST Percent"/>Gst Percent
+
+                    <textarea value={remarks} onChange={(e)=>setRemarks(e.target.value)} className='w-full border p-2 mt-3' placeholder="Remarks"/> Remarks
+
             </div>
 
         </div>
