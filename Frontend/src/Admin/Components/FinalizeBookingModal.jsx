@@ -36,8 +36,27 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
     }
 
     return(
-        <div className=''>
-            
+        <div className='fixed inset-0 bg-black/50 flex justify-center items-center z-50'>
+            <div className='bg-white rounded-lg p-6 w-full max-w-md'>
+                <h2 className='text-lg font-bold mb-4'>Finalize Booking</h2>
+
+
+                <p><b>Booking ID:</b> {booking.bookingId}</p>
+                <p><b>Guest Category:</b> {booking.guestCategory}</p>
+                <p><b>Room:</b> {booking.roomNumber}({booking.roomType})</p>
+                <p><b>Remarks:</b> {remarks}</p>
+
+
+                <select value={guestCategory}
+                onChange={(e)=>setGuestCategory(e.target.value)}
+                className='w-full border p-2 mt-3'
+                >
+                    <option value="">Select Category</option>
+
+
+                    </select>
+            </div>
+
         </div>
         
     )

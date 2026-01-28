@@ -84,6 +84,8 @@ const sendAdminAlertEmail=async({bookingId,applicantName})=>{
 }
 
 const sendApprovedEmail=async(booking)=>{
+
+    try{
     const templatePath=path.resolve(__dirname,"../template/bookingApproved.html");
     let html=fs.readFileSync(templatePath,"utf-8");
     html=html
@@ -97,10 +99,15 @@ const sendApprovedEmail=async(booking)=>{
         to:booking.officialEmail,
         subject:"Booking Approved-CSIR-NGRI Guest House",
         html,
-    })
+    });
+    console.log("Approved mail sent to:",booking.officialEmail);
+}catch(error){
+    console.error("Error in sending approved email:",error.message);
+}
 }
 
 const sendRoomAllocationEmail=async(booking)=>{
+    try{
     const subject=`Room Allocated - Booking ${booking.bookingId}`;
     const html=`<p>Dear ${booking.applicantName}</p>
     <p>Your Room has been <b>successfully allocated</b>.</p>
@@ -124,9 +131,17 @@ const sendRoomAllocationEmail=async(booking)=>{
         html,
     });
 
+
+    console.log("allocation mail sent to:",booking.officialEmail);
+
+}catch(error){
+    console.error("Error in sending room allocation email:",error.message);
+}
+
 };
 
 const sendRejectedEmail=async(booking)=>{
+    try{
     const templatePath=path.resolve(__dirname,"../template/bookingRejected.html");
     let html=fs.readFileSync(templatePath,"utf-8");
     html=html
@@ -141,6 +156,10 @@ const sendRejectedEmail=async(booking)=>{
         subject:"Booking Rejected-CSIR-NGRI Guest House",
         html,
     })
+    console.log("Rejected mail sent to:",booking.officialEmail);
+}catch(error){
+    console.error("Error in sending rejected email:",error.message);
+}
 }
 
 module.exports= {sendAcknowledgementEmail,sendAdminAlertEmail,sendApprovedEmail,sendRejectedEmail,sendRoomAllocationEmail};
