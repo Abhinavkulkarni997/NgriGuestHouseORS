@@ -81,12 +81,14 @@ const bookingSchema =new mongoose.Schema(
                 'OTHER_GUEST',
                 'NRI_FOREIGN'
             ],
-            required: true
+         
+            default: null
         },
         acType: {
             type: String,
             enum: ["AC", "NON_AC"],
-            required: true
+            
+            default:null
         },
         // step 2:Visit Details
         purpose:{
@@ -131,7 +133,7 @@ const bookingSchema =new mongoose.Schema(
         // Booking status
         status:{
             type:String,
-            enum:["PENDING","APPROVED","REJECTED","ALLOCATED","VACATED"],
+            enum:["PENDING","APPROVED","REJECTED","ALLOCATED","VACATED","FINALIZED"],
             default:"PENDING",
         },
         adminRemarks:{

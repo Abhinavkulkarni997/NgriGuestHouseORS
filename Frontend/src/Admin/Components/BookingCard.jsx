@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import AllocateRoomModal from './AllocateRoomModal';
 import VacateRoomModal from './VacateRoomModal';
+import FinalizeBookingModal from './FinalizeBookingModal';
 
 
 const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
@@ -8,6 +9,7 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
     const [remarks,setRemarks]=useState('');
     const [showAllocateModal,setShowAllocateModal]=useState(false);
     const [showVacateModal,setShowVacateModal]=useState(false);
+    const [showFinalizeModal,setShowFinalizeModal]=useState(false);
 
     // const hasRooms=availableRooms?.length>0;
    
@@ -157,6 +159,25 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
                     )}
                 </div>
             )}
+
+
+            {booking.status === "VACATED" && (
+  <button
+    onClick={() => setShowFinalizeModal(true)}
+    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+  >
+    Finalize Booking
+  </button>
+)}
+
+{showFinalizeModal && (
+  <FinalizeBookingModal
+    booking={booking}
+    bookingId={booking._id}
+    onClose={() => setShowFinalizeModal(false)}
+    onSuccess={onAllocate} // refresh list
+  />
+)}
             
             </div>
             )}

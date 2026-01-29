@@ -33,7 +33,7 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
         }finally{
             setLoading(false);
         }
-    }
+    };
 
     return(
         <div className='fixed inset-0 bg-black/50 flex justify-center items-center z-50'>
@@ -42,7 +42,7 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
 
 
                 <p><b>Booking ID:</b> {booking.bookingId}</p>
-                <p><b>Guest Category:</b> {guestCategory | "Not selected"}</p>
+                <p><b>Guest Category:</b> {guestCategory || "Not selected"}</p>
                 <p><b>Room:</b> {booking.roomNumber}({booking.roomType})</p>
            
 
@@ -62,7 +62,7 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
 
                     </select>
 
-
+                    <label className='mt-3 block font-medium'>Rate Per Day:</label>
                     <input 
                     type="number" 
                     value={ratePerDay} 
@@ -70,6 +70,7 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
                     className='w-full border p-2 mt-3'
                      placeholder="Rate Per Day"/>
 
+                     <label className='mt-3 block font-medium'>gstPercent:</label>
                     <input
                      type="number"
                       value={gstPercent} 

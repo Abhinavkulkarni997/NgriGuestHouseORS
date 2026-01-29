@@ -2,6 +2,9 @@ const nodemailer=require('nodemailer');
 const fs=require('fs');
 const path=require('path');
 // creation of transportation object 
+
+console.log("EMAIL_USER =", process.env.EMAIL_USER);
+console.log("EMAIL_PASS length =", process.env.EMAIL_PASS?.length);
  const mailTransporter=nodemailer.createTransport({
      service:'gmail',
     // service:'smtp.office365.com',
