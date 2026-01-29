@@ -6,15 +6,18 @@ const path=require('path');
 console.log("EMAIL_USER =", process.env.EMAIL_USER);
 console.log("EMAIL_PASS length =", process.env.EMAIL_PASS?.length);
  const mailTransporter=nodemailer.createTransport({
-     service:'gmail',
+     host:"smtp.mail.yahoo.com",
     // service:'smtp.office365.com',
-    // secure:false,
-    // port:587,
-    port:465,
-    secure:true,
+    // service:"gmail",
+    secure:false,
+    port:587,
+    // requireTLS:true,
+    // port:465,
+    // secure:true,
+    // useSsl:true,
     auth:{
-        user:`ngriguesthouse@gmail.com`,
-        pass:`qhvztonuibpdkzkq`,
+        user:process.env.EMAIL_USER,
+        pass:process.env.EMAIL_PASS,
         //  user: 'ngriguesthouse@hotmail.com',
         // pass:'a8121511670!V',
     },
@@ -22,6 +25,9 @@ console.log("EMAIL_PASS length =", process.env.EMAIL_PASS?.length);
     //     ciphers: 'SSLv3' 
     // },
 });
+
+
+
 
 mailTransporter.verify((err, success) => {
   if (err) {
