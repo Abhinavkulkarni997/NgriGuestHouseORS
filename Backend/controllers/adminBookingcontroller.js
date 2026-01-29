@@ -129,6 +129,12 @@ const finalizeBooking=async(req,res)=>{
             });
         }
 
+        if(!booking.roomType){
+            return res.status(400).json({
+                success:false,
+                message:"Room Type missing in booking, cannot finalize"
+            });
+        }
         // calculation of  stay duration
         const arrival=new Date(booking.arrivalDateTime);
         const vacated=new Date(booking.vacatedAt);

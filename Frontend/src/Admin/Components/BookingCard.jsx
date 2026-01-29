@@ -162,13 +162,13 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
 
 
             {booking.status === "VACATED" && (
-  <button
-    onClick={() => setShowFinalizeModal(true)}
-    className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
-  >
-    Finalize Booking
-  </button>
-)}
+            <button
+                onClick={() => setShowFinalizeModal(true)}
+                 className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                >
+                Finalize Booking
+            </button>
+            )}
 
 {showFinalizeModal && (
   <FinalizeBookingModal

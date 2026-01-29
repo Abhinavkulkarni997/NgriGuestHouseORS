@@ -34,16 +34,16 @@ const InvoiceView=()=>{
             </div>
 
             <div className="grid sm:grid-cols-2 gap-4 text-sm">
-                <div>
+                <div className="mt-2 pt-4">
                     <p className="font-medium">Guest</p>
                     <p>{invoice.guestName}</p>
                     <p className="text-gray-500">{invoice.category}</p>
                 </div>
 
-                <div>
+                <div className="mt-2 pt-4">
                     <p className="font-medium">Room</p>
-                    <p>Room {invoice.roomNumber}</p>
-                    <p className="">{invoice.roomType}</p>
+                    <p className="mt-2">Room {invoice.roomNumber}</p>
+                    <p className="mt-2">{invoice.roomType}</p>
                 </div>
             </div>
 

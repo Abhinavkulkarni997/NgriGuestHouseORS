@@ -2,7 +2,7 @@ import React ,{useState} from 'react';
 import api from '../../api/bookingapi';
 
 const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
-    const [guestCategory,setGuestCategory]=useState(booking.guests?.[0]?.category||"");
+    const [guestCategory,setGuestCategory]=useState(booking.guestCategory||"");
     const [acType,setAcType]=useState(booking.acType||"");
     const [ratePerDay,setRatePerDay]=useState("");
     const [gstPercent,setGstPercent]=useState(0);
@@ -62,7 +62,7 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
 
                     </select>
 
-                    <label className='mt-3 block font-medium'>Rate Per Day:</label>
+                    <label className='mt-3 block font-medium text-red-600'>Rate Per Day:</label>
                     <input 
                     type="number" 
                     value={ratePerDay} 
@@ -77,6 +77,15 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
                       onChange={(e)=>setGstPercent(e.target.value)} 
                       className='w-full border p-2 mt-3' 
                       placeholder="GST Percent"/>
+
+                      <label className='m-3 block font-medium'>AC Type</label>
+                      <select value={acType}
+                      onChange={(e)=>setAcType(e.target.value)}
+                      className="w-full border p-2 mt-1">
+                         <option value="">Select AC Type</option>
+                        <option value="AC">AC</option>
+                        <option value="NON_AC">Non-AC</option>
+                      </select>
                       
                     <textarea value={remarks}
                      onChange={(e)=>setRemarks(e.target.value)}

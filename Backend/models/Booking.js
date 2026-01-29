@@ -178,7 +178,7 @@ const bookingSchema =new mongoose.Schema(
         ratePerDay:{
             type:Number,
         },
-        gstPercentage:{
+        gstPercent:{
             type:Number,
             default:0,
         },
@@ -188,7 +188,7 @@ const bookingSchema =new mongoose.Schema(
         invoice:{
             type:mongoose.Schema.Types.ObjectId,
             ref:"Invoice",
-            
+
         }
 
         
