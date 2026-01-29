@@ -171,7 +171,26 @@ const bookingSchema =new mongoose.Schema(
         },
         vacateRemarks:{
             type:String,
+        },
+
+
+
+        ratePerDay:{
+            type:Number,
+        },
+        gstPercentage:{
+            type:Number,
+            default:0,
+        },
+        numberOfDays:{type:Number},
+        finalizeRemarks:String,
+        finalizedAt:Date,
+        invoice:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Invoice",
+            
         }
+
         
     },
     {timestamps:true}

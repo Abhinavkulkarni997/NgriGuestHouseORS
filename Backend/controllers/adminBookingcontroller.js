@@ -144,7 +144,7 @@ const finalizeBooking=async(req,res)=>{
         booking.status="FINALIZED";
         booking.finalizedAt=new Date();
 
-        await booking.save();
+        // await booking.save();
 
         // Generate Invoice
         const invoice=await generateInvoice(booking);
