@@ -10,9 +10,11 @@ console.log("EMAIL_PASS length =", process.env.EMAIL_PASS?.length);
     // service:'smtp.office365.com',
     // secure:false,
     // port:587,
+    port:465,
+    secure:true,
     auth:{
-        user:process.env.EMAIL_USER,
-        pass:process.env.EMAIL_PASS,
+        user:`ngriguesthouse@gmail.com`,
+        pass:`qhvztonuibpdkzkq`,
         //  user: 'ngriguesthouse@hotmail.com',
         // pass:'a8121511670!V',
     },

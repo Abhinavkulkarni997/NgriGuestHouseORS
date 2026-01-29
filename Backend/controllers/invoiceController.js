@@ -38,7 +38,11 @@ const createInvoiceForBooking=async(req,res)=>{
   return res.status(400).json({
     message: "Cannot generate invoice. Guest Category or AC Type is missing in booking."
   });
+  
 }
+        if(booking.status !== "FINALIZED"){
+            return res.status(400).json({message:"Invoice can only be generated for FINALIZED bookings"});
+        }
         const invoice=await generateInvoice(booking);
         res.status(201).json(invoice);
     }catch(error){
