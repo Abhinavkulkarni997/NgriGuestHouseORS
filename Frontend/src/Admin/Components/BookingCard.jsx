@@ -170,14 +170,14 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
             </button>
             )}
 
-{showFinalizeModal && (
-  <FinalizeBookingModal
-    booking={booking}
-    bookingId={booking._id}
-    onClose={() => setShowFinalizeModal(false)}
-    onSuccess={onAllocate} // refresh list
-  />
-)}
+            {showFinalizeModal && (
+             <FinalizeBookingModal
+             booking={booking}
+            bookingId={booking._id}
+            onClose={() => setShowFinalizeModal(false)}
+            onSuccess={onAllocate} // refresh list
+        />
+        )}
             
             </div>
             )}

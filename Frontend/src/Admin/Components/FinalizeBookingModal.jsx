@@ -10,8 +10,8 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
     const [loading,setLoading]=useState(false);
 
     const handleFinalize=async()=>{
-        if(!guestCategory || !ratePerDay){
-            alert("Category and Rate are required");
+        if(!guestCategory || !ratePerDay || !acType){
+            alert("Category and Ac Type Rate are required");
             return;
         }
         setLoading(true);
@@ -71,12 +71,18 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
                      placeholder="Rate Per Day"/>
 
                      <label className='mt-3 block font-medium'>gstPercent:</label>
-                    <input
-                     type="number"
+                    <select
                       value={gstPercent} 
                       onChange={(e)=>setGstPercent(e.target.value)} 
                       className='w-full border p-2 mt-3' 
-                      placeholder="GST Percent"/>
+                      placeholder="GST Percent">
+                        <option value={0}>0%</option>
+                        <option value={5}>5%</option>
+                        <option value={12}>12%</option> 
+                        <option value={18}>18%</option>
+                    </select>
+
+
 
                       <label className='m-3 block font-medium'>AC Type</label>
                       <select value={acType}
