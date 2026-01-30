@@ -6,9 +6,9 @@ const path=require('path');
 console.log("EMAIL_USER =", process.env.EMAIL_USER);
 console.log("EMAIL_PASS length =", process.env.EMAIL_PASS?.length);
  const mailTransporter=nodemailer.createTransport({
-     host:"smtp.mail.yahoo.com",
+    //  host:"smtp.mail.yahoo.com",
     // service:'smtp.office365.com',
-    // service:"gmail",
+    service:"gmail",
     secure:false,
     port:587,
     // requireTLS:true,
