@@ -33,9 +33,12 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
             </div>
        
         {/* Body */}
-        <span className={`px-3 py-1 text-sm rounded-full
-        ${booking.status==='APPROVED'?'bg-green-100 text-green-700'
+        <span className={`px-3 py-1 text-sm rounded-full font-medium
+        ${booking.status==='PENDING'?'bg-yellow-100 text-yellow-700'
+        : booking.status==='APPROVED'?'bg-green-100 text-green-700'
         :booking.status==='ALLOCATED'?'bg-indigo-100 text-indigo-700'
+        : booking.status === "VACATED" ? "bg-orange-100 text-orange-700"
+        : booking.status === "FINALIZED" ? "bg-gray-200 text-gray-700"
         :booking.status==='REJECTED'?'bg-red-100 text-red-700':'bg-yellow-100 text-yellow-700'}`}>
             {booking.status}
             {booking.roomNumber &&  `: Room ${booking.roomNumber} ${booking.roomType}`}
@@ -86,6 +89,13 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
                 ))}
 
             </div>
+
+
+            {booking.status === "FINALIZED" && (
+            <p className="text-sm text-gray-500 italic">
+                Booking finalized. No further actions allowed.
+            </p>
+                )}
 
              {/* Actions */}
              {booking.status==='PENDING' &&(
@@ -160,14 +170,16 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
                 </div>
             )}
 
-
+            {/* after room vacation to show and generate invoice  */}
             {booking.status === "VACATED" && (
+                <div className='pt-3 flex flex-wrap gap-3 border-t'>
             <button
                 onClick={() => setShowFinalizeModal(true)}
                  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
                 >
                 Finalize Booking
             </button>
+            </div>
             )}
 
             {showFinalizeModal && (

@@ -135,6 +135,14 @@ const finalizeBooking=async(req,res)=>{
                 message:"Room Type missing in booking, cannot finalize"
             });
         }
+
+        // to prevent FINALIZE without VACATED timestamp
+        if (!booking.vacatedAt) {
+        return res.status(400).json({
+             success: false,
+             message: "Booking must be vacated before finalization"
+            });
+            }
         // calculation of  stay duration
         const arrival=new Date(booking.arrivalDateTime);
         const vacated=new Date(booking.vacatedAt);
