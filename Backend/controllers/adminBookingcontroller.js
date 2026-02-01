@@ -4,6 +4,7 @@ const path=require('path');
  const {sendRoomAllocationEmail,sendApprovedEmail,sendRejectedEmail}=require('../services/mailservice');
 const { rmSync } = require('fs');
 const {generateInvoice}=require('../services/InvoiceService');
+const Invoice=require('../models/Invoice');
 
 
 // logic to fetch bookings
@@ -112,16 +113,31 @@ const finalizeBooking=async(req,res)=>{
         }
 
         if (booking.status === "FINALIZED") {
-      return res.status(400).json({
-        success: false,
-        message: "Booking already finalized"
+            return res.status(400).json({
+            success: false,
+            message: "Booking already finalized"
       });
     }
 
         if(booking.status!=="VACATED"){
-            return res.status(400).json({success:false,message:"Only vacated bookings can be finalized"});
+            return res.status(400).json({success:false,
+                message:"Only vacated bookings can be finalized"});
         }
 
+        // check if invoice already exists
+        const existingInvoice=await Invoice.findOne({booking:booking._id});
+        if(existingInvoice){
+            booking.invoice=existingInvoice._id;
+            booking.status="FINALIZED";
+            booking.finalizedAt=booking.finalizedAt|| new Date();
+            await booking.save();
+
+            return res.status(200).json({
+                success:true,
+                message:"Booking already finalized earlier",
+                invoiceId:existingInvoice._id
+            })
+        }
         if(!guestCategory || !ratePerDay){
             return res.status(400).json({
                 success:false,
@@ -161,13 +177,18 @@ const finalizeBooking=async(req,res)=>{
         // await booking.save();
 
         // Generate Invoice
-        const invoice=await generateInvoice(booking);
+        try{
+             const invoice=await generateInvoice(booking);
+               booking.invoice=invoice._id;
+               await booking.save();
+        }catch(err){
+            booking.status="VACATED";
+            booking.finalizedAt=null;
+            await booking.save();
+            throw err;
 
-        booking.invoice=invoice._id;
-        await booking.save();
+        }
 
-
-       
         res.status(200).json({success:true,message:"Booking finalized successfully",invoiceId:invoice._id});
     }catch(error){
         console.error("Error in finalizing booking:",error);

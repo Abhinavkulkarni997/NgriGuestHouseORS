@@ -104,10 +104,10 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
                 <a href={`/api/admin/bookings/${booking._id}/idCard`} target="_blank" rel="noreferrer" className='text-white'>View ID Card</a>
             </button>
             <input type='text' value={remarks} onChange={(e)=>setRemarks(e.target.value)} placeholder='Add Remarks' className='flex-1 px-3 py-2 border rounded text-sm'/>
-            <button onClick={()=>onApprove(booking._id,remarks)} className='px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700'>
+            <button onClick={()=>{onApprove(booking._id,remarks);setRemarks("");}} className='px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700'>
                 Approve
             </button>
-            <button onClick={()=>onReject(booking._id,remarks)} className='px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700'>
+            <button onClick={()=>{onReject(booking._id,remarks);setRemarks("");}} className='px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700'>
                 Reject
             </button>
         </div>
@@ -170,6 +170,26 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
                 </div>
             )}
 
+            {/* in finalized tab detail appears  */}
+
+            {
+                booking.status==="FINALIZED" && (
+                    <div className='mt-4 p-3 rounded-lg bg-green-50 border border-green-200 text-sm'>
+                        <p className='font-semibold text-green-700'>
+                            Booking Finalized
+                        </p>
+
+                        <p>
+                            Invoice ID:{booking.invoice}
+                        </p>
+                        <p>
+                            Finalized At:{" "}{new Date(booking.finalizedAt).toLocaleDateString()}
+                        </p>
+
+                    </div>
+                )
+
+            }
             {/* after room vacation to show and generate invoice  */}
             {booking.status === "VACATED" && (
                 <div className='pt-3 flex flex-wrap gap-3 border-t'>
