@@ -176,6 +176,7 @@ const finalizeBooking=async(req,res)=>{
 
         // await booking.save();
 
+        let invoice;
         // Generate Invoice
         try{
              const invoice=await generateInvoice(booking);
