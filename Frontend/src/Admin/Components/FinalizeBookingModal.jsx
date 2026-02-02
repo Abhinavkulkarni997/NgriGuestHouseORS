@@ -19,8 +19,8 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
             const response=await api.patch(`/admin/bookings/${bookingId}/finalize`,{
                 guestCategory,
                 acType,
-                // ratePerDay:Number(ratePerDay),
-                // gstPercent:Number(gstPercent),
+                ratePerDay:Number(ratePerDay),
+                gstPercent:Number(gstPercent),
                 remarks
             });
             alert(response.data?.message||"Booking finalized successfully & invoice generated");
@@ -61,7 +61,7 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
                     <option value="NRI_FOREIGN">NRI/Foreign</option>
 
                     </select>
-{/* 
+
                     <label className='mt-3 block font-medium text-red-600'>Rate Per Day:</label>
                     <input 
                     type="number" 
@@ -80,7 +80,7 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
                         <option value={5}>5%</option>
                         <option value={12}>12%</option> 
                         <option value={18}>18%</option>
-                    </select> */}
+                    </select>
 
 
 
