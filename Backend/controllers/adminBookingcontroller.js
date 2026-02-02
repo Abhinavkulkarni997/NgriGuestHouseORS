@@ -179,7 +179,7 @@ const finalizeBooking=async(req,res)=>{
         let invoice;
         // Generate Invoice
         try{
-             const invoice=await generateInvoice(booking);
+              invoice=await generateInvoice(booking);
                booking.invoice=invoice._id;
                await booking.save();
         }catch(err){
@@ -189,6 +189,12 @@ const finalizeBooking=async(req,res)=>{
             throw err;
 
         }
+        if (!invoice) {
+  return res.status(500).json({
+    success: false,
+    message: "Invoice generation failed"
+  });
+}
 
         res.status(200).json({success:true,message:"Booking finalized successfully",invoiceId:invoice._id});
     }catch(error){
