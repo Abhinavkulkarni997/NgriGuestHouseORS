@@ -31,12 +31,12 @@ const Hero = () => {
         <div className='absolute inset-0 bg-black/40'></div>
 
         {/* Center Content */}
-        <div className='relative z-10  h-full w-full flex flex-col items-center justify-center text-center px-6'>
-           <h1 className='text-white font-extrabold text-3xl md:text-5xl  leading-tight max-w-3xl '>
+        <div className='relative left-0 z-10  h-full w-full flex flex-col items-center justify-center text-center px-6'>
+           <h1 className='text-white font-extrabold text-3xl md:text-5xl  leading-tight max-w-3xl bg-black/50 p-4 rounded-lg'>
             CSIR-NGRI Guesthouse <br/>Online Reservation System</h1>
-        <p className='text-white mt-4 font-medium text-lg md:text-xl'>CSIR-NATIONAL GEOPHYSICAL RESEARCH INSTITUTE</p>
-        <p className='text-white text-base md:text-lg '>Telangana,Hyderabad-500007</p>
-        <p className='text-white text-base md:text-lg'>guesthouse@ngri.res.in</p>
+        <p className='text-white mt-4 font-medium text-lg md:text-xl bg-black/50 p-2 rounded-lg'>CSIR-NATIONAL GEOPHYSICAL RESEARCH INSTITUTE</p>
+        <p className='text-white text-base md:text-lg bg-black/50 p-2 rounded-lg'>Telangana,Hyderabad-500007</p>
+        <p className='text-white text-base md:text-lg bg-black/50 p-2 rounded-lg'>guesthouse@ngri.res.in</p>
           <Link to="/onlinebooking"><button className='mt-6 px-6 py-3  text-white bg-cyan-500/80 hover:bg-cyan-400/80  rounded-lg border shadow-lg'>Book Online</button></Link>
         </div>
        

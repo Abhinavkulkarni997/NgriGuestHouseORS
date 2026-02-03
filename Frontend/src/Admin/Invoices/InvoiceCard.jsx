@@ -14,7 +14,8 @@ const InvoiceCard=({invoice})=>{
                            GENERATED   
                     </span>
                     </div>
-
+                
+                <p className="mt-2 text-sm text-gray-700">{invoice.booking.applicantName}</p>
                 <p className="mt-2 text-sm text-gray-700">{invoice.guestCategory}</p>
                 <p className="text-xs text-gray-500">Room {invoice.roomNumber} {" "} {invoice.roomType}</p>
             </div>
