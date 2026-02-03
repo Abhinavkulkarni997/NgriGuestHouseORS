@@ -45,7 +45,7 @@ const getAllBookings=async(req,res)=>{
 
 
 
-
+// logic for approve Booking
 const approveBooking=async(req,res)=>{
     try{
         const {remarks}=req.body;
