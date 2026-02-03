@@ -41,8 +41,8 @@ mailTransporter.verify((err, success) => {
 const sendAcknowledgementEmail=async({toEmail,name,bookingId,bookingDate})=>{
     const mailOptions={
     from: `"CSIR-NGRI Guest House" <${process.env.EMAIL_USER}>`,
-
     to:toEmail,
+    bcc:process.env.EMAIL_ADMIN,
     subject:'CSIR-NGRI Guest House Request Acknowledgement',
     text:`Dear ${name},
     
@@ -75,6 +75,7 @@ const sendAdminAlertEmail=async({bookingId,applicantName})=>{
     const mailOptions={
         from:`"CSIR-NGRI Guest House" <${process.env.EMAIL_USER}>`,
         to:process.env.EMAIL_ADMIN,
+        bcc:process.env.EMAIL_ADMIN,
         subject:`New Guest House Booking Received (${bookingId})`,
         text:`
         A new Guest House Booking received 
@@ -108,6 +109,7 @@ const sendApprovedEmail=async(booking)=>{
     await mailTransporter.sendMail({
         from:`"CSIR-NGRI Guest House"<${process.env.EMAIL_USER}>`,
         to:booking.officialEmail,
+        bcc:process.env.EMAIL_ADMIN,
         subject:"Booking Approved-CSIR-NGRI Guest House",
         html,
     });
@@ -138,6 +140,7 @@ const sendRoomAllocationEmail=async(booking)=>{
     await WebTransportError.sendMail({
          from: `"CSIR-NGRI Guest House" <${process.env.EMAIL_USER}>`,
         to:booking.officialEmail,
+        bcc:process.env.EMAIL_ADMIN,
         subject,
         html,
     });
@@ -164,6 +167,7 @@ const sendRejectedEmail=async(booking)=>{
     await mailTransporter.sendMail({
         from:`"CSIR-NGRI Guest House"<${process.env.EMAIL_USER}>`,
         to:booking.officialEmail,
+        bcc:process.env.EMAIL_ADMIN,
         subject:"Booking Rejected-CSIR-NGRI Guest House",
         html,
     })

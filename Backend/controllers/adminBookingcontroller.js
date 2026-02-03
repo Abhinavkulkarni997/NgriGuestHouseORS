@@ -105,7 +105,7 @@ const rejectBooking=async(req,res)=>{
 const finalizeBooking=async(req,res)=>{
     try{
         // const {guestCategory,acType,ratePerDay,gstPercent=0,remarks}=req.body;
-                const {guestCategory,acType,remarks}=req.body;
+        const {guestCategory,acType,remarks}=req.body;
 
 
         const booking=await Bookings.findById(req.params.id);
@@ -114,12 +114,14 @@ const finalizeBooking=async(req,res)=>{
             return res.status(404).json({success:false,message:"Booking not found"});
         }
 
+        
+
         if (booking.status === "FINALIZED") {
             return res.status(400).json({
             success: false,
             message: "Booking already finalized"
-      });
-    }
+        });
+        }
 
         if(booking.status!=="VACATED" || !booking.vacatedAt){
             return res.status(400).json({success:false,
@@ -199,13 +201,13 @@ const finalizeBooking=async(req,res)=>{
 
         }
         if (!invoice) {
-  return res.status(500).json({
-    success: false,
-    message: "Invoice generation failed"
-  });
-}
+        return res.status(500).json({
+        success: false,
+        message: "Invoice generation failed"
+        });
+    }
 
-        res.status(200).json({success:true,message:"Booking finalized successfully",invoiceId:invoice._id});
+    res.status(200).json({success:true,message:"Booking finalized successfully",invoiceId:invoice._id});
     }catch(error){
         console.error("Error in finalizing booking:",error);
         res.status(500).json({success:false,message:"Server Error failed to finalize booking"})

@@ -4,13 +4,18 @@ import api from '../../api/bookingapi';
 const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
     const [guestCategory,setGuestCategory]=useState(booking.guestCategory||"");
     const [acType,setAcType]=useState(booking.acType||"");
-    const [ratePerDay,setRatePerDay]=useState("");
-    const [gstPercent,setGstPercent]=useState(0);
+    // const [ratePerDay,setRatePerDay]=useState("");
+    // const [gstPercent,setGstPercent]=useState(0);
     const [remarks,setRemarks]=useState("");
     const [loading,setLoading]=useState(false);
 
     const handleFinalize=async()=>{
-        if(!guestCategory || !ratePerDay || !acType){
+        // if(!guestCategory || !ratePerDay || !acType){
+        //     alert("Category and Ac Type Rate are required");
+        //     return;
+        // }
+
+          if(!guestCategory || !acType){
             alert("Category and Ac Type Rate are required");
             return;
         }
@@ -19,8 +24,8 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
             const response=await api.patch(`/admin/bookings/${bookingId}/finalize`,{
                 guestCategory,
                 acType,
-                ratePerDay:Number(ratePerDay),
-                gstPercent:Number(gstPercent),
+                // ratePerDay:Number(ratePerDay),
+                // gstPercent:Number(gstPercent),
                 remarks
             });
             alert(response.data?.message||"Booking finalized successfully & invoice generated");
@@ -62,7 +67,7 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
 
                     </select>
 
-                    <label className='mt-3 block font-medium text-red-600'>Rate Per Day:</label>
+                    {/* <label className='mt-3 block font-medium text-red-600'>Rate Per Day:</label>
                     <input 
                     type="number" 
                     value={ratePerDay} 
@@ -82,7 +87,7 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
                         <option value={18}>18%</option>
                     </select>
 
-
+ */}
 
                       <label className='m-3 block font-medium'>AC Type</label>
                       <select value={acType}
@@ -98,7 +103,7 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
                      className='w-full border p-2 mt-3' placeholder="Remarks"/> 
 
                      <div className='flex justify-end gap-3 mt-4'>
-                        <button onClick={onClose}>Cancel</button>
+                        <button className="bg-gray-500 text-white rounded px-4 py-2" onClick={onClose}>Cancel</button>
                         <button onClick={handleFinalize} 
                         disabled={loading} 
                         className='bg-green-600 text-white px-4 py-2 rounded'>
