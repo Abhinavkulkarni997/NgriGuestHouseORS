@@ -149,12 +149,16 @@ const finalizeBooking=async(req,res)=>{
         //     });
         // }
 
+        if(!booking.guestCategory){
+
          if(!guestCategory){
             return res.status(400).json({
                 success:false,
                 message:"Guest Category  are required to finalize booking"
             });
         }
+        booking.guestCategory=guestCategory;
+    }
 
         // if(!booking.roomType){
         //     return res.status(400).json({
@@ -176,14 +180,14 @@ const finalizeBooking=async(req,res)=>{
         // const numberOfDays=Math.max(1,Math.ceil((vacated-arrival)/(1000*60*60*24)));
 
         // Freeze billing values
-        booking.guestCategory=guestCategory;
-        booking.acType=acType ||booking.acType;
+        // booking.guestCategory=guestCategory;
+        // booking.acType=acType ||booking.acType;
         // booking.ratePerDay=ratePerDay;
         // booking.gstPercent=gstPercent;
         // booking.numberOfDays=numberOfDays;
-        booking.finalizeRemarks=remarks||"";
-        booking.status="FINALIZED";
-        booking.finalizedAt=new Date();
+        // booking.finalizeRemarks=remarks||"";
+        // booking.status="FINALIZED";
+        // booking.finalizedAt=new Date();
 
         // await booking.save();
 
@@ -191,26 +195,43 @@ const finalizeBooking=async(req,res)=>{
         // Generate Invoice
         try{
               invoice=await generateInvoice(booking);
-               booking.invoice=invoice._id;
-               await booking.save();
+            //    booking.invoice=invoice._id;
+            //    await booking.save();
         }catch(err){
-            booking.status="VACATED";
-            booking.finalizedAt=null;
-            await booking.save();
-            throw err;
+            // booking.status="VACATED";
+            // booking.finalizedAt=null;
+            // await booking.save();
+            // throw err;
+            console.error("Invoice generation error:",err);
+            return res.status(500).json({
+                success:false,
+                message:"Invoice generation failed during finalization"
+            });
 
         }
-        if (!invoice) {
-        return res.status(500).json({
-        success: false,
-        message: "Invoice generation failed"
-        });
-    }
+    //     if (!invoice) {
+    //     return res.status(500).json({
+    //     success: false,
+    //     message: "Invoice generation failed"
+    //     });
+    // }
 
-    res.status(200).json({success:true,message:"Booking finalized successfully",invoiceId:invoice._id});
+    // finally updating booking status to finalized
+        booking.invoice=invoice._id;
+        booking.status="FINALIZED";
+        booking.finalizeRemarks=remarks||"";
+        booking.finalizedAt=new Date();
+        await booking.save();
+
+    res.status(200).json({success:true,
+        message:"Booking finalized successfully",
+        invoiceId:invoice._id
+    });
     }catch(error){
         console.error("Error in finalizing booking:",error);
-        res.status(500).json({success:false,message:"Server Error failed to finalize booking"})
+        res.status(500).json({
+            success:false,
+            message:"Server Error failed to finalize booking"})
     }
 }
 

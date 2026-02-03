@@ -175,21 +175,24 @@ const bookingSchema =new mongoose.Schema(
 
 
 
-        ratePerDay:{
-            type:Number,
-        },
-        gstPercent:{
-            type:Number,
-            default:0,
-        },
-        numberOfDays:{type:Number},
+        // ratePerDay:{
+        //     type:Number,
+        // },
+        // gstPercent:{
+        //     type:Number,
+        //     default:0,
+        // },
+        // numberOfDays:{type:Number},
         finalizeRemarks:String,
         finalizedAt:Date,
         invoice:{
             type:mongoose.Schema.Types.ObjectId,
             ref:"Invoice",
 
-        }
+        },
+
+        expectedDepartureDateTime:Date,
+        actualDepartureDateTime:Date,
 
         
     },

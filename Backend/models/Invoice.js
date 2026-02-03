@@ -6,10 +6,10 @@ const invoiceSchema=new mongoose.Schema(
             type:mongoose.Schema.Types.ObjectId,
             ref:"Booking",
             required:true,
-            unique:true,
+            // unique:true,
         },
             invoiceNumber:{
-                type:String,
+                type:Number,
                 required:true,
                 unique:true,
             },
@@ -27,6 +27,16 @@ const invoiceSchema=new mongoose.Schema(
                 default:null,
             },
 
+            period:{
+                from:Date,
+                to:Date,
+            },
+
+            subTotal:{
+                type:Number,
+                required:true,
+                
+            },
 
             guestCategory:{
                 type:String,
@@ -48,11 +58,11 @@ const invoiceSchema=new mongoose.Schema(
                 required:true,
             },
 
-            baseAmount:{
-                type:Number,
-                required:true,
+            // baseAmount:{
+            //     type:Number,
+            //     required:true,
 
-            },
+            // },
             gstPercent:{
                 type:Number,
                 default:0,
