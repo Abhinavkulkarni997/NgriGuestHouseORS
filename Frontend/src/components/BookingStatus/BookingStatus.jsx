@@ -5,11 +5,11 @@ import api from '../../api/bookingapi';
 const BookingStatus= () => {
   // const {register}=useFormContext();
   const [status, setStatus] = useState();
-  useEffect(()=>{
-    api.get('/admin/bookings')
-    .then(response=>{setStatus(response.data)})
-    .catch(error=>console.error(error));
-  })
+  // useEffect(()=>{
+  //   api.get('/admin/bookings')
+  //   .then(response=>{setStatus(response.data)})
+  //   .catch(error=>console.error(error));
+  // },[]);
   return (
     <div className='min-h-screen flex  items-center justify-center py-[150px] px-4 bg-cyan-50/20 mb-4 rounded-lg '>
         <div className='w-full max-w-4xl bg-white shadow-lg rounded-2xl   flex flex-col items-center '>

@@ -5,7 +5,7 @@ const Counter = require('../models/counter');
 
 const generateInvoice=async(booking)=>{
     console.log('Full Booking Object:', booking);
-    // invoice number
+    // invoice number logic generation where seq is incremented starting from 1
     const counter=await Counter.findOneAndUpdate(
         {name:"invoice"},
         {$inc:{seq:1}},
@@ -23,38 +23,43 @@ const generateInvoice=async(booking)=>{
     if(!category || !rateCard[category]){
         throw new Error("Invalid guest category");
     }
-    const acType=booking.AcType === "AC"?"AC":"NON_AC";
+    const acType=booking.acType === "AC"?"AC":"NON_AC";
 
-    const rate=rateCard[category][acType];
+    const ratePerDay=rateCard[category][acType];
 
-   if (!rate) {
+   if (!ratePerDay) {
         throw new Error(`Rate not found for category: ${category}, AC Type: ${acType}`);
+    }
+
+    if(!booking.vacatedAt || !booking.arrivalDateTime){
+        throw new Error("Invalid booking dates for invoice calculation");
     }
     
 
     const days=Math.ceil(
-        (new Date(booking.departureDateTime)-new Date(booking.arrivalDateTime))/(1000*60*60*24) 
+        (new Date(booking.vacatedAt)-new Date(booking.arrivalDateTime))/(1000*60*60*24) 
     )||1;
-    const baseAmount=rate*days;
+    const baseAmount=ratePerDay*days;
 
-    const gstPercent=0;
+    const gstPercent=booking.gstPercent ?? 0;
     const gstAmount=(baseAmount*gstPercent)/100;
     const totalAmount=baseAmount+gstAmount;
 
     const invoice=await Invoice.create({
         booking:booking._id,
+        guestName:booking.applicantName,
         invoiceNumber,
         guestCategory:category,
         roomNumber:booking.roomNumber,
         roomType:booking.roomType,
         acType,
-        ratePerDay:rate,
+        ratePerDay,
         numberOfDays:days,
         baseAmount,
         gstPercent,
         gstAmount,
         totalAmount,
-        paymentBy:booking.paymentBy,
+        paymentBy:booking.paymentBy ||"CASH",
     });
     return invoice;
 

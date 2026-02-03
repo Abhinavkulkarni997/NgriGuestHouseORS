@@ -104,7 +104,9 @@ const rejectBooking=async(req,res)=>{
 // finalize booking logic for invoice generation
 const finalizeBooking=async(req,res)=>{
     try{
-        const {guestCategory,acType,ratePerDay,gstPercent=0,remarks}=req.body;
+        // const {guestCategory,acType,ratePerDay,gstPercent=0,remarks}=req.body;
+                const {guestCategory,acType,remarks}=req.body;
+
 
         const booking=await Bookings.findById(req.params.id);
 
@@ -119,12 +121,12 @@ const finalizeBooking=async(req,res)=>{
       });
     }
 
-        if(booking.status!=="VACATED"){
+        if(booking.status!=="VACATED" || !booking.vacatedAt){
             return res.status(400).json({success:false,
                 message:"Only vacated bookings can be finalized"});
         }
 
-        // check if invoice already exists
+        // check if invoice already exists and to prevent duplication of  invoice generation
         const existingInvoice=await Invoice.findOne({booking:booking._id});
         if(existingInvoice){
             booking.invoice=existingInvoice._id;
@@ -138,38 +140,45 @@ const finalizeBooking=async(req,res)=>{
                 invoiceId:existingInvoice._id
             })
         }
-        if(!guestCategory || !ratePerDay){
+        // if(!guestCategory || !ratePerDay){
+        //     return res.status(400).json({
+        //         success:false,
+        //         message:"Guest Category and rate per day are required to finalize booking"
+        //     });
+        // }
+
+         if(!guestCategory){
             return res.status(400).json({
                 success:false,
-                message:"Guest Category and rate per day are required to finalize booking"
+                message:"Guest Category  are required to finalize booking"
             });
         }
 
-        if(!booking.roomType){
-            return res.status(400).json({
-                success:false,
-                message:"Room Type missing in booking, cannot finalize"
-            });
-        }
+        // if(!booking.roomType){
+        //     return res.status(400).json({
+        //         success:false,
+        //         message:"Room Type missing in booking, cannot finalize"
+        //     });
+        // }
 
         // to prevent FINALIZE without VACATED timestamp
-        if (!booking.vacatedAt) {
-        return res.status(400).json({
-             success: false,
-             message: "Booking must be vacated before finalization"
-            });
-            }
+        // if (!booking.vacatedAt) {
+        // return res.status(400).json({
+        //      success: false,
+        //      message: "Booking must be vacated before finalization"
+        //     });
+        //     }
         // calculation of  stay duration
-        const arrival=new Date(booking.arrivalDateTime);
-        const vacated=new Date(booking.vacatedAt);
-        const numberOfDays=Math.max(1,Math.ceil((vacated-arrival)/(1000*60*60*24)));
+        // const arrival=new Date(booking.arrivalDateTime);
+        // const vacated=new Date(booking.vacatedAt);
+        // const numberOfDays=Math.max(1,Math.ceil((vacated-arrival)/(1000*60*60*24)));
 
         // Freeze billing values
         booking.guestCategory=guestCategory;
         booking.acType=acType ||booking.acType;
-        booking.ratePerDay=ratePerDay;
-        booking.gstPercent=gstPercent;
-        booking.numberOfDays=numberOfDays;
+        // booking.ratePerDay=ratePerDay;
+        // booking.gstPercent=gstPercent;
+        // booking.numberOfDays=numberOfDays;
         booking.finalizeRemarks=remarks||"";
         booking.status="FINALIZED";
         booking.finalizedAt=new Date();
