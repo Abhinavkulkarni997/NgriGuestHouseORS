@@ -12,7 +12,9 @@ const InvoiceView=()=>{
         if(!invoiceId) return;
         api.get(`/admin/invoices/${invoiceId}`)
         .then((response)=>{setInvoice(response.data),
-            console.log("Invoice Data ",response.data)}
+            console.log("Invoice Data ",response.data),
+        console.log("Name",response.data.applicantName,response.data.booking.applicantName);
+        }
     ).catch((error)=>console.log(error));
     },[invoiceId]);
    
@@ -36,8 +38,8 @@ const InvoiceView=()=>{
             <div className="grid sm:grid-cols-2 gap-4 text-sm">
                 <div className="mt-2 pt-4">
                     <p className="font-medium">Guest</p>
-                    <p>{invoice.guestName}</p>
-                    <p className="text-gray-500">{invoice.category}</p>
+                    <p>{invoice.booking.applicantName}</p>
+                    <p className="text-gray-500">{invoice.guestCategory}</p>
                 </div>
 
                 <div className="mt-2 pt-4">
@@ -65,11 +67,11 @@ const InvoiceView=()=>{
             </div>
 
 
-            <div className="flex flex-col sm:flex-row gap-3 sm:justify-end">
-                <button className="border rounded-lg px-4 py-2 text-sm">
+            <div className="flex flex-col sm:flex-row gap-3 sm:justify-end mt-2">
+                <button className="border rounded-lg px-4 py-2 text-sm bg-white hover:bg-gray-100">
                     Print
                 </button>
-                <button disabled className="bg-cyan-600 text-white rounded-lg px-4 py-2 text-sm opacity-60 cursor-not-allowed">
+                <button disabled className="bg-cyan-600 text-white rounded-lg px-4 py-2 text-sm opacity-60 cursor-not-allowed ">
                     Download PDF
                 </button>
             </div>
