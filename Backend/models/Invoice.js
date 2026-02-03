@@ -13,6 +13,21 @@ const invoiceSchema=new mongoose.Schema(
                 required:true,
                 unique:true,
             },
+
+            invoiceType:{
+                type:String,
+                enum:["BASE","EXTENSION"],
+                default:"BASE",
+
+            },
+
+            parentInvoice:{
+                type:mongoose.Schema.Types.ObjectId,
+                ref:"Invoice",
+                default:null,
+            },
+
+
             guestCategory:{
                 type:String,
                 required:true,
