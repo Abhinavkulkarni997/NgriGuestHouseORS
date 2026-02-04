@@ -32,15 +32,22 @@ const generateExtensionInvoice=async(booking,lastInvoice,extendTill,remarks="")=
         parentInvoice:lastInvoice.invoiceType==="BASE"?lastInvoice._id:lastInvoice.parentInvoice,
         guestName:booking.applicantName,
         period:{from,to},
+        subTotal:baseAmount,
+        guestCategory:booking.guestCategory,
+        roomNumber:booking.roomNumber,
+        roomType:booking.roomType,
+        acType:booking.acType,
         ratePerDay:rate,
-        days:days,
-        baseAmount:baseAmount,
-        gstPercent:gstPercent,
-        gstAmount:gstAmount,
-        totalAmount:totalAmount,
-        remarks:remarks
+        numberOfDays:days,
+       baseAmount,
+       gstPercent,
+       gstAmount,
+       totalAmount,
+       paymentBy:booking.paymentBy,
+       remarks,
+        
     });
-    await newInvoice.save();
+    
 }
 
 

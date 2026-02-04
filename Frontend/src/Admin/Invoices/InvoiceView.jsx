@@ -1,6 +1,7 @@
 import {useParams} from "react-router-dom";
 import {useState,useEffect} from "react";
 import api from "../../api/bookingapi";
+// import ngrilogo from '../../assets/ngri-logo.png';
 
 const InvoiceView=()=>{
     const {invoiceId}= useParams();
@@ -26,6 +27,13 @@ const InvoiceView=()=>{
     return(
         <div className="p-4 max-w-4xl mx-auto">
             <div className="bg-white rounded-xl border shadow p-6 space-y-6">
+
+                {/* <div className="">
+                <img src={ngrilogo} className="w-12 h-12 mx-auto" alt="NGRI Logo" />
+                </div> */}
+
+
+                <div className=""></div>
                 <h1 className="text-xl font-semibold">
                     Invoice #{invoice.invoiceNumber}
                 </h1>

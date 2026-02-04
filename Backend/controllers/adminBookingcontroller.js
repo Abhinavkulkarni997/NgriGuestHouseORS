@@ -197,7 +197,7 @@ const finalizeBooking=async(req,res)=>{
         let invoice;
         try{
               invoice=await generateInvoice(booking);
-            //    booking.invoice=invoice._id;
+            //   booking.invoice=invoice._id;
             //    await booking.save();
         }catch(err){
             // booking.status="VACATED";
@@ -238,7 +238,7 @@ const finalizeBooking=async(req,res)=>{
 }
 
 // whenever the booking is finalized invoice is generated and if the invoice exists or if the guest want to stay more time then we will update the invoice accordingly
-const StayInvoice=async(req,res)=>{
+const extendStayInvoice=async(req,res)=>{
     try{
         const {extendedTill,remarks}=req.body;
         const booking=await Bookings.findById(req.params.id);
@@ -425,5 +425,5 @@ const getCalendarBookings=async(req,res)=>{
 
 
 
-module.exports={getAllBookings,approveBooking,rejectBooking,idCardView,allocateRoom,getAvailableRooms,vacateRoom,getCalendarBookings,finalizeBooking};
+module.exports={getAllBookings,approveBooking,rejectBooking,idCardView,allocateRoom,getAvailableRooms,vacateRoom,getCalendarBookings,finalizeBooking,extendStayInvoice};
 
