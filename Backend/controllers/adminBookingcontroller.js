@@ -1,7 +1,7 @@
 const Bookings=require('../models/Booking');
 const Room =require('../models/Room');
 const path=require('path');
- const {sendRoomAllocationEmail,sendApprovedEmail,sendRejectedEmail}=require('../services/mailservice');
+const {sendRoomAllocationEmail,sendApprovedEmail,sendRejectedEmail}=require('../services/mailservice');
 const { rmSync } = require('fs');
 const {generateInvoice}=require('../services/InvoiceService');
 const Invoice=require('../models/Invoice');
@@ -149,6 +149,7 @@ const finalizeBooking=async(req,res)=>{
         //     });
         // }
 
+        // freezing category only if not already present
         if(!booking.guestCategory){
 
          if(!guestCategory){
@@ -191,8 +192,9 @@ const finalizeBooking=async(req,res)=>{
 
         // await booking.save();
 
+            // Generate Invoice logic
+        
         let invoice;
-        // Generate Invoice
         try{
               invoice=await generateInvoice(booking);
             //    booking.invoice=invoice._id;
@@ -218,8 +220,8 @@ const finalizeBooking=async(req,res)=>{
 
     // finally updating booking status to finalized
         booking.invoice=invoice._id;
-        booking.status="FINALIZED";
         booking.finalizeRemarks=remarks||"";
+        booking.status="FINALIZED";
         booking.finalizedAt=new Date();
         await booking.save();
 
@@ -235,7 +237,40 @@ const finalizeBooking=async(req,res)=>{
     }
 }
 
+// whenever the booking is finalized invoice is generated and if the invoice exists or if the guest want to stay more time then we will update the invoice accordingly
+const StayInvoice=async(req,res)=>{
+    try{
+        const {extendedTill,remarks}=req.body;
+        const booking=await Bookings.findById(req.params.id);
+        if(!booking){
+            return res.status(404).json({success:false,message:"Booking not found"});
+        }
 
+        if(booking.status !=="FINALIZED"){
+            return res.status(400).json({success:false,message:"Only finalized bookings can have stay invoice"});
+        }
+
+        if(!extendedTill){
+            return res.status(400).json({success:false,message:"Extended till date is required"});
+        }
+
+        const lastInvoice=await Invoice.findOne({booking:booking._id}).sort({createdAt:-1});
+        if(!lastInvoice){
+            return res.status(404).json({success:false,message:"No existing invoice found for this booking"});
+        }
+
+        const extensionInvoice=await generateExtensionInvoice(booking,lastInvoice,new Date(extendedTill),remarks);
+        res.status(200).json({success:true,
+            message:"Extended stay invoice generated",
+            invoiceId:extensionInvoice._id
+        });
+
+    }catch(error){
+        console.error("Error in extension stay invoice ",error);
+        res.status(500).json({success:false,message:"Failed to generate extended stay invoice"});
+    }
+
+}
 
 // logic for allocating room
 const allocateRoom=async(req,res)=>{
