@@ -12,20 +12,22 @@ const Home = () => {
 
   useEffect(()=>{
     if(hash){
+      const section=document.querySelector(hash);
+      section?.scrollIntoView({behavior:'smooth'});
       
     }
 
-  },[hash])
+  },[hash]);
 
 
   return (
      <>
      <Hero/>
-     <section id="charges" className=''>
+     <section id="charges" className='scroll-mt-28'>
         <GuestHouseCharges />
      </section>
   
-    <section id="guidelines" className=''>
+    <section id="guidelines" className='scroll-mt-28'>
       <Guidelines />
       </section>
       <GuestHouseGallery/>
