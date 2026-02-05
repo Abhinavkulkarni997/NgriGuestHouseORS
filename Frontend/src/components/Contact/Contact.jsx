@@ -15,7 +15,8 @@ const Contact = () => {
         icon:<BsFillTelephoneFill size={26} className="text-primary"/>
     }]
   return (
-    <section className='py-12 sm:py-14 lg:py-20 bg-white shadow-md mb-4  '>
+    // <section className='py-12 sm:py-14 lg:py-20 bg-white shadow-md mb-4  '>
+       <section className='py-12 max-w-screen-xl mx-auto px-4 bg-white shadow-md mb-4 lg:py-20 '>
       <div className='max-w-7xl mx-auto p-10 px-4 '>
         {/* Heading */}
         <h1 className='text-center font-extrabold text-3xl md:text-4xl text-gray-900'>Contact Us</h1>
