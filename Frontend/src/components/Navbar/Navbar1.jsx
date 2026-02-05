@@ -41,8 +41,8 @@ const navItems=[
     ],
     },
     
-    {id:5,title:"Guidelines",url:"/guidelines"},
-    {id:6, title:"Charges",url:"/charges"},
+    {id:5,title:"Guidelines",url:"/#guidelines"},
+    {id:6, title:"Charges",url:"/#charges"},
     {id:7, title:"FAQ",url:"/faq"},
     {id:8, title:"Contact",url:"/contact"}
     // {id:10,title:"Book Online",url:"/bookonline"}
