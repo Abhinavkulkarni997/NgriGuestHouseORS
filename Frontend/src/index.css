@@ -92,3 +92,6 @@ html{
 
 @tailwind utilities;
 
+/* body {
+  padding-top: 96px; /* navbar height */
+/* }  */
