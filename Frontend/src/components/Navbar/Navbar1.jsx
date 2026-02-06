@@ -179,12 +179,13 @@ import { Link } from 'react-router-dom';
 import sun from '../../assets/sun.svg';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaXmark } from "react-icons/fa6";
-import { IoMoonOutline } from "react-icons/io5";
-
+import { IoMoonOutline,IoSunnyOutline } from "react-icons/io5";
+import { useTheme } from '../../Admin/Context/ThemeContext';
 
 const Navbar1 = ({hasHero}) => {
     const [hoverOpen,setHoverOpen]=useState(false);
     const [navBg,setNavBg]=useState(false);
+    const {dark,setDark}=useTheme();
     
 
     useEffect(()=>{
@@ -225,7 +226,7 @@ const navItems=[
 
   return (
     
-    <nav className={`w-full fixed z-50 left-0 top-0  bg-white transition-all duration-300 rounded-b-lg  `}>
+    <nav className={`w-full fixed z-50 left-0 top-0  bg-white transition-all duration-300 rounded-b-lg dark:bg-[#0f172a] text-gray-900 dark:text-gray-100 shadow-sm dark:shadow-none `}>
         <div className='max-w-7xl mx-auto flex  items-center justify-between px-4 py-4 flex-nowrap'>
 
             {/* Logo content on the left */}
@@ -294,7 +295,12 @@ const navItems=[
             </div>
           
           <div className='flex items-center gap-3 shrink-0'>
-          <button><IoMoonOutline size={22} className={`text-gray-800`}/></button>
+          <button onClick={()=>setDark(!dark)} className='p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition'>
+            {dark? (
+              <IoSunnyOutline size={22} className={`text-yellow-400`}/>
+
+            ):(<IoMoonOutline size={22} className={`text-gray-800`}/>)}
+            </button>
             {/* <button onClick={()=>null}><img src={sun} className='w-10 h-10 rounded-full' /></button> */}
             <button
               onClick={() => setHoverOpen(!hoverOpen)}
