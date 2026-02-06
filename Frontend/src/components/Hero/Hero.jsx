@@ -87,7 +87,7 @@ const Hero = () => {
 
         {/* Center Content */}
         <div className='relative  z-10  h-full flex  items-center justify-center '>
-          <div className='text-center  max-w-3xl px-6 pt-96 min-h-[80vh] '>
+          <div className='text-center  max-w-3xl px-6 pt-96 min-h-[80vh] relative '>
            <h1 className=' text-white font-extrabold text-3xl md:text-5xl  leading-tight '>
             CSIR-NGRI Guest House <br/>Online Reservation System</h1>
         <p className=' text-white text-base mt-4 sm:text-lg md:text-xl'>CSIR-NATIONAL GEOPHYSICAL RESEARCH INSTITUTE</p>
