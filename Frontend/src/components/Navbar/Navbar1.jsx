@@ -232,19 +232,19 @@ const navItems=[
             {/* Logo content on the left */}
             <Link to="/" className='flex items-center gap-2 shrink-0 '>
             <img src={logo} alt="Logo" className='w-10 h-10 sm:w-12 sm:h-12'/>         
-            <span className={` font-semibold text-base sm:block  transition-all `}>
+            <span className={` font-semibold text-base sm:block   `}>
                 CSIR-NGRI GUEST HOUSE
               </span>
             </Link>
 
 
             {/* Center division nav menu desktop version */}
-            <ul className='hidden md:flex gap-6 text-lg bg-white p-2 rounded-full border border-[#1A1A1A] animate-in'>
+            <ul className='hidden md:flex gap-6 text-lg bg-white p-2 rounded-full border border-[#1A1A1A] animate-in dark:bg-gray-800 '>
             {navItems.map((item,index)=>(
-                    <li key={index} className='cursor-pointer relative group ' >                    
+                    <li key={index} className='cursor-pointer relative group  ' >                    
                         {!item.children && (
                         <Link to={item.url} 
-                        className={`hover:text-indigo-500  font-medium text-gray-900`}
+                        className={`hover:text-indigo-500  font-medium text-gray-900 dark:text-white`}
                         >
                         {item.title}
                         </Link>
@@ -254,7 +254,7 @@ const navItems=[
                        {item.children && (
                         <div className='relative'>
                         <button className={`flex items-center gap-1 
-                        ${navBg ? 'text-gray-800':'text-gray-800'} hover:text-indigo-600 flex items-center justify-center font-medium
+                        ${navBg ? 'text-gray-800':'text-gray-800'} hover:text-indigo-600 flex items-center justify-center font-medium dark:text-white
                          `}>
                             {item.title}
                        
@@ -268,10 +268,10 @@ const navItems=[
                         <ul className='absolute top-full left-0 mt-2 hidden group-hover:block
                            
                          min-w-[180px]  bg-white backdrop-blur-sm bg-white/95 
-                          shadow-xl rounded-lg border-b-4 border-indigo-600  p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200'>
+                          shadow-xl rounded-lg border-b-4 border-indigo-600  p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200 dark:bg-gray-800 dark:border-gray-700 '>
                             {item.children.map((child,index)=>(
                                 <li key={index}><Link to={child.url} 
-                                className='block px-4 py-3 text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors duration-150'
+                                className='block px-4 py-3 text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors duration-150 dark:text-white dark:bg-gray-800 dark:hover:bg-gray-700'
                                 >{child.title}</Link>
                                 </li>
                             ))}
@@ -288,14 +288,14 @@ const navItems=[
             {/*Book Online Button*/}
             <div className='hidden md:flex items-center gap-4'>
                   <Link to="/onlinebooking">
-            <button className={`${navBg?'hover:text-indigo-500':'hover:text-indigo-500'} border border-[#1A1A1A]  px-4 py-2 rounded-lg font-semibold    transition` }>
+            <button className={`${navBg?'hover:text-indigo-500':'hover:text-indigo-500'} border border-[#1A1A1A]  px-4 py-2 rounded-lg font-semibold  dark:border-white dark:hover:border-white  ` }>
               Book Online
             </button>            
             </Link>
             </div>
           
           <div className='flex items-center gap-3 shrink-0'>
-          <button onClick={()=>setDark(!dark)} className='p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition'>
+          <button onClick={()=>setDark(!dark)} className='p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 '>
             {dark? (
               <IoSunnyOutline size={22} className={`text-yellow-400`}/>
 

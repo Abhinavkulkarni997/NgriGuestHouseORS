@@ -12,15 +12,15 @@ const Guidelines = () => {
 'Accommodation and food charges are billed separately and are to be separately settled as per rules]'
         ]
   return (
-    <section id="guidelines" className='w-full py-16 bg-gradient-to-br from-cyan-50 via-cyan-400/10 to-cyan-400/10 rounded-lg '>
-        <div className='max-w-6xl bg-white mx-auto shadow-md rounded-2xl p-10 px-4 '>
-            <h1 className='text-3xl md:text-4xl font-extrabold text-gray-800 text-center'>Booking Guidelines</h1>
+    <section id="guidelines" className='w-full py-16 bg-gradient-to-br from-cyan-50 via-cyan-400/10 to-cyan-400/10 rounded-lg dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 '>
+        <div className='max-w-6xl bg-white mx-auto shadow-md rounded-2xl p-10 px-4 dark:bg-gray-800 '>
+            <h1 className='text-3xl md:text-4xl font-extrabold text-gray-800 text-center dark:text-white '>Booking Guidelines</h1>
 
             <div className='mt-12 grid grid-cols-1 md:grid-cols-2 gap-6'>
             {guideLines.map((item,index)=>(
-                <div  key={index} className=' flex  items-start gap-4 bg-white/80 backdrop-blur-md p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:-translate-y-1 transition-all duration-300'>
+                <div  key={index} className=' flex  items-start gap-4 bg-white/80 backdrop-blur-md p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:-translate-y-1 transition-all duration-300 dark:bg-gray-800 '>
                   <FaCheckCircle className='w-6 h-6 md:w-7 md:h-7 text-cyan-600 flex-shrink-0'/>
-                  <p className='text-start md:text-base text-gray-700 leading-relaxed break-words  min-w-0  font-medium text-xs sm:text-sm w-full'>
+                  <p className='text-start md:text-base text-gray-700 leading-relaxed break-words  min-w-0  font-medium text-xs sm:text-sm w-full dark:text-white'>
                     {item}
                     </p>
                     </div>

@@ -1,9 +1,9 @@
-import { Children, createContext,useContext,useDebugValue,useEffect,useState } from 'react';
+import {  createContext,useContext,useEffect,useState } from 'react';
 
 const ThemeContext = createContext();
 
 
-export const ThemeProvider=({Children})=>{
+export const ThemeProvider=({children})=>{
     const [dark,setDark]=useState(()=>{
         return localStorage.getItem('theme')==='dark';
     });
@@ -22,7 +22,7 @@ export const ThemeProvider=({Children})=>{
 
     return(
         <ThemeContext.Provider value={{dark,setDark}}>
-            {Children}
+            {children}
         </ThemeContext.Provider>
          
     )

@@ -301,7 +301,7 @@ export default function GuestHouseCenteredCarousel() {
   const swiperRef = useRef(null);
 
   return (
-    <section className="w-full py-12 bg-white">
+    <section className="w-full py-12 bg-white section">
       <div className="max-w-6xl mx-auto px-4">
         <h2 className="text-center text-3xl md:text-4xl font-extrabold mb-6">
           Guest House Gallery

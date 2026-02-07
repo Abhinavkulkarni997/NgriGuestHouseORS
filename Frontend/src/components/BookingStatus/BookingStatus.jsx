@@ -11,7 +11,7 @@ const BookingStatus= () => {
   //   .catch(error=>console.error(error));
   // },[]);
   return (
-    <div className='min-h-screen flex  items-center justify-center py-[150px] px-4 bg-cyan-50/20 mb-4 rounded-lg '>
+    <div className='min-h-screen flex  items-center justify-center py-[150px] px-4 bg-cyan-50/20 mb-4 rounded-lg dark:bg-gray-800 '>
         <div className='w-full max-w-4xl bg-white shadow-lg rounded-2xl   flex flex-col items-center '>
             <h3 className='font-semibold text-center text-lg xl:text-2xl md:text-3xl sm:text-sm bg-cyan-600 w-full rounded-t-md text-white p-4'>Booking Status</h3>
         

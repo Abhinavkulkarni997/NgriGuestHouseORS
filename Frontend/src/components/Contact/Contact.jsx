@@ -16,36 +16,36 @@ const Contact = () => {
     }]
   return (
     // <section className='py-12 sm:py-14 lg:py-20 bg-white shadow-md mb-4  '>
-       <section className='py-12 max-w-screen-xl mx-auto px-4 bg-white shadow-md mb-4 lg:py-20 '>
+       <section className='py-12 max-w-screen-xl mx-auto px-4 bg-white shadow-md mb-4 lg:py-20 dark:bg-gray-900 dark:shadow-none '>
       <div className='max-w-7xl mx-auto p-10 px-4 '>
         {/* Heading */}
-        <h1 className='text-center font-extrabold text-3xl md:text-4xl text-gray-900'>Contact Us</h1>
+        <h1 className='text-center font-extrabold text-3xl md:text-4xl text-gray-900 dark:text-white'>Contact Us</h1>
 
         
-      <div className='mt-12 bg-cyan-400/10 p-4 rounded-xl grid md:grid-cols-2 gap-6 '>
+      <div className='mt-12 bg-cyan-400/10 p-4 rounded-xl grid md:grid-cols-2 gap-6 dark:bg-gray-800/60 '>
       {contactItems.map((item)=>(
-        <div key={item.id} className='bg-white shadow-sm hover:shadow-md transition rounded-xl p-6 flex items-start gap-4 hover:scale-105' >
-             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+        <div key={item.id} className='bg-white shadow-sm hover:shadow-md transition rounded-xl p-6 flex items-start gap-4 hover:scale-105 dark:bg-gray-800 ' >
+             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center dark:bg-white/10 border  ">
                 {item.icon}
               </div>
             <div>
-                <h3 className="text-lg font-semibold text-gray-900">{item.name}</h3>
-                <p className="text-gray-700 text-base">{item.info}</p>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{item.name}</h3>
+                <p className="text-gray-700 text-base dark:text-white">{item.info}</p>
               </div>
         </div>
       ))}
       </div>
 
        {/* Address Section */}
-       <div className='bg-cyan-400/10 p-4 rounded-xl mt-12'>
-        <div className=" bg-white p-6 rounded-xl border hover:shadow-md hover:scale-105">
+       <div className='bg-cyan-400/10 p-4 rounded-xl mt-12 dark:bg-gray-800/60'>
+        <div className=" bg-white p-6 rounded-xl border hover:shadow-md hover:scale-105 dark:bg-gray-800 dark:border-gray-700  transition">
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-              <FaMapMarkerAlt size={22} className="text-primary" />
+            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center border dark:bg-white/10 ">
+              <FaMapMarkerAlt size={22} className="text-primary dark:text-white" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900">Address</h3>
-              <p className="text-gray-700">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Address</h3>
+              <p className="text-gray-700 dark:text-white text-base">
                 NGRI Guest House, CSIR-NGRI Campus, Uppal Road, Hyderabad,
                 Telangana - 500007, India.
               </p>

@@ -55,18 +55,18 @@ const GuestHouseCharges = () => {
 
     }];
   return (
-    <section className='py-10 sm:py-14 lg:py-20 bg-white '>
+    <section className='py-10 sm:py-14 lg:py-20 bg-white dark:bg-gray-900 '>
       <div className='max-w-6xl mx-auto px-4 '>
-        <h1 className='text-center text-gray-800 font-extrabold text-3xl md:text-4xl mb-3'>Guesthouse Charges</h1>
-        <p className='text-center  text-gray-700   mb-10 leading-relaxed'>The accommodation can be requested/booked for a maximum period of 7 days, subject to availability.<br/>
+        <h1 className='text-center text-gray-800 font-extrabold text-3xl md:text-4xl mb-3 dark:text-white'>Guesthouse Charges</h1>
+        <p className='text-center  text-gray-700   mb-10 leading-relaxed dark:text-white'>The accommodation can be requested/booked for a maximum period of 7 days, subject to availability.<br/>
 Beyond 7 days the rates will be doubled for that category in which the guest belongs and billed accordingly.</p>
 </div>
 
 
-        <div className='overflow-x-auto mt-6 shadow-xl  border border-b-2 rounded-lg'>
+        <div className='overflow-x-auto mt-6 shadow-xl  border border-b-2 rounded-lg border-gray-200 dark:border-gray-700 '>
         <table  className='w-full text-sm text-left' >
-            <thead className=' backdrop-blur-md bg-gradient-to-r from-cyan-400/10  to-cyan-400/10 text-gray-800'>
-            <tr>
+            <thead className=' backdrop-blur-md bg-gradient-to-r from-cyan-400/10  to-cyan-400/10 text-gray-800 dark:bg-gray-800 dark:text-white'>
+            <tr className='dark:bg-gray-700'>
            <th className='px-4 py-3 '> Sl No.</th>
             <th className='px-4 py-3 '>Category Of Guests </th>
            <th className='px-4 py-3'>Rates Per Bed(A/C)</th>
@@ -75,11 +75,11 @@ Beyond 7 days the rates will be doubled for that category in which the guest bel
             </thead>
             <tbody className=' divide-y divide-gray-200 '>
                 {guestHouseCharges.map((row,index)=>(
-                <tr key={index} className={`${index%2==0? "border-gray-50":"bg-white"} hover:bg-indigo-50 transition`}>
-                    <td  className='px-4 py-3 text-gray-700'>{row.sl}</td>
-                    <td className='px-4 py-3 text-gray-700'>{row.category}</td>
-                    <td className='px-4 py-3 font-medium text-gray-900'>{row.ac}</td>
-                    <td className='px-4 py-3 font-medium text-gray-900'>{row.nonAc}</td>
+                <tr key={index} className={`${index%2==0? "border-gray-50":"bg-white"} hover:bg-indigo-50 dark:bg-gray-800 transition`}>
+                    <td  className='px-4 py-3 text-gray-700 dark:text-white'>{row.sl}</td>
+                    <td className='px-4 py-3 text-gray-700 dark:text-white'>{row.category}</td>
+                    <td className='px-4 py-3 font-medium text-gray-900 dark:text-white'>{row.ac}</td>
+                    <td className='px-4 py-3 font-medium text-gray-900 dark:text-white'>{row.nonAc}</td>
                 </tr>
                 ))}
 

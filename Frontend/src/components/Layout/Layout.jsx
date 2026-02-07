@@ -31,9 +31,11 @@ import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 import Navbar1 from "../Navbar/Navbar1";
 import ScrollToTop from "../ScrollToTop/ScrollToTop";
+import { ThemeProvider } from '../../Admin/Context/ThemeContext.jsx';
 const Layout = ({ children,hasHero=false }) => {
   return (
     <>
+    <ThemeProvider>
       <Navbar1 hasHero={hasHero}/>
 
       {/* Only NON-hero pages get offset */}
@@ -45,6 +47,7 @@ const Layout = ({ children,hasHero=false }) => {
           {children}
         {/* </div> */}
       </main>
+      </ThemeProvider>
             <ScrollToTop/>
 
       <Footer />
