@@ -45,8 +45,8 @@ const Visit = () => {
 
         <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
             <div>
-             <label className="block text-sm font-medium text-gray-700">Purpose of Visit</label>
-            <select {...register("purpose")} className="mt-1  w-full rounded-lg border p-3">
+             <label className="block text-sm font-medium text-gray-700 dark:text-white">Purpose of Visit</label>
+            <select {...register("purpose")} className="mt-1  w-full rounded-lg border p-3 dark:bg-gray-900">
                 <option value="">Select Purpose</option>
             {purposes.map(p => <option key={p} value={p}>{p}</option>)}
           </select>
@@ -54,8 +54,8 @@ const Visit = () => {
           </div>
 
            <div>
-          <label className="block text-sm font-medium text-gray-700">Number of Rooms</label>
-          <select {...register("numberOfRooms", { valueAsNumber: true })}   className="mt-1  w-full rounded-lg border p-3" >
+          <label className="block text-sm font-medium text-gray-700 dark:text-white">Number of Rooms</label>
+          <select {...register("numberOfRooms", { valueAsNumber: true })}   className="mt-1  w-full rounded-lg border p-3 dark:bg-gray-900" >
             <option value={0}>Select</option>
             {rooms.map((r)=>(<option key={r.id} value={r.id}>{r.name}</option>))}
         </select>
@@ -63,25 +63,25 @@ const Visit = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Arrival Date</label>
-          <input {...register("arrivalDate")} min={new Date().toISOString().split("T")[0]} type="date" className="mt-1 w-full rounded-lg border p-3" />
+          <label className="block text-sm font-medium text-gray-700 dark:text-white">Arrival Date</label>
+          <input {...register("arrivalDate")} min={new Date().toISOString().split("T")[0]} type="date" className="mt-1 w-full rounded-lg border p-3 dark:bg-gray-900 " />
           {errors.arrivalDate && <p className="text-red-600 text-sm mt-1">{errors.arrivalDate.message}</p>}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Arrival Time</label>
-          <input {...register("arrivalTime")} type="time" className="mt-1 w-full rounded-lg border p-3" />
+          <label className="block text-sm font-medium text-gray-700 dark:text-white">Arrival Time</label>
+          <input {...register("arrivalTime")} type="time" className="mt-1 w-full rounded-lg border p-3 dark:bg-gray-900" />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Departure Date</label>
-          <input {...register("departureDate")} min={new Date().toISOString().split("T")[0]} type="date" className="mt-1 w-full rounded-lg border p-3" />
+          <label className="block text-sm font-medium text-gray-700 dark:text-white">Departure Date</label>
+          <input {...register("departureDate")} min={new Date().toISOString().split("T")[0]} type="date" className="mt-1 w-full rounded-lg border p-3 dark:bg-gray-900" />
           {errors.departureDate && (<p className='text-red-600 text-sm mt-1'>{errors.departureDate.message}</p>)}
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Departure Time</label>
-          <input {...register("departureTime")} type="time" className="mt-1 w-full rounded-lg border p-3" />
+          <label className="block text-sm font-medium text-gray-700 dark:text-white">Departure Time</label>
+          <input {...register("departureTime")} type="time" className="mt-1 w-full rounded-lg border p-3 dark:bg-gray-900" />
         </div>
       </div>
         </div>

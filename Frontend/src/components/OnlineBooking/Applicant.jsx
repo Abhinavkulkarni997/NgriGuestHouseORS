@@ -7,7 +7,7 @@ const Input=({name,label,type="text",placeholder,...rest})=>{
         <div>
         <label className="block text-sm font-medium text-gray-700">{label}</label>
         <input {...register(name)} type={type} placeholder={placeholder} {...rest}
-        className="mt-1 block w-full rounded-lg border p-3 outline-none focus:ring-2 focus:ring-cyan-400/80"
+        className="mt-1 block w-full rounded-lg border p-3 outline-none focus:ring-2 focus:ring-cyan-400/80 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 bg-white dark:bg-gray-900"
         />
         {errors[name] && <p className="text-sm text-red-600 mt-1">{errors[name].message}</p>}
         </div>
@@ -172,12 +172,20 @@ const Applicant = () => {
         }
     ]
   return (
-    <div>
-    <h2 className="text-lg font-semibold mb-4">Applicant Details</h2>
+    <div className="dark:bg-gray-900 ">
+    <h2 className="text-lg font-semibold mb-4 dark:text-white">Applicant Details</h2>
 
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
-        <Input name="applicantName" label="Applicant Name" placeholder="Full name" />
-        <Input name="designation" label="Designation" placeholder="Designation" />
+        <div >
+        <label className="dark:text-white">Applicant Name</label>
+        <Input name="applicantName" placeholder="Full name"   className=""/>
+        </div>
+        <div>
+        <label className="dark:text-white">Designation</label>
+        <Input name="designation"  placeholder="Designation" />
+
+        </div>
+       
     </div>
 
     <div>
@@ -186,20 +194,23 @@ const Applicant = () => {
         {/* {errors.officeIdFile && <p className="text-red-600">{errors.officeIdFile.message}</p>} */}
     </div>
     <div>
-        <label className="block text-sm font-medium text-gray-700">Organization</label>
-        <select {...register("organization")} className="mt-1 block w-full rounded-lg border p-3">
+        <label className="block text-sm font-medium text-gray-700 dark:text-white">Organization</label>
+        <select {...register("organization")} className="mt-1 block w-full rounded-lg border p-3 dark:text-white dark:bg-gray-900">
             <option value="">Select organization</option>
             {organizations.map(o=><option key={o.id} value={o.name}>{o.name}</option>)}
         </select>
         {errors.organization && (<p className="text-red-600 text-sm mt-1">{errors.organization.message}</p>)}
     </div>
-    <Input name="employeeId" label="Employee ID" placeholder="Employee ID" />
-    <Input name="mobileNumber" label="Mobile Number" placeholder="Enter Mobile Number" />
-    <Input name="officialEmail" label='Official Email ID' type="email" placeholder="Official Email Address"/>
+    <label className="dark:text-white">Employee ID</label>
+    <Input name="employeeId"  placeholder="Employee ID"  />
+    <label className="dark:text-white">Mobile Number</label>
+    <Input name="mobileNumber"  placeholder="Enter Mobile Number" />
+     <label className="dark:text-white">Official Email Address</label>
+    <Input name="officialEmail"  type="email" placeholder="Official Email Address" />
 
      <div>
-        <label className="block text-sm font-medium text-gray-700">Payment to be borne by</label>
-        <select {...register("paymentBy")} className="mt-1 block w-full rounded-lg border p-3">
+        <label className="block text-sm font-medium text-gray-700 dark:text-white">Payment to be borne by</label>
+        <select {...register("paymentBy")} className="mt-1 block w-full rounded-lg border p-3 dark:bg-gray-900">
             <option value="">Select</option>
         {payments.map(p=><option key={p.id} value={p.name}>{p.name}</option>)}
         </select>

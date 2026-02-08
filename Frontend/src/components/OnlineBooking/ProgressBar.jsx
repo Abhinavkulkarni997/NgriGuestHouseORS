@@ -5,8 +5,8 @@ const ProgressBar = ({step,steps=4}) => {
   return (
     <div className='mb-6'>
         <div className='flex items-center justify-between text-sm text-gray-600 mb-2'>
-            <div>Step {step} of {steps}</div>
-            <div>{percent}%</div>
+            <div className='dark:text-white'>Step {step} of {steps}</div>
+            <div className='dark:text-white'>{percent}%</div>
         </div>
 
         <div className='h-2 b-gray-200 rounded-full overflow-hidden'>

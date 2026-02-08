@@ -324,18 +324,18 @@ const navItems=[
 
         {/* MOBILE NAV */}
       {hoverOpen && (
-        <div className="md:hidden bg-white shadow-lg py-3 px-4 space-y-3">
+        <div className="md:hidden bg-white shadow-lg py-3 px-4 space-y-3 dark:bg-gray-800 ">
           {navItems.map((item) => (
             <div key={item.id}>
               {!item.children && (
-                <Link to={item.url} className="block py-2 text-gray-900">
+                <Link to={item.url} className="block py-2 text-gray-900 dark:text-white">
                   {item.title}
                 </Link>
               )}
 
               {item.children && (
                 <details className="group">
-                  <summary className="cursor-pointer py-2 text-gray-900">
+                  <summary className="cursor-pointer py-2 text-gray-900 dark:text-white">
                     {item.title}
                   </summary>
                   <div className="ml-4 mt-2 space-y-2">
@@ -343,7 +343,7 @@ const navItems=[
                       <Link
                         key={child.id}
                         to={child.url}
-                        className="block text-gray-700"
+                        className="block text-gray-700 dark:text-white"
                       >
                         {child.title}
                       </Link>

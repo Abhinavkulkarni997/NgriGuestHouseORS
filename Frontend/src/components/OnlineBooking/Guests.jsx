@@ -173,7 +173,7 @@ const genders=[
         </label>
         {/* guests list */}
             {fields.map((field,index)=>(
-                <div key={field.id} className='border rounded-lg p-4 bg-white'>
+                <div key={field.id} className='border rounded-lg p-4 bg-white dark:bg-gray-900'>
                     <div className='flex justify-between items-center mb-3'>
                         <strong>Guest #{index+1} </strong>
                         {/* <div className='flex gap-2'> */}
@@ -184,24 +184,24 @@ const genders=[
 
                     <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
                         <div>
-                            <label className='font-medium text-sm text-gray-700'>Name</label>
-                            <input {...register(`guests.${index}.name`)} className='mt-1  w-full rounded-lg border p-3' disabled={field.isApplicant}/>
+                            <label className='font-medium text-sm text-gray-700 dark:text-white'>Name</label>
+                            <input {...register(`guests.${index}.name`)} className='mt-1  w-full rounded-lg border p-3 dark:bg-gray-900' disabled={field.isApplicant}/>
                             {errors.guests?.[index]?.name &&(<p className='text-red-600 text-sm'>{errors.guests[index].name.message}</p>)}
                             </div>
 
                         <div>
-                            <label className='font-medium text-sm text-gray-700'>Organization </label>
-                            <input {...register(`guests.${index}.organization`)} className='mt-1 border w-full rounded-lg p-3' disabled={field.isApplicant}/>
+                            <label className='font-medium text-sm text-gray-700 dark:text-white'>Organization </label>
+                            <input {...register(`guests.${index}.organization`)} className='mt-1 border w-full rounded-lg p-3 dark:bg-gray-900' disabled={field.isApplicant}/>
                         </div>
 
                         <div>
-                            <label className='font-medium text-sm text-gray-700'>Age</label>
-                            <input type="number" {...register(`guests.${index}.age`,{valueAsNumber:true})} className='mt-1 border w-full rounded-lg p-3'/>
+                            <label className='font-medium text-sm text-gray-700 dark:text-white'>Age</label>
+                            <input type="number" {...register(`guests.${index}.age`,{valueAsNumber:true})} className='mt-1 border w-full rounded-lg p-3 dark:bg-gray-900'/>
                         </div>
 
                         <div>
-                            <label className='font-medium text-sm text-gray-700'>Gender</label>
-                        <select {...register(`guests.${index}.gender`)} className='mt-1  border w-full rounded-lg p-3'>
+                            <label className='font-medium text-sm text-gray-700 dark:text-white'>Gender</label>
+                        <select {...register(`guests.${index}.gender`)} className='mt-1  border w-full rounded-lg p-3 dark:bg-gray-900'>
                             <option value="">Select</option>
                             {genders.map((g)=>(<option key={g.id} value={g.name}>{g.name}</option>))}
 
@@ -209,20 +209,20 @@ const genders=[
                         </div>
 
                         <div>
-                            <label className="font-medium text-sm text-gray-700">Contact No.</label>
-                            <input {...register(`guests.${index}.contact`)} className="mt-1  w-full rounded-lg border p-3" disabled={field.isApplicant}/>
+                            <label className="font-medium text-sm text-gray-700 dark:text-white">Contact No.</label>
+                            <input {...register(`guests.${index}.contact`)} className="mt-1  w-full rounded-lg border p-3 dark:bg-gray-900" disabled={field.isApplicant}/>
                             {errors.guests?.[index]?.contact &&(<p className='text-red-600 text-sm'>{errors.guests[index].contact.message}</p>)}
 
                         </div>
 
                         <div>
-                            <label className="font-medium text-sm text-gray-700">ID Proof No.</label>
-                            <input {...register(`guests.${index}.idProof`)} className="mt-1  w-full rounded-lg border p-3" />
+                            <label className="font-medium text-sm text-gray-700 dark:text-white">ID Proof No.</label>
+                            <input {...register(`guests.${index}.idProof`)} className="mt-1  w-full rounded-lg border p-3 dark:bg-gray-900" />
                         </div>
 
                         <div>
-                            <label className='font-medium text-sm text-gray-700'>Category</label>
-                            <select {...register(`guests.${index}.category`)} className='mt-1  w-full rounded-lg border p-3'>
+                            <label className='font-medium text-sm text-gray-700 dark:text-white'>Category</label>
+                            <select {...register(`guests.${index}.category`)} className='mt-1  w-full rounded-lg border p-3 dark:bg-gray-900'>
                                 <option value="">Select</option>
                                 {category.map((c)=>(<option key={c.id} value={c.name}>{c.name}</option>))}
                             </select>
@@ -236,7 +236,7 @@ const genders=[
                <button type="button" disabled={fields.length>=6} onClick={() => append({ name: "", organization: "", age: "", gender: "", contact: "", idProof: "", category: "" })} className="px-4 py-2 bg-cyan-600 text-white rounded-md">
             Add Guest
           </button>
-               <p className='text-sm text-gray-800 self-center'>You can add upto 6 guests</p>
+               <p className='text-sm text-gray-800 self-center dark:text-white'>You can add upto 6 guests</p>
             {/* </div> */}
 
 

@@ -83,8 +83,8 @@ const MultiStepForm = () => {
   }
 
   return (
-    <div className='min-h-screen flex items-start justify-center bg-gray-50 py-[120px] px-4'>
-      <div className='w-full max-w-4xl bg-white rounded-2xl shadow-lg p-6'>
+    <div className='min-h-screen flex items-start justify-center bg-gray-50 py-[120px] px-4 dark:bg-gray-800 dark:text-white'>
+      <div className='w-full max-w-4xl bg-white rounded-2xl shadow-lg p-6 dark:bg-gray-900 dark:text-white'>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <ProgressBar step={step} steps={steps}/>
@@ -96,7 +96,7 @@ const MultiStepForm = () => {
 
             <div className='mt-6 flex items-center justify-between'>
               <div>
-                {step >1 && <button type="button" onClick={prev} className='px-4 py-2 rounded-md bg-[#1A1A1A] text-white'>Back</button>}
+                {step >1 && <button type="button" onClick={prev} className='px-4 py-2 rounded-md bg-[#1A1A1A] text-white dark:text-white '>Back</button>}
               </div>
               <div>
                 {step < steps && (

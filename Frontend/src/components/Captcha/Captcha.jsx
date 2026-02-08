@@ -36,7 +36,7 @@ const Captcha = () => {
         <button
           type="button"
           onClick={refreshCaptcha}
-          className="flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900 transition-colors group"
+          className="flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900 transition-colors group dark:text-white"
         >
           Can't read image?
           <span className="flex items-center gap-1 text-cyan-600 font-medium group-hover:underline">
@@ -54,7 +54,7 @@ const Captcha = () => {
       <input
         {...register("captcha")}
         placeholder="Enter Captcha"
-        className="w-full rounded-lg border p-3"
+        className="w-full rounded-lg border p-3 dark:bg-gray-900"
       />
       {errors?.captcha && (
         <p className="text-red-600 text-sm">{errors.captcha.message}</p>
