@@ -14,48 +14,52 @@ const invoiceSchema=new mongoose.Schema(
                 unique:true,
             },
 
-            invoiceType:{
-                type:String,
-                enum:["BASE","EXTENSION"],
-                default:"BASE",
+            // invoiceType:{
+            //     type:String,
+            //     enum:["BASE","EXTENSION"],
+            //     default:"BASE",
 
-            },
+            // },
 
-            parentInvoice:{
-                type:mongoose.Schema.Types.ObjectId,
-                ref:"Invoice",
-                default:null,
-            },
+            // parentInvoice:{
+            //     type:mongoose.Schema.Types.ObjectId,
+            //     ref:"Invoice",
+            //     default:null,
+            // },
 
             period:{
-                from:Date,
-                to:Date,
+                from:{type:Date,required:true},
+                to:{type:Date,required:true},
             },
-
-            subTotal:{
-                type:Number,
-                required:true,
-                
-            },
-
-            guestCategory:{
+             guestCategory:{
                 type:String,
                 required:true,
             },
+
             roomNumber:String,
             roomType:String,
+
+          
+
             acType:{
                 type:String,
                 enum:["AC","NON_AC"],
                 required:true,
             },
+
             ratePerDay:{
                 type:Number,
                 required:true,
             },
+
             numberOfDays:{
                 type:Number,
                 required:true,
+            },
+              subTotal:{
+                type:Number,
+                required:true,
+                
             },
 
             // baseAmount:{
@@ -75,6 +79,11 @@ const invoiceSchema=new mongoose.Schema(
             totalAmount:{
                 type:Number,
                 required:true
+            },
+            status:{
+                type:String,
+                enum:["draft","FINAL"],
+                default:"DRAFT",
             },
             paymentBy:{
                     type:String,
