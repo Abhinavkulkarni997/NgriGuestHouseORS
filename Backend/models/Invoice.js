@@ -56,7 +56,7 @@ const invoiceSchema=new mongoose.Schema(
                 type:Number,
                 required:true,
             },
-              subTotal:{
+              subtotal:{
                 type:Number,
                 required:true,
                 
@@ -76,19 +76,37 @@ const invoiceSchema=new mongoose.Schema(
                 default:0,
             },
 
-            totalAmount:{
+            total:{
                 type:Number,
                 required:true
             },
-            status:{
-                type:String,
-                enum:["draft","FINAL"],
-                default:"DRAFT",
-            },
-            paymentBy:{
+
+            payment:{
+                mode:{
                     type:String,
-                    required:true,
+                    enum:["CASH","ONLINE"],
+                    default:"CASH",
                 },
+                status:{
+                type:String,
+                enum:["PENDING","PAID"],
+                default:"PENDING",
+            },
+                transactionId:{
+                    type:String,
+                    default:null
+                },
+                paidAt:{
+                    type:Date,
+                    default:null
+                }
+            
+            },
+            
+            // paymentBy:{
+            //         type:String,
+            //         required:true,
+            //     },
             generatedAt:{
                 type:Date,
                 default:Date.now,
