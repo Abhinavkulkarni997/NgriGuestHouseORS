@@ -67,15 +67,85 @@ const {calculateInvoice}=require("../utils/invoiceCalculator");
 // };
 
 // code developed on 10-02-2026 as per new requirement changes
-const Invoice=require('../models/Invoice');
-const rateCard=require('../config/rateCard');
-const Counter=require('../models/counter');
-const {calculateInvoice}=require('../utils/invoiceCalculator');
+
 
 const createOrUpdateInvoice=async(booking)=>{
     // validate booking 
     if(!booking.arrivalDateTime || !booking.departureDateTime){
         throw new Error("Invalid booking dates for invoice calculation");
     }
+
+    const category=booking.guestCategory;
+    if(!category || !rateCard[category]){
+        throw new Error("Invalid guest category");
+    }
+
+    const acType=booking.acType==="AC"?"AC":"NON_AC";
+    const ratePerDay=rateCard[category][acType];
+
+    if(!ratePerDay){
+        throw new Error(
+            `Rate not found for category: ${category},AC Type:${acType}`
+        );
+    }
+
+    const gstPercent=booking.gstPercent ?? 0;
+
+    // -------CALCULATION--------
+    const calc=calculateInvoice({
+        from:booking.arrivalDateTime,
+        to:booking.departureDateTime,
+        ratePerDay,
+        gstPercent
+    });
+
+    // ---------FIND EXISTING INVOICE-----------
+    let invoice=await Invoice.findOne({booking:booking._id});
+
+
+    if(!invoice){
+        const counter=await Counter.findOneAndUpdate(
+            {name:"invoice"},
+            {$inc:{seq:1}},
+            {new:true,upsert:true}
+        );
+
+        const invoiceNumber=`INV-${String(counter.seq).padStart(5,"0")}`;
+
+        invoice=new Invoice({
+            booking:booking._id,
+            invoiceNumber,
+
+            period:{
+                from:booking.arrivalDateTime,
+                to:booking.departureDateTime
+            },
+
+            guestCategory:category,
+            roomNumber:booking.roomNumber,
+            roomType:booking.roomType,
+            acType,
+
+            ratePerDay,
+            gstPercent,
+
+            ...calc,
+
+            payment:{
+                mode:"CASH",
+                status:"PENDING"
+            }
+        });
+    }else{
+        // ------------UPDATE SAME INVOICE----------------
+        invoice.period.to=booking.departureDateTime;
+        invoice.numberOfDays=calc.numberOfDays;
+        invoice.subtotal=calc.subtotal;
+        invoice.gstAmount=calc.gstAmount;
+        invoice.total=calc.total;
+    }
+
+    await invoice.save();
+    return invoice;
 }
-module.exports = {generateInvoice};
+module.exports = {createOrUpdateInvoice};
