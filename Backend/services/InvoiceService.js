@@ -73,6 +73,7 @@ const Counter=require('../models/counter');
 const {calculateInvoice}=require('../utils/invoiceCalculator');
 
 const createOrUpdateInvoice=async(booking)=>{
+    // validate booking 
     if(!booking.arrivalDateTime || !booking.departureDateTime){
         throw new Error("Invalid booking dates for invoice calculation");
     }
