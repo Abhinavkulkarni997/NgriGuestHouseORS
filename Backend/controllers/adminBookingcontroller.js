@@ -3,7 +3,7 @@ const Room =require('../models/Room');
 const path=require('path');
 const {sendRoomAllocationEmail,sendApprovedEmail,sendRejectedEmail}=require('../services/mailservice');
 const { rmSync } = require('fs');
-const {generateInvoice}=require('../services/InvoiceService');
+const {createOrUpdateInvoice}=require('../services/InvoiceService');
 const Invoice=require('../models/Invoice');
 
 
@@ -196,7 +196,7 @@ const finalizeBooking=async(req,res)=>{
         
         let invoice;
         try{
-              invoice=await generateInvoice(booking);
+              invoice=await createOrUpdateInvoice(booking);
             //   booking.invoice=invoice._id;
             //    await booking.save();
         }catch(err){

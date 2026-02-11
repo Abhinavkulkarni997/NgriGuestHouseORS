@@ -132,13 +132,22 @@ const createOrUpdateInvoice=async(booking)=>{
             ...calc,
 
             payment:{
-                mode:"CASH",
+                mode:booking.paymentBy || "CASH",
                 status:"PENDING"
             }
         });
     }else{
-        // ------------UPDATE SAME INVOICE----------------
+        // ------------UPDATE THE SAME INVOICE----------------
         invoice.period.to=booking.departureDateTime;
+
+        invoice.guestCategory=category;
+        invoice.roomNumber=booking.roomNumber;
+        invoice.roomType=booking.roomType;
+        invoice.acType=acType;
+
+        invoice.ratePerDay=ratePerDay;
+        invoice.gstPercent=gstPercent;
+
         invoice.numberOfDays=calc.numberOfDays;
         invoice.subtotal=calc.subtotal;
         invoice.gstAmount=calc.gstAmount;

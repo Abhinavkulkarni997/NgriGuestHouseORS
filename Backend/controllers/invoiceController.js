@@ -1,6 +1,6 @@
 const Invoice=require('../models/Invoice');
 const Booking=require('../models/Booking');
-const {generateInvoice}=require('../services/InvoiceService');
+const {createOrUpdateInvoice}=require('../services/InvoiceService');
 
 
 
@@ -43,7 +43,7 @@ const createInvoiceForBooking=async(req,res)=>{
         if(booking.status !== "FINALIZED"){
             return res.status(400).json({message:"Invoice can only be generated for FINALIZED bookings"});
         }
-        const invoice=await generateInvoice(booking);
+        const invoice=await createOrUpdateInvoice(booking);
         res.status(201).json(invoice);
     }catch(error){
         console.error(error);
