@@ -320,13 +320,22 @@ export default function GuestHouseCenteredCarousel() {
             loop={true}
             autoplay={{ delay: 3500, disableOnInteraction: false }}
             spaceBetween={24}
-            slidesPerView={"auto"} // important to show side slides
-            breakpoints={{
-              320: { slidesPerView: 1.05, spaceBetween: 12 },
-              640: { slidesPerView: 1.3, spaceBetween: 16 },
-              768: { slidesPerView: 2.1, spaceBetween: 20 },
-              1024: { slidesPerView: 3.2, spaceBetween: 24 },
-              1280: { slidesPerView: 4.2, spaceBetween: 28 },
+            slidesPerView={"auto"}
+            // breakpoints={{
+            //   320: { slidesPerView: 1.05, spaceBetween: 12 },
+            //   640: { slidesPerView: 1.3, spaceBetween: 16 },
+            //   768: { slidesPerView: 2.1, spaceBetween: 20 },
+            //   1024: { slidesPerView: 3.2, spaceBetween: 24 },
+            //   1280: { slidesPerView: 4.2, spaceBetween: 28 },
+            // }}
+
+            // slides per view is removed to achieve responsiveness in below from above code
+        breakpoints={{
+              320: {  spaceBetween: 12 },
+              640: {  spaceBetween: 16 },
+              768: {  spaceBetween: 20 },
+              1024: {  spaceBetween: 24 },
+              1280: { spaceBetween: 28 },
             }}
             className="py-6"
           >
@@ -336,7 +345,7 @@ export default function GuestHouseCenteredCarousel() {
                 className="!w-[220px] md:!w-[260px] lg:!w-[300px] xl:!w-[340px] 2xl:!w-[380px] flex justify-center"
               >
                 {/** Slide card */}
-                <div className="relative w-full rounded-2xl overflow-hidden shadow-lg group">
+                <div className="relative w-full rounded-2xl overflow-hidden shadow-lg group ">
                   <img
                     src={img.src}
                     alt={img.title}

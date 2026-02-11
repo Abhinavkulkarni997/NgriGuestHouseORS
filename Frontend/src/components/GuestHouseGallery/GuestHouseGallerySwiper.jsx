@@ -15,12 +15,12 @@ import thg6 from "../../assets/Gallery/thg6.jpg";
 import thg7 from "../../assets/Gallery/thg7.jpg";
 
 const images = [
-  { id: 1, title: "Surat", src: thg1 },
-  { id: 2, title: "Kasauli", src: thg2 },
-  { id: 3, title: "Ambala", src: thg3 },
-  { id: 4, title: "Sakleshpur", src: thg4 },
-  { id: 5, title: "Phagwara", src: thg6 },
-  { id: 6, title: "Other", src: thg7 },
+  { id: 1, title: "image1", src: thg1 },
+  { id: 2, title: "image2", src: thg2 },
+  { id: 3, title: "image3", src: thg3 },
+  { id: 4, title: "image4", src: thg4 },
+  { id: 5, title: "image5", src: thg6 },
+  { id: 6, title: "image6", src: thg7 },
 ];
 
 export default function GuestHouseGallerySwiper() {
