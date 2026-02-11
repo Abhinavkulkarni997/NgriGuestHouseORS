@@ -49,21 +49,20 @@ const Faq = () => {
     }
   return (
     
-    <section className='py-[140px] sm:py-[140px] md:py-[140px] lg:py-[140px] max-w-screen-xl mx-auto px-4 bg-cyan-400/10 backdrop-blur-md rounded-lg mb-4 dark:bg-gray-900  '>
-        <h1 className='font-semibold text-3xl md:text-4xl mb-6 text-gray-800 text-center dark:text-white'>Any questions? Check out the FAQ</h1>
+    <section className='py-[140px] sm:py-[140px] md:py-[140px] lg:py-[140px] max-w-screen-xl mx-auto px-4 bg-cyan-400/10 backdrop-blur-md rounded-lg mb-4  '>
+        <h1 className='font-extrabold text-3xl md:text-4xl mb-6 text-gray-800 text-center '>Any questions? Check out the FAQ</h1>
         {faqItems.map((item,index)=>{
             const isOpen=openItems.includes(item.id);
             return(
                 
-                <div key={index} className='text-start bg-white/80 backdrop-blur-md p-4 sm:p-6 my-4 rounded-lg shadow-md dark:bg-gray-800/90 '>
+                <div key={index} className='text-start bg-white/80 backdrop-blur-md p-4 sm:p-6 my-4 rounded-lg shadow-md  '>
                     <div className='flex justify-between items-start'>
-                    <div onClick={()=>toggleItem(item.id)} className='text-base sm:text-sm font-medium    hover:text-indigo-600 cursor-pointer flex-1 pr-4 break-normal md:break-all'>
-                    
+                    <div onClick={()=>toggleItem(item.id)} className='text-base sm:text-sm font-semibold    hover:text-indigo-600 cursor-pointer flex-1 pr-4 break-normal md:break-all'>
                         {item.question}
                     </div>
                     
                     <button onClick={()=>toggleItem(item.id)} className='flex-shrink-0 ml-2'>
-                        <IoIosArrowDown className={`w-4 h-4 cursor-pointer text-gray-800 hover:text-indigo-800 dark:text-white transition-transform duration-300 ${isOpen? 'rotate-180' : ''}`} />
+                        <IoIosArrowDown className={`w-4 h-4 cursor-pointer text-gray-800 hover:text-indigo-800 transition-transform duration-300 ${isOpen? 'rotate-180' : ''}`} />
                     </button>
                     </div>
 
