@@ -117,6 +117,7 @@ const finalizeBooking=async(req,res)=>{
         
 
         if (booking.status === "FINALIZED") {
+           
             return res.status(400).json({
             success: false,
             message: "Booking already finalized"
@@ -424,6 +425,39 @@ const getCalendarBookings=async(req,res)=>{
 }
 
 
+const updateBookingDetails=async(req,res)=>{
+    try{
+        const {arrivalDateTime,departureDateTime,guestCategory,acType}=req.body;
+        const booking=await Booking.find(req.params.id);
+
+        if(!booking){
+            return res.status(404).json({
+                success:false,
+                message:"Booking not found"
+            });
+        }
+
+        // Only allow update if booking is not REJECTED
+        if(booking.status==="REJECTED"){
+            return res.status(400).json({
+                success:false,
+                message:"Cannot update rejected booking"
+            });
+        }
+
+        // update fields if provided
+        if(arrivalDateTime) {booking.arrivalDateTime=arrivalDateTime;}
+        if(departureDateTime) {booking.departureDateTime=departureDateTime;}
+        if(guestCategory){booking.guestCategory=guestCategory;}
+        if(acType){booking.acType=acType;}
+        await booking.save();
+
+        // if booking is already finalized ->recalculate invoice 
+        if(booking.status==="FINALIZED"){
+            await createOrUpdateInvoice(booking);
+        }
+    }
+}
 
 module.exports={getAllBookings,approveBooking,rejectBooking,idCardView,allocateRoom,getAvailableRooms,vacateRoom,getCalendarBookings,finalizeBooking};
 

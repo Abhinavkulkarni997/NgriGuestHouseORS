@@ -1,7 +1,7 @@
 import {useParams} from "react-router-dom";
 import {useState,useEffect} from "react";
 import api from "../../api/bookingapi";
-// import ngrilogo from '../../assets/ngri-logo.png';
+import ngrilogo from '../../assets/ngri-logo.png';
 
 const InvoiceView=()=>{
     const {invoiceId}= useParams();
@@ -26,16 +26,19 @@ const InvoiceView=()=>{
 
     return(
         <div className="p-4 max-w-4xl mx-auto">
-            <div className="bg-white rounded-xl border shadow p-6 space-y-6">
+            <div className="bg-white rounded-xl border shadow p-6 space-y-6   ">
+                <div className="flex  items-center ">
+                <img src={ngrilogo} className="w-12 h-12 " alt="NGRI Logo" />
+                <h1 className="text-base sm:text-sm font-bold ">CSIR-NATIONAL GEOPHYSICAL RESEARCH INSTITUTE</h1>
+              <div className="f"> 
+                <p className="text-base sm:text-sm text-start"><br/>Council of Scientific & Industrial Research</p>
+                <p className="text-base sm:text-sm">Hyderabad, Telangana - 500007, India.</p>
+                </div>
+                </div>
 
-                {/* <div className="">
-                <img src={ngrilogo} className="w-12 h-12 mx-auto" alt="NGRI Logo" />
-                </div> */}
-
-
-                <div className=""></div>
+                 
                 <h1 className="text-xl font-semibold">
-                    Invoice #{invoice.invoiceNumber}
+                    Invoice No: #{invoice.invoiceNumber}
                 </h1>
 
                 <span className="mt-2 sm:mt-0 text-sm text-gray-500">
@@ -43,17 +46,23 @@ const InvoiceView=()=>{
                 </span>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-4 text-sm">
+            <div className="grid sm:grid-cols-4 gap-4 text-sm">
                 <div className="mt-2 pt-4">
-                    <p className="font-medium">Guest</p>
+                    <p className="font-medium">Guest Name</p>
                     <p>{invoice.booking.applicantName}</p>
                     <p className="text-gray-500">{invoice.guestCategory}</p>
+                    <p>{invoice.booking.designation}</p>
                 </div>
 
                 <div className="mt-2 pt-4">
-                    <p className="font-medium">Room</p>
+                    <p className="font-medium">Room Details</p>
                     <p className="mt-2">Room {invoice.roomNumber}</p>
                     <p className="mt-2">{invoice.roomType}</p>
+                </div>
+                <div className="mt-2 pt-4">
+                    <p className="font-medium">Arrival Date</p>
+                    <p className="mt-2">{invoice.arrivalDateTime}</p>
+                    
                 </div>
             </div>
 
