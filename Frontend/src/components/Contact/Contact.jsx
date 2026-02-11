@@ -24,7 +24,7 @@ const Contact = () => {
         
       <div className='mt-12 bg-cyan-400/10 p-4 rounded-xl grid md:grid-cols-2 gap-6 dark:bg-gray-800/60 '>
       {contactItems.map((item)=>(
-        <div key={item.id} className='bg-white shadow-sm hover:shadow-md transition rounded-xl p-6 flex items-start gap-4 hover:scale-105 dark:bg-gray-800 ' >
+        <div key={item.id} className='bg-white shadow-sm hover:shadow-md transition rounded-xl p-4 flex items-start gap-4 hover:scale-105 dark:bg-gray-800 ' >
              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center dark:bg-white/10 border  ">
                 {item.icon}
               </div>
