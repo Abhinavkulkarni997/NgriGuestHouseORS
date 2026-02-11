@@ -452,12 +452,17 @@ const updateBookingDetails=async(req,res)=>{
         if(acType){booking.acType=acType;}
         await booking.save();
 
-        // if booking is already finalized ->recalculate invoice 
+        // if booking is already finalized ->we are recalculating invoice here
         if(booking.status==="FINALIZED"){
             await createOrUpdateInvoice(booking);
         }
+        res.status(200).status({success:true,message:"Booking Updated Successfully "},booking);
+    }catch(error){
+        console.error(error);
+        res.status(500).status({success:false,message:"Failed to update Booking Server Error"});
+
     }
 }
 
-module.exports={getAllBookings,approveBooking,rejectBooking,idCardView,allocateRoom,getAvailableRooms,vacateRoom,getCalendarBookings,finalizeBooking};
+module.exports={getAllBookings,approveBooking,rejectBooking,idCardView,allocateRoom,getAvailableRooms,vacateRoom,getCalendarBookings,finalizeBooking,updateBookingDetails};
 
