@@ -63,7 +63,7 @@ const Faq = () => {
                         {item.question}
                     </div>
                     
-                    <button onClick={()=>toggleItem(item.id)} className='flex-shrink-0 ml-2'>
+                    <button onClick={()=>toggleItem(item.id)} className='flex-shrink-1 ml-1'>
                         <IoIosArrowDown className={`w-4 h-4 cursor-pointer text-gray-800 hover:text-indigo-800 dark:text-white transition-transform duration-300 ${isOpen? 'rotate-180' : ''}`} />
                     </button>
                     </div>
