@@ -57,9 +57,9 @@ const Faq = () => {
                 
                 <div key={index} className='text-start bg-white/80 backdrop-blur-md p-4 sm:p-6 my-4 rounded-lg shadow-md dark:bg-gray-800/90 '>
                     <div className='flex justify-between items-start'>
-                    {/* <div onClick={()=>toggleItem(item.id)} className='text-base sm:text-sm font-semibold    hover:text-indigo-600 cursor-pointer flex-1 pr-4 break-all md:break-normal'> */}
+                    <div onClick={()=>toggleItem(item.id)} className='text-base sm:text-sm font-semibold    hover:text-indigo-600 cursor-pointer flex-1 pr-4 break-all md:break-normal'>
                     {/* in the below line when we remove break-all md:break-normal we will get equal break spaces */}
-                        <div onClick={()=>toggleItem(item.id)} className='text-base sm:text-sm font-semibold    hover:text-indigo-600 cursor-pointer flex-1 pr-4'>
+                        {/* <div onClick={()=>toggleItem(item.id)} className='text-base sm:text-sm font-semibold    hover:text-indigo-600 cursor-pointer flex-1 pr-4'> */}
                         {item.question}
                     </div>
                     
