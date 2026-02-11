@@ -238,39 +238,39 @@ const finalizeBooking=async(req,res)=>{
 }
 
 // whenever the booking is finalized invoice is generated and if the invoice exists or if the guest want to stay more time then we will update the invoice accordingly
-const extendStayInvoice=async(req,res)=>{
-    try{
-        const {extendedTill,remarks}=req.body;
-        const booking=await Bookings.findById(req.params.id);
-        if(!booking){
-            return res.status(404).json({success:false,message:"Booking not found"});
-        }
+// const extendStayInvoice=async(req,res)=>{
+//     try{
+//         const {extendedTill,remarks}=req.body;
+//         const booking=await Bookings.findById(req.params.id);
+//         if(!booking){
+//             return res.status(404).json({success:false,message:"Booking not found"});
+//         }
 
-        if(booking.status !=="FINALIZED"){
-            return res.status(400).json({success:false,message:"Only finalized bookings can have stay invoice"});
-        }
+//         if(booking.status !=="FINALIZED"){
+//             return res.status(400).json({success:false,message:"Only finalized bookings can have stay invoice"});
+//         }
 
-        if(!extendedTill){
-            return res.status(400).json({success:false,message:"Extended till date is required"});
-        }
+//         if(!extendedTill){
+//             return res.status(400).json({success:false,message:"Extended till date is required"});
+//         }
 
-        const lastInvoice=await Invoice.findOne({booking:booking._id}).sort({createdAt:-1});
-        if(!lastInvoice){
-            return res.status(404).json({success:false,message:"No existing invoice found for this booking"});
-        }
+//         const lastInvoice=await Invoice.findOne({booking:booking._id}).sort({createdAt:-1});
+//         if(!lastInvoice){
+//             return res.status(404).json({success:false,message:"No existing invoice found for this booking"});
+//         }
 
-        const extensionInvoice=await generateExtensionInvoice(booking,lastInvoice,new Date(extendedTill),remarks);
-        res.status(200).json({success:true,
-            message:"Extended stay invoice generated",
-            invoiceId:extensionInvoice._id
-        });
+//         const extensionInvoice=await generateExtensionInvoice(booking,lastInvoice,new Date(extendedTill),remarks);
+//         res.status(200).json({success:true,
+//             message:"Extended stay invoice generated",
+//             invoiceId:extensionInvoice._id
+//         });
 
-    }catch(error){
-        console.error("Error in extension stay invoice ",error);
-        res.status(500).json({success:false,message:"Failed to generate extended stay invoice"});
-    }
+//     }catch(error){
+//         console.error("Error in extension stay invoice ",error);
+//         res.status(500).json({success:false,message:"Failed to generate extended stay invoice"});
+//     }
 
-}
+// }
 
 // logic for allocating room
 const allocateRoom=async(req,res)=>{
@@ -360,7 +360,7 @@ const vacateRoom=async(req,res)=>{
         console.log("Allowed statuses:", booking.schema.path("status").enumValues);
         await booking.save(); 
 
-        // await generateInvoice(booking);
+        // await createOrUpdate(booking);
 
         res.status(200).json({success:true,message:"Room vacated successfully",booking})
     }catch(error){
@@ -425,5 +425,5 @@ const getCalendarBookings=async(req,res)=>{
 
 
 
-module.exports={getAllBookings,approveBooking,rejectBooking,idCardView,allocateRoom,getAvailableRooms,vacateRoom,getCalendarBookings,finalizeBooking,extendStayInvoice};
+module.exports={getAllBookings,approveBooking,rejectBooking,idCardView,allocateRoom,getAvailableRooms,vacateRoom,getCalendarBookings,finalizeBooking};
 

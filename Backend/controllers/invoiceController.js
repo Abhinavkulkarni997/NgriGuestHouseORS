@@ -21,35 +21,35 @@ res.json(invoice);
 }
 
 
-const createInvoiceForBooking=async(req,res)=>{
-    try{
-        const booking =await Booking.findById(req.params.bookingId);
-        if(!booking){
-            return res.status(404).json({message:"Booking not found"});
-        }
+// const createInvoiceForBooking=async(req,res)=>{
+//     try{
+//         const booking =await Booking.findById(req.params.bookingId);
+//         if(!booking){
+//             return res.status(404).json({message:"Booking not found"});
+//         }
 
 
-        console.log("guest Category ",booking.guestCategory);
-        console.log("aC Type:",booking.acType);
+//         console.log("guest Category ",booking.guestCategory);
+//         console.log("aC Type:",booking.acType);
 
-        console.log('Full Booking Object:', JSON.stringify(booking, null, 2));
+//         console.log('Full Booking Object:', JSON.stringify(booking, null, 2));
 
-        if (!booking.guestCategory || !booking.acType) {
-  return res.status(400).json({
-    message: "Cannot generate invoice. Guest Category or AC Type is missing in booking."
-  });
+//         if (!booking.guestCategory || !booking.acType) {
+//   return res.status(400).json({
+//     message: "Cannot generate invoice. Guest Category or AC Type is missing in booking."
+//   });
   
-}
-        if(booking.status !== "FINALIZED"){
-            return res.status(400).json({message:"Invoice can only be generated for FINALIZED bookings"});
-        }
-        const invoice=await createOrUpdateInvoice(booking);
-        res.status(201).json(invoice);
-    }catch(error){
-        console.error(error);
-        res.status(500).json({message:"Server error"});
-    }
-}
+// }
+//         if(booking.status !== "FINALIZED"){
+//             return res.status(400).json({message:"Invoice can only be generated for FINALIZED bookings"});
+//         }
+//         const invoice=await createOrUpdateInvoice(booking);
+//         res.status(201).json(invoice);
+//     }catch(error){
+//         console.error(error);
+//         res.status(500).json({message:"Server error"});
+//     }
+// }
 
 // const updateInvoiceForBooking=async(req,res)=>{
 //         try{
@@ -71,4 +71,4 @@ const createInvoiceForBooking=async(req,res)=>{
 //         }
 //     }
 
-module.exports={getAllInvoices,getInvoiceById,createInvoiceForBooking};
+module.exports={getAllInvoices,getInvoiceById};

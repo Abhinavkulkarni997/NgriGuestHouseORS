@@ -138,7 +138,10 @@ const createOrUpdateInvoice=async(booking)=>{
         });
     }else{
         // ------------UPDATE THE SAME INVOICE----------------
-        invoice.period.to=booking.departureDateTime;
+        invoice.period={
+            from:booking.arrivalDateTime,
+            to:booking.departureDateTime
+        };
 
         invoice.guestCategory=category;
         invoice.roomNumber=booking.roomNumber;
