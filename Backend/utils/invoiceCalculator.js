@@ -10,7 +10,7 @@ module.exports.calculateInvoice=({
     const numberOfDays=Math.ceil(1,Math.ceil((to-from)/MS_PER_DAY));
     const subtotal=numberOfDays*ratePerDay;
     const gstAmount=(subtotal*gstPercent)/100;
-
+    const total = subtotal + gstAmount;
     return{
         numberOfDays,
         subtotal,
