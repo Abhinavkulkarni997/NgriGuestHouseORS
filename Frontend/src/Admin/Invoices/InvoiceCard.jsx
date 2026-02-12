@@ -22,7 +22,7 @@ const InvoiceCard=({invoice})=>{
 
             <div className="mt-4 flex justify-between items-center">
                 <p className="font-semibold text-cyan-600">
-                    ₹{invoice.totalAmount}
+                    ₹{invoice.total}
                 </p>
 
                 <button onClick={()=>navigate(`/admin/invoices/${invoice._id}`)} className="text-sm text-cyan-600 font-medium hover:underline">View</button>

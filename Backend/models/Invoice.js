@@ -9,7 +9,7 @@ const invoiceSchema=new mongoose.Schema(
          unique:true,
         },
             invoiceNumber:{
-                type:Number,
+                type:String,
                 required:true,
                 unique:true,
             },
@@ -84,7 +84,7 @@ const invoiceSchema=new mongoose.Schema(
             payment:{
                 mode:{
                     type:String,
-                    enum:["CASH","ONLINE"],
+                    // enum:["CASH","ONLINE"],
                     default:"CASH",
                 },
                 status:{
