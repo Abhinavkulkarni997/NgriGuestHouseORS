@@ -70,6 +70,60 @@
 // export default Hero
 
 
+// import React from 'react';
+// import HeroImg from '../../assets/Hero/hero.jpg';
+// import { Link } from 'react-router-dom';
+
+// const Hero = () => {
+//   return (
+//     <section className='relative w-full min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh] xl:min-h-screen overflow-hidden'>
+      
+//       {/* Background Image */}
+//       <img
+//         src={HeroImg}
+//         alt='CSIR-NGRI Guesthouse'
+//         className='absolute inset-0 w-full h-full object-cover'
+//       />
+
+//       {/* Dark Overlay */}
+//       <div className='absolute inset-0 bg-black/40'></div>
+
+//       {/* Center Content */}
+//       <div className='relative z-10 flex items-center justify-center h-full px-6'>
+//         <div className='text-center max-w-3xl'>
+          
+//           <h1 className='text-white font-extrabold text-3xl md:text-5xl xl:text-6xl 2xl:text-7xl leading-tight'>
+//             CSIR-NGRI Guest House <br />
+//             Online Reservation System
+//           </h1>
+
+//           <p className='text-white mt-4 text-base sm:text-lg md:text-xl xl:text-2xl'>
+//             CSIR-NATIONAL GEOPHYSICAL RESEARCH INSTITUTE
+//           </p>
+
+//           <p className='text-white mt-1 text-sm sm:text-base xl:text-lg'>
+//             Telangana, Hyderabad-500007
+//           </p>
+
+//           <p className='text-white mt-1 sm:text-base xl:text-lg'>
+//             guesthouse@ngri.res.in
+//           </p>
+
+//           <Link to="/onlinebooking">
+//             <button className='mt-6 px-6 py-3 text-white bg-cyan-400/80 border hover:bg-cyan-400/60 rounded-lg font-semibold shadow-lg transition'>
+//               Book Online
+//             </button>
+//           </Link>
+
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default Hero;
+
+
 // code developed and changed on 06-02-2026 latest layout code is below and the above code is old code which is commented for reference and backup
 import React from 'react';
 import HeroImg from '../../assets/Hero/hero.jpg';
@@ -103,3 +157,8 @@ const Hero = () => {
 }
 
 export default Hero;
+
+
+
+
+
