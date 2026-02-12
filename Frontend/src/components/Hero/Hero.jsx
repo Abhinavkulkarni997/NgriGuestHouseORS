@@ -161,7 +161,7 @@ export default Hero;
 
 
 
-// code developed on 12-02-2026 and use the below code when text for the resolution for 4k goes upside added extra div 
+// code developed on 12-02-2026 and use the below code when text for the resolution for 4k goes upside added extra div below 183 and 185 
 
 // import React from 'react';
 // import HeroImg from '../../assets/Hero/hero.jpg';
