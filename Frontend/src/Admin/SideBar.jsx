@@ -35,10 +35,10 @@ const SideBar=({collapsed,mobileOpen,onCloseMobile})=>{
         },
         
         {
-            id:6,name:'Admin Profile', url:'/adminprofile',icon:<img src={profile} alt="AdminProfile" className="w-6 h-6" />,title:"Admin Profile",
+            id:6,name:'Admin Profile', url:'/#adminprofile',icon:<img src={profile} alt="AdminProfile" className="w-6 h-6" />,title:"Admin Profile",
 
         },{
-            id:7,name:'Settings', url:'/settings',icon:<img src={settings} alt="settings" className="w-6 h-6" />,title:'Settings'
+            id:7,name:'Settings', url:'/#settings',icon:<img src={settings} alt="settings" className="w-6 h-6" />,title:'Settings'
         }
     ]
     return(
