@@ -69,7 +69,7 @@ const {calculateInvoice}=require("../utils/invoiceCalculator");
 // code developed on 10-02-2026 as per new requirement changes
 
 
-const createOrUpdateInvoice=async(booking)=>{
+const createOrUpdateInvoice=async(booking,paymentMode="CASH")=>{
     // validate booking 
     if(!booking.arrivalDateTime || !booking.departureDateTime){
         throw new Error("Invalid booking dates for invoice calculation");
@@ -132,8 +132,8 @@ const createOrUpdateInvoice=async(booking)=>{
             ...calc,
 
             payment:{
-                mode:booking.paymentBy || "CASH",
-                status:"PENDING"
+                mode:paymentMode,
+                status:paymentMode==="CASH"?"PAID":"PENDING",
             }
         });
     }else{
@@ -155,8 +155,13 @@ const createOrUpdateInvoice=async(booking)=>{
         invoice.subtotal=calc.subtotal;
         invoice.gstAmount=calc.gstAmount;
         invoice.total=calc.total;
-    }
 
+       if(paymentMode){
+        
+       }
+   };
+
+    }
     await invoice.save();
     return invoice;
 }

@@ -84,13 +84,13 @@ const invoiceSchema=new mongoose.Schema(
             payment:{
                 mode:{
                     type:String,
-                    // enum:["CASH","ONLINE"],
+                     enum:["CASH","ONLINE"],
                     default:"CASH",
                 },
                 status:{
                 type:String,
-                enum:["PENDING","PAID"],
-                default:"PENDING",
+                enum:["PAID","PENDING"],
+                default:"PAID",
             },
                 transactionId:{
                     type:String,

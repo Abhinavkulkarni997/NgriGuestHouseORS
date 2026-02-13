@@ -8,6 +8,7 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
     // const [gstPercent,setGstPercent]=useState(0);
     const [remarks,setRemarks]=useState("");
     const [loading,setLoading]=useState(false);
+    const [paymentMode,setPaymentMode]=useState("CASH");
 
     const handleFinalize=async()=>{
         // if(!guestCategory || !ratePerDay || !acType){
@@ -26,7 +27,8 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
                 acType,
                 // ratePerDay:Number(ratePerDay),
                 // gstPercent:Number(gstPercent),
-                remarks
+                remarks,
+                paymentMode,
             });
             alert(response.data?.message||"Booking finalized successfully & invoice generated");
            
@@ -98,6 +100,15 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
                         <option value="NON_AC">Non-AC</option>
                       </select>
                       
+
+                      <label className="mt-3 block font-medium">Payment Mode</label>
+                      <select value={paymentMode}
+                      onChange={(e)=>setPaymentMode(e.target.value)}
+                      className='w-full border p-2 mt-1'>
+                        <option value="CASH">Cash</option>
+                        <option value="ONLINE">Online</option>
+                      </select>
+
                     <textarea value={remarks}
                      onChange={(e)=>setRemarks(e.target.value)}
                      className='w-full border p-2 mt-3' placeholder="Remarks"/> 

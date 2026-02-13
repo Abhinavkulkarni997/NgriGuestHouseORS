@@ -105,7 +105,7 @@ const rejectBooking=async(req,res)=>{
 const finalizeBooking=async(req,res)=>{
     try{
         // const {guestCategory,acType,ratePerDay,gstPercent=0,remarks}=req.body;
-        const {guestCategory,acType,remarks}=req.body;
+        const {guestCategory,acType,remarks,paymentMode}=req.body;
 
 
         const booking=await Bookings.findById(req.params.id);
@@ -197,7 +197,7 @@ const finalizeBooking=async(req,res)=>{
         
         let invoice;
         try{
-              invoice=await createOrUpdateInvoice(booking);
+              invoice=await createOrUpdateInvoice(booking,paymentMode);
             //   booking.invoice=invoice._id;
             //    await booking.save();
         }catch(err){
