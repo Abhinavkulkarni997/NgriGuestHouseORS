@@ -428,7 +428,7 @@ const getCalendarBookings=async(req,res)=>{
 const updateBookingDetails=async(req,res)=>{
     try{
         const {arrivalDateTime,departureDateTime,guestCategory,acType}=req.body;
-        const booking=await Booking.find(req.params.id);
+        const booking=await Bookings.findById(req.params.id);
 
         if(!booking){
             return res.status(404).json({
@@ -456,10 +456,10 @@ const updateBookingDetails=async(req,res)=>{
         if(booking.status==="FINALIZED"){
             await createOrUpdateInvoice(booking);
         }
-        res.status(200).status({success:true,message:"Booking Updated Successfully "},booking);
+        res.status(200).json({success:true,message:"Booking Updated Successfully "},booking);
     }catch(error){
         console.error(error);
-        res.status(500).status({success:false,message:"Failed to update Booking Server Error"});
+        res.status(500).json({success:false,message:"Failed to update Booking Server Error"});
 
     }
 }
