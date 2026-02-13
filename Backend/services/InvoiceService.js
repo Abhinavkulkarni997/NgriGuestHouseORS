@@ -157,7 +157,8 @@ const createOrUpdateInvoice=async(booking,paymentMode="CASH")=>{
         invoice.total=calc.total;
 
        if(paymentMode){
-        
+        invoice.payment.mode=paymentMode;
+        invoice.payment.status=paymentMode ==="CASH" ?"PAID":"PENDING";
        }
    };
 
