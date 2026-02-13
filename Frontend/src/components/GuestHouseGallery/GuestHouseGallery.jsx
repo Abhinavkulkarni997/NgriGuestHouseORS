@@ -333,6 +333,7 @@ export default function GuestHouseCenteredCarousel() {
         breakpoints={{
               320: {  spaceBetween: 12 },
               640: {  spaceBetween: 16 },
+              720: {  spaceBetween: 18 },
               768: {  spaceBetween: 20 },
               1024: {  spaceBetween: 24 },
               1280: { spaceBetween: 28 },
