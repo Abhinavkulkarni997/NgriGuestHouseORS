@@ -125,85 +125,85 @@
 
 
 // code developed and changed on 06-02-2026 latest layout code is below and the above code is old code which is commented for reference and backup
-import React from 'react';
-import HeroImg from '../../assets/Hero/hero.jpg';
-import {Link} from 'react-router-dom';
-const Hero = () => {
-  return (
-    <section className=' w-full relative min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh]  '>
-      {/* code for background Image */}
-        <img src={HeroImg}  
-        alt='CSIR-NGRI Guesthouse' 
-        className='w-full h-full object-cover absolute inset-0 
-          '/>
-        {/* Dark Overlay */}
-        <div className='absolute inset-0 bg-black/40'></div>
+// import React from 'react';
+// import HeroImg from '../../assets/Hero/hero.jpg';
+// import {Link} from 'react-router-dom';
+// const Hero = () => {
+//   return (
+//     <section className=' w-full relative min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh]  '>
+//       {/* code for background Image */}
+//         <img src={HeroImg}  
+//         alt='CSIR-NGRI Guesthouse' 
+//         className='w-full h-full object-cover absolute inset-0 
+//           '/>
+//         {/* Dark Overlay */}
+//         <div className='absolute inset-0 bg-black/40'></div>
 
-        {/* Center Content */}
-        <div className='relative  z-10  h-full flex  items-center justify-center '>
-          <div className='text-center  max-w-3xl px-6 pt-96 min-h-[80vh] relative '>
-           <h1 className=' text-white font-extrabold text-3xl md:text-5xl  lg:text-5xl leading-tight '>
-            CSIR-NGRI Guest House <br/>Online Reservation System</h1>
-        <p className=' text-white text-base mt-4 sm:text-lg md:text-xl'>CSIR-NATIONAL GEOPHYSICAL RESEARCH INSTITUTE</p>
-        <p className='text-white mt-1 text-sm sm:text-base'>Telangana,Hyderabad-500007</p>
-        <p className=' text-white mt-1 text-sm sm:text-base '>guesthouse@ngri.res.in</p>
-          <Link to="/onlinebooking">
-          <button className='mt-6 px-6 py-3 text-white bg-cyan-400/80 border hover:bg-cyan-400/60  rounded-lg font-semibold shadow-lg transition'>Book Online</button></Link>
-       </div>
-        </div>
+//         {/* Center Content */}
+//         <div className='relative  z-10  h-full flex  items-center justify-center '>
+//           <div className='text-center  max-w-3xl px-6 pt-96 min-h-[80vh] relative '>
+//            <h1 className=' text-white font-extrabold text-3xl md:text-5xl  lg:text-5xl leading-tight '>
+//             CSIR-NGRI Guest House <br/>Online Reservation System</h1>
+//         <p className=' text-white text-base mt-4 sm:text-lg md:text-xl'>CSIR-NATIONAL GEOPHYSICAL RESEARCH INSTITUTE</p>
+//         <p className='text-white mt-1 text-sm sm:text-base'>Telangana,Hyderabad-500007</p>
+//         <p className=' text-white mt-1 text-sm sm:text-base '>guesthouse@ngri.res.in</p>
+//           <Link to="/onlinebooking">
+//           <button className='mt-6 px-6 py-3 text-white bg-cyan-400/80 border hover:bg-cyan-400/60  rounded-lg font-semibold shadow-lg transition'>Book Online</button></Link>
+//        </div>
+//         </div>
        
-    </section>
-  )
-}
+//     </section>
+//   )
+// }
 
-export default Hero;
+// export default Hero;
 
 
 
 
 // code developed on 12-02-2026 and use the below code when text for the resolution for 4k goes upside 
 
-// import React from 'react';
-// import HeroImg from '../../assets/Hero/hero.jpg';
-// import {Link} from 'react-router-dom';
-// const Hero = () => {
-//   return (
-//     <section className='w-full relative min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh]'>
-//       {/* Background Image */}
-//       <img 
-//         src={HeroImg}  
-//         alt='CSIR-NGRI Guesthouse' 
-//         className='w-full h-full object-cover absolute inset-0'
-//       />
+import React from 'react';
+import HeroImg from '../../assets/Hero/hero.jpg';
+import {Link} from 'react-router-dom';
+const Hero = () => {
+  return (
+    <section className='w-full relative min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh]'>
+      {/* Background Image */}
+      <img 
+        src={HeroImg}  
+        alt='CSIR-NGRI Guesthouse' 
+        className='w-full h-full object-cover absolute inset-0'
+      />
       
-//       {/* Dark Overlay */}
-//       <div className='absolute inset-0 bg-black/40'></div>
+      {/* Dark Overlay */}
+      <div className='absolute inset-0 bg-black/40'></div>
 
-//       {/* Center Content - Fixed for all resolutions */}
-//       <div className='relative z-10 h-full min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh] flex items-center justify-center pt-[200px]'>
-//         {/* pt-20 = 80px accounts for your fixed navbar */}
-//         <div className='text-center max-w-3xl px-6'>
-//           <h1 className='text-white font-extrabold text-3xl md:text-5xl lg:text-5xl leading-tight'>
-//             CSIR-NGRI Guest House <br/>Online Reservation System
-//           </h1>
-//           <p className='text-white text-base mt-4 sm:text-lg md:text-xl'>
-//             CSIR-NATIONAL GEOPHYSICAL RESEARCH INSTITUTE
-//           </p>
-//           <p className='text-white mt-1 text-sm sm:text-base'>
-//             Telangana, Hyderabad-500007
-//           </p>
-//           <p className='text-white mt-1 text-sm sm:text-base'>
-//             guesthouse@ngri.res.in
-//           </p>
-//           <Link to="/onlinebooking">
-//             <button className='mt-6 px-6 py-3 text-white bg-cyan-400/80 border hover:bg-cyan-400/60 rounded-lg font-semibold shadow-lg transition'>
-//               Book Online
-//             </button>
-//           </Link>
-//         </div>
-//       </div>
-//     </section>
-//   )
-// }
+      {/* Center Content - Fixed for all resolutions */}
+      <div className='relative z-10 h-full min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh] flex items-center justify-center pt-[200px]'>
+        {/* pt-20 = 80px accounts for your fixed navbar */}
+        <div className='text-center max-w-3xl px-6'>
+          <h1 className='text-white font-extrabold text-3xl md:text-5xl lg:text-5xl leading-tight'>
+            CSIR-NGRI Guest House <br/>Online Reservation System
+          </h1>
+          <p className='text-white text-base mt-4 sm:text-lg md:text-xl'>
+            CSIR-NATIONAL GEOPHYSICAL RESEARCH INSTITUTE
+          </p>
+          <p className='text-white mt-1 text-sm sm:text-base'>
+            Telangana, Hyderabad-500007
+          </p>
+          <p className='text-white mt-1 text-sm sm:text-base'>
+            guesthouse@ngri.res.in
+          </p>
+          <Link to="/onlinebooking">
+            <button className='mt-6 px-6 py-3 text-white bg-cyan-400/80 border hover:bg-cyan-400/60 rounded-lg font-semibold shadow-lg transition'>
+              Book Online
+            </button>
+          </Link>
+        </div>
+      </div>
+    </section>
+  )
+}
 
-// export default Hero;
+export default Hero;
