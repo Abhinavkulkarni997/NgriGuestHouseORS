@@ -69,7 +69,7 @@ const {calculateInvoice}=require("../utils/invoiceCalculator");
 // code developed on 10-02-2026 as per new requirement changes
 
 
-const createOrUpdateInvoice=async(booking,paymentMode="CASH")=>{
+const createOrUpdateInvoice=async(booking,paymentMode)=>{
     // validate booking 
     if(!booking.arrivalDateTime || !booking.departureDateTime){
         throw new Error("Invalid booking dates for invoice calculation");
@@ -132,9 +132,13 @@ const createOrUpdateInvoice=async(booking,paymentMode="CASH")=>{
             ...calc,
 
             payment:{
-                mode:paymentMode,
-                status:paymentMode==="CASH"?"PAID":"PENDING",
-            }
+                mode:paymentMode || "CASH",
+                status:(paymentMode || "CASH")==="CASH"?"PAID":"PENDING",
+                paidAt:(paymentMode==="CASH")==="CASH" ? new Date():null,
+            },
+
+            
+            
         });
     }else{
         // ------------UPDATE THE SAME INVOICE----------------
@@ -159,11 +163,12 @@ const createOrUpdateInvoice=async(booking,paymentMode="CASH")=>{
        if(paymentMode){
         invoice.payment.mode=paymentMode;
         invoice.payment.status=paymentMode ==="CASH" ?"PAID":"PENDING";
+         invoice.payment.paidAt = paymentMode === "CASH" ? new Date() : null;
        }
    };
-
-    }
-    await invoice.save();
+   await invoice.save();
     return invoice;
-}
+    }
+    
+
 module.exports = {createOrUpdateInvoice};
