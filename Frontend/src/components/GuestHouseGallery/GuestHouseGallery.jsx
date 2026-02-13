@@ -280,7 +280,7 @@ import "swiper/css/navigation";
 import "swiper/css/autoplay";
 import "swiper/css/effect-coverflow"; 
 
-// replace these imports with your images
+// replace these imports with your images whenever the images changes in the future
 import thg1 from "../../assets/Gallery/thg1.jpeg";
 import thg2 from "../../assets/Gallery/thg2.jpeg";
 import thg3 from "../../assets/Gallery/thg3.png";
