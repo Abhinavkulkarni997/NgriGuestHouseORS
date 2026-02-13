@@ -180,7 +180,7 @@ const InvoiceView=()=>{
                 <div className="flex flex-row gap-2 items-center  ">
 
                     <div className="">
-                <img src={ngrilogo} className="w-14 h-14 " alt="NGRI Logo" />
+                <img src={ngrilogo} className="w-14 h-14 sm:w-12 sm:h-12" alt="NGRI Logo" />
                 </div>
               
                 <div>
@@ -294,12 +294,12 @@ const InvoiceView=()=>{
 
             </div>
 
-            <div className="flex justify-end mt-4 text-base font-semibold">
+            <div className="flex justify-end mt-2 text-base font-semibold">
              Total Price (in INR): ₹{invoice.total}
             </div>
 
 
-              <div className="flex flex-col sm:flex-row gap-3 sm:justify-end mt-4 py-4 ">
+              <div className="flex flex-col sm:flex-row gap-3 sm:justify-end mt-2 py-4 ">
                 <p className="font-semibold mt-4">SIGNATURE & DATE</p>
             </div>
 
