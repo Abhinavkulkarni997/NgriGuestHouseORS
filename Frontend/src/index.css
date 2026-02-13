@@ -154,13 +154,10 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     display: none !important;
   }
 
-   @page {
-    size: A4 portrait;
+  @page {
     margin: 10mm;
-  } 
-
-  html, body {
-    height: auto;
   }
+
 }
+
 
