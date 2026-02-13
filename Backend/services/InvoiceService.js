@@ -80,7 +80,8 @@ const createOrUpdateInvoice=async(booking,paymentMode)=>{
         throw new Error("Invalid guest category");
     }
 
-    const acType=booking.acType==="AC"?"AC":"NON_AC";
+    const acType = String(booking.acType).toUpperCase() === "AC"
+    ? "AC": "NON_AC";
     const ratePerDay=rateCard[category][acType];
 
     if(!ratePerDay){
@@ -134,7 +135,7 @@ const createOrUpdateInvoice=async(booking,paymentMode)=>{
             payment:{
                 mode:paymentMode || "CASH",
                 status:(paymentMode || "CASH")==="CASH"?"PAID":"PENDING",
-                paidAt:(paymentMode==="CASH")==="CASH" ? new Date():null,
+                paidAt: paymentMode==="CASH" ? new Date():null,
             },
 
             

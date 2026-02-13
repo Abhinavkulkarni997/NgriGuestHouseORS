@@ -162,6 +162,9 @@ const finalizeBooking=async(req,res)=>{
         booking.guestCategory=guestCategory;
     }
 
+            if (acType) {
+            booking.acType = acType;
+        }
         // if(!booking.roomType){
         //     return res.status(400).json({
         //         success:false,
