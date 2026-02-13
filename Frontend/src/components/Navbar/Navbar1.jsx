@@ -362,7 +362,7 @@
 // export default Navbar1;
 
 
-// code developed on 12-022026 and in the below code all the md: are replced by lg: to achieve responsiveness for 800 resolution in the above code md: caused some issues
+// code developed on 12-02-2026 and in the below code all the md: are replaced by lg: to achieve responsiveness for 800 resolution in the above code md: caused some issues
 import React, { Children, useEffect, useState } from 'react'
 import logo from '../../assets/ngri-logo.png';
 import '../../index.css';
