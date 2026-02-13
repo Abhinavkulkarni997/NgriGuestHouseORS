@@ -130,3 +130,37 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 .dark input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
 }
+
+
+@media print {
+
+  body * {
+    visibility: hidden;
+  }
+
+  #invoice-print-area,
+  #invoice-print-area * {
+    visibility: visible;
+  }
+
+  #invoice-print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  button {
+    display: none !important;
+  }
+
+   @page {
+    size: A4 portrait;
+    margin: 10mm;
+  } 
+
+  html, body {
+    height: auto;
+  }
+}
+
