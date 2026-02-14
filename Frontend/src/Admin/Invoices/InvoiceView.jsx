@@ -310,9 +310,9 @@ const InvoiceView=()=>{
                 <button onClick={()=>window.print()} className="border rounded-lg px-4 py-2 text-sm bg-white hover:bg-gray-100">
                     Print
                 </button>
-                <button disabled className="bg-cyan-600 text-white rounded-lg px-4 py-2 text-sm opacity-60 cursor-not-allowed ">
+                {/* <button disabled className="bg-cyan-600 text-white rounded-lg px-4 py-2 text-sm opacity-60 cursor-not-allowed ">
                     Download PDF
-                </button>
+                </button> */}
             </div>
 
           </div>

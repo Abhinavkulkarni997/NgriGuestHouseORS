@@ -31,12 +31,12 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
                     guestCategory
                 })
             });
-            if (!res) throw new Error("Update failed");
+            if (!res.ok) throw new Error("Update failed");
             alert("Booking updated successfully");
             setEditMode(false);
-            window,location.reload();
+            window.location.reload();
         }catch(err){
-            alert(err,"Update Failed");
+            alert("Update Failed");
         }
     }
    
@@ -121,11 +121,11 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
             </div>
 
 
-            {booking.status === "FINALIZED" && (
-            <p className="text-sm text-gray-500 italic">
-                Booking finalized. No further actions allowed.
+           {booking.status === "FINALIZED" && (
+                <p className="text-sm text-gray-500 italic">
+                Booking finalized. Only stay details can be modified.
             </p>
-                )}
+            )}
 
                 
             {/* Edit Form */}
@@ -157,16 +157,18 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
 
                     <div>
                         <label className='block text-sm font-medium'>GUEST CATEGORY</label>
-                        <select value={acType}
-                        onChange={(e)=>setAcType(e.target.value)}
-                        className="w-full border px-3 py-3 rounded text-sm">
-                             <option value="CSIR_EMPLOYEE">CSIR Employee</option>
-                            <option value="PROJECT_FELLOW">Project Fellow</option>
-                            <option value="NON_DEPENDANT_FAMILY">Non Dependant Family</option>
-                            <option value="OFFICIAL_EXPERT">Official Expert</option>
-                            <option value="ASI_PSU_EMPLOYEE">ASI PSU Employee</option>
-                            <option value="OTHER_GUEST">Other Guest</option>
-                            <option value="NRI_FOREIGN">NRI/Foreign</option>
+                        <select 
+                            value={guestCategory}
+                            onChange={(e)=>setGuestCategory(e.target.value)}
+                            className="w-full border px-3 py-3 rounded text-sm"
+                        >
+                        <option value="CSIR_EMPLOYEE">(a) CSIR Employee</option>
+                        <option value="PROJECT_FELLOW">(b) Project Fellow</option>
+                        <option value="NON_DEPENDANT_FAMILY">(c) Non Dependant Family</option>
+                        <option value="OFFICIAL_EXPERT">(d) Official Expert</option>
+                        <option value="ASI_PSU_EMPLOYEE">(e) ASI PSU Employee</option>
+                        <option value="OTHER_GUEST">(f) Other Guest</option>
+                        <option value="NRI_FOREIGN">(g) NRI / Foreign</option>
                         </select>
                     </div>
 
