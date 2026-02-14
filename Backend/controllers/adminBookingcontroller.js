@@ -463,7 +463,7 @@ const updateBookingDetails=async(req,res)=>{
             booking.finalizedAt=new Date();
         }
         await booking.save();
-        res.status(200).json(success:true,message:"Booking Updated Successfully ",booking);
+        res.status(200).json({success:true,message:"Booking Updated Successfully ",booking});
     }catch(error){
         console.error(error);
         res.status(500).json({success:false,message:"Failed to update Booking Server Error"});
