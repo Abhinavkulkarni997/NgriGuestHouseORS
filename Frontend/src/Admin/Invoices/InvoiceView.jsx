@@ -213,16 +213,19 @@ const InvoiceView=()=>{
             <div className="grid sm:grid-cols-4 gap-4 text-sm">
                 <div className="mt-2 pt-4">
                     <p className="font-medium">Guest Name</p>
-                    <p className="font-bold">{invoice.booking.applicantName}</p>
+                    <p className="font-extrabold">{invoice.booking.applicantName}</p>
                     {/* <p className="text-gray-500">{invoice.guestCategory}</p> */}
                     <p className="">{invoice.booking.organization}</p>
-                    <p>{invoice.booking.designation}</p>
+                    <p>Designation: {invoice.booking.designation}</p>
                 </div>
 
                 <div className="mt-2 pt-4">
                     <p className="font-medium">Room Details</p>
-                    <p className="mt-2">Room {invoice.roomNumber}</p>
-                    <p className="mt-2">{invoice.roomType}</p>
+                    {/* <p className="mt-2">Room {invoice.roomNumber}</p>
+                    <p className="mt-2">{invoice.roomType}</p> */}
+                    <p className="mt-2">
+                        Room {invoice.roomNumber}-{invoice.roomType} ({invoice.acType})
+                    </p>
                 </div>
                 <div className="mt-2 pt-4">
                     <p className="font-medium">Arrival Date</p>
@@ -250,7 +253,7 @@ const InvoiceView=()=>{
                     <tbody>
                         <tr>
                             <td className="border px-3 py-2">
-                                Room {invoice.roomNumber} ({invoice.acType})
+                               Accommodation Charges
                             </td>
                             <td className="border px-3 py-2 text-center"> 
                                 ₹{invoice.ratePerDay}

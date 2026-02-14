@@ -12,7 +12,37 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
     const [showFinalizeModal,setShowFinalizeModal]=useState(false);
 
     // const hasRooms=availableRooms?.length>0;
+    const [editMode,setEditMode]=useState(false);
+    const [departureDateTime,setDepartureDateTime]=useState(booking.departureDateTime);
+    const [acType,setAcType]=useState(booking.acType);
+    const [guestCategory,setGuestCategory]=useState(booking.guests?.[0]?.category || "");
+ 
+    const handleUpdate=async()=>{
+        try{
+            const res=await fetch(`/api/admin/bookings/${booking._id}/update`,{
+                method:"PATCH",
+                headers:{
+                    "Content-Type":"application/json",
+                    Authorization:`Bearer ${localStorage.getItem("adminToken")}`
+                },
+                body:JSON.stringify({
+                    departureDateTime,
+                    acType,
+                    guestCategory
+                })
+            });
+            if (!res) throw new Error("Update failed");
+            alert("Booking updated successfully");
+            setEditMode(false);
+            window,location.reload();
+        }catch(err){
+            alert(err,"Update Failed");
+        }
+    }
    
+   
+
+
   return (
     <div className='bg-white rounded-xl shadow-md border p-5 space-y-4 '>
 
@@ -97,6 +127,61 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
             </p>
                 )}
 
+                
+            {/* Edit Form */}
+            {editMode &&(
+                <div className='mt-4 p-4 border rounded bg-gray-50 space-y-3'>
+                    <h4 className="font-semibold text-gray-700">Edit Stay Details</h4>
+
+                    <div>
+                        <label className='block text-sm font-medium'>Departure Date</label>
+                        <input 
+                        type="datetime-local"
+                        value={new Date(departureDateTime).toISOString().slice(0,16)}
+                        onChange={(e) =>setDepartureDateTime(e.target.value)}
+                        className='w-full border px-3 py-3 rounded text-sm'
+                        />
+                    </div>
+
+                    <div>
+                        <label className='block text-sm font-medium'>AC Type</label>
+                        <select value={acType}
+                        onChange={(e)=>setAcType(e.target.value)}
+                        className="w-full border px-3 py-3 rounded text-sm">
+                             <option value="AC">AC</option>
+                            <option value="NON_AC">NON AC</option>
+                           
+                        
+                        </select>
+                    </div>
+
+                    <div>
+                        <label className='block text-sm font-medium'>GUEST CATEGORY</label>
+                        <select value={acType}
+                        onChange={(e)=>setAcType(e.target.value)}
+                        className="w-full border px-3 py-3 rounded text-sm">
+                             <option value="CSIR_EMPLOYEE">CSIR Employee</option>
+                            <option value="PROJECT_FELLOW">Project Fellow</option>
+                            <option value="NON_DEPENDANT_FAMILY">Non Dependant Family</option>
+                            <option value="OFFICIAL_EXPERT">Official Expert</option>
+                            <option value="ASI_PSU_EMPLOYEE">ASI PSU Employee</option>
+                            <option value="OTHER_GUEST">Other Guest</option>
+                            <option value="NRI_FOREIGN">NRI/Foreign</option>
+                        </select>
+                    </div>
+
+                    <button onClick={handleUpdate}
+                    className='px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700'
+                    >Save Changes
+                    </button>
+                        
+
+                </div>
+            )}
+
+
+
+
              {/* Actions */}
              {booking.status==='PENDING' &&(
                  <div className='flex flex-wrap gap-3 pt-3 border-t'>
@@ -137,10 +222,21 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
                 />
             )}
 
+            {/* EDIT STAY BUTTON */}
+            {["ALLOCATED","FINALIZED"].includes(booking.status) &&(
+                <div className="pt-3 flex flex-wrap gap-3 border-t">
+                    <button onClick={()=>setEditMode(!editMode)}
+                    className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700">
+                        {editMode ? "Cancel Edit":"Edit Stay"}
+                    </button>
+                    </div>
+            )}
+
              {/* Allocated for vacate */}
             {booking.status==="ALLOCATED" &&(
                 <div className='pt-3 flex flex-wrap gap-3 border-t'>
-                    <button onClick={()=>setShowVacateModal(true)} className='px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700'>Vacate Room</button>
+                    <button onClick={()=>setShowVacateModal(true)} 
+                    className='px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700'>Vacate Room</button>
                 </div>
             )}
 
