@@ -134,7 +134,8 @@ const finalizeBooking=async(req,res)=>{
         if(existingInvoice){
             booking.invoice=existingInvoice._id;
             booking.status="FINALIZED";
-            booking.finalizedAt=booking.finalizedAt|| new Date();
+             booking.finalizedAt=booking.finalizedAt|| new Date();
+            
             await booking.save();
 
             return res.status(200).json({
@@ -449,17 +450,20 @@ const updateBookingDetails=async(req,res)=>{
         }
 
         // update fields if provided
-        if(arrivalDateTime) {booking.arrivalDateTime=arrivalDateTime;}
-        if(departureDateTime) {booking.departureDateTime=departureDateTime;}
+        if(arrivalDateTime) {booking.arrivalDateTime=new Date(arrivalDateTime);}
+        if(departureDateTime) {booking.departureDateTime=new Date(departureDateTime);}
         if(guestCategory){booking.guestCategory=guestCategory;}
         if(acType){booking.acType=acType;}
-        await booking.save();
+        
 
         // if booking is already finalized ->we are recalculating invoice here
         if(booking.status==="FINALIZED"){
-            await createOrUpdateInvoice(booking);
+           const updatedInvoice= await createOrUpdateInvoice(booking);
+            booking.invoice=updatedInvoice._id;
+            booking.finalizedAt=new Date();
         }
-        res.status(200).json({success:true,message:"Booking Updated Successfully "},booking);
+        await booking.save();
+        res.status(200).json(success:true,message:"Booking Updated Successfully ",booking);
     }catch(error){
         console.error(error);
         res.status(500).json({success:false,message:"Failed to update Booking Server Error"});

@@ -14,8 +14,8 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
     // const hasRooms=availableRooms?.length>0;
     const [editMode,setEditMode]=useState(false);
     const [departureDateTime,setDepartureDateTime]=useState(booking.departureDateTime);
-    const [acType,setAcType]=useState(booking.acType);
-    const [guestCategory,setGuestCategory]=useState(booking.guests?.[0]?.category || "");
+    // const [acType,setAcType]=useState(booking.acType);
+    // const [guestCategory,setGuestCategory]=useState(booking.guests?.[0]?.category || "");
  
     const handleUpdate=async()=>{
         try{
@@ -27,19 +27,26 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
                 },
                 body:JSON.stringify({
                     departureDateTime,
-                    acType,
-                    guestCategory
+                    // acType,
+                    // guestCategory
                 })
             });
             if (!res.ok) throw new Error("Update failed");
             alert("Booking updated successfully");
             setEditMode(false);
-            window.location.reload();
+            // window.location.reload();
+            onAllocate();
         }catch(err){
             alert("Update Failed");
         }
     }
-   
+
+    const formatDateTimeLocal=(dateString)=>{
+        const date=new Date(dateString);
+        const offset=date.getTimezoneOffset();
+        const localDate=new Date(date.getTime()-offset*60000);
+        return localDate.toISOString().slice(0,16);
+    }
    
 
 
@@ -137,13 +144,13 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
                         <label className='block text-sm font-medium'>Departure Date</label>
                         <input 
                         type="datetime-local"
-                        value={new Date(departureDateTime).toISOString().slice(0,16)}
+                        value={formatDateTimeLocal(departureDateTime)}
                         onChange={(e) =>setDepartureDateTime(e.target.value)}
                         className='w-full border px-3 py-3 rounded text-sm'
                         />
                     </div>
 
-                    <div>
+                    {/* <div>
                         <label className='block text-sm font-medium'>AC Type</label>
                         <select value={acType}
                         onChange={(e)=>setAcType(e.target.value)}
@@ -153,9 +160,9 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
                            
                         
                         </select>
-                    </div>
+                    </div> */}
 
-                    <div>
+                    {/* <div>
                         <label className='block text-sm font-medium'>GUEST CATEGORY</label>
                         <select 
                             value={guestCategory}
@@ -170,12 +177,19 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
                         <option value="OTHER_GUEST">(f) Other Guest</option>
                         <option value="NRI_FOREIGN">(g) NRI / Foreign</option>
                         </select>
-                    </div>
+                    </div> */}
 
                     <button onClick={handleUpdate}
                     className='px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700'
                     >Save Changes
                     </button>
+
+                    {booking.status === "FINALIZED" && (
+                     <p className="text-xs text-orange-600">
+                    Updating stay will regenerate invoice and update finalized date.
+                </p>
+                )}
+
                         
 
                 </div>
@@ -270,7 +284,7 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
 
             {/* in finalized tab detail appears  */}
 
-            {
+            {/* {
                 booking.status==="FINALIZED" && (
                     <div className='mt-4 p-3 rounded-lg bg-green-50 border border-green-200 text-sm'>
                         <p className='font-semibold text-green-700'>
@@ -287,7 +301,7 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
                     </div>
                 )
 
-            }
+            } */}
             {/* after room vacation to show and generate invoice  */}
             {booking.status === "VACATED" && (
                 <div className='pt-3 flex flex-wrap gap-3 border-t'>
