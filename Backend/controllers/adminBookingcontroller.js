@@ -105,7 +105,8 @@ const rejectBooking=async(req,res)=>{
 const finalizeBooking=async(req,res)=>{
     try{
         // const {guestCategory,acType,ratePerDay,gstPercent=0,remarks}=req.body;
-        const {guestCategory,acType,remarks,paymentMode}=req.body;
+        // const {guestCategory,acType,remarks,paymentMode}=req.body; acType is removed as per new on 15-02-2026
+         const {guestCategory,remarks,paymentMode}=req.body;
 
 
         const booking=await Bookings.findById(req.params.id);
@@ -163,9 +164,11 @@ const finalizeBooking=async(req,res)=>{
         booking.guestCategory=guestCategory;
     }
 
-            if (acType) {
-            booking.acType = acType;
-        }
+    // acType is removed on 15-02-2026 as per new 
+        //     if (acType) {
+        //     booking.acType = acType;
+
+        // }
         // if(!booking.roomType){
         //     return res.status(400).json({
         //         success:false,
@@ -277,107 +280,240 @@ const finalizeBooking=async(req,res)=>{
 
 // }
 
-// logic for allocating room
-const allocateRoom=async(req,res)=>{
-    try{
-          const {roomId}=req.body;
-           // Fetch booking details
-            const booking =await Bookings.findById(req.params.id);
-            if(!booking){
-            return res.status(404).json({success:false,message:"Booking not found"});
-        }
-        if(booking.status!=="APPROVED"){
-            return res.status(400).json({success:false,message:"Only approved bookings can be allocated rooms"});
-        }
+// logic for allocating room previous fully working code 
+// const allocateRoom=async(req,res)=>{
+//     try{
+//           const {roomId}=req.body;
+//            // Fetch booking details
+//             const booking =await Bookings.findById(req.params.id);
+//             if(!booking){
+//             return res.status(404).json({success:false,message:"Booking not found"});
+//         }
+//         if(booking.status!=="APPROVED"){
+//             return res.status(400).json({success:false,message:"Only approved bookings can be allocated rooms"});
+//         }
 
-        // Fetch room details
-        const room=await Room.findById(roomId);
-        if(!room || room.isActive){
-            return res.status(404).json({success:false,message:"Room not available for allocation"});
-        }
+//         // Fetch room details
+//         const room=await Room.findById(roomId);
+//         if(!room || room.isActive){
+//             return res.status(404).json({success:false,message:"Room not available for allocation"});
+//         }
 
-        // if (!booking.guestCategory || !booking.acType) {
-        //     return res.status(400).json({
-        //     message: "Finalize Guest Category and AC Type before allocating room"
-        //     });
-        // }
-        // Allocate room to booking
-        booking.allocatedRoom=room._id;
-        booking.roomNumber=room.roomNumber;
-        booking.roomType=room.roomType;
-        booking.status="ALLOCATED";
-        booking.allocatedAt=new Date(),
-        await booking.save();
+//         // if (!booking.guestCategory || !booking.acType) {
+//         //     return res.status(400).json({
+//         //     message: "Finalize Guest Category and AC Type before allocating room"
+//         //     });
+//         // }
+//         // Allocate room to booking
+//         booking.allocatedRoom=room._id;
+//         booking.roomNumber=room.roomNumber;
+//         booking.roomType=room.roomType;
+//         booking.status="ALLOCATED";
+//         booking.allocatedAt=new Date(),
+//         await booking.save();
 
-         // send room allocation email(with room details)
+//          // send room allocation email(with room details)
 
-        try{
-            await sendRoomAllocationEmail(booking);
-        }catch(emailError){
-            console.error("Allocation email failed:",emailError.message)
-        }
+//         try{
+//             await sendRoomAllocationEmail(booking);
+//         }catch(emailError){
+//             console.error("Allocation email failed:",emailError.message)
+//         }
 
-        // Marking room as active
-        room.isActive=true;
-        await room.save();
+//         // Marking room as active
+//         room.isActive=true;
+//         await room.save();
 
        
      
-        res.status(200).json({success:true,message:"Room allocated successfully",booking});
-    }
-    catch(error){
-        console.log("Error in allocating room:",error);
-        res.status(500).json({success:false,message:"Server Error failed to allocate room"})
-    }
-}
+//         res.status(200).json({success:true,message:"Room allocated successfully",booking});
+//     }
+//     catch(error){
+//         console.log("Error in allocating room:",error);
+//         res.status(500).json({success:false,message:"Server Error failed to allocate room"})
+//     }
+// }
 
+
+//new allocate room logic code is developed on 15-02-2026 the previous version was working good but the below version is developed as per the current new requirement  
 // logic to vacate the room
-const vacateRoom=async(req,res)=>{
-   
+const allocateRoom=async(req,res)=>{
     try{
-         const {remarks}=req.body;
-         const booking=await Bookings.findById(req.params.id);
-         if(!booking){
-            return res.status(404).json({success:false,message:"Booking not found"});
-         }
-         if(booking.status!=="ALLOCATED"){
-            return res.status(400).json({success:false,message:"Only allocated Booking can be vacated"});
-         }
+        const {id}=req.params;
+        const {roomIds}=req.body;
 
-         if(!booking.allocatedRoom){
+        if(!roomIds || !Array.isArray(roomIds) || roomIds.length==0){
             return res.status(400).json({
-                success:false,message:"No room is currently allocated to this booking"
-            })
-
-         }
-
-        //  vacate the room
-        const room=await Room.findById(booking.allocatedRoom);
-        if(room){
-            room.isActive=false;
-            await room.save();
+                success:false,
+                message:"Please select at least one room"
+            });
         }
-        //update booking
-        booking.status="VACATED";
-        booking.vacatedAt=new Date();
-        booking.vacateRemarks=remarks||"";
-        // booking.allocatedRoom=null;
-        console.log("Allowed statuses:", booking.schema.path("status").enumValues);
-        await booking.save(); 
 
-        // await createOrUpdate(booking);
+        const booking=await Bookings.findById(id);
+        if(!booking){
+            return res.status(404).json({
+                success:false,
+                message:"Booking not found"
+            });
+        }
 
-        res.status(200).json({success:true,message:"Room vacated successfully",booking})
+        if(booking.status!=="APPROVED"){
+            return res.status(400).json({
+                success:false,
+                message:"Only APPROVED bookings can be allocated"
+            });
+        }
+
+        if(roomIds.length !== booking.numberOfRooms){
+            return res.status(400).json({
+                success:false,
+                message:`You must allocate exactly ${booking.numberOfRooms} room(s)`
+            });
+        }
+
+        // fetching rooms
+        const rooms=await Room.find({
+            _id:{$in:roomIds},
+            isActive:true
+        });
+
+        if(rooms.length !==roomIds.length){
+            return res.status(400).json({
+                success:false,
+                message:"One or more rooms are inactive (maintenance)"
+            });
+        }
+
+        // logic to check overlap
+        const overlappingBookings=await Bookings.find({
+            status:{$in:["ALLOCATED","VACATED"]},
+            allocatedRooms:{$in:roomIds},
+            arrivalDateTime:{$lt:booking.departureDateTime},
+            departureDateTime:{$gt:booking.arrivalDateTime}
+        });
+        if(overlappingBookings.length >0){
+            return res.status(400).json({
+                success:false,
+                message:"One or more selected rooms are already booked for these dates "
+            });
+        }
+        booking.allocatedRooms=roomIds;
+        booking.status="ALLOCATED";
+        booking.allocatedAt=new Date();
+
+        await booking.save();
+
+        // send Allocation Email (with room numbers)
+        try{
+            const roomNumbers=rooms.map(r=>r.roomNumber);
+            await sendRoomAllocationEmail(booking,roomNumbers);
+        }catch(emailError){
+            console.error("Allocation email failed:",emailError.message);
+        }
+
+        res.json({
+            success:true,
+            message:"Rooms allocated successfully",
+            booking
+        });
     }catch(error){
-        console.log("Error in vacating the room: ",error);
-        res.status(500).json({
+        res.status(400).json({
             success:false,
-            message:"Server Error while vacating the room"
+            message:error.message
         });
     }
 };
 
-// logic for idCard View 
+// the below is the fully working vacate room logic 
+
+// const vacateRoom=async(req,res)=>{
+   
+//     try{
+//          const {remarks}=req.body;
+//          const booking=await Bookings.findById(req.params.id);
+//          if(!booking){
+//             return res.status(404).json({success:false,message:"Booking not found"});
+//          }
+//          if(booking.status!=="ALLOCATED"){
+//             return res.status(400).json({success:false,message:"Only allocated Booking can be vacated"});
+//          }
+
+//          if(!booking.allocatedRoom){
+//             return res.status(400).json({
+//                 success:false,message:"No room is currently allocated to this booking"
+//             })
+
+//          }
+
+//         //  vacate the room
+//         const room=await Room.findById(booking.allocatedRoom);
+//         if(room){
+//             room.isActive=false;
+//             await room.save();
+//         }
+//         //update booking
+//         booking.status="VACATED";
+//         booking.vacatedAt=new Date();
+//         booking.vacateRemarks=remarks||"";
+//         // booking.allocatedRoom=null;
+//         console.log("Allowed statuses:", booking.schema.path("status").enumValues);
+//         await booking.save(); 
+
+//         // await createOrUpdate(booking);
+
+//         res.status(200).json({success:true,message:"Room vacated successfully",booking})
+//     }catch(error){
+//         console.log("Error in vacating the room: ",error);
+//         res.status(500).json({
+//             success:false,
+//             message:"Server Error while vacating the room"
+//         });
+//     }
+// };
+
+
+//new vacate  room logic code is developed on 15-02-2026 the previous version was working good but the below version is developed as per the current new requirement  
+const vacateRoom=async(req,res)=>{
+    try{
+        const {id}=req.params;
+        const {remarks}=req.body;
+
+        const booking=await Bookings.findById(id);
+        
+        if(!booking){
+            return res.status(404).json({
+                success:false,
+                message:"Booking not found"
+            });
+        }
+        if(booking.status!=="ALLOCATED"){
+            return res.status(400).json({
+                success:false,
+                message:"Only ALLOCATED bookings can be vacated"
+            });
+        }
+        booking.status="VACATED";
+        booking.vacatedAt=new Date();
+        booking.vacateRemarks=remarks || "";
+
+        await booking.save();
+
+        res.json({
+            success:true,
+            message:"Booking vacated successfully",
+            booking
+        });
+
+    }catch(error){
+        res.status(400).json({
+            success:false,
+            message:error.message
+        });
+    }
+};
+
+
+ // logic for idCard View 
 const idCardView=async(req,res)=>{
     try{
         const booking=await Bookings.findById(req.params.id);
@@ -397,41 +533,108 @@ const idCardView=async(req,res)=>{
     }
 }
 
+
+// old fully working code 
+// const getAvailableRooms=async(req,res)=>{
+//     const availableRooms=await Room.find({isActive:false});
+//     res.status(200).json({success:true,availableRooms});
+// }
+
+//new getAvailableRooms logic code is developed on 15-02-2026 the previous version was working good but the below version is developed as per the current new requirement  
+
 const getAvailableRooms=async(req,res)=>{
-    const availableRooms=await Room.find({isActive:false});
-    res.status(200).json({success:true,availableRooms});
+    try{
+        const {arrivalDateTime,departureDateTime}=req.query;
+        if(!arrivalDateTime || !departureDateTime){
+            return  res.status(400).json({
+                success:false,
+                message:"Arrival and departure dates required"
+            });
+        }
+
+        const overlappingBookings=await Bookings.find({
+            status:{$in:["ALLOCATED","VACATED"]},
+            arrivalDateTime:{$lt:departureDateTime},
+            departureDateTime:{$gt:arrivalDateTime}
+        });
+
+        const bookedRoomIds=overlappingBookings.flatMap(
+            b=>b.allocatedRooms
+        );
+
+        const availableRooms=await Room.find({
+            _id:{$nin:bookedRoomIds},
+            isActive:true
+        });
+        res.json({
+            success:true,
+            rooms:availableRooms
+        });
+    }catch(error){
+        res.status(400).json({
+            success:false,
+            message:error.message
+        });
+    }
 }
 
 
 
 // logic for calendar building
+// const getCalendarBookings=async(req,res)=>{
+//     try{
+//         const bookings=await Bookings.find({status:{$in:["ALLOCATED","VACATED"]}})
+//         .select("arrivalDateTime departureDateTime applicantName status roomNumber roomType");
+
+//         const calendarEvents=bookings.map((b=>({
+//               id:b._id,
+//               title:`Room ${b.roomNumber} ${b.applicantName}`,
+//               start:b.arrivalDateTime,
+//               end:b.departureDateTime,
+//               status:b.status,
+//               roomNumber:b.roomNumber,
+//               roomType:b.roomType,
+//               applicantName:b.applicantName,
+//         })));
+
+//         res.status(200).json({success:true,events:calendarEvents});
+//     }catch(error){
+//         console.error("error in fetching the calendar details:",error);
+//         res.status(500).json({success:false,message:"Calendar Fetch Failed"});
+//     }
+// }
+
+// getCalendarBookings code is modified on 15-02-2026 as per new design fields like roomNumber,roomType and we use allocatedRooms(array)
 const getCalendarBookings=async(req,res)=>{
     try{
         const bookings=await Bookings.find({status:{$in:["ALLOCATED","VACATED"]}})
-        .select("arrivalDateTime departureDateTime applicantName status roomNumber roomType");
+        .populate("allocatedRooms","roomNumber")
+        .select("arrivalDateTime departureDateTime applicantName status allocatedRooms");
 
-        const calendarEvents=bookings.map((b=>({
-              id:b._id,
-              title:`Room ${b.roomNumber} ${b.applicantName}`,
-              start:b.arrivalDateTime,
-              end:b.departureDateTime,
-              status:b.status,
-              roomNumber:b.roomNumber,
-              roomType:b.roomType,
-              applicantName:b.applicantName,
-        })));
+       const calendarEvents = bookings.flatMap(b => 
+            b.allocatedRooms.map(room => ({
+                id: b._id + "_" + room._id,
+                title: `Room ${room.roomNumber} - ${b.applicantName}`,
+                start: b.arrivalDateTime,
+                end: b.departureDateTime,
+                status: b.status,
+                roomNumber: room.roomNumber,
+                applicantName: b.applicantName
+            }))
+        );
 
         res.status(200).json({success:true,events:calendarEvents});
     }catch(error){
         console.error("error in fetching the calendar details:",error);
         res.status(500).json({success:false,message:"Calendar Fetch Failed"});
     }
-}
+};
 
 
 const updateBookingDetails=async(req,res)=>{
     try{
-        const {arrivalDateTime,departureDateTime,guestCategory,acType}=req.body;
+        // const {arrivalDateTime,departureDateTime,guestCategory,acType}=req.body; acType is removed as per new on 15-02-2026
+        const {arrivalDateTime,departureDateTime,guestCategory}=req.body;
         const booking=await Bookings.findById(req.params.id);
 
         if(!booking){
@@ -453,7 +656,8 @@ const updateBookingDetails=async(req,res)=>{
         if(arrivalDateTime) {booking.arrivalDateTime=new Date(arrivalDateTime);}
         if(departureDateTime) {booking.departureDateTime=new Date(departureDateTime);}
         if(guestCategory){booking.guestCategory=guestCategory;}
-        if(acType){booking.acType=acType;}
+        // acType is commented as it removed from schema on 15-02-2026
+        // if(acType){booking.acType=acType;} 
         
 
         // if booking is already finalized ->we are recalculating invoice here

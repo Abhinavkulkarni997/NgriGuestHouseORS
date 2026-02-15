@@ -64,12 +64,12 @@ const getTodayActivities=async(req,res)=>{
     todaysStart.setUTCHours(0,0,0,0);
     const todaysEnd=new Date();
     todaysEnd.setUTCHours(23,59,59,999);
-    console.log(todaysStart.setISOString());
-    console.log(todaysStart.setISOString());
+    console.log(todaysStart.toISOString());
+    console.log(todaysStart.toISOString());
 
     // here we are applying the filter for todays checkIns where the arrivalDate=today and status=approved,allocated
     const todaysCheckIns=await Booking.find({
-        arrivalDateTime: {$gte:start,$lte:end},
+       arrivalDateTime: { $gte: todaysStart, $lte: todaysEnd },
         status:{$in:["APPROVED","ALLOCATED"]}
     }).select("bookingId applicantName arrivalDateTime status")
 
@@ -84,7 +84,7 @@ const getTodayActivities=async(req,res)=>{
     })
 }catch(error){
     console.error("Todays activity error:",error);
-    res.json(500).json({message:"Server Error Failed todays activities dashboard data"});
+    res.status(500).json({message:"Server Error Failed todays activities dashboard data"});
 }
 
 }

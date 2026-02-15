@@ -1,7 +1,7 @@
-const Invoice=require('../models/Invoice');
-const rateCard=require("../config/rateCard");
-const Counter = require('../models/counter');
-const {calculateInvoice}=require("../utils/invoiceCalculator");
+// const Invoice=require('../models/Invoice');
+// const rateCard=require("../config/rateCard");
+// const Counter = require('../models/counter');
+// const {calculateInvoice}=require("../utils/invoiceCalculator");
 
 
 // const generateInvoice=async(booking)=>{
@@ -69,6 +69,118 @@ const {calculateInvoice}=require("../utils/invoiceCalculator");
 // code developed on 10-02-2026 as per new requirement changes
 
 
+// const createOrUpdateInvoice=async(booking,paymentMode)=>{
+//     // validate booking 
+//     if(!booking.arrivalDateTime || !booking.departureDateTime){
+//         throw new Error("Invalid booking dates for invoice calculation");
+//     }
+
+//     const category=booking.guestCategory;
+//     if(!category || !rateCard[category]){
+//         throw new Error("Invalid guest category");
+//     }
+
+//     const acType = String(booking.acType).toUpperCase() === "AC"
+//     ? "AC": "NON_AC";
+//     const ratePerDay=rateCard[category][acType];
+
+//     if(!ratePerDay){
+//         throw new Error(
+//             `Rate not found for category: ${category},AC Type:${acType}`
+//         );
+//     }
+
+//     const gstPercent=booking.gstPercent ?? 0;
+
+//     // -------CALCULATION--------
+//     const calc=calculateInvoice({
+//         from:booking.arrivalDateTime,
+//         to:booking.departureDateTime,
+//         ratePerDay,
+        
+//         gstPercent
+//     });
+
+//     // ---------FIND EXISTING INVOICE-----------
+//     let invoice=await Invoice.findOne({booking:booking._id});
+
+
+//     if(!invoice){
+//         const counter=await Counter.findOneAndUpdate(
+//             {name:"invoice"},
+//             {$inc:{seq:1}},
+//             {new:true,upsert:true}
+//         );
+
+//         const invoiceNumber=`INV-${String(counter.seq).padStart(5,"0")}`;
+
+//         invoice=new Invoice({
+//             booking:booking._id,
+//             invoiceNumber,
+
+//             period:{
+//                 from:booking.arrivalDateTime,
+//                 to:booking.departureDateTime
+//             },
+
+//             guestCategory:category,
+//             roomNumber:booking.roomNumber,
+//             roomType:booking.roomType,
+//             acType,
+
+//             ratePerDay,
+//             gstPercent,
+
+//             ...calc,
+
+//             payment:{
+//                 mode:paymentMode || "CASH",
+//                 status:(paymentMode || "CASH")==="CASH"?"PAID":"PENDING",
+//                 paidAt: paymentMode==="CASH" ? new Date():null,
+//             },
+
+            
+            
+//         });
+//     }else{
+//         // ------------UPDATE THE SAME INVOICE----------------
+//         invoice.period={
+//             from:booking.arrivalDateTime,
+//             to:booking.departureDateTime
+//         };
+
+//         invoice.guestCategory=category;
+//         invoice.roomNumber=booking.roomNumber;
+//         invoice.roomType=booking.roomType;
+//         invoice.acType=acType;
+
+//         invoice.ratePerDay=ratePerDay;
+//         invoice.gstPercent=gstPercent;
+
+//         invoice.numberOfDays=calc.numberOfDays;
+//         invoice.subtotal=calc.subtotal;
+//         invoice.gstAmount=calc.gstAmount;
+//         invoice.total=calc.total;
+
+//        if(paymentMode){
+//         invoice.payment.mode=paymentMode;
+//         invoice.payment.status=paymentMode ==="CASH" ?"PAID":"PENDING";
+//          invoice.payment.paidAt = paymentMode === "CASH" ? new Date() : null;
+//        }
+//    };
+//    await invoice.save();
+//     return invoice;
+//     }
+    
+
+// module.exports = {createOrUpdateInvoice};
+
+// code developed on 15-02-2026 as per new requirement changes somefields like roomNumber and roomtype are updated accordingly
+const Invoice=require('../models/Invoice');
+const rateCard=require("../config/rateCard");
+const Counter = require('../models/counter');
+const {calculateInvoice}=require("../utils/invoiceCalculator");
+
 const createOrUpdateInvoice=async(booking,paymentMode)=>{
     // validate booking 
     if(!booking.arrivalDateTime || !booking.departureDateTime){
@@ -80,23 +192,33 @@ const createOrUpdateInvoice=async(booking,paymentMode)=>{
         throw new Error("Invalid guest category");
     }
 
-    const acType = String(booking.acType).toUpperCase() === "AC"
-    ? "AC": "NON_AC";
-    const ratePerDay=rateCard[category][acType];
+    if(!booking.allocatedRooms || booking.allocatedRooms.length === 0){
+        throw new Error("No rooms allocated for this booking");
+    }
+
+    // Populate rooms
+    if (!booking.populated("allocatedRooms")) {
+        await booking.populate("allocatedRooms");
+    }
+
+    const roomNumbers=booking.allocatedRooms.map(r=>r.roomNumber);
+    const ratePerDay=rateCard[category].rate;
+    const gstPercent=booking.gstPercent ?? 0;
 
     if(!ratePerDay){
         throw new Error(
-            `Rate not found for category: ${category},AC Type:${acType}`
+            `Rate not found for category: ${category}`
         );
     }
 
-    const gstPercent=booking.gstPercent ?? 0;
-
-    // -------CALCULATION--------
+  
+   
+    // -------CALCULATION--------//
     const calc=calculateInvoice({
         from:booking.arrivalDateTime,
         to:booking.departureDateTime,
         ratePerDay,
+        numberOfRooms: booking.allocatedRooms.length,
         gstPercent
     });
 
@@ -105,13 +227,16 @@ const createOrUpdateInvoice=async(booking,paymentMode)=>{
 
 
     if(!invoice){
-        const counter=await Counter.findOneAndUpdate(
-            {name:"invoice"},
-            {$inc:{seq:1}},
-            {new:true,upsert:true}
+        const year = new Date().getFullYear();
+
+        const counter = await Counter.findOneAndUpdate(
+        { name: "invoice", year },
+        { $inc: { sequenceValue: 1 } },
+         { new: true, upsert: true }
         );
 
-        const invoiceNumber=`INV-${String(counter.seq).padStart(5,"0")}`;
+
+        const invoiceNumber = `INV-${year}-${String(counter.sequenceValue).padStart(5,"0")}`;
 
         invoice=new Invoice({
             booking:booking._id,
@@ -123,10 +248,8 @@ const createOrUpdateInvoice=async(booking,paymentMode)=>{
             },
 
             guestCategory:category,
-            roomNumber:booking.roomNumber,
-            roomType:booking.roomType,
-            acType,
-
+            roomNumbers,
+    
             ratePerDay,
             gstPercent,
 
@@ -149,9 +272,7 @@ const createOrUpdateInvoice=async(booking,paymentMode)=>{
         };
 
         invoice.guestCategory=category;
-        invoice.roomNumber=booking.roomNumber;
-        invoice.roomType=booking.roomType;
-        invoice.acType=acType;
+        invoice.roomNumbers=roomNumbers;
 
         invoice.ratePerDay=ratePerDay;
         invoice.gstPercent=gstPercent;

@@ -84,12 +84,14 @@ const bookingSchema =new mongoose.Schema(
          
             default: null
         },
-        acType: {
-            type: String,
-            enum: ["AC", "NON_AC"],
+
+        // acType is removed on 15-02-2026 as all the rooms are AC by default provided by GH data so below is commented
+        // acType: {
+        //     type: String,
+        //     enum: ["AC", "NON_AC"],
             
-            default:null
-        },
+        //     default:null
+        // },
         // step 2:Visit Details
         purpose:{
             type:String,
@@ -153,12 +155,25 @@ const bookingSchema =new mongoose.Schema(
         },
 
         // adding room schema here
-        allocatedRoom:{
+        // allocatedRoom:{
+        //     type:mongoose.Schema.Types.ObjectId,
+        //     ref:"Room",
+        // },
+
+        // below room is added on 15-02-2026 changed from allocated room to allocatedRooms since we got data from GH 
+
+         allocatedRooms:[{
             type:mongoose.Schema.Types.ObjectId,
             ref:"Room",
-        },
-        roomNumber:String,
-        roomType:String,
+        }],
+
+       
+       
+
+        // roomNumber and roomType is removed on 15-02-2026 because as per new data these are not required
+        // roomNumber:String,
+        // roomType:String,
+      
         approvedAt:Date,
         allocatedAt:{
             type:Date,
@@ -193,10 +208,35 @@ const bookingSchema =new mongoose.Schema(
 
         expectedDepartureDateTime:Date,
         actualDepartureDateTime:Date,
+        
 
         
     },
+     
     {timestamps:true}
 );
+
+// code added on 15-02-2026 and  allocated rooms length matches numberOfRooms.
+bookingSchema.pre("save", function(next) {
+
+  if (this.arrivalDateTime >= this.departureDateTime) {
+    return next(new Error("Departure must be after arrival"));
+  }
+
+  if (this.status === "ALLOCATED") {
+    if (!this.allocatedRooms ||
+        this.allocatedRooms.length !== this.numberOfRooms) {
+      return next(new Error("Allocated rooms mismatch"));
+    }
+  }
+
+  next();
+});
+
+bookingSchema.index({
+  allocatedRooms: 1,
+  arrivalDateTime: 1,
+  departureDateTime: 1
+});
 
 module.exports=mongoose.model("Booking",bookingSchema);

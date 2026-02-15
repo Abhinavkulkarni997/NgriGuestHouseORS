@@ -120,40 +120,82 @@ const sendApprovedEmail=async(booking)=>{
 }
 }
 
-const sendRoomAllocationEmail=async(booking)=>{
-    try{
-    const subject=`Room Allocated - Booking ${booking.bookingId}`;
-    const html=`<p>Dear ${booking.applicantName}</p>
-    <p>Your Room has been <b>successfully allocated</b>.</p>
+// const sendRoomAllocationEmail=async(booking)=>{
+//     try{
+//     const subject=`Room Allocated - Booking ${booking.bookingId}`;
+//     const html=`<p>Dear ${booking.applicantName}</p>
+//     <p>Your Room has been <b>successfully allocated</b>.</p>
 
-    <p><b>Booking ID:</b>${booking.bookingId}</p>
-    <p><b>Room Number:</b>${booking.roomNumber}</p>
-    <p><b>Room Type:</b>${booking.roomType}</p>
+//     <p><b>Booking ID:</b>${booking.bookingId}</p>
+//     <p><b>Room Number:</b>${booking.roomNumbers}</p>
+    
 
-    <p><b>Check-in:</b>${new Date(booking.arrivalDateTime).toLocaleString()}</p>
-    <p><b>Check-out:</b>${new Date(booking.departureDateTime).toLocaleString()}</p>
+//     <p><b>Check-in:</b>${new Date(booking.arrivalDateTime).toLocaleString()}</p>
+//     <p><b>Check-out:</b>${new Date(booking.departureDateTime).toLocaleString()}</p>
 
-    <p>Please carry a valid ID proof during check-in.</p>
-    <p>Regards,<br/>Guest House Administration</p>
+//     <p>Please carry a valid ID proof during check-in.</p>
+//     <p>Regards,<br/>Guest House Administration</p>
     
     
-    `;
-    await WebTransportError.sendMail({
-         from: `"CSIR-NGRI Guest House" <${process.env.EMAIL_USER}>`,
-        to:booking.officialEmail,
-        bcc:process.env.EMAIL_ADMIN,
-        subject,
-        html,
-    });
+//     `;
+//     await mailTransporter.sendMail({
+//          from: `"CSIR-NGRI Guest House" <${process.env.EMAIL_USER}>`,
+//         to:booking.officialEmail,
+//         bcc:process.env.EMAIL_ADMIN,
+//         subject,
+//         html,
+//     });
 
 
-    console.log("allocation mail sent to:",booking.officialEmail);
+//     console.log("allocation mail sent to:",booking.officialEmail);
 
-}catch(error){
-    console.error("Error in sending room allocation email:",error.message);
-}
+// }catch(error){
+//     console.error("Error in sending room allocation email:",error.message);
+// }
 
+// };
+
+// code developed on 16-02-2026 modifications are done in the below code 
+const sendRoomAllocationEmail = async (booking) => {
+    try {
+
+        if (!booking.populated("allocatedRooms")) {
+            await booking.populate("allocatedRooms");
+        }
+
+        const roomNumbers = booking.allocatedRooms
+            .map(r => r.roomNumber)
+            .join(", ");
+
+        const html = `
+            <p>Dear ${booking.applicantName}</p>
+            <p>Your rooms have been <b>successfully allocated</b>.</p>
+
+            <p><b>Booking ID:</b> ${booking.bookingId}</p>
+            <p><b>Room Numbers:</b> ${roomNumbers}</p>
+
+            <p><b>Check-in:</b> ${new Date(booking.arrivalDateTime).toLocaleString()}</p>
+            <p><b>Check-out:</b> ${new Date(booking.departureDateTime).toLocaleString()}</p>
+
+            <p>Please carry a valid ID proof during check-in.</p>
+            <p>Regards,<br/>Guest House Administration</p>
+        `;
+
+        await mailTransporter.sendMail({
+            from: `"CSIR-NGRI Guest House" <${process.env.EMAIL_USER}>`,
+            to: booking.officialEmail,
+            bcc: process.env.EMAIL_ADMIN,
+            subject: `Room Allocation - ${booking.bookingId}`,
+            html,
+        });
+
+        console.log("Allocation mail sent to:", booking.officialEmail);
+
+    } catch (error) {
+        console.error("Error in sending room allocation email:", error.message);
+    }
 };
+
 
 const sendRejectedEmail=async(booking)=>{
     try{
