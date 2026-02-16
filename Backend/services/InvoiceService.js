@@ -225,18 +225,18 @@ const createOrUpdateInvoice=async(booking,paymentMode)=>{
     // ---------FIND EXISTING INVOICE-----------
     let invoice=await Invoice.findOne({booking:booking._id});
 
-
+    
     if(!invoice){
         const year = new Date().getFullYear();
 
         const counter = await Counter.findOneAndUpdate(
         { name: "invoice", year },
-        { $inc: { sequenceValue: 1 } },
+        { $inc: { seq: 1 } },
          { new: true, upsert: true }
         );
 
 
-        const invoiceNumber = `INV-${year}-${String(counter.sequenceValue).padStart(5,"0")}`;
+        const invoiceNumber = `INV-${year}-${String(counter.seq).padStart(5,"0")}`;
 
         invoice=new Invoice({
             booking:booking._id,

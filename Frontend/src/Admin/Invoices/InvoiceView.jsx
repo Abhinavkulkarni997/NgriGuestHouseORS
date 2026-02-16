@@ -347,7 +347,20 @@ const InvoiceView=()=>{
 
     if(!invoice) return <p className="p-4">Loading Invoice...</p>;
 
- 
+    const formatDateTime = (date) => {
+  if (!date) return "";
+  const d = new Date(date);
+
+  const day = String(d.getDate()).padStart(2, "0");
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const year = d.getFullYear();
+
+  const hours = String(d.getHours()).padStart(2, "0");
+  const minutes = String(d.getMinutes()).padStart(2, "0");
+
+  return `${day}-${month}-${year} (${hours}:${minutes})`;
+};
+
 
     return(
         <div className="p-4 max-w-4xl mx-auto">
@@ -381,29 +394,29 @@ const InvoiceView=()=>{
                 </div>
                 
 
-                <span className="mt-2 sm:mt-0 text-sm text-gray-500">
-                    Bill Date:{new Date(invoice.period?.to).toDateString()}
+                <span className="mt-2 sm:mt-0 text-sm text-gray-500 font-medium">
+                    Invoice Date:{formatDateTime(invoice.createdAt)}
                 </span>
             </div>
 
-            <div className="grid sm:grid-cols-4 gap-4 text-sm">
-                <div className="mt-2 pt-4">
+            {/* <div className="grid sm:grid-cols-4 gap-4 text-sm"> */}
+                {/* <div className="mt-2 pt-4">
                     <p className="font-medium">Guest Name</p>
-                    <p className="font-extrabold">{invoice.booking.applicantName}</p>
+                    <p className="font-extrabold">{invoice.booking.applicantName}</p> */}
                     {/* <p className="text-gray-500">{invoice.guestCategory}</p> */}
-                    <p className="">{invoice.booking.organization}</p>
+                    {/* <p className="">{invoice.booking.organization}</p>
                     <p>Designation: {invoice.booking.designation}</p>
-                </div>
+                </div> */}
 
-                <div className="mt-2 pt-4">
+                {/* <div className="mt-2 pt-4">
                     <p className="font-medium">Room Details</p>
                     {/* <p className="mt-2">Room {invoice.roomNumber}</p>
                     <p className="mt-2">{invoice.roomType}</p> */}
-                    <p className="mt-2">
-                       Rooms: {invoice.roomNumbers.join(", ")}
+                    {/* <p className="mt-2">
+                       Room: {invoice.roomNumbers.join(", ")}
                     </p>
-                </div>
-                <div className="mt-2 pt-4">
+                </div> */}
+                {/* <div className="mt-2 pt-4">
                     <p className="font-medium">Arrival Date</p>
                     <p className="mt-2">{new Date(invoice.period?.from).toDateString()}</p>
                     
@@ -412,15 +425,17 @@ const InvoiceView=()=>{
                     <p className="font-medium">Departure Date</p>
                     <p className="mt-2">{new Date(invoice.period?.to).toDateString()}</p>
                     
-                </div>
-            </div>
+                </div> */}
+            {/* </div> */}
 
             {/* charges Section */}
             <div className="mt-6 border rounded-lg overflow-hidden">
                 <table className="w-full text-sm border-collapse">
                     <thead className="bg-gray-100">
                         <tr>
-                            <th className="border px-3 py-2 text-left">Description</th>
+                            <th className="border px-3 py-2 text-left">Guest Name</th>
+                            <th className="border px-3 py-2 text-left">Arrival Date</th>
+                             <th className="border px-3 py-2 text-left">Departure Date</th>
                             <th className="border px-3 py-2">Rate</th>
                             <th className="border px-3 py-2">No of Days</th>
                             <th className="border px-3 py-2">Amount</th>
@@ -429,8 +444,21 @@ const InvoiceView=()=>{
                     <tbody>
                         <tr>
                             <td className="border px-3 py-2">
-                               Accommodation Charges
+                               <p className="font-extrabold">{invoice.booking.applicantName}</p>
+                               <p className="font-medium">{invoice.booking.designation}</p>
+                               <p className="">{invoice.booking.organization}</p>
+                                
                             </td>
+
+                            <td className="border px-3 py-2 ">
+                                <p >{formatDateTime(invoice.period?.from)}</p>
+                            </td>
+                             <td className="border px-3 py-2">
+                                <p >{formatDateTime(invoice.period?.to)}</p>
+                            </td>
+
+                            
+
                             <td className="border px-3 py-2 text-center"> 
                                 ₹{invoice.ratePerDay}
                             </td>
@@ -466,7 +494,7 @@ const InvoiceView=()=>{
                     <div className="flex justify-between">
                         <span>Paid On:</span>
                         <span>
-                            {new Date(invoice.payment.paidAt).toLocaleDateString()} 
+                           {formatDateTime(invoice.payment.paidAt)}
                             </span>
                         </div>
                 )}
