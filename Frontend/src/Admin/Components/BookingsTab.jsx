@@ -12,7 +12,7 @@ const BookingsTab=({bookings,onApprove,onReject,onAllocate,onVacate,availableRoo
     return(
         <div className='mb-4  border-default'>
             {/* Tabs */}
-            {<ul className="flex gap-4  border-b mb-6 overflow-x-auto ">
+            {<ul className="flex gap-4 flex-wrap  border-b mb-6 overflow-x-auto ">
                {tabMenu.map((tab)=>{
                 const count=bookings.filter(b=>b.status===tab).length;
                 return (
