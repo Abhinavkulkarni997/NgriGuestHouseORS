@@ -217,21 +217,23 @@ const bookingSchema =new mongoose.Schema(
 );
 
 // code added on 15-02-2026 and  allocated rooms length matches numberOfRooms.
-bookingSchema.pre("save", function(next) {
+bookingSchema.pre("save", async function () {
 
   if (this.arrivalDateTime >= this.departureDateTime) {
-    return next(new Error("Departure must be after arrival"));
+    throw new Error("Departure must be after arrival");
   }
 
   if (this.status === "ALLOCATED") {
-    if (!this.allocatedRooms ||
-        this.allocatedRooms.length !== this.numberOfRooms) {
-      return next(new Error("Allocated rooms mismatch"));
+    if (
+      !this.allocatedRooms ||
+      this.allocatedRooms.length !== this.numberOfRooms
+    ) {
+      throw new Error("Allocated rooms mismatch");
     }
   }
 
-  next();
 });
+
 
 bookingSchema.index({
   allocatedRooms: 1,

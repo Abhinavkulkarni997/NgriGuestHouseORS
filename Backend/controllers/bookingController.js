@@ -92,11 +92,11 @@ const { sendAcknowledgementEmail,sendAdminAlertEmail } = require("../services/ma
     const year=new Date().getFullYear();
       const counter = await Counter.findOneAndUpdate(
       { name: "booking", year },
-      { $inc: { sequenceValue: 1 } },
+      { $inc: { seq: 1 } },
       { new: true, upsert: true }
     );
 
-    const sequence = String(counter.sequenceValue).padStart(4, "0");
+    const sequence = String(counter.seq).padStart(4, "0");
     const bookingId = `${year}/NGRI/GH/${sequence}`;
 
     const booking = new Booking({
