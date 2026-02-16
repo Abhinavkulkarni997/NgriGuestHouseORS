@@ -1,9 +1,141 @@
+// import React ,{useState} from 'react';
+// import api from '../../api/bookingapi';
+
+// const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
+//     const [guestCategory,setGuestCategory]=useState(booking.guestCategory||"");
+//     const [acType,setAcType]=useState(booking.acType||"");
+//     // const [ratePerDay,setRatePerDay]=useState("");
+//     // const [gstPercent,setGstPercent]=useState(0);
+//     const [remarks,setRemarks]=useState("");
+//     const [loading,setLoading]=useState(false);
+//     const [paymentMode,setPaymentMode]=useState("CASH");
+
+//     const handleFinalize=async()=>{
+//         // if(!guestCategory || !ratePerDay || !acType){
+//         //     alert("Category and Ac Type Rate are required");
+//         //     return;
+//         // }
+
+//           if(!guestCategory || !acType){
+//             alert("Category and Ac Type Rate are required");
+//             return;
+//         }
+//         setLoading(true);
+//         try{
+//             const response=await api.patch(`/admin/bookings/${bookingId}/finalize`,{
+//                 guestCategory,
+//                 acType,
+//                 // ratePerDay:Number(ratePerDay),
+//                 // gstPercent:Number(gstPercent),
+//                 remarks,
+//                 paymentMode,
+//             });
+//             alert(response.data?.message||"Booking finalized successfully & invoice generated");
+           
+//             onSuccess();
+//             onClose();
+//         }catch(error){
+//             console.error("Error finalizing booking:", error);
+//             alert("Failed to finalize booking. Please try again.");
+//         }finally{
+//             setLoading(false);
+//         }
+//     };
+
+//     return(
+//         <div className='fixed inset-0 bg-black/50 flex justify-center items-center z-50'>
+//             <div className='bg-white rounded-lg p-6 w-full max-w-md'>
+//                 <h2 className='text-lg font-bold mb-4'>Finalize Booking</h2>
+
+
+//                 <p><b>Booking ID:</b> {booking.bookingId}</p>
+//                 <p><b>Guest Category:</b> {guestCategory || "Not selected"}</p>
+//                 <p><b>Room:</b> {booking.roomNumber}({booking.roomType})</p>
+           
+
+
+//                 <select value={guestCategory}
+//                 onChange={(e)=>setGuestCategory(e.target.value)}
+//                 className='w-full border p-2 mt-3'
+//                 >
+//                     <option value="">Select Category</option>
+//                     <option value="CSIR_EMPLOYEE">CSIR Employee</option>
+//                     <option value="PROJECT_FELLOW">Project Fellow</option>
+//                     <option value="NON_DEPENDANT_FAMILY">Non Dependant Family</option>
+//                     <option value="OFFICIAL_EXPERT">Official Expert</option>
+//                     <option value="ASI_PSU_EMPLOYEE">ASI PSU Employee</option>
+//                     <option value="OTHER_GUEST">Other Guest</option>
+//                     <option value="NRI_FOREIGN">NRI/Foreign</option>
+
+//                     </select>
+
+//                     {/* <label className='mt-3 block font-medium text-red-600'>Rate Per Day:</label>
+//                     <input 
+//                     type="number" 
+//                     value={ratePerDay} 
+//                     onChange={(e)=>setRatePerDay(e.target.value)} 
+//                     className='w-full border p-2 mt-3'
+//                      placeholder="Rate Per Day"/>
+
+//                      <label className='mt-3 block font-medium'>gstPercent:</label>
+//                     <select
+//                       value={gstPercent} 
+//                       onChange={(e)=>setGstPercent(e.target.value)} 
+//                       className='w-full border p-2 mt-3' 
+//                       placeholder="GST Percent">
+//                         <option value={0}>0%</option>
+//                         <option value={5}>5%</option>
+//                         <option value={12}>12%</option> 
+//                         <option value={18}>18%</option>
+//                     </select>
+
+//  */}
+
+//                       <label className='m-3 block font-medium'>AC Type</label>
+//                       <select value={acType}
+//                       onChange={(e)=>setAcType(e.target.value)}
+//                       className="w-full border p-2 mt-1">
+//                          <option value="">Select AC Type</option>
+//                         <option value="AC">AC</option>
+//                         <option value="NON_AC">Non-AC</option>
+//                       </select>
+                      
+
+//                       <label className="mt-3 block font-medium">Payment Mode</label>
+//                       <select value={paymentMode}
+//                       onChange={(e)=>setPaymentMode(e.target.value)}
+//                       className='w-full border p-2 mt-1'>
+//                         <option value="CASH">Cash</option>
+//                         <option value="ONLINE">Online</option>
+//                       </select>
+
+//                     <textarea value={remarks}
+//                      onChange={(e)=>setRemarks(e.target.value)}
+//                      className='w-full border p-2 mt-3' placeholder="Remarks"/> 
+
+//                      <div className='flex justify-end gap-3 mt-4'>
+//                         <button className="bg-gray-500 text-white rounded px-4 py-2" onClick={onClose}>Cancel</button>
+//                         <button onClick={handleFinalize} 
+//                         disabled={loading} 
+//                         className='bg-green-600 text-white px-4 py-2 rounded'>
+//                             {loading ? "Finalizing...":"Finalize & Generate Invoice"}
+//                         </button>
+//                      </div>
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default FinalizeBookingModal;
+
+
+// code developed on 16-02-2026 and changes are done as per new GH rules some fields are modified and removed 
 import React ,{useState} from 'react';
 import api from '../../api/bookingapi';
 
 const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
     const [guestCategory,setGuestCategory]=useState(booking.guestCategory||"");
-    const [acType,setAcType]=useState(booking.acType||"");
+    // const [acType,setAcType]=useState(booking.acType||""); commented on 16-02-2026
     // const [ratePerDay,setRatePerDay]=useState("");
     // const [gstPercent,setGstPercent]=useState(0);
     const [remarks,setRemarks]=useState("");
@@ -16,15 +148,20 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
         //     return;
         // }
 
-          if(!guestCategory || !acType){
-            alert("Category and Ac Type Rate are required");
+        //   if(!guestCategory || !acType){
+        //     alert("Category and Ac Type Rate are required");
+        //     return;
+        // }
+
+            if(!guestCategory ){
+            alert("guest Category is required");
             return;
         }
         setLoading(true);
         try{
             const response=await api.patch(`/admin/bookings/${bookingId}/finalize`,{
                 guestCategory,
-                acType,
+                // acType,
                 // ratePerDay:Number(ratePerDay),
                 // gstPercent:Number(gstPercent),
                 remarks,
@@ -50,7 +187,7 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
 
                 <p><b>Booking ID:</b> {booking.bookingId}</p>
                 <p><b>Guest Category:</b> {guestCategory || "Not selected"}</p>
-                <p><b>Room:</b> {booking.roomNumber}({booking.roomType})</p>
+               <p><b>Rooms:</b>{" "}{booking.allocatedRooms?.map(r => r.roomNumber).join(", ")}</p>
            
 
 
@@ -91,14 +228,14 @@ const FinalizeBookingModal=({booking,bookingId, onSuccess,onClose})=>{
 
  */}
 
-                      <label className='m-3 block font-medium'>AC Type</label>
+                      {/* <label className='m-3 block font-medium'>AC Type</label>
                       <select value={acType}
                       onChange={(e)=>setAcType(e.target.value)}
                       className="w-full border p-2 mt-1">
                          <option value="">Select AC Type</option>
                         <option value="AC">AC</option>
                         <option value="NON_AC">Non-AC</option>
-                      </select>
+                      </select> */}
                       
 
                       <label className="mt-3 block font-medium">Payment Mode</label>

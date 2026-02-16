@@ -10,7 +10,7 @@ const Invoice=require('../models/Invoice');
 // logic to fetch bookings
 const getAllBookings=async(req,res)=>{
     try{
-        const bookings=await Bookings.find().sort({createdAt:-1});
+        const bookings=await Bookings.find().populate("allocatedRooms", "roomNumber").sort({createdAt:-1});
         res.status(200).json({success:true,bookings});
         console.log("Fetched bookings:",bookings);
     }
@@ -553,7 +553,8 @@ const getAvailableRooms=async(req,res)=>{
         }
 
         const overlappingBookings=await Bookings.find({
-            status:{$in:["ALLOCATED","VACATED"]},
+            // status:{$in:["ALLOCATED","VACATED"]},
+            status:{$in:["ALLOCATED"]},
             arrivalDateTime:{$lt:departureDateTime},
             departureDateTime:{$gt:arrivalDateTime}
         });

@@ -26,4 +26,5 @@ const counterSchema = new mongoose.Schema({
 
 counterSchema.index({ name: 1, year: 1 }, { unique: true });
 
-module.exports = mongoose.model("Counter", counterSchema);
+const Counter = mongoose.models.Counter || mongoose.model("Counter", counterSchema);
+module.exports = Counter;
