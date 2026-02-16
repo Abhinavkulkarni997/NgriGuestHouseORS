@@ -224,12 +224,13 @@ const AllocateRoomModal = ({ booking, bookingId, onClose, onSuccess }) => {
       try {
         const response = await api.get("/admin/rooms/available", {
           params: {
-            from: booking.arrivalDateTime,
-            to: booking.departureDateTime,
+            arrivalDateTime: booking.arrivalDateTime,
+            departureDateTime: booking.departureDateTime,
           },
         });
 
-        setRooms(response.data.availableRooms || []);
+        setRooms(response.data.rooms || []);
+
       } catch (error) {
         console.error("Error fetching available rooms:", error);
       } finally {
@@ -284,6 +285,8 @@ const AllocateRoomModal = ({ booking, bookingId, onClose, onSuccess }) => {
       <div className="bg-white rounded-xl shadow-xl p-6 w-full max-w-lg mx-4">
 
         <h1 className="text-xl font-bold mb-2">Allocate Rooms</h1>
+
+        <h2 className='text-lg font-semibold mb-4'> Booking ID: {booking.bookingId}</h2>
 
         <p className="text-sm text-gray-600 mb-1">
           Applicant: <b>{booking?.applicantName}</b>

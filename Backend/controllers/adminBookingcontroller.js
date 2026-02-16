@@ -386,7 +386,8 @@ const allocateRoom=async(req,res)=>{
 
         // logic to check overlap
         const overlappingBookings=await Bookings.find({
-            status:{$in:["ALLOCATED","VACATED"]},
+            // status:{$in:["ALLOCATED","VACATED"]},
+              status:{$in:["ALLOCATED"]},
             allocatedRooms:{$in:roomIds},
             arrivalDateTime:{$lt:booking.departureDateTime},
             departureDateTime:{$gt:booking.arrivalDateTime}
@@ -552,11 +553,14 @@ const getAvailableRooms=async(req,res)=>{
             });
         }
 
+        const from = new Date(arrivalDateTime);
+        const to = new Date(departureDateTime);
+
         const overlappingBookings=await Bookings.find({
             // status:{$in:["ALLOCATED","VACATED"]},
             status:{$in:["ALLOCATED"]},
-            arrivalDateTime:{$lt:departureDateTime},
-            departureDateTime:{$gt:arrivalDateTime}
+            arrivalDateTime:{$lt:to},
+            departureDateTime:{$gt:from}
         });
 
         const bookedRoomIds=overlappingBookings.flatMap(

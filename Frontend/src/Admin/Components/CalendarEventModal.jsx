@@ -50,6 +50,11 @@ const CalendarEventModal = ({event,onClose}) => {
     status,
   } = event.extendedProps;
 
+  const normalizedRooms = Array.isArray(roomNumbers)
+  ? roomNumbers
+  : roomNumbers
+    ? [roomNumbers]
+    : [];
   return (
     <div className='fixed inset-0 bg-black/50 flex items-center justify-center z-50'>
         <div className='bg-white rounded-xl w-full max-w-md p-6 shadow-lg'>
@@ -57,7 +62,7 @@ const CalendarEventModal = ({event,onClose}) => {
 
             <div className='space-y-2 text-sm'>
                 <p><b>Applicant:{" "}</b>{applicantName}</p>
-                <p><b>Room:{" "}</b>{roomNumbers.join(", ")}</p>
+                <p><b>{normalizedRooms.join(", ")}</b></p>
                 <p><b>Status:{" "}</b>{status}</p>
                 <p><b>Check-in:{" "}</b>{new Date(event.start).toLocaleString()}</p>
                 <p><b>Check-out:{" "}</b>{new Date(event.end).toLocaleString()}</p>
