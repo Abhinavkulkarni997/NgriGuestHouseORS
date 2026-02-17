@@ -146,7 +146,7 @@ const Hero = () => {
             CSIR-NGRI Guest House <br/>Online Reservation System</h1>
         <p className=' text-white text-base mt-4 sm:text-lg md:text-xl'>CSIR-NATIONAL GEOPHYSICAL RESEARCH INSTITUTE</p>
         <p className='text-white mt-1 text-sm sm:text-base'>Telangana,Hyderabad-500007</p>
-        <p className=' text-white mt-1 text-sm sm:text-base '>guesthouse@ngri.res.in</p>
+        <p className=' text-white mt-1 text-sm sm:text-base '>guesthouse.ngri@csir.res.in</p>
           <Link to="/onlinebooking">
           <button className='mt-6 px-6 py-3 text-white bg-cyan-400/80 border hover:bg-cyan-400/60  rounded-lg font-semibold shadow-lg transition'>Book Online</button></Link>
        </div>

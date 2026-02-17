@@ -2,7 +2,7 @@ import React from 'react'
 import { FaCheckCircle } from "react-icons/fa";
 const Guidelines = () => {
     const guideLines=[
-        'Requests for booking accommodation at CSIR-NGRI Guest House should be invariably submitted through email : guesthouse@ngri.res.in, well in advance with complete details.',
+        'Requests for booking accommodation at CSIR-NGRI Guest House should be invariably submitted through email : guesthouse.ngri@csir.res.in, well in advance with complete details.',
 'The accommodation can be requested/booked for a maximum period of 7 days, subject to availability. Beyond 7 days the rates will be doubled for that category in which the guest belongs and billed accordingly.',
 'The applicant is responsible for the correctness/genuineness of each of the guest’s details.',
 'The management may at its discretion, cancel a booking, offer a shared accommodation or offer an alternate accommodation as per availability, without citing any reason.',

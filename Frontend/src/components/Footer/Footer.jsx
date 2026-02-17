@@ -15,7 +15,7 @@ const Footer = () => {
 },{
     id:3,
     title:'Email',
-    info:'guesthouse@ngri.res.in'
+    info:'guesthouse.ngri@csir.res.in'
 }]
 
 const socialIcons=[{

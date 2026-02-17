@@ -28,7 +28,7 @@
 const mongoose=require("mongoose");
 const RoomSchema=new mongoose.Schema({
     roomNumber:{
-        type: String,
+        type: Number,
         required:true,
         unique:true
     },

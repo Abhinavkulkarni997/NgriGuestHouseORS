@@ -6,7 +6,7 @@ const Contact = () => {
     const contactItems=[{
         id:1,
         name:'Email',
-        info:'guesthouse@ngri.res.in',
+        info:'guesthouse.ngri@csir.res.in',
         icon:<IoIosMail size={26} className='text-primary'/>
     },{
         id:2,

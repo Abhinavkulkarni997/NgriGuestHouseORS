@@ -54,7 +54,7 @@ module.exports = {
         rate: 200
     },
 
-    OFFICIAL_EXPERT: {
+    NON_OFFICIAL_EXPERT: {
         label: "Non official/expert members invited for CSIR work",
         rate: 200
     },

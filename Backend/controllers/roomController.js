@@ -111,8 +111,7 @@ const getRoomHistory = async (req, res) => {
 const getRoomCalendar=async(req,res)=>{
     const {start,end}=req.query;
     try{
-        const rooms=await Room.find({isActive:true})
-        .sort({roomNumber:1})
+        const rooms=await Room.find({isActive:true}).sort({ roomNumber: 1 })
         .lean();
         const bookings=await Booking.find({
             status:{$in:["ALLOCATED","VACATED"]},

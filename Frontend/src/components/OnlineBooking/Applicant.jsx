@@ -153,7 +153,12 @@ const Applicant = () => {
     },{
         id:44,
         name:'AcSIR'
-    }]
+    }
+    // ,{
+    //     id:45,
+    //     name:'Other Org'
+    // }
+]
      const payments=[
     //     {
     //     id:0,
