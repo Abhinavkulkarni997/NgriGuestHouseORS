@@ -120,4 +120,47 @@ const { sendAcknowledgementEmail,sendAdminAlertEmail } = require("../services/ma
     
 }
 
-module.exports = {createBooking};
+
+const getBookingStatus=async (req,res)=>{
+  try{
+    const {email,mobile}=req.query;
+
+    if(!email || !mobile){
+      return res.status(400).json({
+        success:false,
+        message:"Email and Mobile number are required"
+      });
+    }
+
+
+    const filterEmail=email.trim().toLowerCase();
+    const filterMobile=mobile.trim();
+
+    const bookings=await Booking.find({officialEmail:filterEmail,
+      mobileNumber:filterMobile,
+    }).sort({createdAt:-1})
+    .populate("allocatedRooms","roomNumber");
+
+    if(!bookings){
+      return res.status(400).json({
+        success:false,
+        message:"No booking found with provided details"
+      });
+    }
+
+    return res.status(200).json({
+      success:true,
+      data:bookings,
+    });
+
+  }catch(error){
+    console.error("Status API Error:",error);
+    return res.status(500).json({
+      success:false,
+      message:"Server Error"
+    })
+  }
+
+}
+
+module.exports = {createBooking,getBookingStatus};

@@ -50,24 +50,28 @@
 // code developed on 17-02-2026
 import React, { useState } from 'react';
 import api from '../../api/bookingapi';
+import { useNavigate } from 'react-router-dom';
 
 
 const BookingStatus = () => {
   const [email, setEmail] = useState('');
   const [mobile, setMobile] = useState('');
-  const [statusData, setStatusData] = useState(null);
+  // const [statusData, setStatusData] = useState(null);
   const [error, setError] = useState('');
+  const navigate=useNavigate();
 
   const handleGetStatus = async () => {
     try {
       setError('');
-      setStatusData(null);
+    
 
       const response = await api.get('/booking/status', {
         params: { email, mobile }
       });
 
-      setStatusData(response.data);
+      navigate('/booking-status-result', {
+      state: { bookings: response.data.data }
+    });
     } catch (err) {
       setError(err.response?.data?.message || "Something went wrong");
     }
@@ -117,14 +121,20 @@ const BookingStatus = () => {
         </div>
 
         {/* Result Section */}
-        {statusData && (
-          <div className='mb-6 p-4 bg-green-100 rounded-lg text-center'>
-            <p><strong>Status:</strong> {statusData.status}</p>
-            <p><strong>Booking ID:</strong> {statusData.bookingId}</p>
-            <p><strong>Check In:</strong> {statusData.checkIn}</p>
-            <p><strong>Check Out:</strong> {statusData.checkOut}</p>
-          </div>
-        )}
+        {/* {statusData && statusData.length > 0 && (
+  <div className='mb-6 p-4 bg-green-100 rounded-lg text-center'>
+    {statusData.map((booking) => (
+      <div key={booking._id} className="mb-4 border-b pb-2">
+        <p><strong>Booking ID:</strong> {booking.bookingId}</p>
+        <p><strong>Applicant Name:</strong> {booking.applicantName}</p>
+        <p><strong>Status:</strong> {booking.status}</p>
+        <p><strong>Arrival Date:</strong> {new Date(booking.arrivalDateTime).toLocaleString()}</p>
+        <p><strong>Departure Date:</strong> {new Date(booking.departureDateTime).toLocaleString()}</p>
+      </div>
+    ))}
+  </div>
+)} */}
+
 
         {error && (
           <div className='mb-6 p-4 bg-red-100 text-red-700 rounded-lg'>

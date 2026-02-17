@@ -10,6 +10,7 @@ import OnlineBooking from './components/OnlineBooking/OnlineBooking';
 import MultiStepForm from './components/OnlineBooking/MultiStepForm';
 import Success from './components/Success/Success';
 import BookingStatus from './components/BookingStatus/BookingStatus';
+import BookingStatusResult from './components/BookingStatus/BookingStatusResult';
 import AdminLayout from './Admin/AdminLayout';
 import AdminDashboard from './Admin/AdminDashBoard';
 import Bookings from './Admin/Pages/Bookings';
@@ -23,6 +24,7 @@ import RoomDirectory from './Admin/Pages/RoomDirectory';
 import RoomHistory from './Admin/Pages/RoomHistory';
 import InvoiceList from './Admin/Invoices/InvoiceList';
 import InvoiceView from './Admin/Invoices/InvoiceView';
+
 function App() {
 
   return (
@@ -37,6 +39,7 @@ function App() {
     <Route path="/onlinebooking" element={<Layout><MultiStepForm/></Layout>}/>
     <Route path="/success" element={<Layout><Success/></Layout>}/>
     <Route path="/bookingstatus" element={<Layout><BookingStatus/></Layout>} />
+    <Route path="/booking-status-result" element={<Layout><BookingStatusResult /></Layout>} />
     
 
     {/* Admin Login */}

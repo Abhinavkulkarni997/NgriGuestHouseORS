@@ -235,10 +235,19 @@ bookingSchema.pre("save", async function () {
 });
 
 
+// For room allocation we are creating index to check overlap 
 bookingSchema.index({
   allocatedRooms: 1,
   arrivalDateTime: 1,
   departureDateTime: 1
 });
+
+// For booking status we add index to get status quicker
+bookingSchema.index({
+  officialEmail: 1,
+  mobileNumber: 1,
+  createdAt: -1
+});
+
 
 module.exports=mongoose.model("Booking",bookingSchema);
