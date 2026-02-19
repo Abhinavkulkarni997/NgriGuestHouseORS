@@ -64,22 +64,24 @@ import { useParams } from 'react-router-dom';
 import api from '../../api/bookingapi';
 
 const RoomHistory = () => {
-  const { roomNumber } = useParams();
+  const { roomId } = useParams();
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get(`/admin/rooms/${roomNumber}/history`)
+    api.get(`/admin/rooms/${roomId}/history,{
+        state:{roomId:roomNumber}}`
+    )
       .then(res => setHistory(res.data))
       .catch(err => console.error(err))
       .finally(() => setLoading(false));
-  }, [roomNumber]);
+  }, [roomId]);
 
   if (loading) return <p>Loading Room History....</p>;
 
   return (
     <div className='p-4'>
-      <h1 className='text-xl font-semibold mb-4'>Room {roomNumber} History</h1>
+      <h1 className='text-xl font-semibold mb-4'>Room {roomId} History</h1>
 
       {history.length === 0 ? (
         <div className='bg-gray-50 p-6 rounded-lg text-center text-gray-500'>
@@ -90,8 +92,8 @@ const RoomHistory = () => {
           {history.map((b) => {
             // Multiple rooms allocated per booking
             const roomsList = b.allocatedRooms?.length
-  ? b.allocatedRooms.map(r => r.roomNumber).join(", ")
-  : b.room?.roomNumber 
+            ? b.allocatedRooms.map(r => r.roomNumber).join(", ")
+            : b.room?.roomNumber 
             return (
               <div key={b._id} className='bg-white p-4 rounded-lg shadow border'>
                 <div className='flex justify-between'>

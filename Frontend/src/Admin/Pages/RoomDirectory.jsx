@@ -100,7 +100,7 @@ const RoomDirectory = () => {
             <div
               key={room._id}
               className='bg-white rounded-xl shadow p-4 border cursor-pointer hover:shadow-md'
-              onClick={() => navigate(`/admin/rooms/${room.roomNumber}/history`)}
+              onClick={() => navigate(`/admin/rooms/${room._id}/history`)}
             >
               <h2 className="text-lg font-bold">Room {room.roomNumber}</h2>
               <p className='text-sm text-gray-500'>{room.roomType}</p>
