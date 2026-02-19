@@ -24,7 +24,7 @@ const AdminLogin = () => {
     const handleSubmit=async(e)=>{
         console.log("ADMIN LOGIN HIT");
         e.preventDefault();
-        console.log("SUBMIT CLICKED",email,password);
+        // console.log("SUBMIT CLICKED",email,password);
         setLoading(true);
         setError("");
     try{

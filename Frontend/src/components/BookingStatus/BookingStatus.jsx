@@ -49,32 +49,24 @@
 
 // code developed on 17-02-2026
 import React, { useState } from 'react';
-import api from '../../api/bookingapi';
 import { useNavigate } from 'react-router-dom';
 
 
 const BookingStatus = () => {
   const [email, setEmail] = useState('');
   const [mobile, setMobile] = useState('');
-  // const [statusData, setStatusData] = useState(null);
-  const [error, setError] = useState('');
   const navigate=useNavigate();
 
   const handleGetStatus = async () => {
-    try {
-      setError('');
+      if(!email || !mobile) {
+        alert("Please enter Email and Mobile Number");
+        return;
+      }
     
-
-      const response = await api.get('/booking/status', {
-        params: { email, mobile }
-      });
-
-      navigate('/booking-status-result', {
-      state: { bookings: response.data.data }
-    });
-    } catch (err) {
-      setError(err.response?.data?.message || "Something went wrong");
-    }
+       navigate(
+      `/booking-status-result?email=${encodeURIComponent(email)}&mobile=${encodeURIComponent(mobile)}`
+    );
+    
   };
 
   return (
@@ -136,11 +128,7 @@ const BookingStatus = () => {
 )} */}
 
 
-        {error && (
-          <div className='mb-6 p-4 bg-red-100 text-red-700 rounded-lg'>
-            {error}
-          </div>
-        )}
+        
 
       </div>
     </div>

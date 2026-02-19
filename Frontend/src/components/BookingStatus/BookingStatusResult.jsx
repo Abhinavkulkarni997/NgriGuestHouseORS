@@ -1,7 +1,12 @@
+// code created on 17-02-2026 
 import React from "react";
+import { useSearchParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 const BookingStatusResult = () => {
+    const [searchParams]=useSearchParams();
+    const email=searchParams.get("email");
+    const mobile=searchParams.get("mobile");
   const location = useLocation();
   const bookings = location.state?.bookings;
 
