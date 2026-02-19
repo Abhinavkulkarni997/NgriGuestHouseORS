@@ -95,10 +95,11 @@ const getRoomHistory = async (req, res) => {
         const { roomId } = req.params;
 
         const history = await Booking.find({
-            allocatedRooms: roomId
+            allocatedRooms: {$in:[roomId]}
         })
-        .sort({ allocatedAt: -1 })
-        .select("bookingId applicantName arrivalDateTime departureDateTime status");
+        .populate("allocatedRooms","roomNumber")
+        .sort({ createdAt: -1 })
+        .select("bookingId applicantName arrivalDateTime departureDateTime status allocatedRooms");
 
         res.json(history);
 

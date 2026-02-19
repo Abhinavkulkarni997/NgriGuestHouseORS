@@ -55,7 +55,7 @@
 // code developed on 17-02-2026 as per the new GH Rules 
 import React, { useState, useEffect } from 'react';
 import api from '../../api/bookingapi';
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 const RoomDirectory = () => {
   const [rooms, setRooms] = useState([]);
@@ -100,10 +100,10 @@ const RoomDirectory = () => {
             <div
               key={room._id}
               className='bg-white rounded-xl shadow p-4 border cursor-pointer hover:shadow-md'
-              onClick={() => navigate(`/admin/rooms/${room._id}/history`)}
+              onClick={() => navigate(`/admin/rooms/${room._id}/history`,{ state: { roomNumber: room.roomNumber } })}
             >
               <h2 className="text-lg font-bold">Room {room.roomNumber}</h2>
-              <p className='text-sm text-gray-500'>{room.roomType}</p>
+              {/* <p className='text-sm text-gray-500'>{room.roomType}</p> */}
 
               <div className='mt-3'>
                 <span

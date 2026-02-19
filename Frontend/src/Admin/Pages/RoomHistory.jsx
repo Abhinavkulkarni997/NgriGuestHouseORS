@@ -60,17 +60,21 @@
 
 // code developed on 17-02-2026 
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,useLocation } from 'react-router-dom';
 import api from '../../api/bookingapi';
+
 
 const RoomHistory = () => {
   const { roomId } = useParams();
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
+  const location=useLocation();
+
+   const roomNumber=location?.state?.roomNumber;
 
   useEffect(() => {
-    api.get(`/admin/rooms/${roomId}/history,{
-        state:{roomId:roomNumber}}`
+   
+    api.get(`/admin/rooms/${roomId}/history`
     )
       .then(res => setHistory(res.data))
       .catch(err => console.error(err))
@@ -81,7 +85,7 @@ const RoomHistory = () => {
 
   return (
     <div className='p-4'>
-      <h1 className='text-xl font-semibold mb-4'>Room {roomId} History</h1>
+      <h1 className='text-xl font-semibold mb-4'>Room {roomNumber || "Unkown"} History</h1>
 
       {history.length === 0 ? (
         <div className='bg-gray-50 p-6 rounded-lg text-center text-gray-500'>
