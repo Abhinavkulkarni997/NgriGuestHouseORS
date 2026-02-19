@@ -141,7 +141,7 @@ const getBookingStatus=async (req,res)=>{
     }).sort({createdAt:-1})
     .populate("allocatedRooms","roomNumber");
 
-    if(!bookings){
+    if(bookings.length===0){
       return res.status(400).json({
         success:false,
         message:"No booking found with provided details"
