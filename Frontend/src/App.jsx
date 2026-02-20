@@ -57,7 +57,7 @@ function App() {
       <Route path='calendar' element={<BookingsCalendar/>}/>
       <Route path='active-stays' element={<Rooms/>}/>
       <Route path='rooms' element={<RoomDirectory/>}/>
-      <Route path='rooms/:roomNumber/history' element={<RoomHistory/>}/>
+      <Route path='rooms/:roomId/history' element={<RoomHistory/>}/>
       <Route path='rooms-calendar' element={<RoomsCalendar/>}/>
     <Route path="invoices" element={<InvoiceList/>}/>
     <Route path="invoices/:invoiceId" element={<InvoiceView/>}/>

@@ -94,19 +94,31 @@ const getRoomHistory = async (req, res) => {
     try {
         const { roomId } = req.params;
 
+        
+
+        const objectRoomId = new mongoose.Types.ObjectId(roomId);
+            console.log("RoomId from params:", roomId);
+            console.log("Converted:", objectRoomId);
+
+            if(!roomId || !objectRoomId) {
+                res.status(400).json("Invalid Room ID");
+            }
+
         const history = await Booking.find({
-            allocatedRooms: {$in:[roomId]}
+            allocatedRooms: objectRoomId
         })
-        .populate("allocatedRooms","roomNumber")
+        .populate("allocatedRooms", "roomNumber")
         .sort({ createdAt: -1 })
         .select("bookingId applicantName arrivalDateTime departureDateTime status allocatedRooms");
 
         res.json(history);
 
     } catch (error) {
+        console.error(error);
         res.status(500).json("Failed to load Room History");
     }
 };
+
 
 
 const getRoomCalendar=async(req,res)=>{
