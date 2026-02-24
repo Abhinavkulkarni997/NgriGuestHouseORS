@@ -156,27 +156,66 @@ const RoomsCalendar = () => {
 
   /* ================= OCCUPANCY CHECK ================= */
 
-  const isOccupied = (roomId, day) => {
-    return bookings.find((b) => {
-      const roomMatch = b.allocatedRooms?.some(
-        (r) => r._id.toString() === roomId.toString()
-      );
-      return (
-        roomMatch &&
-        new Date(b.arrivalDateTime) <= day &&
-        new Date(b.departureDateTime) >= day
-      );
-    });
-  };
+  // the below logic is working but it in this logic arrival date is not blocking the date and departure date is getting so in some cases 
+  // const isOccupied = (roomId, day) => {
+  //   return bookings.find((b) => {
+  //     const roomMatch = b.allocatedRooms?.some(
+  //       (r) => r._id.toString() === roomId.toString()
+  //     );
+      
+  //     return (
+  //       roomMatch &&
+  //       new Date(b.arrivalDateTime) <= day &&
+  //       new Date(b.departureDateTime) >= day
+  //     );
+  //   });
+  // };
 
-  const isOccupiedMonth = (roomId, monthDate) => {
-    return bookings.some((b) =>
-      b.allocatedRooms?.some(r => r._id.toString() === roomId.toString()) &&
-      new Date(b.arrivalDateTime).getMonth() <= monthDate.getMonth() &&
-      new Date(b.departureDateTime).getMonth() >= monthDate.getMonth()
+  // const isOccupiedMonth = (roomId, monthDate) => {
+  //   return bookings.some((b) =>
+  //     b.allocatedRooms?.some(r => r._id.toString() === roomId.toString()) &&
+  //     new Date(b.arrivalDateTime).getMonth() <= monthDate.getMonth() &&
+  //     new Date(b.departureDateTime).getMonth() >= monthDate.getMonth()
+  //   );
+  // };
+
+  // below logic also works  here the departure date is not considered because user may leave on that day and it can be blocked as it can be allocated to  other people or user
+  const isOccupied=(roomId,day)=>{
+    return bookings.find((b)=>{
+      const roomMatch=b.allocatedRooms?.some(
+        (r)=>r._id.toString() === roomId.toString()
+      );
+      if(!roomMatch) return false;
+
+      const arrival=new Date(b.arrivalDateTime);
+      const departure=new Date(b.departureDateTime);
+
+      // by setting setHours we are normalizing all the date times to zero
+      arrival.setHours(0,0,0,0);
+      departure.setHours(0,0,0,0);
+      const currentDay = new Date(day);
+    currentDay.setHours(0, 0, 0, 0);
+    return currentDay >= arrival && currentDay < departure;
+    })
+  }
+
+const isOccupiedMonth = (roomId, monthDate) => {
+  return bookings.some((b) => {
+    const roomMatch = b.allocatedRooms?.some(
+      (r) => r._id.toString() === roomId.toString()
     );
-  };
 
+    if (!roomMatch) return false;
+
+    const arrival = new Date(b.arrivalDateTime);
+    const departure = new Date(b.departureDateTime);
+
+    return (
+      monthDate >= new Date(arrival.getFullYear(), arrival.getMonth(), 1) &&
+      monthDate < new Date(departure.getFullYear(), departure.getMonth(), 1)
+    );
+  });
+};
   /* ================= NAVIGATION ================= */
 
   const handlePrev = () => {

@@ -22,18 +22,18 @@ const AdminLogin = () => {
     }
 
     const handleSubmit=async(e)=>{
-        console.log("ADMIN LOGIN HIT");
+        // console.log("ADMIN LOGIN HIT");
         e.preventDefault();
         // console.log("SUBMIT CLICKED",email,password);
         setLoading(true);
         setError("");
     try{
-        console.log("SENDING REQUEST...");
+        // console.log("SENDING REQUEST...");
         const res=await api.post("/admin/auth/login",{
             email,
             password,
         });
-        console.log("LOGIN RESPONSE:",res.data);
+        // console.log("LOGIN RESPONSE:",res.data);
         
         login(res.data.token,res.data.admin);
         navigate("/admin");

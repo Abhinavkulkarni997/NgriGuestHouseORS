@@ -26,7 +26,7 @@ const AdminDashBoard = () => {
   useEffect(()=>{
     api.get('/admin/dashboard/overview')
     .then(res=>{
-      console.log("API RESPONSE DATA:",res.data),
+      // console.log("API RESPONSE DATA:",res.data),
       setStats(res.data)})
     .catch(err=>console.error(err))
     .finally(()=>setLoading(false));
@@ -36,7 +36,7 @@ const AdminDashBoard = () => {
   useEffect(()=>{
     api.get('/admin/dashboard/today')
     .then(res=>{
-      console.log("TODAY API RESPONSE DATA:",res.data),
+      // console.log("TODAY API RESPONSE DATA:",res.data),
       setToday({checkIns:res.data.todaysCheckIns,
         checkOuts:res.data.todaysCheckOuts,
       })
