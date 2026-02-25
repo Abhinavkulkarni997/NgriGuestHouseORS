@@ -92,7 +92,7 @@ import api from "../../api/bookingapi";
 const RoomsCalendar = () => {
   const today = new Date();
 
-  const [viewMode, setViewMode] = useState("month"); // week | month | year
+  const [viewMode, setViewMode] = useState("month"); // week | month | year as of now default is month 
   const [currentDate, setCurrentDate] = useState(today);
   const [rooms, setRooms] = useState([]);
   const [bookings, setBookings] = useState([]);
@@ -210,9 +210,26 @@ const isOccupiedMonth = (roomId, monthDate) => {
     const arrival = new Date(b.arrivalDateTime);
     const departure = new Date(b.departureDateTime);
 
+     // by setting setHours we are normalizing all the date times to zero
+      arrival.setHours(0,0,0,0);
+      departure.setHours(0,0,0,0);
+
+         // to check First day of this month
+    const monthStart = new Date(
+      monthDate.getFullYear(),
+      monthDate.getMonth(),
+      1
+    );
+
+    // to check First day of next month
+    const monthEnd = new Date(
+      monthDate.getFullYear(),
+      monthDate.getMonth() + 1,
+      1
+    );
     return (
-      monthDate >= new Date(arrival.getFullYear(), arrival.getMonth(), 1) &&
-      monthDate < new Date(departure.getFullYear(), departure.getMonth(), 1)
+      // to check overlap
+      arrival <monthEnd && departure>monthStart
     );
   });
 };
