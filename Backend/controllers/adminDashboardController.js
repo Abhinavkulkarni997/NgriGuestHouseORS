@@ -74,7 +74,7 @@ const getTodayActivities=async(req,res)=>{
     }).select("bookingId applicantName arrivalDateTime status")
 
     const todaysCheckOuts=await Booking.find({
-        departureDateTime:{$gte:start,$lte:end},
+        departureDateTime:{$gte:todaysStart,$lte:todaysEnd},
         status:"ALLOCATED",
     }).select("bookingId applicantName roomNumber departureDateTime")
 

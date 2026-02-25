@@ -4,5 +4,5 @@ const adminAuth=require('../middleware/adminAuth');
 const {getDashboardOverview,getTodayActivities}=require("../controllers/adminDashboardController");
 
 router.get("/overview",adminAuth,getDashboardOverview);
-router.get("/dashboard/today",adminAuth,getTodayActivities);
+router.get("/today",adminAuth,getTodayActivities);
 module.exports=router;
