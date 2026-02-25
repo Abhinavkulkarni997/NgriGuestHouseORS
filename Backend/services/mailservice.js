@@ -53,7 +53,8 @@ const sendAcknowledgementEmail=async({toEmail,name,bookingId,bookingDate})=>{
 
     This is not a booking confirmation.
     Your booking status will be updated and 
-    intimated 7-15 days before the arrival date based on room availability.
+    intimated 7-15 days before the arrival date 
+    based on room availability.
 
     Please note:
     This is an auto-generated email. Do not reply.
