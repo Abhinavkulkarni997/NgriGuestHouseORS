@@ -148,6 +148,7 @@ const RoomsCalendar = () => {
         },
       })
       .then((res) => {
+        console.log(" calendar API Response", res.data);
         setRooms(res.data.rooms);
         setBookings(res.data.bookings);
       })
