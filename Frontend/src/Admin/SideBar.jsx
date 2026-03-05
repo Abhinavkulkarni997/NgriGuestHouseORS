@@ -6,14 +6,22 @@ import room from '../assets/AdminDashboard/Home/rooms.svg'
 import roomCalendar from '../assets/AdminDashboard/Home/room.svg';
 import invoices from '../assets/AdminDashboard/Home/invoices.svg';
 import profile from '../assets/AdminDashboard/Home/profile.svg';
-import settings from '../assets/AdminDashboard/Home/settings.svg'
+import settings from '../assets/AdminDashboard/Home/settings.svg';
+import Logout from '../assets/AdminDashboard/Home/logout.svg';
 // import sidemenu from '../assets/AdminDashboard/Home/menu.svg';
 // import close from '../assets/AdminDashboard/Home/close';
 import Nlogo from '../assets/AdminDashboard/Home/ngri-logo.png';
+import { useNavigate } from "react-router-dom";
+import { useAdminAuth } from './Context/AdminAuthContext';
+
 
 import { Link } from "react-router-dom";
 const SideBar=({collapsed,mobileOpen,onCloseMobile})=>{
     // const [menuOpen,setMenuOpen]=useState(false);
+    const {admin,logout}=useAdminAuth();
+    const navigate=useNavigate();
+
+    
     const menu=[
         {
             id:0,name:'Home',url:'/',icon:<img src={home} alt="home" className="w-6 h-6"/>,title:"Home",
@@ -40,7 +48,16 @@ const SideBar=({collapsed,mobileOpen,onCloseMobile})=>{
         },{
             id:7,name:'Settings', url:'/#settings',icon:<img src={settings} alt="settings" className="w-6 h-6" />,title:'Settings'
         }
+        // ,{
+        //     id:8,name:'Logout' ,title:'logout'
+        // }
     ]
+
+    const handleLogout=()=>{
+    
+        logout();
+       navigate('admin/login')
+    }
     return(
         // <div className="min-h-screen  mx-auto ">
         //     <div className="max-w-7xl mx-auto bg-gradient-to-r from-[#faf7e5]  via-slate-100 backdrop-blur-md bg-opacity-60 transition-all border h-full ">
@@ -101,15 +118,30 @@ const SideBar=({collapsed,mobileOpen,onCloseMobile})=>{
                     //   <li key={index} className="flex items-center gap-3 p-2  mt-4 hover:bg-gray-200 rounded-md" onClose={onCloseMobile}>
                     <li key={index}
                      className="mt-4 hover:bg-gray-200 rounded-md" 
-                     onClose={onCloseMobile}>
+                    >
                     <Link to={`/admin${item.url}`} 
+                     onClose={onCloseMobile}
                     className="flex items-center gap-3 p-2">
                     {item.icon}
                     {!collapsed &&(<span>{item.title}</span>)}
                     </Link>   
                     </li>
+                 
                 ))}
+                
+                <div className="cursor-pointer hover:bg-gray-200 flex items-center  gap-3 p-2 rounded-md  ">
+                <img src={Logout} alt="logout"  className="ml-1  h-6 w-6 " />
+                {!collapsed &&(
+                     <button onClick={handleLogout} className=" bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
+                        Logout
+                    </button>
+                )}
+                  
+                </div>
+              
                 </ul>
+               
+
         </aside>
     )
 }

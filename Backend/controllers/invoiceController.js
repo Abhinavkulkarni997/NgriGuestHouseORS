@@ -1,14 +1,31 @@
 const Invoice=require('../models/Invoice');
 const Booking=require('../models/Booking');
 const {createOrUpdateInvoice}=require('../services/InvoiceService');
+const paginate=require('../utils/paginate');
 
 
+
+// const getAllInvoices=async(req,res)=>{
+//     const invoices=await Invoice.find()
+//     .populate("booking")
+//     .sort({createdAt:-1});
+//     res.json(invoices);
+// };
+
+// the above getAllInvoices is modifed and added pagination to the below one both are working and above can be used wihout pagination
 
 const getAllInvoices=async(req,res)=>{
-    const invoices=await Invoice.find()
-    .populate("booking")
-    .sort({createdAt:-1});
-    res.json(invoices);
+
+    try{
+        const {page,limit}=req.query;
+        const result =await paginate(Invoice,{},{page,limit,sort:{createdAt:-1},populate:"booking"});
+        res.status(200).json(result);
+    }
+    catch(error){
+        console.error("Error in fetching invoice",error);
+        res.status(500).json({success:false,message:"Server Error in fetching data"});
+    }
+  
 };
 
 const getInvoiceById=async(req,res)=>{

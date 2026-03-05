@@ -5,7 +5,7 @@ const {sendRoomAllocationEmail,sendApprovedEmail,sendRejectedEmail}=require('../
 const { rmSync } = require('fs');
 const {createOrUpdateInvoice}=require('../services/InvoiceService');
 const Invoice=require('../models/Invoice');
-
+const paginate=require('../utils/paginate');
 
 // logic to fetch bookings
 const getAllBookings=async(req,res)=>{
@@ -114,9 +114,6 @@ const finalizeBooking=async(req,res)=>{
         if(!booking){
             return res.status(404).json({success:false,message:"Booking not found"});
         }
-
-        
-
         if (booking.status === "FINALIZED") {
            
             return res.status(400).json({
@@ -242,6 +239,32 @@ const finalizeBooking=async(req,res)=>{
         res.status(500).json({
             success:false,
             message:"Server Error failed to finalize booking"})
+    }
+}
+
+// below is the logic for pagination for finalized booking as the application grows there will be need for pagination and we will get total finalized bookings 
+
+const getFinalizedBookings=async(req,res)=>{
+
+
+    try{
+        const {page,limit}=req.query;
+
+        const result=await paginate(
+            Bookings,
+            {status:"FINALIZED"},
+            {page,limit,sort:{finalizedAt:-1}}
+            
+        );
+
+        res.status(200).json(result);
+
+    }catch(error){
+        console.error("Error in fetching Finalized bookings:",error)
+        res.status(500).json({
+            success:false,
+            message:"Server Error while fetching finalize bookings"
+        });
     }
 }
 
@@ -680,5 +703,5 @@ const updateBookingDetails=async(req,res)=>{
     }
 }
 
-module.exports={getAllBookings,approveBooking,rejectBooking,idCardView,allocateRoom,getAvailableRooms,vacateRoom,getCalendarBookings,finalizeBooking,updateBookingDetails};
+module.exports={getAllBookings,approveBooking,rejectBooking,idCardView,allocateRoom,getAvailableRooms,vacateRoom,getCalendarBookings,finalizeBooking,getFinalizedBookings,updateBookingDetails};
 

@@ -1,6 +1,6 @@
 const express=require('express');
 const router=express.Router();
-const {getAllBookings,approveBooking,rejectBooking, idCardView,allocateRoom,getAvailableRooms,vacateRoom, getCalendarBookings,finalizeBooking, updateBookingDetails}=require('../controllers/adminBookingcontroller');
+const {getAllBookings,approveBooking,rejectBooking, idCardView,allocateRoom,getAvailableRooms,vacateRoom, getCalendarBookings,finalizeBooking, getFinalizedBookings,updateBookingDetails}=require('../controllers/adminBookingcontroller');
 const adminAuth=require('../middleware/adminAuth');
 router.get('/bookings',adminAuth,getAllBookings);
 // router.patch("/bookings/:id/status",updateBookingStatus);
@@ -8,6 +8,7 @@ router.get('/bookings',adminAuth,getAllBookings);
 router.patch('/bookings/:id/approve',adminAuth,approveBooking);
 router.patch('/bookings/:id/reject',adminAuth,rejectBooking);
 router.patch('/bookings/:id/finalize', adminAuth,finalizeBooking); 
+router.get('/bookings/finalized',adminAuth,getFinalizedBookings);
 // router.patch("/bookings/:id/extend-invoice",adminAuth,extendStayInvoice);
 router.patch("/bookings/:id/update",adminAuth,updateBookingDetails);
 router.patch("/bookings/:id/allocate-room",adminAuth,allocateRoom);
