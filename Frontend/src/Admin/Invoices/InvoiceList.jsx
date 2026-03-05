@@ -1,19 +1,37 @@
 import {useState,useEffect} from "react";
 import api from "../../api/bookingapi";
 import InvoiceCard from "./InvoiceCard";
+import Pagination from "../Components/Pagination/Pagination";
 const InvoiceList=()=>{
     const [invoices,setInvoices]=useState([]);
     const [loading,setLoading]=useState(true);
+    const [currentPage,setCurrentPage]=useState(1);
+    const [totalPages,setTotalPages]=useState(1);
 
+
+
+
+    // useEffect(()=>{
+    //     api.get('/admin/invoices')
+    //     .then(response=>{
+    //         console.log("invoiceList response data",response.data);
+    //         setInvoices(Array.isArray(response.data)? response.data:response.data.data||[]);
+    //     })
+    //     .catch(err=>console.error(err))
+    //     .finally(()=>setLoading(false));
+    // },[]);
+
+    // new invoices useEffect with pagination is added and old one is commented out above
     useEffect(()=>{
-        api.get('/admin/invoices')
+        api.get(`/admin/invoices?page=${currentPage}`)
         .then(response=>{
             console.log("invoiceList response data",response.data);
             setInvoices(Array.isArray(response.data)? response.data:response.data.data||[]);
+            setTotalPages(response.data.totalPages ||1);
         })
         .catch(err=>console.error(err))
         .finally(()=>setLoading(false));
-    },[]);
+    },[currentPage]);
 
     if(loading){return <p className="p-4">Loading invoices....</p>};
 
@@ -32,6 +50,14 @@ const InvoiceList=()=>{
                     <InvoiceCard key={inv._id} invoice={inv}/>
                 ))}
             </div>
+            <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={(page)=>setCurrentPage(page)}
+            
+            
+            />
+
         </div>
 
     )
