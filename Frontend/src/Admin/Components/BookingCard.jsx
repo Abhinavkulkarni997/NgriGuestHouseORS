@@ -340,6 +340,7 @@ import AllocateRoomModal from './AllocateRoomModal';
 import VacateRoomModal from './VacateRoomModal';
 import FinalizeBookingModal from './FinalizeBookingModal';
 import Pagination from './Pagination/Pagination';
+import usePagination from '../../hooks/usePagination';
 
 
 const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
@@ -355,9 +356,16 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
     // const [acType,setAcType]=useState(booking.acType);
     // const [guestCategory,setGuestCategory]=useState(booking.guests?.[0]?.category || "");
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages,setTotalPages]=useState(1);
- 
+
+
+    // the below two currentPage and totalPages state are moved to usePagination hook and the updatePagination function is used to update the totalPages state when the data is fetched from the API.
+    // usePagination hook is used to manage the pagination state and logic, which includes the current page, total pages, total records, and a function to update the pagination state when new data is fetched from the API.
+    // usePagination hook is created on 07-03-2026
+
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const [totalPages,setTotalPages]=useState(1);
+
+    const {page,setPage,limit,totalPages,totalRecords,updatePagination}=usePagination();
     const handleUpdate=async()=>{
         try{
             const res=await fetch(`/api/admin/bookings/${booking._id}/update`,{
