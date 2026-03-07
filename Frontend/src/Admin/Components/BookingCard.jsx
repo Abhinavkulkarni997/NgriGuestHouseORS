@@ -335,10 +335,11 @@
 
 // code developed on 16-02-2026 and changes are done as per new GH rules some fields are modified and removed 
 
-import React,{useState} from 'react'
+import {useState} from 'react'
 import AllocateRoomModal from './AllocateRoomModal';
 import VacateRoomModal from './VacateRoomModal';
 import FinalizeBookingModal from './FinalizeBookingModal';
+import Pagination from './Pagination/Pagination';
 
 
 const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
@@ -353,6 +354,9 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
     const [departureDateTime,setDepartureDateTime]=useState(booking.departureDateTime);
     // const [acType,setAcType]=useState(booking.acType);
     // const [guestCategory,setGuestCategory]=useState(booking.guests?.[0]?.category || "");
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages,setTotalPages]=useState(1);
  
     const handleUpdate=async()=>{
         try{
@@ -665,7 +669,16 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
             
             </div>
             )}
+            
+        <Pagination
+
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onPageChange={(page)=>setCurrentPage(page)}
+       
+        />
         </div>
+
         
     
   )

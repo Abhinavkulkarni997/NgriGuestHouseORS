@@ -23,7 +23,7 @@ const InvoiceList=()=>{
 
     // new invoices useEffect with pagination is added and old one is commented out above
     useEffect(()=>{
-        api.get(`/admin/invoices?page=${currentPage}`)
+        api.get(`/admin/invoices?page=${currentPage}&limit=6`)
         .then(response=>{
             console.log("invoiceList response data",response.data);
             setInvoices(Array.isArray(response.data)? response.data:response.data.data||[]);

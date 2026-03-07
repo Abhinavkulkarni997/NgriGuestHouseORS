@@ -28,7 +28,7 @@ const Pagination = ({currentPage,totalPages,onPageChange }) => {
 
 
   return (
-    <div className="flex items-center justify-center gap-2 mt-6  bottom-0 inset-0 absolute ">
+    <div className="flex items-center justify-center gap-2 mt-6  bottom-8 inset-x-0  absolute ">
 
         <button
         onClick={()=>onPageChange(currentPage-1)}
