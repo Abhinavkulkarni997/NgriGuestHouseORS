@@ -64,7 +64,7 @@ const InvoiceList=()=>{
                 ))}
             </div>
 
-            {/* record info */}
+            {/* invoices list record information */}
           <div className="flex justify-between items-center mt-6 text-sm text-gray-600  ">
         <p>
           Showing {startRecord} – {endRecord} of {totalRecords} invoices
