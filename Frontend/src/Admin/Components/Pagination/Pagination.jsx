@@ -25,6 +25,7 @@ const Pagination = ({currentPage,totalPages,onPageChange }) => {
         
     }
   const pages=getPages();
+ 
 
 
   return (

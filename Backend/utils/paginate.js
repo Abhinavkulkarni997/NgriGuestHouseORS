@@ -5,10 +5,15 @@ const paginate=async(model,query={},options={})=>{
     const skip=(page-1)*limit;
     const totalRecords=await model.countDocuments(query);
 
-    const data=await model.find(query)
+    let queryBuilder= model.find(query)
     .sort(options.sort || {createdAt:-1})
     .skip(skip)
     .limit(limit);
+
+    if(options.populate){
+        queryBuilder=queryBuilder.populate(options.populate);
+    }
+    const data=await queryBuilder;
 
     return{
         data,

@@ -12,7 +12,7 @@ const paginate=require('../utils/paginate');
 //     res.json(invoices);
 // };
 
-// the above getAllInvoices is modifed and added pagination to the below one both are working and above can be used wihout pagination
+// the above getAllInvoices is modifed and added pagination to the below one both are working and above can be used without pagination
 
 const getAllInvoices=async(req,res)=>{
 
@@ -23,7 +23,7 @@ const getAllInvoices=async(req,res)=>{
     }
     catch(error){
         console.error("Error in fetching invoice",error);
-        res.status(500).json({success:false,message:"Server Error in fetching data"});
+        res.status(500).json({success:false,message:"Server Error in fetching data",error:error.message});
     }
   
 };

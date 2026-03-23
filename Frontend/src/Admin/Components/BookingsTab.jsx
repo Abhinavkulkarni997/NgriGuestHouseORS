@@ -19,6 +19,8 @@ const BookingsTab=({bookings,onApprove,onReject,onAllocate,onVacate})=>{
     const indexOfFirst=indexOfLast-itemsPerPage;
     const currentBookings=filteredBookings.slice(indexOfFirst,indexOfLast);
     const totalPages=Math.ceil(filteredBookings.length/itemsPerPage);
+
+    
     if(currentPage > totalPages && totalPages > 0){
     setCurrentPage(totalPages);
 }
@@ -130,7 +132,7 @@ const getPageNumbers=()=>{
 
             {getPageNumbers().map((page,index)=>
             page==="..."?(
-                <span key={index} className='px-2 text-gray-500'></span>
+                <span key={index} className='px-2 text-gray-500'>...</span>
             ):(
                 <button key={page} 
                 onClick={()=>{setCurrentPage(page); window.scrollTo({top: 0, behavior: 'smooth'});}}  

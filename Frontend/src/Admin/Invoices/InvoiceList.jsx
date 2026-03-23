@@ -32,7 +32,8 @@ const InvoiceList=()=>{
 
     // new invoices useEffect with pagination is added and old one is commented out above
     useEffect(()=>{
-        api.get(`/admin/invoices?page=${page}&limit={limit}`)
+        setLoading(true);
+        api.get(`/admin/invoices?page=${page}&limit=${limit}`)
         .then(response=>{
             console.log("invoiceList response data",response.data);
             setInvoices(Array.isArray(response.data)? response.data:response.data.data||[]);
@@ -40,7 +41,7 @@ const InvoiceList=()=>{
         })
         .catch(err=>console.error(err))
         .finally(()=>setLoading(false));
-    },[page]);
+    },[page,limit]);
 
     const startRecord=(page-1)*limit+1;
     const endRecord=Math.min(page*limit,totalRecords);
