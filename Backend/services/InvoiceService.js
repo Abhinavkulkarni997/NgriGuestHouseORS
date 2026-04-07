@@ -178,7 +178,8 @@
 // code developed on 15-02-2026 as per new requirement changes somefields like roomNumber and roomtype are updated accordingly
 const Invoice=require('../models/Invoice');
 const rateCard=require("../config/rateCard");
-const Counter = require('../models/counter');
+// const Counter = require('../models/counter');
+const Counter = require('../models/Counter'); 
 const {calculateInvoice}=require("../utils/invoiceCalculator");
 
 const createOrUpdateInvoice=async(booking,paymentMode)=>{

@@ -1,6 +1,8 @@
 const Invoice=require("../models/invoiceModel");
 const rateCard=require("../config/rateCard");
-const Counter = require('../models/counter');
+// const Counter = require('../models/counter');
+const Counter = require('../models/Counter'); 
+
 const generateExtensionInvoice=async(booking,lastInvoice,extendTill,remarks="")=>{
     const from =lastInvoice.period.to;
     const to=extendTill;
