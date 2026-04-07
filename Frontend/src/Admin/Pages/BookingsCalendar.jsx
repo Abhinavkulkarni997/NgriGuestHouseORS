@@ -4,7 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import api from '../../api/bookingapi';
-import CalendarEventModal from '../Components/calendarEventModal';
+import CalendarEventModal from '../Components/CalendarEventModal.jsx';
 
 const BookingsCalendar = () => {
     const [events,setEvents]=useState([]);

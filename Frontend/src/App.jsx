@@ -7,7 +7,7 @@ import { Routes,Route } from 'react-router-dom';
 import Layout  from './components/Layout/Layout';
 import Home from './components/Home/Home';
 import OnlineBooking from './components/OnlineBooking/OnlineBooking';
-import MultiStepForm from './components/OnlineBooking/MultiStepForm';
+import MultiStepForm from './components/OnlineBooking/MultiStepForm.jsx';
 import Success from './components/Success/Success';
 import BookingStatus from './components/BookingStatus/BookingStatus';
 import BookingStatusResult from './components/BookingStatus/BookingStatusResult';

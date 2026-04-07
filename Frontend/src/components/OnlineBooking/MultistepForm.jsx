@@ -117,4 +117,4 @@ const MultiStepForm = () => {
   )
 }
 
-export default MultiStepForm
+export default MultiStepForm;

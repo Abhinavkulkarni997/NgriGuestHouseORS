@@ -38,8 +38,6 @@
 // export default CalendarEventModal;
 
 // code developed on 16-02-2026 and changes are done as per new GH rules some fields are modified and removed 
-import React from 'react';
-
 
 const CalendarEventModal = ({event,onClose}) => {
     if(!event || !event.extendedProps) return null;
