@@ -5,6 +5,9 @@ const path=require('path');
 
 console.log("EMAIL_USER =", process.env.EMAIL_USER);
 console.log("EMAIL_PASS length =", process.env.EMAIL_PASS?.length);
+const adminEmails = process.env.EMAIL_ADMIN
+  ? [...new Set(process.env.EMAIL_ADMIN.split(",").map(e => e.trim()))]
+  : []; // added adminEamils variable as we have mutliple mails on 27-04-2026
  const mailTransporter=nodemailer.createTransport({
     //  host:"smtp.mail.yahoo.com",
     // service:'smtp.office365.com',
@@ -42,7 +45,8 @@ const sendAcknowledgementEmail=async({toEmail,name,bookingId,bookingDate})=>{
     const mailOptions={
     from: `"CSIR-NGRI Guest House" <${process.env.EMAIL_USER}>`,
     to:toEmail,
-    bcc:process.env.EMAIL_ADMIN,
+    // bcc:process.env.EMAIL_ADMIN, this code is commented on 27-04-2026 and below line is added as there are more mails in cc
+      bcc:adminEmails,
     subject:'CSIR-NGRI Guest House Request Acknowledgement',
     text:`Dear ${name},
     
@@ -76,8 +80,9 @@ const sendAcknowledgementEmail=async({toEmail,name,bookingId,bookingDate})=>{
 const sendAdminAlertEmail=async({bookingId,applicantName})=>{
     const mailOptions={
         from:`"CSIR-NGRI Guest House" <${process.env.EMAIL_USER}>`,
-        to:process.env.EMAIL_ADMIN,
-        bcc:process.env.EMAIL_ADMIN,
+        // to:process.env.EMAIL_ADMIN,  here to is commented as we are sending mails to all at a time 
+       // bcc:process.env.EMAIL_ADMIN, this code is commented on 27-04-2026 and below line is added as there are more mails in cc
+        bcc:adminEmails,
         subject:`New Guest House Booking Received (${bookingId})`,
         text:`
         A new Guest House Booking received 
@@ -111,7 +116,8 @@ const sendApprovedEmail=async(booking)=>{
     await mailTransporter.sendMail({
         from:`"CSIR-NGRI Guest House"<${process.env.EMAIL_USER}>`,
         to:booking.officialEmail,
-        bcc:process.env.EMAIL_ADMIN,
+         // bcc:process.env.EMAIL_ADMIN, this code is commented on 27-04-2026 and below line is added as there are more mails in cc
+        bcc:adminEmails,
         subject:"Booking Approved-CSIR-NGRI Guest House",
         html,
     });
@@ -185,7 +191,8 @@ const sendRoomAllocationEmail = async (booking) => {
         await mailTransporter.sendMail({
             from: `"CSIR-NGRI Guest House" <${process.env.EMAIL_USER}>`,
             to: booking.officialEmail,
-            bcc: process.env.EMAIL_ADMIN,
+            // bcc:process.env.EMAIL_ADMIN, this code is commented on 27-04-2026 and below line is added as there are more mails in cc
+        bcc:adminEmails,
             subject: `Room Allocation - ${booking.bookingId}`,
             html,
         });
@@ -211,7 +218,8 @@ const sendRejectedEmail=async(booking)=>{
     await mailTransporter.sendMail({
         from:`"CSIR-NGRI Guest House"<${process.env.EMAIL_USER}>`,
         to:booking.officialEmail,
-        bcc:process.env.EMAIL_ADMIN,
+       // bcc:process.env.EMAIL_ADMIN, this code is commented on 27-04-2026 and below line is added as there are more mails in cc
+        bcc:adminEmails,
         subject:"Booking Rejected-CSIR-NGRI Guest House",
         html,
     })
