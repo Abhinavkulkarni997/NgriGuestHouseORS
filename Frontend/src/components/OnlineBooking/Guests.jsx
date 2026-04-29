@@ -168,7 +168,7 @@ const genders=[
         <div className='space-y-4'>
             {/* checkbox for one of the guest */}
         <label className='flex items-center gap-2 mb-4'>
-            <input {...register('isApplicantGuest')}type="checkbox"/>
+            <input {...register('isApplicantGuest')} type="checkbox"/>
             <span className="text-sm">Are you one of the guests?</span>
         </label>
         {/* guests list */}
