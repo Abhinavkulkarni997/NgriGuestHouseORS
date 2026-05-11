@@ -339,7 +339,8 @@ const InvoiceView=()=>{
         api.get(`/admin/invoices/${invoiceId}`)
         .then((response)=>{setInvoice(response.data),
             console.log("Invoice Data ",response.data),
-        console.log("Name",response.data.applicantName,response.data.booking.applicantName);
+        // console.log("Name",response.data.applicantName,response.data.booking.applicantName);
+        console.log("Name",response?.data?.applicantName,response?.data?.booking?.applicantName);
         }
     ).catch((error)=>console.log(error));
     },[invoiceId]);
@@ -444,9 +445,9 @@ const InvoiceView=()=>{
                     <tbody>
                         <tr>
                             <td className="border px-3 py-2">
-                               <p className="font-extrabold">{invoice.booking.applicantName}</p>
-                               <p className="font-medium">{invoice.booking.designation}</p>
-                               <p className="">{invoice.booking.organization}</p>
+                               <p className="font-extrabold">{invoice?.booking?.applicantName || "N/A"}</p>
+                               <p className="font-medium">{invoice?.booking?.designation || "-"}</p>
+                               <p >{invoice?.booking?.organization || "-"}</p>
                                 
                             </td>
 
@@ -466,7 +467,8 @@ const InvoiceView=()=>{
                                 {invoice.numberOfDays}
                             </td>
                             <td className="border px-3 py-3 text-center">
-                                ₹{invoice.total}
+                                {/* ₹{invoice.total} */}
+                                ₹{invoice?.total || 0}
                             </td>
                         </tr>
                     </tbody>

@@ -53,9 +53,9 @@ const InvoiceCard=({invoice})=>{
                     </span>
                     </div>
                 
-                <p className="mt-2 text-sm text-gray-700">{invoice.booking.applicantName}</p>
+                <p className="mt-2 text-sm text-gray-700">{invoice?.booking?.applicantName || "N/A"}</p>
                 <p className="mt-2 text-sm text-gray-700">{invoice.guestCategory}</p>
-                <p className="text-xs text-gray-500">Room {invoice.roomNumbers.join(", ")} </p>
+                <p className="text-xs text-gray-500">Room {invoice?.roomNumbers?.join(", ") || "N/A"} </p>
             </div>
 
             <div className="mt-4 flex justify-between items-center">
