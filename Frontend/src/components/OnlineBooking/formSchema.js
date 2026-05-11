@@ -1,76 +1,123 @@
 import {z} from "zod";
+// the below code is commented on 30-04-2026 as fields like organization , age gender idproof category are made compulsory
+//  const guestSchema=z.object({
+//     name:z.string().min(1,"Guest name is required"),
+//     organization:z.string().optional(),
+//     age:z.preprocess((v)=>(v==="" || v===null?undefined:Number(v)),z.number().int().positive().optional()),
+//     gender:z.enum(["MALE","FEMALE"]).optional(),
+//     contact:z.string().regex(/^[0-9]{10}$/,'Please Enter a valid 10 digit mobile number'),
+//     idProof:z.string().optional(),
+//     category:z.string().optional(),
+//     isApplicantGuest:z.boolean().optional(),
+
+//  });
  const guestSchema=z.object({
     name:z.string().min(1,"Guest name is required"),
-    organization:z.string().optional(),
-    age:z.preprocess((v)=>(v==="" || v===null?undefined:Number(v)),z.number().int().positive().optional()),
-    gender:z.enum(["MALE","FEMALE"]).optional(),
-    contact:z.string().regex(/^[0-9]{10}$/,'Enter valid 10 digit mobile number'),
-    idProof:z.string().optional(),
-    category:z.string().optional(),
+    organization:z.string().min(1,"Please Select the Organization"),
+ age: z.preprocess(
+  (v) => {
+    if (v === "" || v === null || v === undefined) return undefined;
+    const num = Number(v);
+    return isNaN(num) ? undefined : num;
+  },
+  z.number({
+    required_error: "Please enter the valid Age",
+    invalid_type_error: "Please enter the valid Age",
+  })
+    .int("Please Enter The Valid Age")
+    .positive("Please Enter The Valid Age")
+),
+     gender: z.enum(["MALE", "FEMALE"], {
+    errorMap: () => ({ message: "Please Select The Gender" }),
+  }),
+    contact:z.string().regex(/^[0-9]{10}$/,'Please Enter a valid 10 digit mobile number'),
+    idProof:z.string().min(1,"Please Enter the Id proof Number"),
+    category:z.string().min(1,"Please select the  category"),
     isApplicantGuest:z.boolean().optional(),
 
  });
-
  const bookingSchema=z.object({
    // Step1 Applicant details
-    applicantName:z.string().min(1,"Applicant name required"),
-    designation:z.string().min(1,"Designation required"),
+    applicantName:z.string().min(1,"Applicant Name Is Required"),
+    designation:z.string().min(1,"Designation is Required"),
     isApplicantGuest:z.boolean().optional(),
 
-    officeIdFile: z
-  .instanceof(FileList)
-  .optional()
-  .refine(
-    (files) => {
-      if (!files || files.length === 0) return true;
+    // officeIdFile is made optional on 30-04-2026 as some users reported issue in uploading the file and also to make the form submission easy. 
+    // We can validate the file upload separately and show error message if file is not uploaded or invalid.
+  //   officeIdFile: z
+  // .instanceof(FileList)
+  // .optional()
+  // .refine(
+  //   (files) => {
+  //     if (!files || files.length === 0) return true;
 
-      const file = files[0];
+  //     const file = files[0];
 
-      return (
-        file.type === "application/pdf" &&
-        file.size <= 2 * 1024 * 1024
-      );
-    },
-    "Only PDF files up to 2MB are allowed"
-  ),
-    organization:z.string().min(1,"Choose organization"),
-    employeeId:z.string().min(4,"EmployeeID is required"),
-    mobileNumber:z.string().regex(/^[0-9]{10}$/,'Enter valid 10 digit mobile number'),
+  //     return (
+  //       file.type === "application/pdf" &&
+  //       file.size <= 2 * 1024 * 1024
+  //     );
+  //   },
+  //   "Only PDF files up to 2MB are allowed"
+  // ),
+
+  officeIdFile:z
+  .any()
+  .refine((files)=>files?.length===1,{message:"Scanned Copy Of Office Id  is Required"})
+  .refine((files)=>files?.[0]?.type==="application/pdf",{
+    message:"Only PDF files are allowed"
+  })
+  .refine((files)=>files?.[0]?.size<=2*1024*1024,{
+    message:"File size should be less than 2MB"
+  }),
+    organization:z.string().min(1,"Please Select the Organization Name"),
+    employeeId:z.string().min(4,"Please Enter the EmployeeID "),
+    mobileNumber:z.string().regex(/^[0-9]{10}$/,'Please Enter a valid 10 digit mobile number'),
     officialEmail:z.string().email("Enter Email Id / Invalid email"),
-    paymentBy:z.string().min(1,"Please select who will bear the Payment"),
+    paymentBy:z.string().min(1,"Please Select Who Will Bear The Payment"),
 
   
 
 
    //  step-2- Visit details
-   purpose:z.string().min(1,"select purpose"),
+   purpose:z.string().min(1,"Please Select The Purpose"),
 //    numberOfRooms: z.preprocess(
 //   (val) => (val === "" || Number.isNaN(val) ? undefined : val),
 //   z.number({
 //     required_error: "Number of rooms is required",
 //   }).int().min(1, "Select at least 1 room")
 // ),
-  numberOfRooms: z.preprocess(
+// The below number of Rooms is working but there is slight change in the error message when user selects the default option and tries to proceed without changing it.
+//  It shows "Please select number of rooms" instead of "Number of rooms is required".
+//  This is because we are treating empty string as undefined and zod is giving the error message for invalid type instead of required error. 
+// We can customize the error message for invalid type to be same as required error to avoid confusion.
+//   numberOfRooms: z.preprocess(
+//   (val) => (val === "" || val === undefined ? undefined : Number(val)),
+//   z.number({
+//     required_error: "Number of rooms is required",
+//   }).int().min(1, "Please select number of rooms")
+// ),
+numberOfRooms: z.preprocess(
   (val) => (val === "" || val === undefined ? undefined : Number(val)),
   z.number({
-    required_error: "Number of rooms is required",
-  }).int().min(1, "Please select number of rooms")
+    required_error: "Number Of Rooms Is Required",
+  }).int().min(1, "Please Select The Number Of Rooms")
 ),
-   arrivalDate:z.string().min(1,"Arrival date required"),
-   arrivalTime:z.string().min(1,"Arrival time required"),
-   departureDate:z.string().min(1,"Departure date required"),
-   departureTime:z.string().min(1,"Departure time required"),
+   arrivalDate:z.string().min(1,"Arrival Date is Required"),
+   arrivalTime:z.string().min(1,"Arrival Time is Required"),
+   departureDate:z.string().min(1,"Departure Date is Required"),
+   departureTime:z.string().min(1,"Departure Time is Required"),
 
    // step 3 - Guests:array
    guests:z.array(guestSchema).min(1).max(6),
 
-   captcha:z.string().min(1,"Enter captcha"),
+   captcha:z.string().min(1,"Please Enter the Captcha"),
    captchaValue: z.string().optional(),
   
 
    // terms
   agreeTerms: z.literal(true, {
-  errorMap: () => ({ message: "You must accept terms" })
+  errorMap: () => ({ message: "You must Accept The Terms & Conditions" })
 })
   })
   .superRefine(
@@ -144,13 +191,7 @@ import {z} from "zod";
   }
 
   }
-
-  
-
-
   });
-
-  
 
  const defaultValues={
    applicantName:"",

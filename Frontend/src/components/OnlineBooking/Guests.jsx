@@ -192,11 +192,13 @@ const genders=[
                         <div>
                             <label className='font-medium text-sm text-gray-700 dark:text-white'>Organization </label>
                             <input {...register(`guests.${index}.organization`)} className='mt-1 border w-full rounded-lg p-3 dark:bg-gray-900' disabled={field.isApplicant}/>
+                            {errors.guests?.[index]?.organization &&(<p className='text-red-600 text-sm'>{errors.guests[index].organization.message}</p>)}
                         </div>
 
                         <div>
                             <label className='font-medium text-sm text-gray-700 dark:text-white'>Age</label>
                             <input type="number" {...register(`guests.${index}.age`,{valueAsNumber:true})} className='mt-1 border w-full rounded-lg p-3 dark:bg-gray-900'/>
+                            {errors.guests?.[index]?.age &&(<p className='text-red-600 text-sm'>{errors.guests[index].age.message}</p>)}
                         </div>
 
                         <div>
@@ -204,8 +206,9 @@ const genders=[
                         <select {...register(`guests.${index}.gender`)} className='mt-1  border w-full rounded-lg p-3 dark:bg-gray-900'>
                             <option value="">Select</option>
                             {genders.map((g)=>(<option key={g.id} value={g.name}>{g.name}</option>))}
-
                         </select>
+                        {errors.guests?.[index]?.gender &&(<p className='text-red-600 text-sm'>{errors.guests[index].gender.message}</p>)}
+
                         </div>
 
                         <div>
@@ -218,6 +221,7 @@ const genders=[
                         <div>
                             <label className="font-medium text-sm text-gray-700 dark:text-white">ID Proof No.</label>
                             <input {...register(`guests.${index}.idProof`)} className="mt-1  w-full rounded-lg border p-3 dark:bg-gray-900" />
+                            {errors.guests?.[index]?.idProof &&(<p className='text-red-600 text-sm'>{errors.guests[index].idProof.message}</p>)}
                         </div>
 
                         <div>
@@ -226,6 +230,7 @@ const genders=[
                                 <option value="">Select</option>
                                 {category.map((c)=>(<option key={c.id} value={c.name}>{c.name}</option>))}
                             </select>
+                            {errors.guests?.[index]?.category &&(<p className='text-red-600 text-sm'>{errors.guests[index].category.message}</p>)}
                         </div>
 
                     </div>

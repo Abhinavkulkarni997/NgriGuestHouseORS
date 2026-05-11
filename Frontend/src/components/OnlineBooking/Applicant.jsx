@@ -195,8 +195,10 @@ const Applicant = () => {
 
     <div>
         <label className="block text-sm font-medium">Scanned Copy of Office ID(less than 2MB)</label>
-        <input {...register("officeIdFile")} type="file" accept="application/pdf" className="mt-1 block w-full rounded-lg border p-3 " />
-        {/* {errors.officeIdFile && <p className="text-red-600">{errors.officeIdFile.message}</p>} */}
+        <input {...register("officeIdFile")} type="file" accept="application/pdf"   className={`mt-1 block w-full rounded-lg border p-3
+    ${errors.officeIdFile ? "border-red-500" : "border-gray-300"}
+  `} />
+        {errors.officeIdFile && <p className="text-red-600">{errors.officeIdFile.message}</p>}
     </div>
     <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-white">Organization</label>

@@ -71,6 +71,7 @@ const Visit = () => {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-white">Arrival Time</label>
           <input {...register("arrivalTime")} type="time" className="mt-1 w-full rounded-lg border p-3 dark:bg-gray-900" />
+          {errors.arrivalTime && <p className="text-red-600 text-sm mt-1">{errors.arrivalTime.message}</p>}
         </div>
 
         <div>
@@ -82,6 +83,7 @@ const Visit = () => {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-white">Departure Time</label>
           <input {...register("departureTime")} type="time" className="mt-1 w-full rounded-lg border p-3 dark:bg-gray-900" />
+          {errors.departureTime && <p className="text-red-600 text-sm mt-1">{errors.departureTime.message}</p>}
         </div>
       </div>
         </div>
