@@ -405,8 +405,9 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
             <b>Organization:</b>{booking.organization}
             </p>
           <p className='text-sm mt-1'>
-             <b>Arrival:</b>{new Date(booking.arrivalDateTime).toLocaleString()}{" "}<br/>
-             <b>Departure:</b>{new Date(booking.departureDateTime).toLocaleString()}</p>
+             <b>Arrival:</b>{" "}{new Date(booking.arrivalDateTime).toLocaleString()}{" "}<br/>
+             <b>Departure:</b>{" "}{new Date(booking.departureDateTime).toLocaleString()}</p>
+             <b>Application Submitted On:</b>{" "} {new Date(booking.createdAt).toLocaleString()}
             </div>
        
         {/* Body */}
