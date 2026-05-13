@@ -406,8 +406,15 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
             </p>
           <p className='text-sm mt-1'>
              <b>Arrival:</b>{" "}{new Date(booking.arrivalDateTime).toLocaleString("en-IN")}{" "}<br/>
-             <b>Departure:</b>{" "}{new Date(booking.departureDateTime).toLocaleString("en-IN")}</p>
-             <b>Application Submitted On:</b>{" "} {new Date(booking.createdAt).toLocaleString("en-IN")}
+             <b>Departure:</b>{" "}{new Date(booking.departureDateTime).toLocaleString("en-IN")}
+             
+             
+        </p>
+         <p className='text-sm mt-1'>
+         <b>Purpose of Visit:</b>{" "}{booking.purpose}<br/>    
+         <b>Application Submitted On:</b>{" "} {new Date(booking.createdAt).toLocaleString("en-IN")}
+          </p>  
+            
             </div>
        
         {/* Body */}
