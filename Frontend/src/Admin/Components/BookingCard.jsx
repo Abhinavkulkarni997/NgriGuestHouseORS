@@ -629,7 +629,7 @@ const BookingCard = ({booking,onApprove,onReject,onAllocate,onVacate}) => {
                 
                     {booking.status==="VACATED" &&(
                         <p className='text-red-600'><strong>Vacated On:</strong>{" "}
-                        {new Date(booking.vacatedAt).toLocaleString()}
+                        {new Date(booking.vacatedAt).toLocaleString("en-IN")}
                         </p>
                     )}
                 </div>

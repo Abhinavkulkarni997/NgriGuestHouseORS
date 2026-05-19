@@ -106,8 +106,8 @@ const RoomHistory = () => {
                 </div>
 
                 <p className="text-sm mt-1">
-                  From: {new Date(b.arrivalDateTime).toLocaleDateString()}{" "}
-                  To: {new Date(b.departureDateTime).toLocaleDateString()}
+                  From: {new Date(b.arrivalDateTime).toLocaleDateString("en-IN")}{" "}
+                  To: {new Date(b.departureDateTime).toLocaleDateString("en-IN")}
                 </p>
 
                 <p className='text-xs text-gray-400 mt-1'>

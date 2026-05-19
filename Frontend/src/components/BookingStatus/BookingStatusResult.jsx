@@ -92,8 +92,8 @@ const BookingStatusResult = () => {
                         <td className="border px-3 py-2">{index+1}</td>
                         <td className="border px-3 py-2"> {booking.bookingId}</td>
                         <td className="border px-3 py-2">{booking.applicantName}</td>
-                        <td className="border px-3 py-2">{new Date(booking.arrivalDateTime).toLocaleDateString()}</td>
-                        <td className="border px-3 py-2">{new Date(booking.departureDateTime).toLocaleDateString()}</td>
+                        <td className="border px-3 py-2">{new Date(booking.arrivalDateTime).toLocaleDateString("en-IN")}</td>
+                        <td className="border px-3 py-2">{new Date(booking.departureDateTime).toLocaleDateString("en-IN")}</td>
                         <td className="border px-3 py-2">{booking.status}</td>
                     </tr>
                 </tbody>

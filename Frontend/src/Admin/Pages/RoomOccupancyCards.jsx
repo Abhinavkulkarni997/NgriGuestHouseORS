@@ -34,10 +34,9 @@ const RoomOccupancyCards = () => {
                         </p>
                         <p className='text-gray-500'>
                             {"From:"}{" "}
-                            {new Date(room.currentBooking.arrivalDateTime).toLocaleDateString()}
+                            {new Date(room.currentBooking.arrivalDateTime).toLocaleDateString("en-IN")}
                             {" "}{"To:"}{" "}
-                            {new Date(room.currentBooking.departureDateTime).toLocaleDateString()}
-
+                            {new Date(room.currentBooking.departureDateTime).toLocaleDateString("en-IN")}
                         </p>
 
                     </div>

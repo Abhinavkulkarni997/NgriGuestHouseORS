@@ -23,11 +23,11 @@ const Rooms=()=>{
                             </p>
                             <p className="text-xs text-gray-500">From: {" "}
                                  {new Date(room.currentBooking.arrivalDateTime
-                    ).toLocaleDateString()}
+                    ).toLocaleDateString("en-IN")}
                     </p>
                         <p className="text-xs text-gray-500">To: {" "}
                                  {new Date(room.currentBooking.departureDateTime
-                    ).toLocaleDateString()}
+                    ).toLocaleDateString("en-IN")}
                     </p>
                 </div>
                 ):(
