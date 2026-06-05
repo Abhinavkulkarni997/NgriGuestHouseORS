@@ -2,18 +2,42 @@ const nodemailer=require('nodemailer');
 const fs=require('fs');
 const path=require('path');
 // creation of transportation object 
-
-console.log("EMAIL_USER =", process.env.EMAIL_USER);
-console.log("EMAIL_PASS length =", process.env.EMAIL_PASS?.length);
+// The below two lines are commented as email and password should not be exposed 
+// console.log("EMAIL_USER =", process.env.EMAIL_USER);
+// console.log("EMAIL_PASS length =", process.env.EMAIL_PASS?.length);
 const adminEmails = process.env.EMAIL_ADMIN
   ? [...new Set(process.env.EMAIL_ADMIN.split(",").map(e => e.trim()))]
   : []; // added adminEamils variable as we have mutliple mails on 27-04-2026
+//   the below code is working and commented on 05-06-2026 as only going to gmails
+//  const mailTransporter=nodemailer.createTransport({
+//     //  host:"smtp.mail.yahoo.com",
+//     // service:'smtp.office365.com',
+//     service:"gmail",
+//     secure:false,
+//     port:587,
+//     // requireTLS:true,
+//     // port:465,
+//     // secure:true,
+//     // useSsl:true,
+//     auth:{
+//         user:process.env.EMAIL_USER,
+//         pass:process.env.EMAIL_PASS,
+//         //  user: 'ngriguesthouse@hotmail.com',
+//         // pass:'a8121511670!V',
+//     },
+//     //   tls: {
+//     //     ciphers: 'SSLv3' 
+//     // },
+// });
+
+
  const mailTransporter=nodemailer.createTransport({
     //  host:"smtp.mail.yahoo.com",
     // service:'smtp.office365.com',
-    service:"gmail",
-    secure:false,
+    host: "smtpout.secureserver.net",
     port:587,
+    secure:false,
+   
     // requireTLS:true,
     // port:465,
     // secure:true,
@@ -24,10 +48,11 @@ const adminEmails = process.env.EMAIL_ADMIN
         //  user: 'ngriguesthouse@hotmail.com',
         // pass:'a8121511670!V',
     },
-    //   tls: {
-    //     ciphers: 'SSLv3' 
-    // },
+//    tls: {
+//         rejectUnauthorized: false,
+//     },
 });
+
 
 
 
@@ -62,6 +87,7 @@ const sendAcknowledgementEmail=async({toEmail,name,bookingId,bookingDate})=>{
 
     Please note:
     This is an auto-generated email. Do not reply.
+    Please check the notifications/ spam folder in your email , if the email is not received to main inbox.
 
     Thanks & Regards,
     CSIR-NGRI Guest House I/C`,
@@ -90,6 +116,7 @@ const sendAdminAlertEmail=async({bookingId,applicantName})=>{
         Applicant:${applicantName}
         
         Please login to admin dashboard to review.
+        Please check the notifications/ spam folder in your email , if the email is not received to main inbox.
         `
     }
      try{
@@ -185,6 +212,9 @@ const sendRoomAllocationEmail = async (booking) => {
             <p><b>Check-out:</b> ${new Date(booking.departureDateTime).toLocaleString()}</p>
 
             <p>Please carry a valid ID proof during check-in.</p>
+              <p>
+                 Please check the notifications/ spam folder in your email , if the email is not received to main inbox.
+            </p>
             <p>Regards,<br/>Guest House Administration</p>
         `;
 
